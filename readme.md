@@ -37,6 +37,9 @@ IOLIGA, hace uso de algunos paquetes robustos y populares más utilizados por lo
 Pasos para clonar y correr proyecto ioliga.
 
 Abra la una consola de terminal y ejecute
+```bash
+git clone https://github.com/soy-software/ioliga.git
+```
 
 1. git clone https://github.com/soy-software/ioliga.git
 2. cd ioliga
