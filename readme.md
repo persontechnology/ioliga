@@ -34,7 +34,8 @@ IOLIGA, hace uso de algunos paquetes robustos y populares más utilizados por lo
 - Crear una cuenta en github (https://github.com)
 - Crear una cuenta en SOYSOFTWARE (http://soysoftware.com/)
 
-Pasos para clonar y correr proyecto ioliga
+Pasos para clonar y correr proyecto ioliga.
+
 Abra la una consola de terminal y ejecute
 
 1. git clone https://github.com/soy-software/ioliga.git
@@ -47,8 +48,10 @@ Abra la una consola de terminal y ejecute
 8. php artisan migrate:fresh
 9. php artisan serve
 
-Abre el siguente link (http://localhost:8000/) y disfruta de la sistema IOLIGA
+Abre el siguente link (http://localhost:8000/) y disfruta del sistema IOLIGA.
+
 Email: info@soysoftware.com
+
 Contraseña : 12345678
 
 Antes de ejecutar el paso 8, debes crear un usuario y una base de datos en mysql y completar las credenciales de configuración en el archivo env, en la parte de conexión de base de datos.
