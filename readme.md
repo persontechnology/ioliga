@@ -26,6 +26,33 @@ IOLIGA, hace uso de algunos paquetes robustos y populares más utilizados por lo
 - **[Laravel-Excel](https://github.com/Maatwebsite/Laravel-Excel)**
 - **[spanish](https://github.com/Laraveles/spanish)**
 - [Limitless - responsive web application kit](http://demo.interface.club/limitless/)
+## Instalación
+- Instalar xammp última versión (https://www.apachefriends.org/es/index.html)
+- Instalar composer última versión (https://getcomposer.org/)
+- Instalar git última versión (https://git-scm.com/)
+- Clonar proyecto en cualquier ubicación (https://github.com/soy-software/ioliga.git)
+- Crear una cuenta en github (https://github.com)
+- Crear una cuenta en SOYSOFTWARE (http://soysoftware.com/)
+
+Pasos para clonar y correr proyecto ioliga
+Abra la una consola de terminal y ejecute
+
+1. git clone https://github.com/soy-software/ioliga.git
+2. cd ioliga
+3. php artisan composer install
+4. php artisan composer update
+5. php artisan cp env.example env
+6. php artisan key:generate
+7. php artisan storage:link
+8. php artisan migrate:fresh
+9. php artisan serve
+
+Abre el siguente link (http://localhost:8000/) y disfruta de la sistema IOLIGA
+Email: info@soysoftware.com
+Contraseña : 12345678
+
+Antes de ejecutar el paso 8, debes crear un usuario y una base de datos en mysql y completar las credenciales de configuración en el archivo env, en la parte de conexión de base de datos.
+Es recomendable que completes otras configuraciones, como las credenciales de email.
 
 ## Contribuyendo
 
