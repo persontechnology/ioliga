@@ -16,15 +16,34 @@ class RolesAndPermissionsSeeder extends Seeder
     {
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
         
-        $p_crear_ligas=Permission::create(['name' => 'Crear ligas']);
-        $role = Role::create(['name' => 'SuperAdministrador']);
-        $role->givePermissionTo($p_crear_ligas);
+        /*permisos*/        
+        $p_menu_estadio=Permission::create(['name' => 'Menu estadio']);
 
-        $user= User::create([
+        /*roles*/
+        /*rola super adminsitrador*/
+        $roleS_Admin = Role::create(['name' => 'SuperAdministrador']);
+        /*rol administrador*/
+        $roleAdmin = Role::create(['name' => 'Administrador']);
+        
+        /*asiganr permisos a roles*/
+        /*$roleS_A->givePermissionTo($p_menu_estadio);*/
+
+        /*usuarios*/
+        
+        $userS_Admin= User::create([
             'name' => 'soysoftware',
             'email' => 'info@soysoftware.com',
             'password' => Hash::make('12345678')
         ]);
-        $user->assignRole($role);
+        $userS_Admin->assignRole($roleS_Admin);
+
+         $userAdmin= User::create([
+            'name' => 'administrador',
+            'email' => 'info@administrador.com',
+            'password' => Hash::make('12345678')
+        ]);
+
+        /*asiganar roles a usuarios*/
+        $userAdmin->assignRole($roleAdmin);
     }
 }

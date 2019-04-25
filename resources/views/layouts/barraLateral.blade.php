@@ -77,67 +77,7 @@
         <div class="card card-sidebar-mobile">
             <ul class="nav nav-sidebar" data-nav-type="accordion">
 
-                <!-- Principal -->
-                <li class="nav-item-header">
-                    <div class="text-uppercase font-size-xs line-height-xs">Principal</div> 
-                    <i class="icon-menu" title="Main"></i>
-                </li>
-
-                <li class="nav-item">
-                    <a href="index.html" class="nav-link">
-                        <i class="icon-home4"></i>
-                        <span>
-                            {{ __('Inicio') }}
-                        </span>
-                    </a>
-                </li>
-                <!-- /Principal -->
-
-                <!-- Diseño -->
-                <li class="nav-item nav-item-submenu">
-                    <a href="#" class="nav-link"><i class="icon-tree5"></i> <span>Menu levels</span></a>
-                    <ul class="nav nav-group-sub" data-submenu-title="Menu levels">
-                        <li class="nav-item"><a href="#" class="nav-link"><i class="icon-IE"></i> Second level</a></li>
-                        <li class="nav-item nav-item-submenu">
-                            <a href="#" class="nav-link"><i class="icon-firefox"></i> Second level with child</a>
-                            <ul class="nav nav-group-sub">
-                                <li class="nav-item"><a href="#" class="nav-link"><i class="icon-android"></i> Third level</a></li>
-                                <li class="nav-item nav-item-submenu">
-                                    <a href="#" class="nav-link"><i class="icon-apple2"></i> Third level with child</a>
-                                    <ul class="nav nav-group-sub">
-                                        <li class="nav-item"><a href="#" class="nav-link"><i class="icon-html5"></i> Fourth level</a></li>
-                                        <li class="nav-item"><a href="#" class="nav-link"><i class="icon-css3"></i> Fourth level</a></li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item"><a href="#" class="nav-link"><i class="icon-windows"></i> Third level</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item"><a href="#" class="nav-link"><i class="icon-chrome"></i> Second level</a></li>
-                    </ul>
-                </li>
-                <!-- /Diseño -->
-
-
-                <!-- tablas -->
-                <li class="nav-item nav-item-submenu nav-item-expanded nav-item-open">
-                    <a href="#" class="nav-link"><i class="icon-alignment-unalign"></i> <span>Data tables extensions</span></a>
-                    <ul class="nav nav-group-sub" data-submenu-title="Data tables extensions">
-                        <li class="nav-item"><a href="datatable_extension_reorder.html" class="nav-link">Columns reorder</a></li>
-          
-                        <li class="nav-item nav-item-submenu nav-item-expanded nav-item-open">
-                            <a href="#" class="nav-link">Buttons</a>
-                            <ul class="nav nav-group-sub">
-                               
-                                <li class="nav-item"><a href="datatable_extension_buttons_print.html" class="nav-link">Print buttons</a></li>
-                                <li class="nav-item"><a href="datatable_extension_buttons_html5.html" class="nav-link active">HTML5 buttons</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item"><a href="datatable_extension_colvis.html" class="nav-link">Columns visibility</a></li>
-                    </ul>
-                </li>
-                <!-- /tablas -->
-
-               
+               @include('layouts.menuLateral')               
 
             </ul>
         </div>
