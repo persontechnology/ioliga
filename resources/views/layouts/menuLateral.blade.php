@@ -17,7 +17,7 @@
 {{-- estadio --}}
 
 @can('Menu estadio')
-<li class="nav-item">
+<li class="nav-item" id="menu_estadio">
     <a href="{{ route('estadios') }}" class="nav-link">
         <i class="fas fa-table"></i>
         <span>

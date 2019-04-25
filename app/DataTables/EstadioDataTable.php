@@ -16,7 +16,9 @@ class EstadioDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables($query)
-            ->addColumn('action', 'estadio.action');
+            ->addColumn('action',function($estadio){
+                         return view('estadios.acciones', ['estadio'=>$estadio])->render();
+            })->rawColumns(['action']);;
     }
 
     /**

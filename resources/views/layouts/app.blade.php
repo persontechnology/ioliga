@@ -23,6 +23,7 @@
     <link href="{{ asset('assets/css/layout.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/components.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/colors.min.css') }}" rel="stylesheet" type="text/css">
+     <link href="{{ asset('global_assets/js/plugins/file-input/fileinput.css') }}" rel="stylesheet" type="text/css">
     <!-- /global stylesheets -->
 
     <!-- Core JS files -->
@@ -45,7 +46,8 @@
     <script src="{{ asset('assets/js/app.js') }}"></script>
     <script src="{{ asset('global_assets/js/demo_pages/datatables_extension_buttons_html5.js') }}"></script>
     <!-- /theme JS files -->
-
+    <script src="{{ asset('global_assets/js/plugins/file-input/fileinput.js') }}"></script>
+    <script src="{{ asset('global_assets/js/plugins/file-input/es.js') }}"></script>
 </head>
 
 <body>
@@ -110,6 +112,10 @@
 
     </div>
     <!-- /Contenido de página -->
-
+<script type="text/javascript">
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
+</script>
 </body>
 </html>
