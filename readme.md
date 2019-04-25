@@ -33,23 +33,43 @@ IOLIGA, hace uso de algunos paquetes robustos y populares más utilizados por lo
 - Clonar proyecto en cualquier ubicación (https://github.com/soy-software/ioliga.git)
 - Crear una cuenta en github (https://github.com)
 - Crear una cuenta en SOYSOFTWARE (http://soysoftware.com/)
+- Instalar un IDE, de preferencia SUBLIMETEXT (https://www.sublimetext.com/)
 
 Pasos para clonar y correr proyecto ioliga.
 
-Abra la una consola de terminal y ejecute
+Clone el proyecto en un directorio de su preferencia
 ```bash
 git clone https://github.com/soy-software/ioliga.git
 ```
+Ingrese al proyecto clonado
+```bash
+cd ioliga
+```
+Instale los paquetes
+```bash
+php artisan composer install
+```
+Abra el proyecto en SUBLIMETEXT y cree un archivo con el nombre de .env
 
-1. git clone https://github.com/soy-software/ioliga.git
-2. cd ioliga
-3. php artisan composer install
-4. php artisan composer update
-5. php artisan cp env.example env
-6. php artisan key:generate
-7. php artisan storage:link
-8. php artisan migrate:fresh
-9. php artisan serve
+Copie las credenciales de .env.example en .env y complete las credenciales de conexión a base de datos.
+
+Generar clave de proyecto
+```bash
+php artisan key:generate
+```
+Generar clave de storage, para el almacenamiento de archivos
+```bash
+php artisan storage:link
+```
+Generar el script de base de datos y carga de información
+```bash
+php artisan migrate:fresh
+```
+Correr el proyecto
+```bash
+php artisan serve
+```
+
 
 Abre el siguente link (http://localhost:8000/) y disfruta del sistema IOLIGA.
 
