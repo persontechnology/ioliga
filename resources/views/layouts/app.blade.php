@@ -17,6 +17,7 @@
     <!-- Global stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
     <link href="{{ asset('global_assets/css/icons/icomoon/styles.min.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{ asset('global_assets/css/icons/fontawesome/styles.min.css') }}">
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/bootstrap_limitless.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/layout.min.css') }}" rel="stylesheet" type="text/css">
@@ -32,12 +33,14 @@
     <!-- /core JS files -->
 
     <!-- Theme JS files -->
-    <script src="{{ asset('global_assets/js/plugins/tables/datatables/datatables.min.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('plus/DataTables/datatables.min.css') }}"/>
+    <script type="text/javascript" src="{{ asset('plus/DataTables/datatables.min.js') }}"></script>
+
     <script src="{{ asset('global_assets/js/plugins/forms/selects/select2.min.js') }}"></script>
-    <script src="{{ asset('global_assets/js/plugins/tables/datatables/extensions/jszip/jszip.min.js') }}"></script>
-    <script src="{{ asset('global_assets/js/plugins/tables/datatables/extensions/pdfmake/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('global_assets/js/plugins/tables/datatables/extensions/pdfmake/vfs_fonts.min.js') }}"></script>
-    <script src="{{ asset('global_assets/js/plugins/tables/datatables/extensions/buttons.min.js') }}"></script>
+
+
+    {{-- vendor datatbles --}}
+    <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
 
     <script src="{{ asset('assets/js/app.js') }}"></script>
     <script src="{{ asset('global_assets/js/demo_pages/datatables_extension_buttons_html5.js') }}"></script>

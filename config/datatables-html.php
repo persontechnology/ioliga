@@ -5,7 +5,7 @@ return [
      * Default table attributes when generating the table.
      */
     'table' => [
-        'class' => 'table table-bordered table-hover table-sm',
+        'class' => 'table',
         'id'    => 'ioliga',
     ],
 

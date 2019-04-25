@@ -8,7 +8,7 @@
     <a href="index.html" class="nav-link">
         <i class="icon-home4"></i>
         <span>
-            {{ __('Inicio') }}
+            {{ __('Home') }}
         </span>
     </a>
 </li>
@@ -16,11 +16,13 @@
 
 {{-- estadio --}}
 
+@can('Menu estadio')
 <li class="nav-item">
-    <a href="index.html" class="nav-link">
-        <i class="icon-home4"></i>
+    <a href="{{ route('estadios') }}" class="nav-link">
+        <i class="fas fa-table"></i>
         <span>
             {{ __('Stadium') }}
         </span>
     </a>
 </li>
+@endcan

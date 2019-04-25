@@ -13,7 +13,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasRoles;
 
     /**
-     * The attributes that are mass assignable.
+     * Los atributos que son asignables en masa.
      *
      * @var array
      */
@@ -22,7 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
+     * Los atributos que se deben ocultar para las matrices.
      *
      * @var array
      */
@@ -31,7 +31,7 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * The attributes that should be cast to native types.
+     * Los atributos que deben ser convertidos a tipos nativos.
      *
      * @var array
      */
