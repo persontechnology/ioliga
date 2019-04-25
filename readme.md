@@ -29,11 +29,11 @@ IOLIGA, hace uso de algunos paquetes robustos y populares más utilizados por lo
 
 ## Contribuyendo
 
-¡Gracias por considerar contribuir al marco de Laravel! La guía de contribución se puede encontrar en la [Documentación de IOLIGA](#).
+¡Gracias por considerar contribuir al IOLIGA! La guía de contribución se puede encontrar en la [Documentación de IOLIGA](#).
 
 ## Vulnerabilidades de seguridad
 
-Si descubre una vulnerabilidad de seguridad dentro de Laravel, envíe un correo electrónico a SOYSOFTWARE via [info@soysoftware.com](mailto:info@soysoftware.com). Todas las vulnerabilidades de seguridad serán tratadas con prontitud.
+Si descubre una vulnerabilidad de seguridad dentro de IOLIGA, envíe un correo electrónico a SOYSOFTWARE via [info@soysoftware.com](mailto:info@soysoftware.com). Todas las vulnerabilidades de seguridad serán tratadas con prontitud.
 
 ## Licensia
 
