@@ -121,33 +121,5 @@
 
 
 
-<script>
-    
-
-Toastnotify.create({
-    text: "Habilita las notificaciones de escritorio para Gmail.",
-    type:"default",  // String volores default|dark|primary|info|warning|danger|success|secondary|pink Valores por defecto "default"
-    duration: 5000, // Number 
-    rounded:true, //boolean Valor por false
-    animationIn: "fadeInLeft", // String Valor por defecto "fadeInLeft" puedes usuar Animate.css https://daneden.github.io/animate.css/ 
-    animationOut: "fadeOutLeft", // String Valores por defecto "fadeOutLeft" puedes usuar Animate.css
-    classes: "gradient-tinder", // String puedes usar uno o mas classes separados por un espacio
-    buttonOk: "OK", // String Valor por defecto "OK"
-    buttonCancel: "No, gracias", // String Valor por defecto "No, gracias"
-    image: "https://instagram.flim1-1.fna.fbcdn.net/vp/797bcb870452079e3ed5efa63d1a1821/5CBE3A01/t51.12442-15/e15/c16.114.662.662/s150x150/49829008_625558677898861_1062597542930286557_n.jpg?_nc_ht=instagram.flim1-1.fna.fbcdn.net",
-    icon: "mdi mdi-cart", // use  https://materialdesignicons.com/cdn/2.0.46/  mdi mdi-icono OR font awesome fa fa-icono
-    important: true, // boolean  Valor por defecto false
-    callbackOk: function () {
-        console.log('Precionado OK');
-    },
-    callbackCancel: function () {
-        console.log('Precionado Cancelado');
-    }
-});
-                            
-
-</script>
-
-
 
 @endsection
