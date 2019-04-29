@@ -15,12 +15,14 @@
         You are logged in!
     </div>
 </div>
-<script>
-	
-</script>
+
+
+
 @push('scriptsFooter')
     <script>
         $('#menuHome').addClass('active');
     </script>
 @endpush
+
+
 @endsection

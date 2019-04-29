@@ -21,5 +21,6 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	/*estadios*/
 	Route::get('/estadios', 'Estadios@index')->name('estadios');
 	Route::get('/estadios-crear', 'Estadios@crear')->name('crearEstadio');
-	
+	Route::get('/editar-estadio/{id}', 'Estadios@editar')->name('estadiosEditar');
+	Route::post('/editar-estadio/{id}', 'Estadios@actualizar')->name('actualizar');
 });
