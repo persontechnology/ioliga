@@ -15,7 +15,7 @@
     </title>
 
     <!-- Global stylesheets -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/Roboto.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('global_assets/css/icons/icomoon/styles.min.css') }}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{{ asset('global_assets/css/icons/fontawesome/styles.min.css') }}">
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
@@ -27,6 +27,7 @@
     <!-- /global stylesheets -->
 
     <!-- Core JS files -->
+    <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('global_assets/js/main/jquery.min.js') }}"></script>
     <script src="{{ asset('global_assets/js/main/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('global_assets/js/plugins/ui/ripple.min.js') }}"></script>
@@ -37,8 +38,6 @@
 
     <script src="{{ asset('assets/js/app.js') }}"></script>
     <!-- /theme JS files -->
-    <script src="{{ asset('global_assets/js/plugins/file-input/fileinput.js') }}"></script>
-    <script src="{{ asset('global_assets/js/plugins/file-input/es.js') }}"></script>
 </head>
 
 <body>
