@@ -13,36 +13,58 @@
 
 <div class="card">
   <div class="card-body">
-    <form action="#">
+    <form action="{{ route('guardarEstadio') }}" method="post" enctype="multipart/form-data">
+    	@csrf
 		<fieldset>
 			<legend class="text-uppercase font-size-sm font-weight-bold">Completar información</legend>
 
+
 			<div class="form-group row">
-				<label class="col-form-label col-lg-2">Nombre<span class="text-danger">*</span></label>
+				<label for="direccion" class="col-form-label col-lg-2">Nombre<span class="text-danger">*</span></label>
 				<div class="col-lg-10">
-					<input type="text" class="form-control" placeholder="Ingrese..">
+					<input type="text" name="nombre" id="nombre" class="form-control @error('nombre') is-invalid @enderror" value="{{ old('nombre') }}" placeholder="Ingrese.." required="">
+					@error('nombre')
+	                    <span class="invalid-feedback" role="alert">
+	                        <strong>{{ $message }}</strong>
+	                    </span>
+	                @enderror
 				</div>
 			</div>
 
 			<div class="form-group row">
-				<label class="col-form-label col-lg-2">Dirección<span class="text-danger">*</span></label>
+				<label for="direccion" class="col-form-label col-lg-2">Dirección<span class="text-danger">*</span></label>
 				<div class="col-lg-10">
-					<textarea rows="3" cols="3" class="form-control" placeholder="Ingrese.."></textarea>
+					<textarea name="direccion" id="direccion" class="form-control @error('direccion') is-invalid @enderror" placeholder="Ingrese.." required="">{{ old('direccion')}}</textarea>
+					@error('direccion')
+	                    <span class="invalid-feedback" role="alert">
+	                        <strong>{{ $message }}</strong>
+	                    </span>
+	                @enderror
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-form-label col-lg-2">Teléfono</label>
+				<label for="telefono" class="col-form-label col-lg-2">Teléfono</label>
 				<div class="col-lg-10">
-					<input type="number" class="form-control" maxlength="4" placeholder="Ingrese..">
+					<input type="number" name="telefono" id="telefono" value="{{ old('telefono') }}" class="form-control @error('telefono') is-invalid @enderror" placeholder="Ingrese..">
+					@error('telefono')
+	                    <span class="invalid-feedback" role="alert">
+	                        <strong>{{ $message }}</strong>
+	                    </span>
+	                @enderror
 				</div>
 			</div>
-			<input id="input-id" type="file" class="file" data-preview-file-type="text" >
+			
+			<div class="file-loading">
+			    <input  type="file"  name="foto" id="fotoEstadio" class="@error('foto') is-invalid @enderror"  accept="image/*">
+			</div>
+			@error('foto')
+                <span class="text-danger" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
 
 		</fieldset>
-
-		<div class="text-right">
-			<button type="submit" class="btn btn-primary">{{ __('Save') }} <i class="icon-paperplane ml-2"></i></button>
-		</div>
+		<button type="submit" class="btn btn-primary mt-3">{{ __('Save') }} <i class="icon-paperplane ml-2"></i></button>
 	</form>
   </div>
 </div>
@@ -64,6 +86,20 @@
 @push('scriptsFooter')
     <script>
         $('#menuEstadio').addClass('active');
+        $("#fotoEstadio").fileinput({
+	        browseClass: "btn btn-primary btn-block",
+	        showCaption: false,
+	        showUpload: false,
+	        language:'es',
+	        theme:'fas',
+	        previewFileType: "image",
+	        browseLabel: "Foto de estadio",
+	        browseIcon: "<i class='far fa-image'></i>",
+	        browseClass: "btn btn-outline-dark float-right",
+	        allowedFileTypes: ["image"],
+	        maxFilePreviewSize: 10240
+	    });
+
     </script>
 @endpush
 

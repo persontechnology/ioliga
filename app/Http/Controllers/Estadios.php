@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use ioliga\Models\Estadio;
 use ioliga\DataTables\EstadioDataTable;
 use Illuminate\Support\Facades\Auth;
-
-use ioliga\User;
+use ioliga\Http\Requests\Estadio\RqGuardarEstadio;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class Estadios extends Controller
 {
@@ -29,6 +30,28 @@ class Estadios extends Controller
     {
     	$this->authorize('create',$this->estadioModel);
     	return view('estadios.crear');
+    }
+
+    public function guardar(RqGuardarEstadio $request)
+    {
+        $this->authorize('create',$this->estadioModel);
+
+        $estadio=new Estadio;
+        $estadio->nombre=$request->nombre;
+        $estadio->direccion=$request->direccion;
+        $estadio->telefono=$request->telefono;
+        $estadio->usuarioCreado=Auth::id();
+        if ($estadio->save()) {
+            if ($request->hasFile('foto')) {
+                $foto=$estadio->id.'_'.Carbon::now().'.'.$request->foto->extension();
+                $path = $request->foto->storeAs('estadios', $foto,'public');
+                $estadio->foto=$foto;    
+                $estadio->save();
+            }
+        }
+        $request->session()->flash('success','Nuevo estadio creado');
+        return redirect()->route('estadios');
+        
     }
 
     public function editar($CodigoEstadio)

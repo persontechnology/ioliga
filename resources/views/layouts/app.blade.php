@@ -7,13 +7,10 @@
      <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>
-        @isset($titulo)
-            {{ $titulo }} | 
-        @endisset
-        {{ config('app.name', 'PROPIEDAD') }}
-    </title>
+    <title>@isset($titulo){{ $titulo }} |@endisset {{ config('app.name', 'IOLIGA') }}</title>
 
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     <!-- Global stylesheets -->
     <link href="{{ asset('css/Roboto.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('global_assets/css/icons/icomoon/styles.min.css') }}" rel="stylesheet" type="text/css">
@@ -23,7 +20,7 @@
     <link href="{{ asset('assets/css/layout.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/components.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('assets/css/colors.min.css') }}" rel="stylesheet" type="text/css">
-     <link href="{{ asset('global_assets/js/plugins/file-input/fileinput.css') }}" rel="stylesheet" type="text/css">
+
     <!-- /global stylesheets -->
 
     <!-- Core JS files -->
@@ -86,7 +83,7 @@
 
             <!-- Content area -->
             <div class="content">
-
+                @include('layouts.alertas')
                 @yield('content')
 
             </div>

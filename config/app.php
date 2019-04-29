@@ -194,6 +194,8 @@ return [
         Tavo\EcLaravelValidator\EcValidatorServiceProvider::class,
         /*roles y permisos*/
         Spatie\Permission\PermissionServiceProvider::class,
+        /*image*/
+        Intervention\Image\ImageServiceProvider::class,
 
 
     ],
@@ -254,6 +256,7 @@ return [
         'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
         /*excel*/
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 
