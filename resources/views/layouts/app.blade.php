@@ -28,22 +28,13 @@
     <!-- Core JS files -->
     <script src="{{ asset('global_assets/js/main/jquery.min.js') }}"></script>
     <script src="{{ asset('global_assets/js/main/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('global_assets/js/plugins/loaders/blockui.min.js') }}"></script>
     <script src="{{ asset('global_assets/js/plugins/ui/ripple.min.js') }}"></script>
     <!-- /core JS files -->
 
     <!-- Theme JS files -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('plus/DataTables/datatables.min.css') }}"/>
-    <script type="text/javascript" src="{{ asset('plus/DataTables/datatables.min.js') }}"></script>
-
-    <script src="{{ asset('global_assets/js/plugins/forms/selects/select2.min.js') }}"></script>
-
-
-    {{-- vendor datatbles --}}
-    <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
+    @stack('scriptsHeader')
 
     <script src="{{ asset('assets/js/app.js') }}"></script>
-    <script src="{{ asset('global_assets/js/demo_pages/datatables_extension_buttons_html5.js') }}"></script>
     <!-- /theme JS files -->
 
 </head>
@@ -110,6 +101,6 @@
 
     </div>
     <!-- /Contenido de página -->
-
+    @stack('scriptsFooter')
 </body>
 </html>

@@ -5,7 +5,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use ioliga\User;
 use Illuminate\Support\Facades\Hash;
-class RolesAndPermissionsSeeder extends Seeder
+class RolesYusuariosSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,32 +14,33 @@ class RolesAndPermissionsSeeder extends Seeder
      */
     public function run()
     {
-        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
         
-        /*permisos*/        
-        $p_menu_estadio=Permission::create(['name' => 'Menu estadio']);
+        /*permisos*/
+
+        
 
         /*roles*/
         /*rola super adminsitrador*/
-        $roleS_Admin = Role::create(['name' => 'SuperAdministrador']);
+        $roleS_Admin = Role::updateOrCreate(['name' => 'SuperAdministrador']);
         /*rol administrador*/
-        $roleAdmin = Role::create(['name' => 'Administrador']);
+        $roleAdmin = Role::updateOrCreate(['name' => 'Administrador']);
         
         /*asiganr permisos a roles*/
-        /*$roleS_A->givePermissionTo($p_menu_estadio);*/
+        /*$roleS_A->givePermissionTo($permiso_aqui);*/
 
         /*usuarios*/
         
-        $userS_Admin= User::create([
+        $userS_Admin= User::updateOrCreate([
             'name' => 'soysoftware',
             'email' => 'info@soysoftware.com',
             'password' => Hash::make('12345678')
         ]);
         $userS_Admin->assignRole($roleS_Admin);
 
-         $userAdmin= User::create([
+         $userAdmin= User::updateOrCreate([
             'name' => 'administrador',
-            'email' => 'info@administrador.com',
+            'email' => 'soysoftware@gmail.com',
             'password' => Hash::make('12345678')
         ]);
 

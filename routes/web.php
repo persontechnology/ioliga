@@ -16,9 +16,10 @@ Route::get('/', function () {
 });
 
 Auth::routes(['verify' => true]);
-Route::group(['middleware' => ['verified']], function () {
+Route::group(['middleware' => ['verified','auth']], function () {
 	Route::get('/home', 'HomeController@index')->name('home');
-
 	/*estadios*/
 	Route::get('/estadios', 'Estadios@index')->name('estadios');
+	Route::get('/estadios-crear', 'Estadios@crear')->name('crearEstadio');
+	
 });

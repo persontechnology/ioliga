@@ -5,7 +5,7 @@
 </li>
 
 <li class="nav-item">
-    <a href="index.html" class="nav-link">
+    <a href="{{ route('home') }}" class="nav-link" id="menuHome">
         <i class="icon-home4"></i>
         <span>
             {{ __('Home') }}
@@ -16,9 +16,9 @@
 
 {{-- estadio --}}
 
-@can('Menu estadio')
+@can('view', 'ioliga\Models\Estadio::class')
 <li class="nav-item">
-    <a href="{{ route('estadios') }}" class="nav-link">
+    <a href="{{ route('estadios') }}" class="nav-link" id="menuEstadio">
         <i class="fas fa-table"></i>
         <span>
             {{ __('Stadium') }}

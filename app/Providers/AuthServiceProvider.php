@@ -5,6 +5,9 @@ namespace ioliga\Providers;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
+use ioliga\Models\Estadio;
+use ioliga\Policies\EstadioPolicy;
+
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -13,7 +16,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'ioliga\Model' => 'ioliga\Policies\ModelPolicy',
+        Estadio::class => EstadioPolicy::class,
     ];
 
     /**
