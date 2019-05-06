@@ -22,29 +22,38 @@ class RolesYusuariosSeeder extends Seeder
 
         /*roles*/
         /*rola super adminsitrador*/
-        $roleS_Admin = Role::updateOrCreate(['name' => 'SuperAdministrador']);
+        $roleSuperAdministrador = Role::updateOrCreate(['name' => 'SuperAdministrador']);
         /*rol administrador*/
-        $roleAdmin = Role::updateOrCreate(['name' => 'Administrador']);
-        
+        $roleAdministrador = Role::updateOrCreate(['name' => 'Administrador']);
+        /*rol jugador*/
+        $roleJugador = Role::updateOrCreate(['name' => 'Jugador']);
+        /*rol representante de equipo*/
+        $roleRepresentanteEquipo = Role::updateOrCreate(['name' => 'Representante de equipo']);
+        /*rol de comisionado calendarizado*/
+        $roleComisionadoDeCalendarizacion = Role::updateOrCreate(['name' => 'Comisionado de calendarización']);
+        /*rol de secretario*/
+        $roleSecreatario=Role::updateOrCreate(['name' => 'Secretario']);
+
+
         /*asiganr permisos a roles*/
         /*$roleS_A->givePermissionTo($permiso_aqui);*/
 
         /*usuarios*/
         
-        $userS_Admin= User::updateOrCreate([
+        $userSuperAdministrador= User::updateOrCreate([
             'name' => 'soysoftware',
             'email' => 'info@soysoftware.com',
             'password' => Hash::make('12345678')
         ]);
-        $userS_Admin->assignRole($roleS_Admin);
+        $userSuperAdministrador->assignRole($roleSuperAdministrador);
 
-         $userAdmin= User::updateOrCreate([
+         $userAdministrador= User::updateOrCreate([
             'name' => 'administrador',
             'email' => 'soysoftware@gmail.com',
             'password' => Hash::make('12345678')
         ]);
 
         /*asiganar roles a usuarios*/
-        $userAdmin->assignRole($roleAdmin);
+        $userAdministrador->assignRole($roleAdministrador);
     }
 }

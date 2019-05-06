@@ -26,4 +26,23 @@ Route::group(['middleware' => ['verified','auth']], function () {
 
 	Route::get('/editar-estadio/{id}', 'Estadios@editar')->name('estadiosEditar');
 	Route::post('/editar-estadio/{id}', 'Estadios@actualizar')->name('actualizar');
+	Route::get('/eliminar-estadio/{id}', 'Estadios@eliminar')->name('eliminarEstadio');
+
+	/*Modulo de usuarios*/
+	Route::namespace('Usuarios')->group(function () {
+	    // usuarios del sistema
+	    Route::get('/usuarios', 'Usuarios@index')->name('usuarios');
+	    Route::get('/usuarios-crear', 'Usuarios@crear')->name('crearUsuario');
+	    Route::post('/usuarios-guardar', 'Usuarios@guardar')->name('guardarUsuario');
+	    Route::get('/usuarios-editar/{id}', 'Usuarios@editar')->name('editarUsuario');
+	    Route::post('/usuarios-actualizar', 'Usuarios@actualizar')->name('actualizarUsuario');
+	    Route::get('/usuarios-editar-foto/{id}', 'Usuarios@editarFoto')->name('editarFotoUsuario');
+	    Route::post('/usuarios-actualizar-foto', 'Usuarios@actualizarFoto')->name('actualizarFotoUsuario');
+	    Route::get('/usuarios-eliminar/{id}', 'Usuarios@eliminar')->name('eliminarUsuario');
+
+	    
+	    
+	});
+
+
 });

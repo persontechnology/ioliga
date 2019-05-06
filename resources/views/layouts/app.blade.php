@@ -28,12 +28,21 @@
     <script src="{{ asset('global_assets/js/main/jquery.min.js') }}"></script>
     <script src="{{ asset('global_assets/js/main/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('global_assets/js/plugins/ui/ripple.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('plus/sweetalert/sweetalert.css') }}">
+    <script src="{{ asset('plus/sweetalert/sweetalert.min.js') }}"></script>
     <!-- /core JS files -->
 
     <!-- Theme JS files -->
     @stack('scriptsHeader')
 
     <script src="{{ asset('assets/js/app.js') }}"></script>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
     <!-- /theme JS files -->
 </head>
 
@@ -100,11 +109,8 @@
     </div>
     <!-- /Contenido de página -->
 
+    
+   <script src="{{ asset('js/funciones.js') }}"></script>
     @stack('scriptsFooter')
-    <script type="text/javascript">
-        $(function () {
-          $('[data-toggle="popover"]').popover()
-        })
-    </script>
 </body>
 </html>

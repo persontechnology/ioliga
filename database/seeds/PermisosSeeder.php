@@ -22,5 +22,14 @@ class PermisosSeeder extends Seeder
         $p_eliminar_estadio=Permission::updateOrCreate(['name' => 'Eliminar estadios']);
         $p_restaurar_estadio=Permission::updateOrCreate(['name' => 'Restaurar estadios']);
         $p_forzar_eliminacion_estadio=Permission::updateOrCreate(['name' => 'Forzar eliminacion estadios']);
+
+        /*permisos para usuarios*/
+        $p_ver_usuarios=Permission::updateOrCreate(['name' => 'Ver usuarios']);
+        $p_crear_usuarios=Permission::updateOrCreate(['name' => 'Crear usuarios']);
+        $p_actualizar_usuarios=Permission::updateOrCreate(['name' => 'Actualizar usuarios']);
+        $p_eliminar_usuarios=Permission::updateOrCreate(['name' => 'Eliminar usuarios']);
+        $p_restaurar_usuarios=Permission::updateOrCreate(['name' => 'Restaurar usuarios']);
+        $p_forzar_eliminacion_usuarios=Permission::updateOrCreate(['name' => 'Forzar eliminacion usuarios']);
+
     }
 }

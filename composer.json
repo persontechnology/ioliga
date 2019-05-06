@@ -19,6 +19,7 @@
         "laravel/tinker": "^1.0",
         "laraveles/spanish": "^1.2",
         "maatwebsite/excel": "^3.1",
+        "pion/laravel-chunk-upload": "^1.2",
         "spatie/laravel-permission": "^2.37",
         "tavo1987/laravel-ec-validator": "^1.1",
         "yajra/laravel-datatables": "^1.5",

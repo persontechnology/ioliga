@@ -86,19 +86,7 @@
 @push('scriptsFooter')
     <script>
         $('#menuEstadio').addClass('active');
-        $("#fotoEstadio").fileinput({
-	        browseClass: "btn btn-primary btn-block",
-	        showCaption: false,
-	        showUpload: false,
-	        language:'es',
-	        theme:'fas',
-	        previewFileType: "image",
-	        browseLabel: "Foto de estadio",
-	        browseIcon: "<i class='far fa-image'></i>",
-	        browseClass: "btn btn-outline-dark float-right",
-	        allowedFileTypes: ["image"],
-	        maxFilePreviewSize: 10240
-	    });
+        subirFoto("#fotoEstadio");
 
     </script>
 @endpush

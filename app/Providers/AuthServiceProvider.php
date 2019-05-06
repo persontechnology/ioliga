@@ -7,6 +7,8 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 
 use ioliga\Models\Estadio;
 use ioliga\Policies\EstadioPolicy;
+use ioliga\Policies\Usuarios\UsuarioPolicy;
+use ioliga\User;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -17,6 +19,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Estadio::class => EstadioPolicy::class,
+        User::class=>UsuarioPolicy::class,
     ];
 
     /**

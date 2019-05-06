@@ -1,11 +1,11 @@
 <?php
 
-namespace ioliga\DataTables;
+namespace ioliga\DataTables\Usuarios;
 
-use ioliga\Models\Estadio;
+use ioliga\User;
 use Yajra\DataTables\Services\DataTable;
-use Illuminate\Support\Facades\Storage;
-class EstadioDataTable extends DataTable
+
+class UsuariosDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -16,24 +16,25 @@ class EstadioDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables($query)
-            ->editColumn('foto',function($es){
-                if($es->foto){
-                    return '<a href="'.Storage::url('public/estadios/'.$es->foto).'"><i class="far fa-image"></i></a>';    
-                }
+            ->editColumn('foto',function($user){
+              return '<a href="'.route('editarFotoUsuario',$user->id).'"><i class="fas fa-camera-retro"></i></a>';
                 
             })
-            ->addColumn('action',function($es){
-                         return view('estadios.acciones', ['estadio'=>$es])->render();
+            ->editColumn('celular',function($user){
+                return $user->telefono.' '.$user->celular;
+            })
+            ->addColumn('action', function($user){
+                return view('usuarios.usuarios.acciones',['user'=>$user])->render();
             })->rawColumns(['foto','action']);
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \ioliga\Models\Estadio $model
+     * @param \ioliga\User $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Estadio $model)
+    public function query(User $model)
     {
         return $model->newQuery()->select($this->getColumns());
     }
@@ -48,7 +49,7 @@ class EstadioDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumnsTable())
                     ->minifiedAjax()
-                    ->addAction(['width' => '80px','printable' => false, 'exportable' => false,'title'=>'Acciones'])
+                    ->addAction(['width' => '80px'])
                     ->parameters($this->getBuilderParameters());
     }
 
@@ -61,29 +62,27 @@ class EstadioDataTable extends DataTable
     {
         return [
             'id',
-            'nombre',
-            'direccion',
-            'telefono',
+            'email',
+            'identificacion',
+            'nombres',
+            'apellidos',
             'foto',
-            'estado',
-            'usuarioCreado',
-            'usuarioActualizado',
-            'created_at',
-            'updated_at'
+            'sexo',
+            'celular',
+            'telefono'
         ];
     }
-
 
     protected function getColumnsTable()
     {
         return [
-            
-            'nombre',
-            'direccion'=>['title'=>'Dirección'],
-            'telefono'=>['title'=>'Teléfono'],
             'foto',
-            'estado',
-            
+            'nombres',
+            'apellidos',
+            'identificacion'=>['title'=>'Identificación'],
+            'email',
+            'sexo',
+            'celular'=>['title'=>'Contactos']
         ];
     }
 
@@ -94,6 +93,6 @@ class EstadioDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Estadio_' . date('YmdHis');
+        return 'Usuarios/Usuarios_' . date('YmdHis');
     }
 }

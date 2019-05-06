@@ -68,12 +68,26 @@ class Estadios extends Controller
     		'telefono'=>'nullable|digits_between:6,10',
     	]);
     	$idUser=Auth::user()->id;
-    	$estadio=Estadio::find($id);
+    	$estadio=Estadio::findOrFail($id);
     	$estadio->nombre=$request->nombre;
     	$estadio->direccion=$request->direccion;
     	$estadio->telefono=$request->telefono;
     	$estadio->usuarioActualizado=$idUser;
     	$estadio->save();
     	 return redirect('/estadios');
+    }
+
+
+    public function eliminar(Request $request,$idEstadio)
+    {
+        $this->authorize('delete',$this->estadioModel);
+        $estadio=Estadio::findOrFail($idEstadio);
+        try {
+            $estadio->delete();
+            $request->session()->flash('success','Estadio eliminado');
+        } catch (\Exception $e) {
+            $request->session()->flash('info','Estadio no eliminado');
+        }
+        return redirect()->route('estadios');
     }
 }
