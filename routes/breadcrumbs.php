@@ -18,6 +18,10 @@ Breadcrumbs::for('crearEstadio', function ($trail) {
     $trail->push('Crear estadio', route('crearEstadio'));
 });
 
+Breadcrumbs::for('estadiosEditar', function ($trail,$estadio) {
+    $trail->parent('estadios');
+    $trail->push('Actualizar '.$estadio->nombre, route('estadiosEditar',$estadio->id));
+});
 /*usuarios*/
 Breadcrumbs::for('usuarios', function ($trail) {
     $trail->parent('home');

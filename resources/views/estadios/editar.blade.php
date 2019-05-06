@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('breadcrumbs', Breadcrumbs::render('inicio'))
+@section('breadcrumbs', Breadcrumbs::render('estadiosEditar',$estadio))
 
-@section('acciones')
-    <a href="#" class="breadcrumb-elements-item">
-        <i class="icon-comment-discussion mr-2"></i>
-        Editar Estadio
-    </a>
+@section('acciones')	
+	<a href="{{ route('estadios') }}" class="breadcrumb-elements-item">
+	    <i class="fas fa-arrow-left"></i>
+	    {{ __('Cancel') }}
+	</a>
 @endsection
 
 @section('content')
@@ -104,7 +104,25 @@
 		</div>		
 	</div>
 </div>
+@prepend('scriptsHeader')
+
+{{-- file input --}}
+<link href="{{ asset('plus/bootstrap-fileinput/css/fileinput.min.css') }}" media="all" rel="stylesheet" type="text/css" />
+<script src="{{ asset('plus/bootstrap-fileinput/js/plugins/piexif.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('plus/bootstrap-fileinput/js/plugins/sortable.min.js') }}" type="text/javascript"></script>
+<script src="{{asset('plus/bootstrap-fileinput/js/plugins/purify.min.js')}}" type="text/javascript"></script>
+<script src="{{ asset('plus/bootstrap-fileinput/js/fileinput.min.js') }}"></script>
+<script src="{{ asset('plus/bootstrap-fileinput/themes/fas/theme.min.js') }}"></script>
+<script src="{{ asset('plus/bootstrap-fileinput/js/locales/es.js') }}"></script>
+{{-- fin file input --}}
+
+@endprepend
 <script type="text/javascript">
+@if($estadio->foto)
+  var foto="<img class='kv-preview-data file-preview-image' src='{{ Storage::url('public/estadios/'.$estadio->foto) }}'>";
+@else
+var foto="<img class='kv-preview-data file-preview-image' src='{{ asset('global_assets/images/estadio.jpg') }}'>";
+@endif
 
     $("#foto").fileinput({
         browseClass: "btn btn-primary btn-block",
@@ -112,9 +130,10 @@
         showRemove: true,
         showUpload: false,
         language: "es",
+        initialPreview: [foto],
         allowedFileExtensions: ["jpg", "png", "gif"],
     });
-    $('#menu_estadio > a').addClass('active');
+    $('#menuEstadio').addClass('active');
 
 </script>
 
