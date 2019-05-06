@@ -46,6 +46,10 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	Route::namespace('Seguridades')->group(function () {
 	    // roles del sistema
 	    Route::get('/roles', 'Roles@index')->name('roles');
+	    Route::post('/roles-actualizar-permisos', 'Roles@actualizarPermisos')->name('actualizarPermisos');
+	    Route::get('/roles-eliminar/{id}', 'Roles@eliminar')->name('eliminarRol');
+	    Route::get('/roles-pdf/{id}', 'Roles@pdf')->name('pdfRol');
+	    
 	});
 
 
