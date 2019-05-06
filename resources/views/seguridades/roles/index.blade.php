@@ -29,18 +29,37 @@
 <div class="row">
 	@foreach($roles as $rol)
 	<div class="col-md-6">
-		<div class="card border-y-1 border-top-dark border-bottom-dark rounded-0">
-			<div class="card-header bg-white header-elements-inline">
-				<h6 class="card-title">{{ $rol->name }}</h6>
-				<div class="header-elements">
-					<button type="button" class="btn btn-outline-dark">Button</button>
+		<form action="{{ route('actualizarPermisos') }}" method="post">
+			 @csrf
+			<input type="hidden" name="rol" value="{{ $rol->id }}" required="">
+			<div class="card border-y-1 border-top-dark border-bottom-dark rounded-0">
+				<div class="card-header bg-white header-elements-inline">
+					<h6 class="card-title">{{ $rol->name }}</h6>
+					
+				</div>
+				
+				<div class="card-body">
+					@foreach($permisos as $per)
+					<div class="form-check form-check-inline">
+					  <input class="form-check-input" type="checkbox" name="permisos[]" id="permiso{{ $per->id.$rol->id }}" value="{{ $per->id }}" {{ $rol->hasPermissionTo($per) ? 'checked': '' }} >
+					  <label class="form-check-label" for="permiso{{ $per->id.$rol->id }}">{{ $per->name }}</label>
+					</div>
+					@endforeach
+				</div>
+				<div class="card-footer bg-white d-flex justify-content-between align-items-center">
+					<button type="submit" class="btn bg-blue">Actualizar</button>
+					<div class="btn-group">
+						<button type="button" class="btn btn-outline bg-slate text-slate-700 border-slate border-2 dropdown-toggle" data-toggle="dropdown">Más</button>
+						<div class="dropdown-menu dropdown-menu-right">
+							<button type="button" data-msj="{{ $rol->name }}" data-url="{{ route('eliminarRol',$rol->id) }}" onclick="eliminar(this);" class="dropdown-item">Eliminar</button>
+							@if(count($rol->getAllPermissions())>0)
+							<a href="{{ route('pdfRol',$rol->id) }}" class="dropdown-item">Descargar PDF</a>
+							@endif
+						</div>
+					</div>
 				</div>
 			</div>
-			
-			<div class="card-body">
-				Basic border size of the element, defined in core variables. Any card border can be highlighted with proper class name
-			</div>
-		</div>
+		</form>
 	</div>
 	@endforeach
 </div>
