@@ -23,8 +23,11 @@ class RqActualizar extends FormRequest
      */
     public function rules()
     {
+
         return [
-            //
+            'nombre'=>'required|unique:estadio,nombre,'.$this->input('estadio'),
+            'direccion'=>'required',
+            'telefono'=>'nullable|digits_between:6,10',
         ];
     }
 }

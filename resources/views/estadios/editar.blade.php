@@ -24,10 +24,10 @@
 		</div>		
 		<div class="card-body">
             <hr>
-       <form method="POST" action="{{ route('actualizar', $estadio->id) }}">
+       <form method="POST" action="{{ route('actualizar') }}" enctype="multipart/form-data">
            <div class="row">
                <div class="col-sm-6">           
-               
+                <input type="hidden" name="estadio" id="estadio" value="{{ $estadio->id }}" required="">
                 @csrf
                
                 <div class="form-group row">
