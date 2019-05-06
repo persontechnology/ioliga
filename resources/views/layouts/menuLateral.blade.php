@@ -26,7 +26,7 @@
     </a>
 </li>
 @endcan
-@role('Administrador')
+
     <li class="nav-item-header">
         <div class="text-uppercase font-size-xs line-height-xs">{{ __('Sistema') }}</div> 
         <i class="icon-menu" title="Sistema"></i>
@@ -36,6 +36,15 @@
             <i class="fas fa-users-cog"></i>
             <span>
                 {{ __('Usuarios del sistema') }}
+            </span>
+        </a>
+    </li>
+@role('Administrador|SuperAdministrador')
+    <li class="nav-item">
+        <a href="{{ route('roles') }}" class="nav-link" id="menuRoles">
+            <i class="fas fa-clipboard-check"></i>
+            <span>
+                {{ __('Roles') }}
             </span>
         </a>
     </li>

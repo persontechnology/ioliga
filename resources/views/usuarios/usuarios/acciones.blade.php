@@ -4,7 +4,7 @@
 		<a class="btn btn-outline-dark" href="{{ route('editarUsuario',$user->id) }}">Editar</a>
 	@endcan
 	@can('delete', 'ioliga\User::class')	
-		<button type="button" class="btn btn-outline-dark" data-url="{{ route('eliminarUsuario',$user->id) }}" onclick="eliminar(this);">Eliminar</button>
+		<button type="button" class="btn btn-outline-dark" data-msj="{{ $user->email }}" data-url="{{ route('eliminarUsuario',$user->id) }}" onclick="eliminar(this);">Eliminar</button>
 	@endcan
 </div>
 

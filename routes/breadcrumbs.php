@@ -32,3 +32,10 @@ Breadcrumbs::for('editarUsuario', function ($trail,$usuario) {
     $trail->push('Actualizar '.$usuario->email, route('editarUsuario',$usuario->id));
 });
 
+/*seguridades*/
+/*roles*/
+Breadcrumbs::for('roles', function ($trail) {
+    $trail->parent('home');
+    $trail->push('Roles', route('roles'));
+});
+

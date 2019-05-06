@@ -39,9 +39,13 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	    Route::get('/usuarios-editar-foto/{id}', 'Usuarios@editarFoto')->name('editarFotoUsuario');
 	    Route::post('/usuarios-actualizar-foto', 'Usuarios@actualizarFoto')->name('actualizarFotoUsuario');
 	    Route::get('/usuarios-eliminar/{id}', 'Usuarios@eliminar')->name('eliminarUsuario');
+	});
 
-	    
-	    
+
+	/*seguridades*/
+	Route::namespace('Seguridades')->group(function () {
+	    // roles del sistema
+	    Route::get('/roles', 'Roles@index')->name('roles');
 	});
 
 
