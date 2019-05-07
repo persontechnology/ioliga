@@ -15,9 +15,10 @@
   <div class="card-body">
     <form action="{{ route('guardarEstadio') }}" method="post" enctype="multipart/form-data">
     	@csrf
-		<fieldset>
+	
 			<legend class="text-uppercase font-size-sm font-weight-bold">Completar información</legend>
-
+	     <div class="row">
+           <div class="col-sm-6">  
 
 			<div class="form-group row">
 				<label for="direccion" class="col-form-label col-lg-2">Nombre<span class="text-danger">*</span></label>
@@ -53,7 +54,8 @@
 	                @enderror
 				</div>
 			</div>
-			
+			</div>
+            <div class="col-sm-6">  
 			<div class="file-loading">
 			    <input  type="file"  name="foto" id="fotoEstadio" class="@error('foto') is-invalid @enderror"  accept="image/*">
 			</div>
@@ -62,9 +64,14 @@
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
-
-		</fieldset>
-		<button type="submit" class="btn btn-primary mt-3">{{ __('Save') }} <i class="icon-paperplane ml-2"></i></button>
+        </div>
+    </div>
+      <div class="form-group row mb-0">
+        <div class="col-md-6 offset-md-4">
+		
+			<button type="submit" class="btn btn-dark btn-rounded">{{ __('Save') }} <i class="icon-paperplane ml-2"></i></button>
+		</div>
+	</div>
 	</form>
   </div>
 </div>

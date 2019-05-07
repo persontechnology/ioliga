@@ -7,6 +7,7 @@ use ioliga\Models\Estadio;
 use ioliga\DataTables\EstadioDataTable;
 use Illuminate\Support\Facades\Auth;
 use ioliga\Http\Requests\Estadio\RqGuardarEstadio;
+use ioliga\Http\Requests\Estadio\RqActualizar;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
@@ -59,23 +60,30 @@ class Estadios extends Controller
     	return view('estadios.editar',compact('estadio'));
     }
 
-    public function actualizar(Request $request, $id)
+    public function actualizar(RqActualizar $request)
     {
 
-    	$request->validate([
-    		'nombre'=>'required|unique:estadio,nombre,'.$id,
-    		'direccion'=>'required',
-    		'telefono'=>'nullable|digits_between:6,10',
-    	]);
-    	$idUser=Auth::user()->id;
-    	$estadio=Estadio::findOrFail($id);
-        $this->authorize('update',$estadio);
+        
+        $estadio=Estadio::findOrFail($request->estadio);  
+        $this->authorize('update',$estadio); 
+
     	$estadio->nombre=$request->nombre;
     	$estadio->direccion=$request->direccion;
     	$estadio->telefono=$request->telefono;
-    	$estadio->usuarioActualizado=$idUser;
-    	$estadio->save();
-    	 return redirect('/estadios');
+    	$estadio->usuarioActualizado=Auth::id();
+    	if($estadio->save()){
+            if ($request->hasFile('foto')) {
+                if ($request->file('foto')->isValid()) {
+                    Storage::disk('public')->delete('estadios/'.$estadio->foto);
+                    $foto=$estadio->id.'_'.Carbon::now().'.'.$request->foto->extension();
+                    $path = $request->foto->storeAs('estadios', $foto,'public');
+                    $estadio->foto=$foto;    
+                    $estadio->save();
+                }
+            }         
+        }
+        $request->session()->flash('success','Esatoadio editado correctamente');
+        return redirect('/estadios');
     }
 
 

@@ -22,9 +22,12 @@ class EstadioDataTable extends DataTable
                 }
                 
             })
+            ->editColumn('estado',function($es){           
+                    return view('estadios.estados', ['estadio'=>$es])->render();         
+            })
             ->addColumn('action',function($es){
                          return view('estadios.acciones', ['estadio'=>$es])->render();
-            })->rawColumns(['foto','action']);
+            })->rawColumns(['foto','estado','action']);
     }
 
     /**

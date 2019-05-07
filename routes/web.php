@@ -25,7 +25,7 @@ Route::group(['middleware' => ['verified','auth']], function () {
 
 
 	Route::get('/editar-estadio/{id}', 'Estadios@editar')->name('estadiosEditar');
-	Route::post('/editar-estadio/{id}', 'Estadios@actualizar')->name('actualizar');
+	Route::post('/editar-estadio', 'Estadios@actualizar')->name('actualizar');
 	Route::get('/eliminar-estadio/{id}', 'Estadios@eliminar')->name('eliminarEstadio');
 
 	/*Modulo de usuarios*/

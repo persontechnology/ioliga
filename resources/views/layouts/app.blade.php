@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="{{ asset('plus/sweetalert/sweetalert.css') }}">
     <script src="{{ asset('plus/sweetalert/sweetalert.min.js') }}"></script>
     <!-- /core JS files -->
-
+    <script src="{{ asset('/global_assets/js/demo_pages/form_checkboxes_radios.js') }}" type="text/javascript"></script>
     <!-- Theme JS files -->
     @stack('scriptsHeader')
 
