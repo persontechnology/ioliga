@@ -17,7 +17,9 @@ class EstadioPolicy
      * @param  \ioliga\Models\Estadio  $estadio
      * @return mixed
      */
-    public function view(User $user, Estadio $estadio)
+
+    
+    public function view(User $user)
     {
         return $user->can('Ver estadios');
     }

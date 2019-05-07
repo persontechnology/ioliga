@@ -13,29 +13,27 @@ use Illuminate\Support\Facades\Storage;
 
 class Estadios extends Controller
 {
-	protected $estadioModel;
 	public function __construct(Estadio $estadioModel)
     {
         $this->middleware('auth');
-        $this->estadioModel=$estadioModel;
     }
 
     public function index(EstadioDataTable $dataTable)
     {
-    	$this->authorize('view',$this->estadioModel);
+    	$this->authorize('view',Estadio::class);
 		return $dataTable->render('estadios.index');
     	
     }
 
     public function crear()
     {
-    	$this->authorize('create',$this->estadioModel);
+    	$this->authorize('create',Estadio::class);
     	return view('estadios.crear');
     }
 
     public function guardar(RqGuardarEstadio $request)
     {
-        $this->authorize('create',$this->estadioModel);
+        $this->authorize('create',Estadio::class);
 
         $estadio=new Estadio;
         $estadio->nombre=$request->nombre;
@@ -58,21 +56,24 @@ class Estadios extends Controller
     public function editar($CodigoEstadio)
     {
     	$estadio = Estadio::find($CodigoEstadio);    	    	
+        $this->authorize('update',$estadio);
     	return view('estadios.editar',compact('estadio'));
     }
 
     public function actualizar(RqActualizar $request)
     {
-        $this->authorize('update',User::class);
-        $estadio=Estadio::findOrFail($request->estadio);    
-  
+
+        
+        $estadio=Estadio::findOrFail($request->estadio);  
+        $this->authorize('update',$estadio); 
+
     	$estadio->nombre=$request->nombre;
     	$estadio->direccion=$request->direccion;
     	$estadio->telefono=$request->telefono;
     	$estadio->usuarioActualizado=Auth::id();
     	if($estadio->save()){
             if ($request->hasFile('foto')) {
-                    if ($request->file('foto')->isValid()) {
+                if ($request->file('foto')->isValid()) {
                     Storage::disk('public')->delete('estadios/'.$estadio->foto);
                     $foto=$estadio->id.'_'.Carbon::now().'.'.$request->foto->extension();
                     $path = $request->foto->storeAs('estadios', $foto,'public');
@@ -81,15 +82,15 @@ class Estadios extends Controller
                 }
             }         
         }
-         $request->session()->flash('success','Esatoadio editado correctamente');
-         return redirect('/estadios');
+        $request->session()->flash('success','Esatoadio editado correctamente');
+        return redirect('/estadios');
     }
 
 
     public function eliminar(Request $request,$idEstadio)
     {
-        $this->authorize('delete',$this->estadioModel);
         $estadio=Estadio::findOrFail($idEstadio);
+        $this->authorize('delete',$estadio);
         try {
             $estadio->delete();
             $request->session()->flash('success','Estadio eliminado');

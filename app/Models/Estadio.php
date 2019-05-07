@@ -12,7 +12,7 @@ class Estadio extends Model
         'nombre', 'direccion', 'telefono','estado'
     ];
 
-    protected $hidden = [
-        // 'usuarioCreado', 'usuarioActualizado',
-    ];
+    // protected $hidden = [
+    //     'usuarioCreado', 'usuarioActualizado',
+    // ];
 }
