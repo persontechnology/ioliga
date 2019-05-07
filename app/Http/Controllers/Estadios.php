@@ -12,29 +12,27 @@ use Illuminate\Support\Facades\Storage;
 
 class Estadios extends Controller
 {
-	protected $estadioModel;
 	public function __construct(Estadio $estadioModel)
     {
         $this->middleware('auth');
-        $this->estadioModel=$estadioModel;
     }
 
     public function index(EstadioDataTable $dataTable)
     {
-    	$this->authorize('view',$this->estadioModel);
+    	$this->authorize('view',Estadio::class);
 		return $dataTable->render('estadios.index');
     	
     }
 
     public function crear()
     {
-    	$this->authorize('create',$this->estadioModel);
+    	$this->authorize('create',Estadio::class);
     	return view('estadios.crear');
     }
 
     public function guardar(RqGuardarEstadio $request)
     {
-        $this->authorize('create',$this->estadioModel);
+        $this->authorize('create',Estadio::class);
 
         $estadio=new Estadio;
         $estadio->nombre=$request->nombre;
@@ -57,11 +55,13 @@ class Estadios extends Controller
     public function editar($CodigoEstadio)
     {
     	$estadio = Estadio::find($CodigoEstadio);    	    	
+        $this->authorize('update',$estadio);
     	return view('estadios.editar',compact('estadio'));
     }
 
     public function actualizar(Request $request, $id)
     {
+
     	$request->validate([
     		'nombre'=>'required|unique:estadio,nombre,'.$id,
     		'direccion'=>'required',
@@ -69,6 +69,7 @@ class Estadios extends Controller
     	]);
     	$idUser=Auth::user()->id;
     	$estadio=Estadio::findOrFail($id);
+        $this->authorize('update',$estadio);
     	$estadio->nombre=$request->nombre;
     	$estadio->direccion=$request->direccion;
     	$estadio->telefono=$request->telefono;
@@ -80,8 +81,8 @@ class Estadios extends Controller
 
     public function eliminar(Request $request,$idEstadio)
     {
-        $this->authorize('delete',$this->estadioModel);
         $estadio=Estadio::findOrFail($idEstadio);
+        $this->authorize('delete',$estadio);
         try {
             $estadio->delete();
             $request->session()->flash('success','Estadio eliminado');
