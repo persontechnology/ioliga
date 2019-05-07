@@ -43,3 +43,12 @@ Breadcrumbs::for('roles', function ($trail) {
     $trail->push('Roles', route('roles'));
 });
 
+/*Campeonato*/
+Breadcrumbs::for('campeonatos', function ($trail) {
+    $trail->parent('home');
+    $trail->push('Campeonatos', route('campeonatos'));
+});
+Breadcrumbs::for('crearCampeonato', function ($trail) {
+    $trail->parent('estadios');
+    $trail->push('Crear campeonato', route('crearCampeonato'));
+});

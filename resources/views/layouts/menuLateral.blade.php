@@ -26,6 +26,19 @@
     </a>
 </li>
 @endcan
+{{-- campeonatos --}}
+
+@can('view', 'ioliga\Models\Campeonato::class')
+<li class="nav-item">
+    <a href="{{ route('campeonatos') }}" class="nav-link" id="menuCampeo" title="Campeonato">
+        <i class="fas fa-trophy"></i>
+        <span>
+            {{ __('Campeonato') }}
+        </span>
+    </a>
+</li>
+@endcan
+
 
     <li class="nav-item-header">
         <div class="text-uppercase font-size-xs line-height-xs">{{ __('Sistema') }}</div> 
