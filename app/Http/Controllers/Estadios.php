@@ -20,20 +20,20 @@ class Estadios extends Controller
 
     public function index(EstadioDataTable $dataTable)
     {
-    	$this->authorize('view',Estadio::class);
+    	$this->authorize('ver',Estadio::class);
 		return $dataTable->render('estadios.index');
     	
     }
 
     public function crear()
     {
-    	$this->authorize('create',Estadio::class);
+    	$this->authorize('crear',Estadio::class);
     	return view('estadios.crear');
     }
 
     public function guardar(RqGuardarEstadio $request)
     {
-        $this->authorize('create',Estadio::class);
+        $this->authorize('crear',Estadio::class);
 
         $estadio=new Estadio;
         $estadio->nombre=$request->nombre;
@@ -56,16 +56,15 @@ class Estadios extends Controller
     public function editar($CodigoEstadio)
     {
     	$estadio = Estadio::find($CodigoEstadio);    	    	
-        $this->authorize('update',$estadio);
+        $this->authorize('actualizar',$estadio);
     	return view('estadios.editar',compact('estadio'));
     }
 
     public function actualizar(RqActualizar $request)
     {
-
         
         $estadio=Estadio::findOrFail($request->estadio);  
-        $this->authorize('update',$estadio); 
+        $this->authorize('actualizar',$estadio); 
 
     	$estadio->nombre=$request->nombre;
     	$estadio->direccion=$request->direccion;
@@ -90,7 +89,7 @@ class Estadios extends Controller
     public function eliminar(Request $request,$idEstadio)
     {
         $estadio=Estadio::findOrFail($idEstadio);
-        $this->authorize('delete',$estadio);
+        $this->authorize('eliminar',$estadio);
         try {
             $estadio->delete();
             $request->session()->flash('success','Estadio eliminado');

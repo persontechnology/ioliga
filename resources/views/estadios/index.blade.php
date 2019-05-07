@@ -4,7 +4,7 @@
 
 @section('acciones')
 
-@can('create', ioliga\Models\Estadio::class)
+@can('crear', ioliga\Models\Estadio::class)
 
     <a href="{{ route('crearEstadio') }}" class="breadcrumb-elements-item">
         <i class="fas fa-plus"></i>
