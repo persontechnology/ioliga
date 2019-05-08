@@ -21,6 +21,8 @@ class CreateCampeonatoTable extends Migration
             $table->date('fechafin');
             $table->string('descripcion');
             $table->boolean('estado')->default(true);
+            $table->bigInteger('usuarioCreado')->nullable();
+            $table->bigInteger('usuarioActualizado')->nullable();
          
         });
     }

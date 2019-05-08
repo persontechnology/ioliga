@@ -17,6 +17,8 @@ class CreateGeneroEquipoTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->enum('nombre',['Masculino','Femenino']);
+            $table->bigInteger('usuarioCreado')->nullable();
+            $table->bigInteger('usuarioActualizado')->nullable();
         });
     }
 

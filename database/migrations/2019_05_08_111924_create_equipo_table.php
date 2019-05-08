@@ -27,8 +27,8 @@ class CreateEquipoTable extends Migration
             $table->string('color2');
             $table->string('foto')->nullable();
             $table->boolean('estado')->default(true)->nullable();
-            $table->unsignedBigInteger('repre_id');
-            $table->foreign('repre_id')->references('id')->on('users');
+            $table->unsignedBigInteger('users_id');
+            $table->foreign('users_id')->references('id')->on('users');
         });
     }
 

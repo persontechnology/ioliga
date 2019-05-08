@@ -12,7 +12,7 @@ class Equipo extends Model
     protected $fillable = [
         'nombre', 'resenaHistorico', 'localidad','telefono','anioCreacion','fraseIdentificacion','color','color1','color2','foto','estado'
     ];
-     public function user()
+    public function user()
     {
     	return $this->belongsTo(User::class, 'repre_id');
     }
