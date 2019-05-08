@@ -16,7 +16,7 @@
 
 {{-- estadio --}}
 
-@can('view', ioliga\Models\Estadio::class)
+@can('ver', ioliga\Models\Estadio::class)
 <li class="nav-item">
     <a href="{{ route('estadios') }}" class="nav-link" id="menuEstadio" title="Estadio">
         <i class="fas fa-table"></i>
