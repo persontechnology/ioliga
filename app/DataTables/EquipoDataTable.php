@@ -2,7 +2,7 @@
 
 namespace ioliga\DataTables;
 
-use ioliga\Models\Equipo\Equipo;
+use ioliga\Models\Equipo;
 use Yajra\DataTables\Services\DataTable;
 
 class EquipoDataTable extends DataTable

@@ -2,18 +2,23 @@
 
 namespace ioliga\Http\Controllers;
 
+
 use Illuminate\Http\Request;
+use ioliga\Models\Equipo;
+use ioliga\DataTables\EquipoDataTable;
+use Illuminate\Support\Facades\Auth;
 
 class Equipos extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct(Estadio $estadioModel)
     {
-        //
+        $this->middleware('auth');
+    }
+   public function index(EquipoDataTable $dataTable)
+    {
+        /*$this->authorize('ver',Estadio::class);*/
+        return $dataTable->render('equipos.index');
+        
     }
 
     /**
