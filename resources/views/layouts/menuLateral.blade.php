@@ -39,6 +39,18 @@
 </li>
 @endcan
 
+{{-- equipos --}}
+
+@can('view', 'ioliga\Models\Equipo\Equipo::class')
+<li class="nav-item">
+    <a href="{{ route('equipos') }}" class="nav-link" id="menuEquipo" title="Equipos">
+        <i class="fas fa-trophy"></i>
+        <span>
+            {{ __('Equipo') }}
+        </span>
+    </a>
+</li>
+@endcan
 
     <li class="nav-item-header">
         <div class="text-uppercase font-size-xs line-height-xs">{{ __('Sistema') }}</div> 
