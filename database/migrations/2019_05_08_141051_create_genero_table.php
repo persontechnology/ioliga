@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGeneroEquipoTable extends Migration
+class CreateGeneroTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,16 @@ class CreateGeneroEquipoTable extends Migration
      */
     public function up()
     {
-        Schema::create('generoEquipo', function (Blueprint $table) {
+        Schema::create('genero', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
-            $table->string('nombre');
-            $table->bigInteger('usuarioCreado')->nullable();
-            $table->bigInteger('usuarioActualizado')->nullable();
+
+            $table->unsignedBigInteger('campeonato_id');
+            $table->foreign('campeonato_id')->references('id')->on('campeonato');
+
+            $table->unsignedBigInteger('generoEquipo_id');
+            $table->foreign('generoEquipo_id')->references('id')->on('generoEquipo');
+
         });
     }
 
@@ -29,6 +33,6 @@ class CreateGeneroEquipoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('generoEquipo');
+        Schema::dropIfExists('genero');
     }
 }

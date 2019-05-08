@@ -54,8 +54,9 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	});
 
 	/*Campeonatos*/
-	Route::get('/campeonato', 'Campeonatos@index')->name('campeonatos');
-	Route::get('/campeonato-crear', 'Campeonatos@crear')->name('crearCampeonato');
+	Route::get('/campeonatos', 'Campeonatos@index')->name('campeonatos');
+	Route::get('/campeonatos-crear', 'Campeonatos@crear')->name('crearCampeonato');
+	Route::post('/campeonatos-crear', 'Campeonatos@guardar')->name('guardarCampeonato');
 
 	/*Equipos*/
 	Route::get('/equipos', 'Equipos@index')->name('equipos');

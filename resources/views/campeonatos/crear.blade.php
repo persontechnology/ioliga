@@ -15,7 +15,7 @@
 @section('content')
 <div class="card">
   <div class="card-body">
-   <form action="{{ route('guardarUsuario') }}" method="post" enctype="multipart/form-data" id="formIngresoUsuario">
+   <form action="{{ route('guardarCampeonato') }}" method="post" enctype="multipart/form-data" id="formIngresoUsuario">
       @csrf
       <div class="row">
           <div class="col-md-6">
@@ -79,7 +79,18 @@
               <fieldset>
                   <legend class="font-weight-semibold"><i class="fas fa-user-lock"></i> Información de categoría de equipos existentes</legend>
                   
+                @if(count($generoEquipos)>0)
                 
+                @foreach($generoEquipos as $ge)
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="generos[]" id="ge{{ $ge->id }}" value="{{ $ge->id }}" checked="">
+                  <label class="form-check-label" for="ge{{ $ge->id }}">{{ $ge->nombre }} ({{ $ge->equipos()->count() }} equipos)</label>
+                </div>
+                @endforeach
+
+                @else
+                <p>No existe generos de equipos creados, es decir no existe equipos en el sistema</p>
+                @endif
 
               </fieldset>
           </div>

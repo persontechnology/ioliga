@@ -17,7 +17,11 @@ class CampeonatoDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables($query)
-            ->addColumn('action', 'campeonatodatatable.action');
+            ->addColumn('categoria',function($campeonato){
+                return view('campeonatos.categorias',['campeonato'=>$campeonato])->render();
+            })
+            ->addColumn('action', 'campeonatodatatable.action')
+            ->rawColumns(['categoria','action']);
     }
 
     /**
@@ -39,7 +43,7 @@ class CampeonatoDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->columns($this->getColumns())
+                    ->columns($this->getColumnsTable())
                     ->minifiedAjax()
                     ->addAction(['width' => '80px','printable' => false, 'exportable' => false,'title'=>'Acciones'])
                     ->parameters($this->getBuilderParameters());
@@ -55,10 +59,24 @@ class CampeonatoDataTable extends DataTable
         return [
             'id',
             'nombre',
-            'fechainicio',
-            'fechafin',
+            'fechaInicio',
+            'fechaFin',
             'estado',
             'descripcion'
+
+        ];
+    }
+
+
+    protected function getColumnsTable()
+    {
+        return [
+            'nombre'=>['title'=>'Nombre de campeonato'],
+            'fechaInicio',
+            'fechaFin',
+            'estado',
+            'descripcion'=>['title'=>'Descripción'],
+            'categoria'=>['title'=>'Categorías']
 
         ];
     }

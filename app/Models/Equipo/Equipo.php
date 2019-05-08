@@ -1,6 +1,6 @@
 <?php
 
-namespace ioliga\Models;
+namespace ioliga\Models\Equipo;
 
 use Illuminate\Database\Eloquent\Model;
 use ioliga\User;

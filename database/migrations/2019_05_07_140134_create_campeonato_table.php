@@ -16,10 +16,10 @@ class CreateCampeonatoTable extends Migration
         Schema::create('campeonato', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
-            $table->string('nombre')->unique();
-            $table->date('fechainicio');
-            $table->date('fechafin');
-            $table->string('descripcion');
+            $table->string('nombre');
+            $table->date('fechaInicio');
+            $table->date('fechaFin');
+            $table->string('descripcion')->nullable();
             $table->boolean('estado')->default(true);
             $table->bigInteger('usuarioCreado')->nullable();
             $table->bigInteger('usuarioActualizado')->nullable();

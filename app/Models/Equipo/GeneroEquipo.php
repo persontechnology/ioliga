@@ -3,7 +3,7 @@
 namespace ioliga\Models\Equipo;
 
 use Illuminate\Database\Eloquent\Model;
-use ioliga\Models\Equipo;
+use ioliga\Models\Equipo\Equipo;
 
 class GeneroEquipo extends Model
 {
@@ -11,6 +11,6 @@ class GeneroEquipo extends Model
 
     public function equipos()
     {
-        return $this->hasMany(Equipo::class);
+        return $this->hasMany(Equipo::class,'generoEquipo_id');
     }
 }
