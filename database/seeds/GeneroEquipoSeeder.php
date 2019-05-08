@@ -11,7 +11,7 @@ class GeneroEquipoSeeder extends Seeder
      */
     public function run()
     {
-         $g_masculino=GeneroEquipo::updateOrCreate(['nombre' => 'Masculino']);
+        $g_masculino=GeneroEquipo::updateOrCreate(['nombre' => 'Masculino']);
          $g_femenino=GeneroEquipo::updateOrCreate(['nombre' => 'Femenino']);
     }
 }
