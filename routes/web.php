@@ -53,5 +53,9 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	    
 	});
 
+	/*Campeonatos*/
+	Route::get('/campeonato', 'Campeonatos@index')->name('campeonatos');
+	Route::get('/campeonato-crear', 'Campeonatos@crear')->name('campeonatoCrear');
+
 
 });
