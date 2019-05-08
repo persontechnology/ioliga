@@ -49,7 +49,7 @@ class UsuariosDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumnsTable())
                     ->minifiedAjax()
-                    ->addAction(['width' => '80px'])
+                    ->addAction(['width' => '80px','printable' => false, 'exportable' => false,'title'=>'Acciones'])
                     ->parameters($this->getBuilderParameters());
     }
 
@@ -76,7 +76,7 @@ class UsuariosDataTable extends DataTable
     protected function getColumnsTable()
     {
         return [
-            'foto',
+            'foto'=>['exportable'=>false,'printable'=>false],
             'nombres',
             'apellidos',
             'identificacion'=>['title'=>'Identificación'],

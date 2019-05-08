@@ -24,20 +24,20 @@ class Usuarios extends Controller
 
     public function index(UsuariosDataTable $dataTable)
     {
-    	$this->authorize('view',User::class);
+    	$this->authorize('ver',User::class);
     	return $dataTable->render('usuarios.usuarios.index');
     }
 
     public function crear()
     {
-        $this->authorize('create',User::class);
+        $this->authorize('crear',User::class);
         $data = array('roles' => Role::where('name','!=','SuperAdministrador')->get() );
     	return view('usuarios.usuarios.crear',$data);
     }
 
     public function guardar(RqCrear $request)
     {
-        $this->authorize('create',User::class);
+        $this->authorize('crear',User::class);
         $user=new User;
         $user->name=$request->name;
         $user->email=$request->email;
@@ -72,16 +72,16 @@ class Usuarios extends Controller
 
     public function editar(Request $request,$idUsuario)
     {
-        $this->authorize('update',User::class);
         $user=User::findOrFail($idUsuario);
+        $this->authorize('actualizar',$user);
         $data = array('usuario' => $user,'roles' => Role::where('name','!=','SuperAdministrador')->get() );
         return view('usuarios.usuarios.editar',$data);
     }
 
     public function actualizar(RqActualizar $request)
     {
-        $this->authorize('update',User::class);
         $user=User::findOrFail($request->usuario);
+        $this->authorize('actualizar',$user);
         $user->name=$request->name;
         $user->email=$request->email;
         if($request->password){
@@ -109,16 +109,16 @@ class Usuarios extends Controller
 
     public function editarFoto(Request $request,$idUsuario)
     {
-        $this->authorize('update',User::class);
         $usuario=User::findOrFail($idUsuario);
+        $this->authorize('actualizar',$usuario);
         $data = array('usuario' => $usuario );
         return view('usuarios.usuarios.editarFoto',$data);
     }
 
     public function actualizarFoto(RqActualizarFoto $request)
     {
-        $this->authorize('update',User::class);
         $user=User::findOrFail($request->id);
+        $this->authorize('actualizar',$user);
          if ($request->hasFile('foto')) {
             if ($request->file('foto')->isValid()) {
                 Storage::disk('public')->delete('usuarios/'.$user->foto);
@@ -138,8 +138,8 @@ class Usuarios extends Controller
 
     public function eliminar(Request $request,$idUsuario)
     {
-        $this->authorize('delete',User::class);
         $user=User::findOrFail($idUsuario);
+        $this->authorize('eliminar',$user);
         try {
             if ($user->id=!Auth::id()) {
                 $user->delete();

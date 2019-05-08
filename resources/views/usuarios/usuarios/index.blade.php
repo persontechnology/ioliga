@@ -4,13 +4,11 @@
 
 @section('acciones')
 
-@can('create', 'ioliga\User::class')
-
+@can('crear', ioliga\User::class)
     <a href="{{ route('crearUsuario') }}" class="breadcrumb-elements-item">
         <i class="fas fa-plus"></i>
         Nuevo usuario
     </a>
-    
 @endcan
 
 @endsection

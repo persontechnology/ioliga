@@ -21,6 +21,18 @@ class Roles extends Controller
     }
 
 
+    public function crear(Request $request)
+    {
+        $validatedData = $request->validate([
+            "nombre"  => "required|string|max:255|unique:roles,name",
+        ]);
+        $role = Role::create(['name' => $request->nombre]);
+
+        $request->session()->flash('success','Rol creado');
+        return redirect()->route('roles');
+
+    }
+
     public function actualizarPermisos(Request $request)
     {
     	$validatedData = $request->validate([

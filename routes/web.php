@@ -49,6 +49,7 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	    Route::post('/roles-actualizar-permisos', 'Roles@actualizarPermisos')->name('actualizarPermisos');
 	    Route::get('/roles-eliminar/{id}', 'Roles@eliminar')->name('eliminarRol');
 	    Route::get('/roles-pdf/{id}', 'Roles@pdf')->name('pdfRol');
+	    Route::post('/roles-crear', 'Roles@crear')->name('crearRol');
 	    
 	});
 

@@ -31,6 +31,8 @@
         <div class="text-uppercase font-size-xs line-height-xs">{{ __('Sistema') }}</div> 
         <i class="icon-menu" title="Sistema"></i>
     </li>
+
+@can('ver', ioliga\User::class)
     <li class="nav-item">
         <a href="{{ route('usuarios') }}" class="nav-link" id="menuUsuario">
             <i class="fas fa-users-cog"></i>
@@ -39,6 +41,8 @@
             </span>
         </a>
     </li>
+@endcan
+
 @role('Administrador|SuperAdministrador')
     <li class="nav-item">
         <a href="{{ route('roles') }}" class="nav-link" id="menuRoles">

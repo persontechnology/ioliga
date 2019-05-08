@@ -1,4 +1,4 @@
-@extends('layouts.app',['titulo'=>'Crear usuario'])
+@extends('layouts.app',['titulo'=>'Actualizar usuario'])
 
 @section('breadcrumbs', Breadcrumbs::render('editarUsuario',$usuario))
 

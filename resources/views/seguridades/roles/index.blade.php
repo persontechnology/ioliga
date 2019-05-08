@@ -2,29 +2,36 @@
 @section('breadcrumbs', Breadcrumbs::render('roles'))
 
 @section('acciones')
-    <a href="#" class="breadcrumb-elements-item">
-        <i class="icon-comment-discussion mr-2"></i>
-        Support
-    </a>
-
-    <div class="breadcrumb-elements-item dropdown p-0">
-        <a href="#" class="breadcrumb-elements-item dropdown-toggle" data-toggle="dropdown">
-            <i class="icon-gear mr-2"></i>
-            Settings
-        </a>
-
-        <div class="dropdown-menu dropdown-menu-right">
-            <a href="#" class="dropdown-item"><i class="icon-user-lock"></i> Account security</a>
-            <a href="#" class="dropdown-item"><i class="icon-statistics"></i> Analytics</a>
-            <a href="#" class="dropdown-item"><i class="icon-accessibility"></i> Accessibility</a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item"><i class="icon-gear"></i> All settings</a>
-        </div>
-    </div>
+    
+ 
 @endsection
 
 @section('content')
 
+<div class="card">
+	<div class="card-header">
+		<form action="{{ route('crearRol') }}" method="post">
+		@csrf
+		<div class="form-group row">
+			<label class="col-form-label col-lg-2">Nombre de rol<span class="text-danger">*</span></label>
+			<div class="col-lg-10">
+				<div class="input-group">
+					<input type="text" name="nombre" class="form-control @error('nombre') is-invalid @enderror" value="{{ old('nombre') }}" placeholder="Ingrese.." required="">
+					<span class="input-group-append">
+						<button class="btn btn-info" type="submit">Guardar</button>
+					</span>
+					@error('nombre')
+	                    <span class="invalid-feedback" role="alert">
+	                        <strong>{{ $message }}</strong>
+	                    </span>
+	                @enderror
+				</div>
+	                
+			</div>
+		</div>
+		</form>
+	</div>
+</div>
 
 <div class="row">
 	@foreach($roles as $rol)
