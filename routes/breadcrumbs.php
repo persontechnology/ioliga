@@ -54,7 +54,7 @@ Breadcrumbs::for('crearCampeonato', function ($trail) {
 });
 
 /*Equipos*/
-Breadcrumbs::for('equipos', function ($trail) {
+Breadcrumbs::for('categorias', function ($trail) {
     $trail->parent('home');
-    $trail->push('Equipos', route('equipos'));
+    $trail->push('Categorias', route('categorias'));
 });

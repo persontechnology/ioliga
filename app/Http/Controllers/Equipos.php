@@ -4,13 +4,14 @@ namespace ioliga\Http\Controllers;
 
 
 use Illuminate\Http\Request;
+use ioliga\Models\Equipo\GeneroEquipo;
 use ioliga\Models\Equipo\Equipo;
 use ioliga\DataTables\EquipoDataTable;
 use Illuminate\Support\Facades\Auth;
 
 class Equipos extends Controller
 {
-    public function __construct(Estadio $estadioModel)
+    public function __construct(Equipo $estadioModel)
     {
         $this->middleware('auth');
     }
@@ -18,6 +19,20 @@ class Equipos extends Controller
     {
         /*$this->authorize('ver',Estadio::class);*/
         return $dataTable->render('equipos.index');
+        
+    }
+    public function genero()
+    {
+        /*$this->authorize('ver',Estadio::class);*/
+        $generos=GeneroEquipo::get();
+        return view('equipos.genero',['genero'=>$generos]);
+        
+    }
+    public function equipo(EquipoDataTable $dataTable, $idGenero)
+    {
+        /*$this->authorize('ver',Estadio::class);*/
+
+        return $dataTable->with('idGenero',$idGenero)->render('equipos.equipo');
         
     }
 
