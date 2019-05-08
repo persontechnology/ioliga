@@ -2,7 +2,8 @@
 
 namespace ioliga\DataTables;
 
-use ioliga\Models\Equipo;
+use ioliga\Models\Equipo\Equipo;
+use ioliga\Models\Equipo\GeneroEquipo;
 use Yajra\DataTables\Services\DataTable;
 
 class EquipoDataTable extends DataTable
@@ -25,9 +26,11 @@ class EquipoDataTable extends DataTable
      * @param \ioliga\Models\Equipo\Equipo $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Equipo $model)
+    public function query(GeneroEquipo $model)
+
     {
-        return $model->newQuery()->select($this->getColumns());
+        $idGenero=$this->idGenero;
+        return $model->find($idGenero)->equipos()->select($this->getColumns());
     }
 
     /**
@@ -40,7 +43,7 @@ class EquipoDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    ->addAction(['width' => '80px'])
+                    ->addAction(['width' => '80px','printable' => false, 'exportable' => false,'title'=>'Acciones'])
                     ->parameters($this->getBuilderParameters());
     }
 
@@ -52,20 +55,30 @@ class EquipoDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id',
+            'equipo.id',
+            'equipo.nombre',        
+            'equipo.localidad',
+            'equipo.users_id',
+            'equipo.generoEquipo_id',
+            'equipo.telefono',
+            'equipo.anioCreacion',                     
+            'equipo.foto',
+            'equipo.estado'
+        ];
+    }
+      protected function getColumnsTable()
+    {
+        return [
             'nombre',        
             'localidad',
-            'telefono',
-            'anioCreacion',
-            'fraseIdentificacion',
-            'color',
-            'color1',
-            'color2',
+            'user_id'=>['title'=>'Representante','data'=>'user_id'],
+            'generoEquipo_id'=>['title'=>'Género','data'=>'generoEquipo_id'],
+            'telefono'=>['title'=>'Teléfono'],
+            'anioCreacion',                   
             'foto',
             'estado'
         ];
     }
-
     /**
      * Get filename for export.
      *
