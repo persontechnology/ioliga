@@ -93,4 +93,10 @@
 </div>
 
 
+@push('scriptsFooter')
+    <script>
+      $('#menuCampeo').addClass('active');
+    </script>
+@endpush
+
 @endsection

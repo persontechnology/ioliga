@@ -52,3 +52,9 @@ Breadcrumbs::for('crearCampeonato', function ($trail) {
     $trail->parent('estadios');
     $trail->push('Crear campeonato', route('crearCampeonato'));
 });
+
+/*Equipos*/
+Breadcrumbs::for('equipos', function ($trail) {
+    $trail->parent('home');
+    $trail->push('Equipos', route('equipos'));
+});

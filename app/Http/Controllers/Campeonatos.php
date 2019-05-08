@@ -5,6 +5,7 @@ namespace ioliga\Http\Controllers;
 use Illuminate\Http\Request;
 use ioliga\DataTables\CampeonatoDataTable;
 use ioliga\Models\Campeonato;
+use ioliga\Models\Equipo\GeneroEquipo;
 class Campeonatos extends Controller
 {
    
@@ -22,6 +23,11 @@ class Campeonatos extends Controller
     public function crear()
     {
         $this->authorize('crear',Estadio::class);
+
+        $generoEquipos=GeneroEquipo::has('')
+
+        $data = array('' => , );
+
         return view('campeonatos.crear');
     }
 }
