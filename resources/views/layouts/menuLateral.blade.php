@@ -28,7 +28,7 @@
 @endcan
 {{-- campeonatos --}}
 
-@can('view', 'ioliga\Models\Campeonato::class')
+@can('ver', ioliga\Models\Campeonato::class)
 <li class="nav-item">
     <a href="{{ route('campeonatos') }}" class="nav-link" id="menuCampeo" title="Campeonato">
         <i class="fas fa-trophy"></i>

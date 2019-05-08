@@ -12,7 +12,7 @@ class Campeonato extends Model
         'nombre', 'fechainicio', 'fechafin','descripcion','estado'
     ];
 
-    protected $hidden = [
-        // 'usuarioCreado', 'usuarioActualizado',
-    ];
+    // protected $hidden = [
+    //     'usuarioCreado', 'usuarioActualizado',
+    // ];
 }

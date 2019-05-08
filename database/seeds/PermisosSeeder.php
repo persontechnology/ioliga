@@ -27,6 +27,12 @@ class PermisosSeeder extends Seeder
         $p_crear_usuarios=Permission::updateOrCreate(['name' => 'Crear usuarios']);
         $p_actualizar_usuarios=Permission::updateOrCreate(['name' => 'Actualizar usuarios']);
         $p_eliminar_usuarios=Permission::updateOrCreate(['name' => 'Eliminar usuarios']);
+
+        /*permisos para campeonato*/
+        $p_ver_campeonatos=Permission::updateOrCreate(['name' => 'Ver campeonatos']);
+        $p_crear_campeonatos=Permission::updateOrCreate(['name' => 'Crear campeonatos']);
+        $p_actualizar_campeonatos=Permission::updateOrCreate(['name' => 'Actualizar campeonatos']);
+        $p_eliminar_campeonatos=Permission::updateOrCreate(['name' => 'Eliminar campeonatos']);
         
 
     }

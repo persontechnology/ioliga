@@ -20,7 +20,7 @@ class CreateCampeonatoTable extends Migration
             $table->date('fechainicio');
             $table->date('fechafin');
             $table->string('descripcion');
-            $table->boolean('estado')->default(false);
+            $table->boolean('estado')->default(true);
          
         });
     }

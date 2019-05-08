@@ -2,9 +2,9 @@
 @section('breadcrumbs', Breadcrumbs::render('campeonatos'))
 @section('acciones')
 
-@can('create', 'ioliga\Models\Campeonato::class')
+@can('crear', ioliga\Models\Campeonato::class)
 
-    <a href="{{ route('campeonatoCrear') }}" class="breadcrumb-elements-item">
+    <a href="{{ route('crearCampeonato') }}" class="breadcrumb-elements-item">
         <i class="fas fa-plus"></i>
         Nuevo campeonato
     </a>

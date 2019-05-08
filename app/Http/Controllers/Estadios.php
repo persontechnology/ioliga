@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 
 class Estadios extends Controller
 {
-	public function __construct(Estadio $estadioModel)
+	public function __construct()
     {
         $this->middleware('auth');
     }
