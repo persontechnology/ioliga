@@ -4,7 +4,7 @@ namespace ioliga\Http\Controllers;
 
 
 use Illuminate\Http\Request;
-use ioliga\Models\Equipo;
+use ioliga\Models\Equipo\Equipo;
 use ioliga\DataTables\EquipoDataTable;
 use Illuminate\Support\Facades\Auth;
 
