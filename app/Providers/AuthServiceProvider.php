@@ -9,6 +9,9 @@ use ioliga\Models\Estadio;
 use ioliga\Policies\EstadioPolicy;
 use ioliga\Policies\Usuarios\UsuarioPolicy;
 use ioliga\User;
+use ioliga\Models\Campeonato;
+use ioliga\Policies\CampeonatoPolicy;
+
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -20,6 +23,8 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         Estadio::class => EstadioPolicy::class,
         User::class=>UsuarioPolicy::class,
+        Campeonato::class=>CampeonatoPolicy::class,
+
     ];
 
     /**

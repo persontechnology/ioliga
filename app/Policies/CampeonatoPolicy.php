@@ -22,11 +22,26 @@ class CampeonatoPolicy
 
     public function actualizar(User $user, Campeonato $campeonato)
     {
-        return $user->can('Actualizar campeonatos');
+        if($user->can('Actualizar campeonatos')){
+            if ($campeonato->estado) {
+                return true;
+            }
+        }
     }
 
     public function eliminar(User $user, Campeonato $campeonato)
     {
-        return $user->can('Eliminar campeonatos');
+        if ($user->can('Eliminar campeonatos')) {
+            if ($campeonato->estado) {
+                return true;
+            }
+        }
+    }
+
+    public function serieEnCampeonatoActivo(User $user,Campeonato $campeonato)
+    {
+        if($campeonato->estado){
+            return false;
+        }
     }
 }

@@ -20,6 +20,6 @@ class Campeonato extends Model
 
     public function categoriaGenero()
     {
-    	return $this->belongsToMany(GeneroEquipo::class, 'genero', 'campeonato_id', 'generoEquipo_id');
+    	return $this->belongsToMany(GeneroEquipo::class, 'genero', 'campeonato_id', 'generoEquipo_id')->as('genero')->withPivot('id');
     }
-}
+}   

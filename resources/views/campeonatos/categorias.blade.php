@@ -4,19 +4,21 @@
 	
 	<ul class="list-group list-group-flush border-top">
 		@foreach($campeonato->categoriaGenero as $cat)
-		<a href="#" class="list-group-item list-group-item-action">
+		<a href="{{ route('series',$cat->genero->id) }}" class="list-group-item list-group-item-action">
 			<span class="font-weight-semibold">
-				
 				{{ $cat->nombre }}
 			</span>
-			<span class="badge bg-success ml-auto">4 series</span>
+			<span class="badge bg-success ml-auto">{{ count($cat->equipos) }} equipos</span>
 		</a>
 		
 		@endforeach
 	</ul>
 
 	<div class="card-footer bg-white d-flex justify-content-between align-items-center">
-		<div class="text-{{ $campeonato->estado ===false ?'danger':'success' }}"><i class="icon-blocked"></i> FINALIZADO</div>
+		<div class="text-{{ $campeonato->estado ==false ?'danger':'success' }}">
+			<i class="fas {{ $campeonato->estado ==false ?'fa-power-off':'fa-clipboard-check' }}"></i>
+			{{ $campeonato->estado ==false ?'FINALIZADO':'ACTIVO' }}
+		</div>
 
     	<div class="btn-group btn-group-sm">
             <button class="btn btn-dark btn-sm dropdown-toggle" data-toggle="dropdown"><i class="icon-cog3"></i></button>

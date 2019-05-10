@@ -28,6 +28,7 @@
     <script src="{{ asset('global_assets/js/main/jquery.min.js') }}"></script>
     <script src="{{ asset('global_assets/js/main/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('global_assets/js/plugins/ui/ripple.min.js') }}"></script>
+    
     <link rel="stylesheet" href="{{ asset('plus/sweetalert/sweetalert.css') }}">
     <script src="{{ asset('plus/sweetalert/sweetalert.min.js') }}"></script>
     <!-- /core JS files -->
