@@ -21,7 +21,6 @@ class Genero extends Model
 		return $this->belongsToMany(Serie::class, 'generoSerie', 'genero_id', 'serie_id');
 	}
 
-
 	public function generoEquipo()
     {
         return $this->belongsTo(GeneroEquipo::class,'generoEquipo_id');

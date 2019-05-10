@@ -75,6 +75,7 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	Route::get('/categorias', 'Equipos@genero')->name('categorias');
 	//Route::get('/equipos', 'Equipos@index')->name('equipos');
 	Route::get('/equipos/{id}', 'Equipos@equipo')->name('equipos');
-
+	Route::get('/crear-equipos/{id}', 'Equipos@crear')->name('crear-equipos');
+	Route::post('/equipo-guaradar', 'Equipos@guardar')->name('guardarEquipo');
 
 });

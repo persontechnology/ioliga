@@ -1,17 +1,15 @@
 @extends('layouts.app',['titulo'=>'Campeonatos'])
-
+@section('breadcrumbs', Breadcrumbs::render('equipos',$genero))
 @section('acciones')
 
-@can('create', 'ioliga\Models\Campeonato::class')
+@can('create', 'ioliga\Models\equipo::class')
 
-    <a href="{{ route('campeonatoCrear') }}" class="breadcrumb-elements-item">
+    <a href="{{route('crear-equipos',$genero->id)}}" class="breadcrumb-elements-item">
         <i class="fas fa-plus"></i>
-        Nuevo campeonato
+        Nuevo Equipo {{$genero->nombre}}
     </a>
 @endcan
-
 @endsection
-
 @section('content')
 
 <div class="card">

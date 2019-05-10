@@ -72,7 +72,9 @@ class Campeonatos extends Controller
     {
         $campeonato=Campeonato::findOrFail($idCampeonoato);
         $this->authorize('actualizar',$campeonato);
-        $ge=GeneroEquipo::whereNotIn('id',$campeonato->categoriaGenero->pluck('id'))->get();
+        
+        $ge=GeneroEquipo::has('equipos')->whereNotIn('id',$campeonato->categoriaGenero->pluck('id'))->get();
+
         $data = array('campeonato' => $campeonato,'generoEquiposNoAsignados'=>$ge);
         return view('campeonatos.actualizar',$data);
     }

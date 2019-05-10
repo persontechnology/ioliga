@@ -5,6 +5,8 @@ namespace ioliga\DataTables;
 use ioliga\Models\Equipo\Equipo;
 use ioliga\Models\Equipo\GeneroEquipo;
 use Yajra\DataTables\Services\DataTable;
+use ioliga\User;
+
 
 class EquipoDataTable extends DataTable
 {
@@ -17,6 +19,12 @@ class EquipoDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables($query)
+            ->editColumn('users_id',function($equipo){
+                return $equipo->user->nombres.' '.$equipo->user->apellidos ;
+            })
+             ->editColumn('generoEquipo_id',function($equipo){
+                return $equipo->genero->nombre;
+            })
             ->addColumn('action', 'equipo.action');
     }
 
@@ -41,7 +49,7 @@ class EquipoDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->columns($this->getColumns())
+                    ->columns($this->getColumnsTable())
                     ->minifiedAjax()
                     ->addAction(['width' => '80px','printable' => false, 'exportable' => false,'title'=>'Acciones'])
                     ->parameters($this->getBuilderParameters());
@@ -55,15 +63,15 @@ class EquipoDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'equipo.id',
-            'equipo.nombre',        
-            'equipo.localidad',
-            'equipo.users_id',
-            'equipo.generoEquipo_id',
-            'equipo.telefono',
-            'equipo.anioCreacion',                     
-            'equipo.foto',
-            'equipo.estado'
+            'id',
+            'nombre',        
+            'localidad',
+            'users_id',
+            'generoEquipo_id',
+            'telefono',
+            'anioCreacion',                     
+            'foto',
+            'estado'
         ];
     }
       protected function getColumnsTable()
@@ -71,7 +79,7 @@ class EquipoDataTable extends DataTable
         return [
             'nombre',        
             'localidad',
-            'user_id'=>['title'=>'Representante','data'=>'user_id'],
+            'users_id'=>['title'=>'Representante','data'=>'users_id'],
             'generoEquipo_id'=>['title'=>'Género','data'=>'generoEquipo_id'],
             'telefono'=>['title'=>'Teléfono'],
             'anioCreacion',                   
