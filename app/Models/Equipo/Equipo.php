@@ -3,6 +3,8 @@
 namespace ioliga\Models\Equipo;
 
 use Illuminate\Database\Eloquent\Model;
+use ioliga\User;
+use ioliga\Models\Equipo\GeneroEquipo;
 
 class Equipo extends Model
 {
@@ -13,11 +15,11 @@ class Equipo extends Model
     ];
      public function user()
     {
-    	return $this->belongsTo(User::class);
+    	return $this->belongsTo(User::class,'users_id');
     }
       public function genero()
     {
-    	return $this->belongsTo(GeneroEquipo::class);
+    	return $this->belongsTo(GeneroEquipo::class,'generoEquipo_id');
     }
 
 }

@@ -23,17 +23,25 @@
                     <ul class="media-list">
                         <li class="media bg-light font-weight-semibold py-2"><i class="fas fa-child"></i> {{$ge->nombre}} <a href="{{route('equipos',$ge->id)}}" class="btn btn-dark ml-5   mt-sm-0"> Ver todos <i class="icon-arrow-right14 ml-2"></i></a>
                          </li>
-
+                         @if($ge->equipos->count()>0)
+                         @foreach($ge->equipos as $equipo)
                         <li class="media">
+                            @if($equipo->foto)
                             <div class="mr-3">
                                 <a href="#">
-                                    <img src="../../../../global_assets/images/demo/users/face1.jpg" class="rounded-circle" width="40" height="40" alt="">
+                                    <img src="{{ Storage::url('public/equipos/'.$equipo->foto) }}" class="rounded-circle" width="40" height="40" alt="">
                                 </a>
                             </div>
-
+                            @else
+                             <div class="mr-3">
+                                <a href="#">
+                                    <img src="{{ asset('global_assets/images/demo/users/balon.jpg') }}" class="rounded-circle" width="40" height="40" alt="">
+                                </a>
+                            </div>
+                            @endif
                             <div class="media-body">
-                                <div class="media-title font-weight-semibold">James Alexander</div>
-                                <span class="text-muted">Development</span>
+                                <div class="media-title font-weight-semibold">{{$equipo->nombre}}</div>
+                                <span class="text-muted">{{$equipo->user->nombres.' '.$equipo->user->apellidos }}</span>
                             </div>
 
                             <div class="align-self-center ml-3">
@@ -44,6 +52,13 @@
                                 </div>
                             </div>
                         </li>
+                        @endforeach
+                        @else
+                         <div class="alert alert-warning alert-styled-left alert-dismissible">
+                            No existen equipos {{$ge->nombre}} crear
+                            <a href="{{route('equipos',$ge->id)}}" class="alert-link"> aquí</a>
+                        </div>
+                         @endif
                     </ul>
                 </div>
             </div>

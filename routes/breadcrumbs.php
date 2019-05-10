@@ -58,3 +58,14 @@ Breadcrumbs::for('categorias', function ($trail) {
     $trail->parent('home');
     $trail->push('Categorias', route('categorias'));
 });
+
+Breadcrumbs::for('equipos', function ($trail,$generos) {   
+     $trail->parent('categorias');
+    $trail->push('Categorias Tipo ' . $generos->nombre, route('equipos',$generos->id));
+});
+
+Breadcrumbs::for('crear-equipos', function ($trail,$generos) {   
+     $trail->parent('categorias');
+     $trail->push('Equipos Tipo ' . $generos->nombre, route('equipos',$generos->id));
+    $trail->push('Crear Equipo Tipo ' . $generos->nombre, route('crear-equipos',$generos->id));
+});
