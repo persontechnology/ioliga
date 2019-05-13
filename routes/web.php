@@ -57,6 +57,19 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	Route::get('/campeonatos', 'Campeonatos@index')->name('campeonatos');
 	Route::get('/campeonatos-crear', 'Campeonatos@crear')->name('crearCampeonato');
 	Route::post('/campeonatos-crear', 'Campeonatos@guardar')->name('guardarCampeonato');
+	Route::get('/campeonatos-actualizar/{id}', 'Campeonatos@actualizar')->name('actualizarCampeonato');
+	Route::post('/campeonatos-editar', 'Campeonatos@editar')->name('editarCampeonato');
+	Route::get('/campeonatos-eliminar/{id}', 'Campeonatos@eliminar')->name('eliminarCampeonato');
+
+	/*series*/
+	Route::namespace('Campeonatos')->group(function () {
+	    // serires
+	    Route::get('/series/{idGenero}', 'Series@index')->name('series');
+	    Route::post('/series-agregar-a-campeonato', 'Series@agregar')->name('agregarSerieCampeonato');
+	    
+	    
+	    
+	});
 
 	/*Equipos*/
 	Route::get('/categorias', 'Equipos@genero')->name('categorias');

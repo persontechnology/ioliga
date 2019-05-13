@@ -49,8 +49,19 @@ Breadcrumbs::for('campeonatos', function ($trail) {
     $trail->push('Campeonatos', route('campeonatos'));
 });
 Breadcrumbs::for('crearCampeonato', function ($trail) {
-    $trail->parent('estadios');
+    $trail->parent('campeonatos');
     $trail->push('Crear campeonato', route('crearCampeonato'));
+});
+Breadcrumbs::for('actualizarCampeonato', function ($trail,$campeonato) {
+    $trail->parent('campeonatos');
+    $trail->push('Actualizar campeonato '.$campeonato->nombre, route('actualizarCampeonato',$campeonato));
+});
+
+/*serieries*/
+
+Breadcrumbs::for('series', function ($trail,$genero) {
+    $trail->parent('campeonatos');
+    $trail->push('Series en campeonato '.$genero->campeonato->nombre, route('series',$genero->id));
 });
 
 /*Equipos*/

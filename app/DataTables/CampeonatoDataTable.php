@@ -20,7 +20,9 @@ class CampeonatoDataTable extends DataTable
             ->addColumn('categoria',function($campeonato){
                 return view('campeonatos.categorias',['campeonato'=>$campeonato])->render();
             })
-            ->addColumn('action', 'campeonatodatatable.action')
+            ->addColumn('action', function($campeonato){
+              return view('campeonatos.acciones',['campeonato'=>$campeonato])->render();  
+            })
             ->rawColumns(['categoria','action']);
     }
 
