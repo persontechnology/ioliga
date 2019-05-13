@@ -25,7 +25,11 @@ class RqActualizarEquipo extends FormRequest
     public function rules()
     {
         return [
-            'usuario'=>'required|unique:equipo,users_id,'.$this->input('usuario'),
+            'users_id' => Rule::unique('users_id')->where(function ($query) {
+                    $idequipo=$this->input('equipo');
+                    $idusuario=$this->input('usuario');
+                    return $query->where('users_id',$idusuario)->where('id','!=',$idequipo);
+                }),
             'genero'=>'required',
             'nombre'=>'required|unique:equipo,nombre,'.$this->input('equipo'),
             'telefono'=>'nullable|digits_between:6,10',
