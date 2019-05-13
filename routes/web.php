@@ -22,7 +22,7 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	Route::get('/estadios', 'Estadios@index')->name('estadios');
 	Route::get('/estadios-crear', 'Estadios@crear')->name('crearEstadio');
 	Route::post('estadios-guardar', 'Estadios@guardar')->name('guardarEstadio');
-
+	Route::post('/estadoEstadio', 'Estadios@estado')->name('estadoEstadio');
 
 	Route::get('/editar-estadio/{id}', 'Estadios@editar')->name('estadiosEditar');
 	Route::post('/editar-estadio', 'Estadios@actualizar')->name('actualizar');
@@ -64,5 +64,10 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	Route::get('/equipos/{id}', 'Equipos@equipo')->name('equipos');
 	Route::get('/crear-equipos/{id}', 'Equipos@crear')->name('crear-equipos');
 	Route::post('/equipo-guaradar', 'Equipos@guardar')->name('guardarEquipo');
+	Route::get('/editar-equipo/{id}', 'Equipos@editar')->name('equipo-editar');
+	Route::post('/actualizar-equipo', 'Equipos@actualizar')->name('actualizar-equipo');
+	Route::post('/estadoEquipo', 'Equipos@estado')->name('estadoEquipo');
+	Route::get('/eliminar-equipo/{id}', 'Equipos@eliminar')->name('eliminarEquipo');
+
 
 });

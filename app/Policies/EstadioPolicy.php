@@ -29,5 +29,9 @@ class EstadioPolicy
     {
         return $user->can('Eliminar estadios');
     }
+     public function estado(User $user, Estadio $estadio)
+    {
+        return $user->can('Estado estadios');
+    }
 
 }

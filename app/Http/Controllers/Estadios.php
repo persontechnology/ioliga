@@ -98,4 +98,18 @@ class Estadios extends Controller
         }
         return redirect()->route('estadios');
     }
+    public function estado(Request $request)
+    {
+         $estadio=Estadio::findOrFail($request->id);
+         if($request->estado=="Activo"){
+            $estadio->estado=true;
+            $estadio->save();
+            $request->session()->flash('success','Estadio Activo');      
+         }else{
+            $estadio->estado=false;
+            $estadio->save();
+            $request->session()->flash('info','Estadio inactivo');            
+         }       
+      
+    }
 }

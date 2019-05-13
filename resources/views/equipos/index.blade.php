@@ -37,7 +37,10 @@
     {!! $dataTable->scripts() !!}
     <script>
         $('#menuEquipo').addClass('active');
-    </script>
+        function cambiarEstadoEquipo (){
+            alert('nn')
+        }
+    </script>   
 @endpush
 
 

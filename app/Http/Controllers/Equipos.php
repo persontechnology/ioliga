@@ -10,6 +10,7 @@ use ioliga\User;
 use ioliga\DataTables\EquipoDataTable;
 use Illuminate\Support\Facades\Auth;
 use ioliga\Http\Requests\Equipo\RqGuardarEquipo;
+use ioliga\Http\Requests\Equipo\RqActualizarEquipo;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
@@ -78,40 +79,75 @@ class Equipos extends Controller
         $request->session()->flash('success','Nuevo registro creado');
         return redirect()->route('equipos',$request->generoEquipo_id);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+       public function estado(Request $request)
     {
-        //
+         $estadio=Equipo::findOrFail($request->id);
+         if($request->estado=="Activo"){
+            $estadio->estado=true;
+            $estadio->save();
+            $request->session()->flash('success','Equipo Activo');      
+         }else{
+            $estadio->estado=false;
+            $estadio->save();
+            $request->session()->flash('info','Equipo inactivo');            
+         }       
+      
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+     public function eliminar(Request $request,$idEquipo)
     {
-        //
+        $equipo=Equipo::findOrFail($idEquipo);
+        $this->authorize('eliminar',$equipo);
+        try {
+            $equipo->delete();
+            $request->session()->flash('success','Equipo eliminado');
+        } catch (\Exception $e) {
+            $request->session()->flash('info','Equipo no eliminado');
+        }
+        return redirect()->route('equipos',$equipo->generoEquipo_id);
+    }
+    
+     public function editar($CodigoEquipo)
+    {
+        $equipo = Equipo::find($CodigoEquipo);
+        $representante=User::role('Representante de equipo')->get();               
+        $this->authorize('actualizar',$equipo);
+        return view('equipos.editar',compact('equipo','representante'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    
+     public function actualizar(RqActualizarEquipo $request)
     {
-        //
+        
+        $equipo=Equipo::findOrFail($request->equipo);  
+        $this->authorize('actualizar',$equipo);        
+        $equipo->nombre=$request->nombre;
+        $equipo->resenaHistorico=$request->resenaHistorico;
+        $equipo->users_id=$request->usuario;
+        $equipo->generoEquipo_id=$request->genero;       
+        $equipo->localidad=$request->localidad;        
+        $equipo->telefono=$request->telefono;
+        $equipo->anioCreacion=$request->anioCreacion;
+        $equipo->fraseIdentificacion=$request->fraseIdentificacion;
+        $equipo->color=$request->color;
+         $equipo->color1=$request->color1;
+        $equipo->color2=$request->color2;
+        $equipo->usuarioActualizado=Auth::id();
+        if($equipo->save()){
+            if ($request->hasFile('foto')) {
+                if ($request->file('foto')->isValid()) {
+                    Storage::disk('public')->delete('equipos/'.$equipo->foto);
+                    $foto=$equipo->id.'_'.Carbon::now().'.'.$request->foto->extension();
+                    $path = $request->foto->storeAs('equipos', $foto,'public');
+                    $equipo->foto=$foto;    
+                    $equipo->save();
+                }
+            }         
+        }
+        $request->session()->flash('success','equipo editado correctamente');
+        return redirect()->route('equipos',$equipo->generoEquipo_id);
     }
+
 
     /**
      * Remove the specified resource from storage.
