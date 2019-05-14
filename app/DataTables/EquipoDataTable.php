@@ -6,7 +6,7 @@ use ioliga\Models\Equipo\Equipo;
 use ioliga\Models\Equipo\GeneroEquipo;
 use Yajra\DataTables\Services\DataTable;
 use ioliga\User;
-
+use Illuminate\Support\Facades\Storage;
 
 class EquipoDataTable extends DataTable
 {
@@ -19,13 +19,24 @@ class EquipoDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables($query)
+             ->editColumn('foto',function($equipo){
+                if($equipo->foto){
+                    return '<a href="'.Storage::url('public/equipos/'.$equipo->foto).'"><i class="far fa-image"></i></a>';    
+                }
+                
+            })
             ->editColumn('users_id',function($equipo){
                 return $equipo->user->nombres.' '.$equipo->user->apellidos ;
             })
              ->editColumn('generoEquipo_id',function($equipo){
                 return $equipo->genero->nombre;
             })
-            ->addColumn('action', 'equipo.action');
+              ->editColumn('estado',function($equipo){           
+                    return view('equipos.estados', ['equipo'=>$equipo])->render();         
+            })
+            ->addColumn('action',function($equipo){
+                         return view('equipos.acciones', ['equipo'=>$equipo])->render();
+           })->rawColumns(['foto','estado','action']);
     }
 
     /**

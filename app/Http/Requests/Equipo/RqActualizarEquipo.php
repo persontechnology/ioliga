@@ -5,9 +5,9 @@ namespace ioliga\Http\Requests\Equipo;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
-use ioliga\Models\Equipo\GeneroEquipo;
 use ioliga\Models\Equipo\Equipo;
-class RqGuardarEquipo extends FormRequest
+
+class RqActualizarEquipo extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,27 +24,32 @@ class RqGuardarEquipo extends FormRequest
      *
      * @return array
      */
+    //select from equipo 
     public function rules()
     {
-         Validator::extend('existeInfoNombre', function($attribute, $value, $parameters){
-            $genero=GeneroEquipo::find($this->input('generoEquipo_id'));
-            $validateequipo=Equipo::where('generoEquipo_id',$genero->id)
-            ->where('users_id',$this->input('usuario'))  
-            ->count();
-            if($validateequipo==0){
-                return true;
-            }else{
+        
+
+    Validator::extend('existeInfo', function($attribute, $value, $parameters){
+            $equipo=Equipo::find($this->input('equipo'));
+            $validateequipo=Equipo::where('id','!=',$this->input('equipo'))
+            ->where('users_id',$this->input('usuario'))
+            ->where('generoEquipo_id',$equipo->generoEquipo_id)
+            ->first();
+            if($validateequipo){
                 return false;
+            }else{
+                return true;
             }
 
         },"El representante ya pertenece a otro equipo en esta categoría");
+
         return [
-            'usuario'=>'required|existeInfoNombre',
-            'generoEquipo_id'=>'required',
-            'nombre'=>'required|unique:equipo,nombre,'.$this->input('generoEquipo_id'),
+            'equipo' => 'required',
+            'usuario' =>'existeInfo',
+            'genero'=>'required',
+            'nombre'=>'required|unique:equipo,nombre,'.$this->input('equipo'),
             'telefono'=>'nullable|digits_between:6,10',
             'colo1'=>'nullable|string',
-           
         ];
     }
 }

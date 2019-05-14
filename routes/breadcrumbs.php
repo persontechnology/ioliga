@@ -80,3 +80,9 @@ Breadcrumbs::for('crear-equipos', function ($trail,$generos) {
      $trail->push('Equipos Tipo ' . $generos->nombre, route('equipos',$generos->id));
     $trail->push('Crear Equipo Tipo ' . $generos->nombre, route('crear-equipos',$generos->id));
 });
+Breadcrumbs::for('editar-equipos', function ($trail,$equipo) {       
+    $trail->parent('categorias');
+    $trail->push('Equipos Tipo ' . $equipo->genero->nombre, route('equipos',$equipo->genero->id));
+    $trail->push('Editar Equipo  ' . $equipo->nombre, route('equipo-editar',$equipo->id));
+  
+});

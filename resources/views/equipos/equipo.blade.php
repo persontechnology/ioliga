@@ -34,8 +34,20 @@
 @push('scriptsFooter')
     {!! $dataTable->scripts() !!}
     <script>
-        $('#menuCampeo').addClass('active');
+        $('#menuEquipo').addClass('active');
+       
+         var estadoEquipo="{{route('estadoEquipo')}}"
+        function cambiarEstadoEquipo(argument){
+                  var op=argument.options[argument.selectedIndex].text;
+            var id=argument.value;
+            var estado=op;
+            $.post(estadoEquipo,{id:id,estado:estado})
+            .done(function( data ) {
+            window.location.replace("{{route('equipos',$genero->id)}}");     
+            })
+        }
     </script>
+
 @endpush
 
 
