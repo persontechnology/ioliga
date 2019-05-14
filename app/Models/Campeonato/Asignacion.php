@@ -4,8 +4,7 @@ namespace ioliga\Models\Campeonato;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Serie extends Model
+class Asignacion extends Model
 {
-    protected $table='serie';
-    
+    protected $table='asignacion';
 }
