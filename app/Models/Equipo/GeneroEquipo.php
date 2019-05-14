@@ -12,6 +12,6 @@ class GeneroEquipo extends Model
 
     public function equipos()
     {
-        return $this->hasMany(Equipo::class,'generoEquipo_id');
+        return $this->hasMany(Equipo::class,'generoEquipo_id')->orderBy('nombre','ASC');
     }
 }

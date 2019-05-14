@@ -26,29 +26,30 @@
 				<label for="direccion" class="col-form-label col-lg-3">Representante<span class="text-danger">*</span></label>
 						<div class="col-lg-9">
 					@if($representante->count()>0)
-					 <select class="selectpicker show-tick form-control" id="usuario" name="usuario" title="Selecione representante..." data-live-search="true" data-header="Selecione maestrías.." required="">
+					 <select class="selectpicker show-tick form-control @error('usuario') is-invalid @enderror" id="usuario" name="usuario" title="Selecione representante..." data-live-search="true" data-header="Selecione maestrías.." required="">
                           @foreach($representante as $representante)
-                          <option value="{{$representante->id}}" data-tokens="{{$representante->id ?? ''}}" data-subtext="{{$representante->id ?? ''}}">{{$representante->nombres.' '. $representante->apellidos  ?? ''}} </option>
+                          <option {{ old('usuario',$representante->id)==$equipo->user->id?'selected':'' }} value="{{$representante->id}}"   data-tokens="{{$representante->id ?? ''}}" data-subtext="{{$representante->id ?? ''}}">{{$representante->nombres.' '. $representante->apellidos  ?? ''}} </option>
                           @endforeach
                         </select>
+                        @error('usuario')
+	                    <span class="invalid-feedback" role="alert">
+	                        <strong>{{ $message }}</strong>
+	                    </span>
+	                @enderror
 				 	@else
                         <div class="alert alert-info alert-styled-left alert-dismissible">
                             No existen Representantes porfavor cree uno
                             <a href="{{route('crearUsuario')}}" class="alert-link">	aquí</a>
                         </div>
                     @endif
-					@error('usuario_id')
-	                    <span class="invalid-feedback" role="alert">
-	                        <strong>{{ $message }}</strong>
-	                    </span>
-	                @enderror
+					
 				</div>
 			</div>
 
 			<div class="form-group row">
 				<label for="direccion" class="col-form-label col-lg-3">Nombre<span class="text-danger">*</span></label>
 				<div class="col-lg-9">
-					<input type="text" name="nombre" id="nombre" class="form-control @error('nombre') is-invalid @enderror" value="{{$equipo->nombre,  old('nombre') }}" placeholder="Ingrese.." required="">
+					<input type="text" name="nombre" id="nombre" class="form-control @error('nombre') is-invalid @enderror" value="{{ old('nombre',$equipo->nombre) }}" placeholder="Ingrese.." required="">
 					@error('nombre')
 	                    <span class="invalid-feedback" role="alert">
 	                        <strong>{{ $message }}</strong>
@@ -60,7 +61,7 @@
 			<div class="form-group row">
 				<label for="localidad" class="col-form-label col-lg-3">Localidad<span class="text-danger">*</span></label>
 				<div class="col-lg-9">
-					<textarea name="localidad" id="localidad" class="form-control @error('localidad') is-invalid @enderror" placeholder="Ingrese.." required="">{{ $equipo->localidad, old('localidad')}}</textarea>
+					<textarea name="localidad" id="localidad" class="form-control @error('localidad') is-invalid @enderror" placeholder="Ingrese.." required="">{{ old('localidad',$equipo->localidad) }}</textarea>
 					@error('localidad')
 	                    <span class="invalid-feedback" role="alert">
 	                        <strong>{{ $message }}</strong>
@@ -69,9 +70,9 @@
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="telefono" class="col-form-label col-lg-3">Teléfono</label>
+				<label for="telefono" class="col-form-label col-lg-3">Teléfono<span class="text-danger">*</span></label>
 				<div class="col-lg-9">
-					<input type="number" name="telefono" id="telefono" value="{{$equipo->telefono,  old('telefono') }}" class="form-control @error('telefono') is-invalid @enderror" placeholder="Ingrese..">
+					<input type="number" name="telefono" id="telefono" value="{{ old('telefono',$equipo->telefono) }}" class="form-control @error('telefono') is-invalid @enderror" placeholder="Ingrese..">
 					@error('telefono')
 	                    <span class="invalid-feedback" role="alert">
 	                        <strong>{{ $message }}</strong>
@@ -80,9 +81,9 @@
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="anioCreacion" class="col-form-label col-lg-3">Año de creación (opcional)</label>
+				<label for="anioCreacion" class="col-form-label col-lg-3">Año de creación (opcional)<span class="text-danger">*</span></label>
 				<div class="col-lg-9">
-					<input type="number" name="anioCreacion" id="anioCreacion" value="{{ $equipo->anioCreacion, old('anioCreacion') }}" class="form-control @error('anioCreacion') is-invalid @enderror" placeholder="Ingrese..">
+					<input type="number" name="anioCreacion" id="anioCreacion" value="{{ old('anioCreacion',$equipo->anioCreacion) }}" class="form-control @error('anioCreacion') is-invalid @enderror" placeholder="Ingrese..">
 					@error('anioCreacion')
 	                    <span class="invalid-feedback" role="alert">
 	                        <strong>{{ $message }}</strong>
@@ -93,7 +94,7 @@
 			<div class="form-group row">
 				<label for="fraseIdentificacion" class="col-form-label col-lg-3">Frase de Identificación (opcional)</label>
 				<div class="col-lg-9">
-					<input type="number" name="fraseIdentificacion" id="fraseIdentificacion" value="{{$equipo->fraseIdentificacion, old('fraseIdentificacion') }}" class="form-control @error('fraseIdentificacion') is-invalid @enderror" placeholder="Ingrese..">
+					<input type="number" name="fraseIdentificacion" id="fraseIdentificacion" value="{{ old('fraseIdentificacion',$equipo->fraseIdentificacion) }}" class="form-control @error('fraseIdentificacion') is-invalid @enderror" placeholder="Ingrese..">
 					@error('fraseIdentificacion')
 	                    <span class="invalid-feedback" role="alert">
 	                        <strong>{{ $message }}</strong>
@@ -102,9 +103,9 @@
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="color" class="col-form-label col-lg-3">Color (opcional)</label>
+				<label for="color" class="col-form-label col-lg-3">Color (opcional)<span class="text-danger">*</span></label>
 				<div class="col-lg-9">
-					<input type="number" name="color" id="color" value="{{$equipo->color,  old('color') }}" class="form-control @error('color') is-invalid @enderror" placeholder="Ingrese..">
+					<input type="number" name="color" id="color" value="{{ old('color',$equipo->color) }}" class="form-control @error('color') is-invalid @enderror" placeholder="Ingrese..">
 					@error('color')
 	                    <span class="invalid-feedback" role="alert">
 	                        <strong>{{ $message }}</strong>
@@ -113,9 +114,9 @@
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="color1" class="col-form-label col-lg-3">Color #2 (opcional)</label>
+				<label for="color1" class="col-form-label col-lg-3">Color #2 (opcional)<span class="text-danger">*</span></label>
 				<div class="col-lg-9">
-					<input type="number" name="color1" id="color1" value="{{$equipo->color1,  old('color1') }}" class="form-control @error('color1') is-invalid @enderror" placeholder="Ingrese..">
+					<input type="number" name="color1" id="color1" value="{{ old('color1',$equipo->color1) }}" class="form-control @error('color1') is-invalid @enderror" placeholder="Ingrese..">
 					@error('color1')
 	                    <span class="invalid-feedback" role="alert">
 	                        <strong>{{ $message }}</strong>
@@ -126,7 +127,7 @@
 			<div class="form-group row">
 				<label for="color2" class="col-form-label col-lg-3">Color #3 (opcional)</label>
 				<div class="col-lg-9">
-					<input type="number" name="color2" id="color2" value="{{ $equipo->color1, old('color2') }}" class="form-control @error('color2') is-invalid @enderror" placeholder="Ingrese..">
+					<input type="number" name="color2" id="color2" value="{{ old('color2',$equipo->color2) }}" class="form-control @error('color2') is-invalid @enderror" placeholder="Ingrese..">
 					@error('color2')
 	                    <span class="invalid-feedback" role="alert">
 	                        <strong>{{ $message }}</strong>
@@ -140,7 +141,7 @@
 	              <div class="form-group row">
 					<label for="resenaHistorico" class="col-form-label col-lg-3">Reseña Histórica (opcional)<span class="text-danger">*</span></label>
 					<div class="col-lg-9">
-						<textarea cols="5" rows="7" name="resenaHistorico" id="resenaHistorico" class="form-control @error('resenaHistorico') is-invalid @enderror" placeholder="Ingrese.." >{{$equipo->resenaHistorico, old('resenaHistorico')}}</textarea>
+						<textarea cols="5" rows="7" name="resenaHistorico" id="resenaHistorico" class="form-control @error('resenaHistorico') is-invalid @enderror" placeholder="Ingrese.." >{{ old('resenaHistorico',$equipo->resenaHistorico) }}</textarea>
 						@error('resenaHistorico')
 		                    <span class="invalid-feedback" role="alert">
 		                        <strong>{{ $message }}</strong>
@@ -189,7 +190,7 @@
     <script>
 
         $('#menuEquipo').addClass('active');
-     $('#usuario').val('{{$equipo->users_id}}')
+ 
        
 	@if($equipo->foto)
 	  var foto="<img class='kv-preview-data file-preview-image' src='{{ Storage::url('public/equipos/'.$equipo->foto) }}'>";

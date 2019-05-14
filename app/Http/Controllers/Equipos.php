@@ -57,7 +57,7 @@ class Equipos extends Controller
         $equipo=new Equipo;
         $equipo->nombre=$request->nombre;
         $equipo->resenaHistorico=$request->resenaHistorico;
-        $equipo->users_id=$request->users_id;
+        $equipo->users_id=$request->usuario;
         $equipo->generoEquipo_id=$request->generoEquipo_id;
         $equipo->localidad=$request->localidad;        
         $equipo->telefono=$request->telefono;
@@ -81,14 +81,14 @@ class Equipos extends Controller
     }
        public function estado(Request $request)
     {
-         $estadio=Equipo::findOrFail($request->id);
+         $equipo=Equipo::findOrFail($request->id);
          if($request->estado=="Activo"){
-            $estadio->estado=true;
-            $estadio->save();
+            $equipo->estado=true;
+            $equipo->save();
             $request->session()->flash('success','Equipo Activo');      
          }else{
-            $estadio->estado=false;
-            $estadio->save();
+            $equipo->estado=false;
+            $equipo->save();
             $request->session()->flash('info','Equipo inactivo');            
          }       
       
@@ -123,8 +123,7 @@ class Equipos extends Controller
         $this->authorize('actualizar',$equipo);        
         $equipo->nombre=$request->nombre;
         $equipo->resenaHistorico=$request->resenaHistorico;
-        $equipo->users_id=$request->usuario;
-        $equipo->generoEquipo_id=$request->genero;       
+        $equipo->users_id=$request->usuario;             
         $equipo->localidad=$request->localidad;        
         $equipo->telefono=$request->telefono;
         $equipo->anioCreacion=$request->anioCreacion;

@@ -24,22 +24,23 @@
 				<label for="direccion" class="col-form-label col-lg-3">Representante<span class="text-danger">*</span></label>
 				<div class="col-lg-9">
 					@if($representante->count()>0)
-					 <select class="selectpicker show-tick form-control" id="users_id" name="users_id" title="Selecione representante..." data-live-search="true" data-header="Selecione maestrías.." required="">
+					 <select class="selectpicker show-tick form-control @error('usuario') is-invalid @enderror" id="usuario" name="usuario" title="Selecione representante..." data-live-search="true" data-header="Selecione maestrías.." required="">
                           @foreach($representante as $representante)
-                          <option value="{{$representante->id}}" data-tokens="{{$representante->id ?? ''}}" data-subtext="{{$representante->id ?? ''}}">{{$representante->nombres.' '. $representante->apellidos  ?? ''}} </option>
+                          <option  {{ old('usuario')==$representante->id ? 'selected':'' }} value="{{$representante->id}}" data-tokens="{{$representante->id ?? ''}}" data-subtext="{{$representante->id ?? ''}}">{{$representante->nombres.' '. $representante->apellidos  ?? ''}} </option>
                           @endforeach
                         </select>
+                        @error('usuario')
+	                    <span class="invalid-feedback" role="alert">
+	                        <strong>{{ $message }}</strong>
+	                    </span>
+	                @enderror
 				 	@else
                         <div class="alert alert-info alert-styled-left alert-dismissible">
                             No existen Representantes porfavor cree uno
                             <a href="{{route('crearUsuario')}}" class="alert-link">	aquí</a>
                         </div>
                     @endif
-					@error('usuario_id')
-	                    <span class="invalid-feedback" role="alert">
-	                        <strong>{{ $message }}</strong>
-	                    </span>
-	                @enderror
+					
 				</div>
 			</div>
 
@@ -67,7 +68,7 @@
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="telefono" class="col-form-label col-lg-3">Teléfono</label>
+				<label for="telefono" class="col-form-label col-lg-3">Teléfono<span class="text-danger">*</span></label>
 				<div class="col-lg-9">
 					<input type="number" name="telefono" id="telefono" value="{{ old('telefono') }}" class="form-control @error('telefono') is-invalid @enderror" placeholder="Ingrese..">
 					@error('telefono')
@@ -78,7 +79,7 @@
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="anioCreacion" class="col-form-label col-lg-3">Año de creación (opcional)</label>
+				<label for="anioCreacion" class="col-form-label col-lg-3">Año de creación (opcional)<span class="text-danger">*</span></label>
 				<div class="col-lg-9">
 					<input type="number" name="anioCreacion" id="anioCreacion" value="{{ old('anioCreacion') }}" class="form-control @error('anioCreacion') is-invalid @enderror" placeholder="Ingrese..">
 					@error('anioCreacion')
@@ -89,7 +90,7 @@
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="fraseIdentificacion" class="col-form-label col-lg-3">Frase de Identificación (opcional)</label>
+				<label for="fraseIdentificacion" class="col-form-label col-lg-3">Frase de Identificación (opcional)<span class="text-danger">*</span></label>
 				<div class="col-lg-9">
 					<input type="number" name="fraseIdentificacion" id="fraseIdentificacion" value="{{ old('fraseIdentificacion') }}" class="form-control @error('fraseIdentificacion') is-invalid @enderror" placeholder="Ingrese..">
 					@error('fraseIdentificacion')
@@ -100,7 +101,7 @@
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="color" class="col-form-label col-lg-3">Color (opcional)</label>
+				<label for="color" class="col-form-label col-lg-3">Color (opcional)<span class="text-danger">*</span></label>
 				<div class="col-lg-9">
 					<input type="number" name="color" id="color" value="{{ old('color') }}" class="form-control @error('color') is-invalid @enderror" placeholder="Ingrese..">
 					@error('color')
@@ -111,7 +112,7 @@
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="color1" class="col-form-label col-lg-3">Color #2 (opcional)</label>
+				<label for="color1" class="col-form-label col-lg-3">Color #2 (opcional)<span class="text-danger">*</span></label>
 				<div class="col-lg-9">
 					<input type="number" name="color1" id="color1" value="{{ old('color1') }}" class="form-control @error('color1') is-invalid @enderror" placeholder="Ingrese..">
 					@error('color1')
@@ -122,7 +123,7 @@
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="color2" class="col-form-label col-lg-3">Color #3 (opcional)</label>
+				<label for="color2" class="col-form-label col-lg-3">Color #3 (opcional)<span class="text-danger">*</span></label>
 				<div class="col-lg-9">
 					<input type="number" name="color2" id="color2" value="{{ old('color2') }}" class="form-control @error('color2') is-invalid @enderror" placeholder="Ingrese..">
 					@error('color2')
@@ -183,7 +184,7 @@
 
 @push('scriptsFooter')
     <script>
-        $('#menuEstadio').addClass('active');
+        $('#menuEquipo').addClass('active');
         subirFoto("#foto");
        
 

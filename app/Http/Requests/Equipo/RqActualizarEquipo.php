@@ -4,6 +4,9 @@ namespace ioliga\Http\Requests\Equipo;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
+use ioliga\Models\Equipo\Equipo;
+
 class RqActualizarEquipo extends FormRequest
 {
     /**
@@ -24,12 +27,25 @@ class RqActualizarEquipo extends FormRequest
     //select from equipo 
     public function rules()
     {
+        
+
+    Validator::extend('existeInfo', function($attribute, $value, $parameters){
+            $equipo=Equipo::find($this->input('equipo'));
+            $validateequipo=Equipo::where('id','!=',$this->input('equipo'))
+            ->where('users_id',$this->input('usuario'))
+            ->where('generoEquipo_id',$equipo->generoEquipo_id)
+            ->first();
+            if($validateequipo){
+                return false;
+            }else{
+                return true;
+            }
+
+        },"El representante ya pertenece a otro equipo en esta categoría");
+
         return [
-            'users_id' => Rule::unique('users_id')->where(function ($query) {
-                    $idequipo=$this->input('equipo');
-                    $idusuario=$this->input('usuario');
-                    return $query->where('users_id',$idusuario)->where('id','!=',$idequipo);
-                }),
+            'equipo' => 'required',
+            'usuario' =>'existeInfo',
             'genero'=>'required',
             'nombre'=>'required|unique:equipo,nombre,'.$this->input('equipo'),
             'telefono'=>'nullable|digits_between:6,10',
