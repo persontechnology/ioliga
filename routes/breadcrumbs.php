@@ -83,6 +83,20 @@ Breadcrumbs::for('crear-equipos', function ($trail,$generos) {
 Breadcrumbs::for('editar-equipos', function ($trail,$equipo) {       
     $trail->parent('categorias');
     $trail->push('Equipos Tipo ' . $equipo->genero->nombre, route('equipos',$equipo->genero->id));
-    $trail->push('Editar Equipo  ' . $equipo->nombre, route('equipo-editar',$equipo->id));
-  
+    $trail->push('Editar Equipo  ' . $equipo->nombre, route('equipo-editar',$equipo->id));  
+});
+Breadcrumbs::for('mis-equipos', function ($trail) {       
+   $trail->parent('home');
+    $trail->push('Mis Equipos', route('mis-equipos'));     
+});
+Breadcrumbs::for('editar-mi-equipo', function ($trail,$equipo) {       
+   $trail->parent('home');
+    $trail->push('Mis Equipos', route('mis-equipos')); 
+    $trail->push('Editar Equipo'.' '.$equipo->nombre, route('editar-mi-equipo',$equipo->id));     
+});
+
+Breadcrumbs::for('nomina-mi-equipo', function ($trail,$equipo) {       
+   $trail->parent('home');
+    $trail->push('Mis Equipos', route('mis-equipos')); 
+    $trail->push('Nomina del Equipo'.' '.$equipo->nombre, route('nomina',$equipo->id));     
 });

@@ -21,7 +21,7 @@ class EquipoDataTable extends DataTable
         return datatables($query)
              ->editColumn('foto',function($equipo){
                 if($equipo->foto){
-                    return '<a href="'.Storage::url('public/equipos/'.$equipo->foto).'"><i class="far fa-image"></i></a>';    
+                    return '<a data-popup="lightbox" href="'.Storage::url('public/equipos/'.$equipo->foto).'"><i class="far fa-image"></i></a>';    
                 }
                 
             })

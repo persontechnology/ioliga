@@ -6,7 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
-
+use ioliga\Models\Equipo\Equipo;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
@@ -38,4 +38,9 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function equipos()
+    {
+       return $this->hasMany(Equipo::class,'users_id');
+    }
 }

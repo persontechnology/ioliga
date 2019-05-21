@@ -11,8 +11,13 @@ use ioliga\DataTables\EquipoDataTable;
 use Illuminate\Support\Facades\Auth;
 use ioliga\Http\Requests\Equipo\RqGuardarEquipo;
 use ioliga\Http\Requests\Equipo\RqActualizarEquipo;
+use ioliga\Http\Requests\Equipo\RqActualizarMiEquipo;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
+use ioliga\Models\Nomina\Nomina;
+
 
 class Equipos extends Controller
 {
@@ -22,13 +27,13 @@ class Equipos extends Controller
     }
    public function index(EquipoDataTable $dataTable)
     {
-        /*$this->authorize('ver',Estadio::class);*/
+        /*$this->authorize('ver',Equipo::class);*/
         return $dataTable->render('equipos.index');
         
     }
     public function genero()
     {
-        /*$this->authorize('ver',Estadio::class);*/
+        $this->authorize('genero',Equipo::class);
         $generos=GeneroEquipo::get();
         return view('equipos.genero',['genero'=>$generos]);
         
@@ -90,8 +95,7 @@ class Equipos extends Controller
             $equipo->estado=false;
             $equipo->save();
             $request->session()->flash('info','Equipo inactivo');            
-         }       
-      
+         }     
     }
 
      public function eliminar(Request $request,$idEquipo)
@@ -147,15 +151,56 @@ class Equipos extends Controller
         return redirect()->route('equipos',$equipo->generoEquipo_id);
     }
 
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    /*funciones para editar los campos de equipo por parte del representante de cada equipo*/
+    /*para ello se utilizara los permisos del modelo nominas ya que allio esta la participacion del reperesentante*/
+    public function editarMiEquipo($CodigoEquipo)
     {
-        //
+
+        try {
+            $equipo = Equipo::find(Crypt::decryptString($CodigoEquipo));                        
+            $this->authorize('actualizarMiEquipo',Nomina::class);
+            return view('equipos.editarMiEquipo',compact('equipo'));
+
+        } catch (DecryptException $th) {
+            session()->flash('danger','Error al editar: Los datos ingresados están manipulados vuelva aintentar !');
+            return redirect()->route('mis-equipos');            
+        }
     }
+
+    public function actualizarMiEquipo(RqActualizarMiEquipo $request)
+    {
+        
+        try {
+            $equipo=Equipo::findOrFail(Crypt::decryptString($request->equipo));  
+            /*$this->authorize('actualizarMiEquipo',Nomina::class);*/    
+            $equipo->resenaHistorico=$request->resenaHistorico;                
+            $equipo->localidad=$request->localidad;        
+            $equipo->telefono=$request->telefono;
+            $equipo->anioCreacion=$request->anioCreacion;
+            $equipo->fraseIdentificacion=$request->fraseIdentificacion;
+            $equipo->color=$request->color;
+             $equipo->color1=$request->color1;
+            $equipo->color2=$request->color2;
+            $equipo->usuarioActualizado=Auth::id();
+            if($equipo->save()){
+                if ($request->hasFile('foto')) {
+                    if ($request->file('foto')->isValid()) {
+                        Storage::disk('public')->delete('equipos/'.$equipo->foto);
+                        $foto=$equipo->id.'_'.Carbon::now().'.'.$request->foto->extension();
+                        $path = $request->foto->storeAs('equipos', $foto,'public');
+                        $equipo->foto=$foto;    
+                        $equipo->save();
+                    }
+                }         
+            }
+            $request->session()->flash('success','Perfil del equipo editado correctamente');
+            return redirect()->route('mis-equipos');
+        } catch (DecryptException $th) {
+            session()->flash('danger','Error al editar: Los datos ingresados están manipulados vuelva aintentar !');
+            return redirect()->route('mis-equipos');            
+        }
+    }
+
+
+
 }

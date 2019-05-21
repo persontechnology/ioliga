@@ -47,7 +47,7 @@
 
                             <div class="align-self-center ml-3">
                                 <div class="list-icons list-icons-extended">
-                                    <a href="#" class="list-icons-item" data-popup="tooltip" title="" data-toggle="modal" data-trigger="hover" data-target="#call" data-original-title="Call"><i class="icon-phone2"></i></a>
+                                    <a href="{{route('nomina',$equipo->id)}}" class="list-icons-item" data-popup="tooltip" title=""  data-trigger="hover" data-target="#call" data-original-title="Ver nómina de {{$equipo->nombre}}"><i class="icon-file-text3"></i></a>
                                     <a href="#" class="list-icons-item" data-popup="tooltip" title="" data-toggle="modal" data-trigger="hover" data-target="#chat" data-original-title="Chat"><i class="icon-comment"></i></a>
                                     <a href="#" class="list-icons-item" data-popup="tooltip" title="" data-toggle="modal" data-trigger="hover" data-target="#video" data-original-title="Video"><i class="icon-video-camera"></i></a>
                                 </div>

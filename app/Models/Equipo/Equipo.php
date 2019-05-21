@@ -21,5 +21,6 @@ class Equipo extends Model
     {
     	return $this->belongsTo(GeneroEquipo::class,'generoEquipo_id');
     }
+     
 
 }

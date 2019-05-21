@@ -33,6 +33,14 @@ class PermisosSeeder extends Seeder
         $p_crear_campeonatos=Permission::updateOrCreate(['name' => 'Crear campeonatos']);
         $p_actualizar_campeonatos=Permission::updateOrCreate(['name' => 'Actualizar campeonatos']);
         $p_eliminar_campeonatos=Permission::updateOrCreate(['name' => 'Eliminar campeonatos']);
+
+        /*permisos para equipo*/
+        $p_ver_categorias=Permission::updateOrCreate(['name' => 'Ver categorias']);
+
+        /*permisos para nominas*/
+        $p_ver_nomina_representante=Permission::updateOrCreate(['name' => 'Ver nomina representante']);
+        $p_actualizar_mi_equipo=Permission::updateOrCreate(['name' => 'Actualizar equipo representante']);
+
         
 
     }

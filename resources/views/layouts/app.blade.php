@@ -32,11 +32,13 @@
     <link rel="stylesheet" href="{{ asset('plus/sweetalert/sweetalert.css') }}">
     <script src="{{ asset('plus/sweetalert/sweetalert.min.js') }}"></script>
     <!-- /core JS files -->
+    <script src="{{ asset('/global_assets/js/plugins/media/fancybox.min.js') }}"></script>
     <script src="{{ asset('/global_assets/js/demo_pages/form_checkboxes_radios.js') }}" type="text/javascript"></script>
     <!-- Theme JS files -->
     @stack('scriptsHeader')
 
     <script src="{{ asset('assets/js/app.js') }}"></script>
+    <script src="{{ asset('/global_assets/js/demo_pages/content_cards_content.js') }}"></script>
     <script>
         $.ajaxSetup({
             headers: {

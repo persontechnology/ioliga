@@ -72,8 +72,7 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	});
 
 	/*Equipos*/
-	Route::get('/categorias', 'Equipos@genero')->name('categorias');
-	//Route::get('/equipos', 'Equipos@index')->name('equipos');
+	Route::get('/categorias', 'Equipos@genero')->name('categorias');	
 	Route::get('/equipos/{id}', 'Equipos@equipo')->name('equipos');
 	Route::get('/crear-equipos/{id}', 'Equipos@crear')->name('crear-equipos');
 	Route::post('/equipo-guaradar', 'Equipos@guardar')->name('guardarEquipo');
@@ -81,6 +80,14 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	Route::post('/actualizar-equipo', 'Equipos@actualizar')->name('actualizar-equipo');
 	Route::post('/estadoEquipo', 'Equipos@estado')->name('estadoEquipo');
 	Route::get('/eliminar-equipo/{id}', 'Equipos@eliminar')->name('eliminarEquipo');
+	Route::get('/editar-mi-equipo/{id}', 'Equipos@editarMiEquipo')->name('editar-mi-equipo');
+	Route::post('/actualizar-mi-equipo', 'Equipos@actualizarMiEquipo')->name('actualizar-mi-equipo');
+	
+	/*	Nominas*/
+	Route::get('/nomina/{id}', 'Nominas@index')->name('nomina');
+	Route::get('/mis-equipos', 'Nominas@nominaRepresentante')->name('mis-equipos');	
+
+
 
 
 });

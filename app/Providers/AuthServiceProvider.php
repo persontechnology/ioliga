@@ -8,10 +8,13 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use ioliga\Models\Estadio;
 use ioliga\Policies\EstadioPolicy;
 use ioliga\Policies\Usuarios\UsuarioPolicy;
+use ioliga\Policies\NominaPolicy;
 use ioliga\User;
 use ioliga\Models\Campeonato;
 use ioliga\Policies\CampeonatoPolicy;
-
+use ioliga\Models\Nomina\Nomina;
+use ioliga\Models\Equipo\Equipo;
+use ioliga\Policies\EquipoPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -24,6 +27,8 @@ class AuthServiceProvider extends ServiceProvider
         Estadio::class => EstadioPolicy::class,
         User::class=>UsuarioPolicy::class,
         Campeonato::class=>CampeonatoPolicy::class,
+        Nomina::class=>NominaPolicy::class,
+        Equipo::class=>EquipoPolicy::class
 
     ];
 
