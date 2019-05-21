@@ -94,9 +94,15 @@ Breadcrumbs::for('editar-mi-equipo', function ($trail,$equipo) {
     $trail->push('Mis Equipos', route('mis-equipos')); 
     $trail->push('Editar Equipo'.' '.$equipo->nombre, route('editar-mi-equipo',$equipo->id));     
 });
-
+/*nominas*/
 Breadcrumbs::for('nomina-mi-equipo', function ($trail,$equipo) {       
    $trail->parent('home');
     $trail->push('Mis Equipos', route('mis-equipos')); 
     $trail->push('Nomina del Equipo'.' '.$equipo->nombre, route('nomina',$equipo->id));     
+});
+
+Breadcrumbs::for('nomina-jugadores-representante', function ($trail,$equipo) {       
+   $trail->parent('home');
+    $trail->push('Mis Equipos', route('mis-equipos')); 
+    $trail->push('Nómina de jugadores '.' '.$equipo->nombre, route('nomina',$equipo->id));     
 });

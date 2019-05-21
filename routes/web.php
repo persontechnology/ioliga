@@ -85,7 +85,9 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	
 	/*	Nominas*/
 	Route::get('/nomina/{id}', 'Nominas@index')->name('nomina');
-	Route::get('/mis-equipos', 'Nominas@nominaRepresentante')->name('mis-equipos');	
+	Route::get('/mis-equipos', 'Nominas@nominaRepresentante')->name('mis-equipos');
+	Route::get('/crear-jugador/{id}', 'Nominas@crearJugadorNomina')->name('crear-jugador');
+
 
 
 

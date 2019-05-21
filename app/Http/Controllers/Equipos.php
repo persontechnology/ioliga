@@ -157,6 +157,7 @@ class Equipos extends Controller
     {
 
         try {
+            
             $equipo = Equipo::find(Crypt::decryptString($CodigoEquipo));                        
             $this->authorize('actualizarMiEquipo',Nomina::class);
             return view('equipos.editarMiEquipo',compact('equipo'));

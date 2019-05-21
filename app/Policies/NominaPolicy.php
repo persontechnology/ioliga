@@ -13,7 +13,7 @@ class NominaPolicy
    
     public function representante(User $user)
     {
-        return $user->can('Ver nomina representante');
+        return $user->can('Ver equipo representante');
     }
 
        public function actualizarMiEquipo(User $user)
@@ -21,9 +21,16 @@ class NominaPolicy
        return $user->can('Actualizar equipo representante');
     }
 
-    public function update(User $user, Nomina $nomina)
+    public function verNominaRepresentante(User $user)
     {
-        //
+        return $user->can('Ver nómina representante');
+        
+    }
+
+    public function crearJugadorNomina(User $user)
+    {
+        return $user->can('Crear jugadores representante');
+        
     }
 
     /**
