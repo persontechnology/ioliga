@@ -25,6 +25,12 @@ class Genero extends Model
 	public function generoEquipo()
     {
         return $this->belongsTo(GeneroEquipo::class,'generoEquipo_id');
-    }
+	}
+	
+
+	public function GenerosSeries()
+	{
+		return $this->hasMany(GeneroSerie::class, 'genero_id');
+	}
 
 }

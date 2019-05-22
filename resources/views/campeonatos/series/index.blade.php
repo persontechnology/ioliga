@@ -11,77 +11,9 @@
 
 @section('content')
 
-<script src="{{ asset('global_assets/js/plugins/ui/dragula.min.js') }}"></script>
 
 
 
-<div class="row">
-    <div class="col-2">
-        <ul id="uno">
-            <li data-id="1">uno</li>
-            <li>dos</li>
-        </ul>
-    </div>
-    <div class="col-2">
-        <ul id="dos" data-id="amor">
-            <li>tres</li>
-            <li>cuatro</li>
-        </ul>
-    </div>
-</div>
-
-
-
-
-<script>
- dragula([document.getElementById('uno'), document.getElementById('dos')])
-  .on('drag', function (el) {
-    console.log($(el).data('id'))
-    /*el.className = el.className.replace('ex-moved', '');*/
-  }).on('drop', function (el) {
-    el.className += ' ex-moved';
-  }).on('over', function (el, container) {
-    container.className += ' ex-over';
-  }).on('out', function (el, container) {
-    console.log($(container).data('id'))
-    /*container.className = container.className.replace('ex-over', '');*/
-  });
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h1>Total de equipos en <strong> {{ $genero->generoEquipo->nombre }} : {{ count($genero->generoEquipo->equipos) }}</strong></h1>
 {{-- presentar formulario si solo el campeonato esta activo --}}
 @can('serieEnCampeonatoActivo',$genero->campeonato)
     <div class="card-group-control card-group-control-right" id="accordion-control-right">
@@ -119,70 +51,86 @@
     </div>
 @endcan
 
-@if(count($seriesSi)>0)
-<h1>Series existentes</h1>
-   <div class="row">
-    @foreach($seriesSi as $serie_si)
-        <div class="col-sm-12 col-xl-6">
-            
-                <div class="card">
-                    <div class="card-header">
-                        <a href="">
-                            <div class="media">
-                                <div class="mr-3 align-self-center">
-                                    <i class="icon-pointer icon-3x text-success-400"></i>
-                                </div>
+<!-- Sortable media list -->
+<div class="mb-2">
 
-                                <div class="media-body text-right">
-                                    <h1 class="font-weight-semibold mb-0">{{ $serie_si->nombre }}</h1>
-                                    <span class="text-uppercase font-size-sm text-muted">
-                                        Total de equipos (0)
-                                    </span>
-                                </div>
-                            </div>
+
+    <div class="row">
+        
+        <div class="col-md-9">
+            <!-- Right list container -->
+            @if(count($genero->GenerosSeries)>0)
+            <div class="row">
+                @foreach($genero->GenerosSeries as $serie_si_x)
+
+                <div class="col-md-4">
+
+                    <!-- Linked list group -->
+                    <div class="card">
+                        <a href="{{ route('asignarEquiposAserie',$serie_si_x->id) }}">
+                        <div class="card-body text-center">
+                            <p class="card-text">
+                                SERIE
+                            </p>
+                            <h1 class="card-title">{{ $serie_si_x->serie->nombre }}</h1>
+                            <small class="float-right">+ Asignar equipos</small>
+                        </div>
                         </a>
 
-                    </div>
-                    <div class="card-body">
-                        
-                
-                            <div class="table-responsive">
-                                <table class="table table-bordered">
-                                  <thead>
-                                    <tr>
-                                      <th scope="col">Equipo</th>
-                                      <th scope="col">Representante</th>
-                                      <th scope="col">Total nomina</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    @foreach($genero ->generoEquipo->equipos as $equipo)
-                                        <tr>
-                                          <td>{{ $equipo->nombre }}</td>
-                                          <td>{{ $equipo->user->name }}</td>
-                                          <td>20</td>
-                                        </tr>
-                                    @endforeach
-                                  </tbody>
-                                </table>
-                            </div>
 
-                       
+                        @if(count($serie_si_x->equipos)>0)
+                        <ul class="list-group list-group-flush border-top">
+                            
+                            @foreach ($serie_si_x->equipos as $equipo)
+                                
+                                
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <span class="font-weight-semibold">
+                                        <i class="icon-grid mr-2"></i>
+                                        {{ $equipo->nombre }}
+                                    </span>
+                                    <span class="badge bg-success ml-auto">New</span>
+                                </a>
+
+                            @endforeach
+
+                        </ul>
+                        @endif
+
+                        <div class="card-footer d-flex justify-content-between">
+                            <span class="text-muted">Updated 2 hours ago</span>
+                            <span>
+                                <i class="icon-star-full2 font-size-base text-warning"></i>
+                                <i class="icon-star-full2 font-size-base text-warning"></i>
+                                <i class="icon-star-full2 font-size-base text-warning"></i>
+                                <i class="icon-star-full2 font-size-base text-warning"></i>
+                                <i class="icon-star-empty3 font-size-base text-warning"></i>
+                                <span class="text-muted ml-2">(86)</span>
+                            </span>
+                        </div>
                     </div>
+                    <!-- /linked list group -->
 
                 </div>
-            
+
+                @endforeach
+            </div>
+            @else
+                <div class="alert alert-dark alert-styled-left alert-dismissible">
+                    <span class="font-weight-semibold">No existe series en este campeonato!</span>
+                </div>
+            @endif
+
+            <!-- /right list container -->
+
         </div>
-    @endforeach
-
     </div>
+</div>
+<!-- /sortable media list -->
 
 
-@else
-    <div class="alert alert-dark alert-styled-left alert-dismissible">
-        <span class="font-weight-semibold">No existe series en este campeonato!</span>
-    </div>
-@endif
+
+
 
 
 
@@ -191,6 +139,11 @@
 
 @prepend('scriptsHeader')
   <script src="{{ asset('global_assets/js/plugins/forms/inputs/duallistbox/duallistbox.min.js') }}"></script>
+  {{-- select bootsrap --}}
+<link rel="stylesheet" href="{{ asset('plus/selectBootstrap/css/bootstrap-select.min.css') }}">
+<script src="{{ asset('plus/selectBootstrap/js/bootstrap-select.min.js') }}"></script>
+<script src="{{ asset('plus/selectBootstrap/js/i18n/defaults-es_ES.min.js') }}"></script>
+{{-- fin select bootsrap --}}
 @endprepend
 
 

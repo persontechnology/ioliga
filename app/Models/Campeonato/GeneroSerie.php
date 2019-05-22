@@ -4,6 +4,8 @@ namespace ioliga\Models\Campeonato;
 
 use Illuminate\Database\Eloquent\Model;
 use ioliga\Models\Equipo\Genero;
+use ioliga\Models\Equipo\Equipo;
+use ioliga\Models\Campeonato\Serie;
 class GeneroSerie extends Model
 {
     protected $table='generoSerie';
@@ -13,5 +15,18 @@ class GeneroSerie extends Model
     public function genero()
 	{
 	    return $this->belongsTo(Genero::class, 'genero_id');
-	}
+    }
+
+    public function serie()
+	{
+	    return $this->belongsTo(Serie::class, 'serie_id');
+    }
+    
+    // GeneroSerie ---> Equipos
+    public function equipos()
+    {
+        return $this->belongsToMany(Equipo::class, 'asignacion', 'generoSerie_id','equipo_id');
+    }
+
+
 }

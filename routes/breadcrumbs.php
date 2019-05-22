@@ -61,8 +61,15 @@ Breadcrumbs::for('actualizarCampeonato', function ($trail,$campeonato) {
 
 Breadcrumbs::for('series', function ($trail,$genero) {
     $trail->parent('campeonatos');
-    $trail->push('Series en campeonato '.$genero->campeonato->nombre, route('series',$genero->id));
+    $trail->push('Series en categoria '.$genero->generoEquipo->nombre, route('series',$genero->id));
 });
+
+// Equipos en serie
+Breadcrumbs::for('asignarEquiposAserie', function ($trail,$generoSerie) {
+    $trail->parent('series',$generoSerie->genero);
+    $trail->push('Equipos en serie '.$generoSerie->serie->nombre, route('asignarEquiposAserie',$generoSerie->id));
+});
+
 
 /*Equipos*/
 Breadcrumbs::for('categorias', function ($trail) {
@@ -86,3 +93,5 @@ Breadcrumbs::for('editar-equipos', function ($trail,$equipo) {
     $trail->push('Editar Equipo  ' . $equipo->nombre, route('equipo-editar',$equipo->id));
   
 });
+
+

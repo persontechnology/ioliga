@@ -66,6 +66,9 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	    // serires
 	    Route::get('/series/{idGenero}', 'Series@index')->name('series');
 	    Route::post('/series-agregar-a-campeonato', 'Series@agregar')->name('agregarSerieCampeonato');
+		Route::get('/agregar-equipos-a-serie/{idGeneroSerie}', 'Series@asignarEquiposAserie')->name('asignarEquiposAserie');
+		Route::post('/agregar-equipos-a-serie-guardar', 'Series@agregarEquipoAserie')->name('agregarEquipoAserie');
+		
 	    
 	    
 	    
