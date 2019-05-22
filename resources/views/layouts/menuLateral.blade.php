@@ -41,7 +41,7 @@
 
 {{-- equipos --}}
 
-@can('view', 'ioliga\Models\Equipo\Equipo::class')
+@can('genero', 'ioliga\Models\Equipo\Equipo::class')
 <li class="nav-item">
     <a href="{{ route('categorias') }}" class="nav-link" id="menuEquipo" title="Equipos">
         <i class="fas fa-futbol"></i>
@@ -50,6 +50,17 @@
         </span>
     </a>
 </li>
+@endcan
+
+@can('representante', ioliga\Models\Nomina\Nomina::class)
+    <li class="nav-item">
+        <a href="{{ route('mis-equipos') }}" class="nav-link" id="menuNominare">
+            <i class="fas fa-users-cog"></i>
+            <span>
+                {{ __('Mis equipos') }}
+            </span>
+        </a>
+    </li>
 @endcan
 
     <li class="nav-item-header">
