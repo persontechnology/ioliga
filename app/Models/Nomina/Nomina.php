@@ -3,13 +3,14 @@
 namespace ioliga\Models\Nomina;
 
 use Illuminate\Database\Eloquent\Model;
-
+use ioliga\User;
+use DateTime;
 class Nomina extends Model
 {
     protected $table="nomina";
 
     protected $fillable = [
-        'users_id', 'equipo_id', 'users_id','lugarProcedencia','nacionalidad','estado','detalle'
+        'users_id', 'equipo_id','lugarProcedencia','nacionalidad','estado','detalle'
     ];
     public function user()
     {
@@ -18,5 +19,13 @@ class Nomina extends Model
       public function equipo()
     {
     	return $this->belongsTo(Equipo::class,'equipo_id');
+    }
+
+    public function calcularaEdad($fecha)
+    {
+        $nacio = DateTime::createFromFormat('Y-m-d', $fecha);
+        $calculo = $nacio->diff(new DateTime());
+        $edad=  $calculo->y;    
+        return $edad;
     }
 }

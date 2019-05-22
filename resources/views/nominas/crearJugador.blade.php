@@ -3,13 +3,14 @@
 @section('content')
 <div class="card">
   <div class="card-body">
-    <form action="{{ route('guardarUsuario') }}" method="post" enctype="multipart/form-data" id="formIngresoUsuario">
+    <form action="{{ route('guardar-jugador') }}" method="post" enctype="multipart/form-data" id="formIngresoUsuario">
       @csrf
       <div class="row">
           <div class="col-md-6">
               <fieldset>
                   <legend class="font-weight-semibold"><i class="far fa-id-card"></i> Detalle personal</legend>
 
+                  <input type="text" name="equipo" id="equipo" value="{{Crypt::encryptString($equipo->id)}}" />
                   <div class="form-group row">
                       <label class="col-lg-3 col-form-label" for="nombres">Nombres<span class="text-danger">*</span></label>
                       <div class="col-lg-9">
@@ -68,42 +69,7 @@
                           @endif
                       </div>
                   </div>
-                   <div class="form-group row">
-                      <label class="col-lg-3 col-form-label" for="fechaNacimiento">Fecha De Nacimiento<span class="text-danger">*</span></label>
-                      <div class="col-lg-9">
-                          <input type="date" name="fechaNacimiento" id="fechaNacimiento"  class="form-control{{ $errors->has('fechaNacimiento') ? ' is-invalid' : '' }}" placeholder="Ingrese.." required=""  value="{{ old('fechaNacimiento') }}">
-                          @if ($errors->has('fechaNacimiento'))
-                              <span class="invalid-feedback" role="alert">
-                                  <strong>{{ $errors->first('fechaNacimiento') }}</strong>
-                              </span>
-                          @endif
-                      </div>
-                  </div>
-
-                   <div class="form-group row">
-	                  <label class="col-lg-3 col-form-label" for="Nacionalidad">Lugar de Procedencia<span class="text-danger">*</span></label>
-	                  <div class="col-lg-9">
-	                      <input type="text" name="Nacionalidad" id="Nacionalidad"  class="form-control{{ $errors->has('Nacionalidad') ? ' is-invalid' : '' }}" placeholder="Ingrese.." required=""  value="{{ old('Nacionalidad') }}">
-	                      @if ($errors->has('Nacionalidad'))
-	                          <span class="invalid-feedback" role="alert">
-	                              <strong>{{ $errors->first('Nacionalidad') }}</strong>
-	                          </span>
-	                      @endif
-	                  </div>
-                  </div>
-
-                  <div class="form-group row">
-	                  <label class="col-lg-3 col-form-label" for="lugarProcedencia">Lugar de Procedencia<span class="text-danger">*</span></label>
-	                  <div class="col-lg-9">
-	                      <input type="text" name="lugarProcedencia" id="lugarProcedencia"  class="form-control{{ $errors->has('lugarProcedencia') ? ' is-invalid' : '' }}" placeholder="Ingrese.." required=""  value="{{ old('lugarProcedencia') }}">
-	                      @if ($errors->has('lugarProcedencia'))
-	                          <span class="invalid-feedback" role="alert">
-	                              <strong>{{ $errors->first('lugarProcedencia') }}</strong>
-	                          </span>
-	                      @endif
-	                  </div>
-                  </div>
-
+                  
                   <div class="form-group row">
                       <label class="col-lg-3 col-form-label" for="sexo">Sexo:<span class="text-danger">*</span></label>
                       <div class="custom-control custom-radio">
@@ -187,7 +153,45 @@
           <div class="col-md-6">
               <fieldset>
                   <legend class="font-weight-semibold"><i class="fas fa-user-lock"></i> Información de cuenta</legend>
+                  
+                   <div class="form-group row">
+                      <label class="col-lg-3 col-form-label" for="fechaNacimiento">Fecha De Nacimiento<span class="text-danger">*</span></label>
+                      <div class="col-lg-9">
+                          <input type="date" name="fechaNacimiento" id="fechaNacimiento"  class="form-control{{ $errors->has('fechaNacimiento') ? ' is-invalid' : '' }}" placeholder="Ingrese.." required=""  value="{{ old('fechaNacimiento') }}">
+                          @if ($errors->has('fechaNacimiento'))
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $errors->first('fechaNacimiento') }}</strong>
+                              </span>
+                          @endif
+                      </div>
+                  </div>
+
+                   <div class="form-group row">
+	                  <label class="col-lg-3 col-form-label" for="nacionalidad">Nacionalidad<span class="text-danger">*</span></label>
+	                  <div class="col-lg-9">
+	                      <input type="text" name="nacionalidad" id="nacionalidad"  class="form-control{{ $errors->has('nacionalidad') ? ' is-invalid' : '' }}" placeholder="Ingrese.." required=""  value="{{ old('nacionalidad') }}">
+	                      @if ($errors->has('nacionalidad'))
+	                          <span class="invalid-feedback" role="alert">
+	                              <strong>{{ $errors->first('nacionalidad') }}</strong>
+	                          </span>
+	                      @endif
+	                  </div>
+                  </div>
+
                   <div class="form-group row">
+	                  <label class="col-lg-3 col-form-label" for="lugarProcedencia">Lugar de Procedencia<span class="text-danger">*</span></label>
+	                  <div class="col-lg-9">
+	                      <input type="text" name="lugarProcedencia" id="lugarProcedencia"  class="form-control{{ $errors->has('lugarProcedencia') ? ' is-invalid' : '' }}" placeholder="Ingrese.." required=""  value="{{ old('lugarProcedencia') }}">
+	                      @if ($errors->has('lugarProcedencia'))
+	                          <span class="invalid-feedback" role="alert">
+	                              <strong>{{ $errors->first('lugarProcedencia') }}</strong>
+	                          </span>
+	                      @endif
+	                  </div>
+                  </div>
+
+                  <div class="form-group row">
+
                       <label for="name" class="col-lg-3 col-form-label">{{ __('Name') }} de usuario<span class="text-danger">*</span></label>
 
                       <div class="col-lg-9">

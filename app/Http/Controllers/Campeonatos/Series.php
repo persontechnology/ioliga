@@ -11,8 +11,7 @@ use ioliga\Models\Campeonato\GeneroSerie;
 class Series extends Controller
 {
     public function index(Request $request,$idGenero)
-    {
-    	
+    {    	
     	$genero=Genero::findOrFail($idGenero);
     	$seriesNo=Serie::whereNotIn('id',$genero->series->pluck('id'))->get();
     	$seriesSi=$genero->series;

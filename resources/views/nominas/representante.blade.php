@@ -27,11 +27,13 @@
 								<span class="font-size-sm text-uppercase font-weight-semibold">Nombre: {{$equipos->nombre}}</span>
 								<span class="font-size-sm text-uppercase font-weight-semibold">Categoria: {{$equipos->genero->nombre}}</span>
 							</div>
+						
+							@if($equipos->foto)  
 							<div class="card-img-actions text-center">
-							@if($equipos->foto)                         
-                            	<img class="cen@section('breadcrumbs', Breadcrumbs::render('equipos',$genero))ter" src="{{ Storage::url('public/equipos/'.$equipos->foto) }}"  height="200" alt="">
+								<img class="" src="{{ Storage::url('public/equipos/'.$equipos->foto) }}"  height="200" alt="">
 								<div class="card-img-actions-overlay">
-									<a data-popup="tooltip" title=""  data-trigger="hover" data-target="#call" data-original-title="Ver Imagen {{$equipos->nombre}}" href="{{ Storage::url('public/equipos/'.$equipos->foto) }}" class="btn btn-outline bg-white text-white border-white border-2" data-popup="lightbox">	Ver 
+									<a href="{{ Storage::url('public/equipos/'.$equipos->foto) }}" class="btn btn-outline bg-white text-white border-white border-2" data-popup="lightbox">
+										Ver
 									</a>
 									@if($equipos->estado)
 									<a data-popup="tooltip" title=""  data-trigger="hover" data-target="#call" data-original-title="Actualizar Perfil de {{$equipos->nombre}}" href="{{route('editar-mi-equipo',Crypt::encryptString($equipos->id))}}" class="btn btn-outline bg-white text-white border-white border-2 ml-2">Detalle
@@ -41,10 +43,15 @@
 									</a>
 									@endif
 								</div>
-                            @else                            
-                            	<img class="{{ asset('global_assets/images/demo/users/balon.jpg') }}" alt="">
+							</div>							                    
+                            	
+								<!-- 1_2019-05-13 15:28:00.png -->
+                            @else 
+                            <div class="card-img-actions text-center">
+								<img class="" height="200" src="{{ asset('global_assets/images/demo/users/balon.jpg') }}" alt="">
 								<div class="card-img-actions-overlay">
-									<a href="{{ asset('global_assets/images/demo/users/balon.jpg') }}" data-popup="tooltip" title=""  data-trigger="hover" data-target="#call" data-original-title="Ver imagen {{$equipos->nombre}}" class="btn btn-outline bg-white text-white border-white border-2" data-popup="lightbox">	ver
+									<a href="{{ asset('global_assets/images/demo/users/balon.jpg') }}" class="btn btn-outline bg-white text-white border-white border-2" data-popup="lightbox">
+										Ver
 									</a>
 									@if($equipos->estado)
 									<a data-popup="tooltip" title=""  data-trigger="hover" data-target="#call" data-original-title="Actualizar Perfil de {{$equipos->nombre}}" href="{{route('editar-mi-equipo',Crypt::encryptString($equipos->id))}}" class="btn btn-outline bg-white text-white border-white border-2 ml-2">Detalle
@@ -54,9 +61,11 @@
 									</a>
 									@endif
 								</div>
+							</div>
+                            
                             @endif
 							
-							</div>
+						
 							<div class="card-footer bg-transparent d-flex justify-content-between border-top-0 ">
 								<span class="text-muted">{{'Año de creación'.' '.$equipos->anioCreacion}}</span>
 								@if($equipos->estado)
