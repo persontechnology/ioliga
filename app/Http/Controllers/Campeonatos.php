@@ -23,6 +23,7 @@ class Campeonatos extends Controller
     public function index(CampeonatoDataTable $dataTable)
     {
         $this->authorize('ver',Campeonato::class);
+        
         return $dataTable->render('campeonatos.index');
     }
 
