@@ -27,28 +27,28 @@ class Equipos extends Controller
     }
    public function index(EquipoDataTable $dataTable)
     {
-        /*$this->authorize('ver',Equipo::class);*/
+        $this->authorize('ver',Equipo::class);
         return $dataTable->render('equipos.index');
         
     }
     public function genero()
     {
-        $this->authorize('genero',Equipo::class);
+        $this->authorize('generoEquipo',GeneroEquipo::class);
         $generos=GeneroEquipo::get();
         return view('equipos.genero',['genero'=>$generos]);
         
     }
     public function equipo(EquipoDataTable $dataTable, $idGenero)
     {
-        /*$this->authorize('ver',Estadio::class);*/
-        $genero=GeneroEquipo::findOrFail($idGenero);
-
-        return $dataTable->with('idGenero',$genero->id)->render('equipos.equipo',['genero'=>$genero]);
+       $this->authorize('ver',Equipo::class);
+       $genero=GeneroEquipo::findOrFail($idGenero);
+       return $dataTable->with('idGenero',$genero->id)->render('equipos.equipo',['genero'=>$genero]);
         
     }
 
      public function crear($idGenero)
     {
+      $this->authorize('crear',Equipo::class);
       $generos=GeneroEquipo::findOrFail($idGenero);
       $representante=User::role('Representante de equipo')->get();
       return view('equipos.crear',['generos'=>$generos,'representante'=>$representante]);
@@ -58,7 +58,6 @@ class Equipos extends Controller
     public function guardar(RqGuardarEquipo $request)
     {
         $this->authorize('crear',Equipo::class);
-
         $equipo=new Equipo;
         $equipo->nombre=$request->nombre;
         $equipo->resenaHistorico=$request->resenaHistorico;
@@ -114,6 +113,7 @@ class Equipos extends Controller
      public function editar($CodigoEquipo)
     {
         $equipo = Equipo::find($CodigoEquipo);
+        $this->authorize('actualizar',$equipo);
         $representante=User::role('Representante de equipo')->get();               
         $this->authorize('actualizar',$equipo);
         return view('equipos.editar',compact('equipo','representante'));
@@ -159,7 +159,7 @@ class Equipos extends Controller
         try {
             
             $equipo = Equipo::find(Crypt::decryptString($CodigoEquipo));                        
-            $this->authorize('actualizarMiEquipo',Nomina::class);
+            $this->authorize('actualizarMiEquipo',$equipo);
             return view('equipos.editarMiEquipo',compact('equipo'));
 
         } catch (DecryptException $th) {
@@ -173,7 +173,7 @@ class Equipos extends Controller
         
         try {
             $equipo=Equipo::findOrFail(Crypt::decryptString($request->equipo));  
-            /*$this->authorize('actualizarMiEquipo',Nomina::class);*/    
+            $this->authorize('actualizarMiEquipo',$equipo);   
             $equipo->resenaHistorico=$request->resenaHistorico;                
             $equipo->localidad=$request->localidad;        
             $equipo->telefono=$request->telefono;

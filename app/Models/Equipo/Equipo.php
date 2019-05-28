@@ -5,7 +5,7 @@ namespace ioliga\Models\Equipo;
 use Illuminate\Database\Eloquent\Model;
 use ioliga\User;
 use ioliga\Models\Equipo\GeneroEquipo;
-
+use ioliga\Models\Nomina\Nomina;
 class Equipo extends Model
 {
     protected $table="equipo";
@@ -21,6 +21,9 @@ class Equipo extends Model
     {
     	return $this->belongsTo(GeneroEquipo::class,'generoEquipo_id');
     }
-     
+      public function nominas()
+    {
+       return $this->hasMany(Nomina::class,'equipo_id');
+    }
 
 }

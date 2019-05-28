@@ -90,14 +90,7 @@ Breadcrumbs::for('crear-equipos', function ($trail,$generos) {
 Breadcrumbs::for('editar-equipos', function ($trail,$equipo) {       
     $trail->parent('categorias');
     $trail->push('Equipos Tipo ' . $equipo->genero->nombre, route('equipos',$equipo->genero->id));
-<<<<<<< HEAD
-    $trail->push('Editar Equipo  ' . $equipo->nombre, route('equipo-editar',$equipo->id));
-  
-});
 
-
-=======
-    $trail->push('Editar Equipo  ' . $equipo->nombre, route('equipo-editar',$equipo->id));  
 });
 Breadcrumbs::for('mis-equipos', function ($trail) {       
    $trail->parent('home');
@@ -112,12 +105,25 @@ Breadcrumbs::for('editar-mi-equipo', function ($trail,$equipo) {
 Breadcrumbs::for('nomina-mi-equipo', function ($trail,$equipo) {       
    $trail->parent('home');
     $trail->push('Mis Equipos', route('mis-equipos')); 
-    $trail->push('Nomina del Equipo'.' '.$equipo->nombre, route('nomina',$equipo->id));     
+    $trail->push('Nomina '.' '.$equipo->nombre, route('nomina',$equipo->id));     
 });
 
 Breadcrumbs::for('nomina-jugadores-representante', function ($trail,$equipo) {       
    $trail->parent('home');
     $trail->push('Mis Equipos', route('mis-equipos')); 
-    $trail->push('Nómina de jugadores '.' '.$equipo->nombre, route('nomina',$equipo->id));     
+    $trail->push('Nómina  '.' '.$equipo->nombre, route('nomina',$equipo->id));     
 });
->>>>>>> 89b30192db0a436b91c6e46cd39fc4504b028aec
+
+Breadcrumbs::for('crear-jugadores-equipo', function ($trail,$equipo) {       
+   $trail->parent('home');
+    $trail->push('Mis Equipos', route('mis-equipos'));
+    $trail->push('Nómina  '.' '.$equipo->nombre, route('nomina',Crypt::encryptString($equipo->id))); 
+    $trail->push('Nuevo jugador de '.' '.$equipo->nombre, route('crear-jugador',$equipo->id));     
+});
+
+Breadcrumbs::for('editar-foto-jugador', function ($trail,$equipo) {       
+   $trail->parent('home');
+    $trail->push('Mis Equipos', route('mis-equipos'));
+    $trail->push('Nómina  '.' '.$equipo->nombre, route('nomina',Crypt::encryptString($equipo->id))); 
+    $trail->push('Editar imagen del jugador ', route('editar-foto-jugador',$equipo->id));     
+});

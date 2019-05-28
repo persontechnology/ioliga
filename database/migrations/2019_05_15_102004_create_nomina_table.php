@@ -18,7 +18,7 @@ class CreateNominaTable extends Migration
             $table->string('lugarProcedencia')->nullable();
             $table->string('nacionalidad')->nullable();
             $table->boolean('estado')->default(false);
-            $table->boolean('detalle')->nullable();
+            $table->string('detalle')->nullable();
             $table->bigInteger('usuarioCreado')->nullable();
             $table->bigInteger('usuarioActualizado')->nullable();
         });

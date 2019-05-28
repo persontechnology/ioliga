@@ -41,7 +41,7 @@
 
 {{-- equipos --}}
 
-@can('genero', 'ioliga\Models\Equipo\Equipo::class')
+@can('Ver categorias', 'ioliga\Models\Equipo\GeneroEquipo::class')
 <li class="nav-item">
     <a href="{{ route('categorias') }}" class="nav-link" id="menuEquipo" title="Equipos">
         <i class="fas fa-futbol"></i>

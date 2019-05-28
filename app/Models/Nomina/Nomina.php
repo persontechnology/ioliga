@@ -4,6 +4,8 @@ namespace ioliga\Models\Nomina;
 
 use Illuminate\Database\Eloquent\Model;
 use ioliga\User;
+use ioliga\Models\Equipo\Equipo;
+
 use DateTime;
 class Nomina extends Model
 {
@@ -16,9 +18,15 @@ class Nomina extends Model
     {
     	return $this->belongsTo(User::class,'users_id');
     }
-      public function equipo()
+    public function equipo()
     {
     	return $this->belongsTo(Equipo::class,'equipo_id');
+    }
+
+    public function equipoUno()
+    {
+     
+        return $this->hasOne(Equipo::class,'id','equipo_id');
     }
 
     public function calcularaEdad($fecha)

@@ -4,6 +4,7 @@ namespace ioliga\Policies;
 
 use ioliga\User;
 use ioliga\Models\Nomina\Nomina;
+use ioliga\Models\Equipo\Equipo;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class NominaPolicy
@@ -16,22 +17,18 @@ class NominaPolicy
         return $user->can('Ver equipo representante');
     }
 
-       public function actualizarMiEquipo(User $user)
+    public function actualizarImagenJugador(User $user, Nomina $nomina)
     {
-       return $user->can('Actualizar equipo representante');
-    }
+        if($user->can('Actualizar imagen jugador nomina')){
 
-    public function verNominaRepresentante(User $user)
-    {
-        return $user->can('Ver nómina representante');
+            if($nomina->equipoUno->users_id==$user->id){
+                return true;
+            }
+
+        }
         
     }
 
-    public function crearJugadorNomina(User $user)
-    {
-        return $user->can('Crear jugadores representante');
-        
-    }
 
     /**
      * Determine whether the user can delete the nomina.

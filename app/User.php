@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use ioliga\Models\Equipo\Equipo;
+use ioliga\Models\Nomina\Nomina;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
@@ -42,5 +43,14 @@ class User extends Authenticatable implements MustVerifyEmail
     public function equipos()
     {
        return $this->hasMany(Equipo::class,'users_id');
+    }
+
+    public function nomina()
+    {
+       return $this->hasOne(Nomina::class,'users_id');
+    }
+    public function nominaUno()
+    {
+       return $this->hasOne(Nomina::class,'users_id');
     }
 }

@@ -24,20 +24,14 @@ class Nominas extends Controller
     /*mostrar datos para nomina de la lista de jugadores*/
     public function index($codigoEquipo)
     {
-        try {        
-
-            if($this->validarExistencia($codigoEquipo)==true){
-                $this->authorize('verNominaRepresentante',Nomina::class);
-                $nomina = Nomina::where('equipo_id',Crypt::decryptString($codigoEquipo))->get();
-                $numeroActivos = Nomina::where('equipo_id',Crypt::decryptString($codigoEquipo))
-                ->where('estado',true)->count();
-                $numeroInactivos = Nomina::where('equipo_id',Crypt::decryptString($codigoEquipo))
-                ->where('estado',false)->count(); 	
-        		$equipo = Equipo::findOrFail(Crypt::decryptString($codigoEquipo));
-                return view('nominas.index',['nomina'=>$nomina,'equipo'=>$equipo,'conteoEstado'=>$numeroActivos,'conteoInactivos'=>$numeroInactivos]);                
-             }
-             session()->flash('danger','Error al visualizar: El equipo ingresado no pertenece a su representación !');
-            return redirect()->route('mis-equipos');  
+        try {
+                
+            $equipo = Equipo::findOrFail(Crypt::decryptString($codigoEquipo));
+            $this->authorize('verNominaRepresentante',$equipo);
+            $nomina = $equipo->nominas;
+            $numeroActivos = $nomina->where('estado',true)->count();
+            $numeroInactivos = $nomina->where('estado',false)->count();        		
+            return view('nominas.index',['nomina'=>$nomina,'equipo'=>$equipo,'conteoEstado'=>$numeroActivos,'conteoInactivos'=>$numeroInactivos]); 
 
         } catch (DecryptException $th) {
 
@@ -58,15 +52,11 @@ class Nominas extends Controller
     public function crearJugadorNomina($codigoEquipo)
     {
 
-        try {        
+        try {
 
-            if($this->validarExistencia($codigoEquipo)==true){
-                 $this->authorize('crearJugadorNomina',Nomina::class);
-                $equipo = Equipo::findOrFail(Crypt::decryptString($codigoEquipo));        
-                return view('nominas.crearJugador',['equipo'=>$equipo]);;                
-             }
-             session()->flash('danger','Error al visualizar: El equipo ingresado no pertenece a su representación !');
-            return redirect()->route('mis-equipos');  
+             $equipo = Equipo::findOrFail(Crypt::decryptString($codigoEquipo));
+            $this->authorize('crearJugadorNomina',$equipo);                
+            return view('nominas.crearJugador',['equipo'=>$equipo]);            
 
         } catch (DecryptException $th) {
 
@@ -80,7 +70,7 @@ class Nominas extends Controller
     {
         try { 
             if($this->validarExistencia($request->equipo)==true){   
-   
+            
                 $user=new User;
                 $user->name=$request->name;
                 $user->email=$request->email;
@@ -93,6 +83,7 @@ class Nominas extends Controller
                 $user->telefono=$request->telefono;
                 $user->celular=$request->celular;
                 $user->detalle=$request->detalle;
+                $user->estado=true;
                 $user->fechaNacimiento=$request->fechaNacimiento;
                 $user->estadoCivil=$request->estadoCivil;
                 $roles=Role::where('name','Jugador')->get();
@@ -129,7 +120,7 @@ class Nominas extends Controller
     {
         try { 
                 $usuario=User::findOrFail(Crypt::decryptString($codigoUsuario));
-                /*$this->authorize('actualizar',$usuario);*/
+                $this->authorize('actualizarImagenJugador',$usuario->nominaUno);
                 $data = array('usuario' => $usuario );
                 return view('nominas.editarFoto',$data);
             } catch (DecryptException $th) {
@@ -141,7 +132,7 @@ class Nominas extends Controller
     public function actualizarFoto(RqActualizarFoto $request)
     {
         $user=User::findOrFail(Crypt::decryptString($request->id));
-        /*$this->authorize('actualizar',$user);*/
+        /*$this->authorize('actualizarImagenJugador',$usuario->nominaUno);*/
          if ($request->hasFile('foto')) {
             if ($request->file('foto')->isValid()) {
                 Storage::disk('public')->delete('usuarios/'.$user->foto);
@@ -158,20 +149,53 @@ class Nominas extends Controller
         }
         return response()->json(['link'=>Storage::url('public/usuarios/'.$user->foto)]);
     }
-    /*validar si el equipo pertenece al usuario selecionado*/
-    public function validarExistencia($codigoEquipo)
+
+    public function inactivo(Request $request)
     {
-        $idEquipo=Crypt::decryptString($codigoEquipo);
-        $usuario=User::findOrFail(Auth::id());
-        $validarEquipo=Equipo::where('users_id',$usuario->id)
-        ->where('id',$idEquipo)->count();
-           if($validarEquipo==1){
-            return true;
-           }else{
-            return false;
-           }
+         try { 
+            $nomina=Nomina::findOrFail(Crypt::decryptString($request->id));
+     
+            $nomina->estado=false;
+            $nomina->detalle=$request->detalle;
+            $nomina->usuarioActualizado=Auth::id();
+            $nomina->save();
+            $request->session()->flash('info','Jugador inactivo del equipo');
+           } catch (DecryptException $th) {
+
+            session()->flash('danger','Error al visualizar: Los datos ingresados están manipulados vuelva intentar !');
+            return redirect()->route('mis-equipos');            
+        }
     }
 
 
+    public function activo(Request $request)
+    {
+         try { 
+            $nomina=Nomina::findOrFail(Crypt::decryptString($request->id));      
+            $nomina->estado=true;
+            $nomina->detalle=" ";
+            $nomina->usuarioActualizado=Auth::id();
+            $nomina->save();
+            $request->session()->flash('success','Jugador activado Exitosamente');
+           } catch (DecryptException $th) {
 
+            session()->flash('danger','Error al visualizar: Los datos ingresados están manipulados vuelva intentar !');
+            return redirect()->route('mis-equipos');            
+        }
+    }
+
+    public function vistaPrevia($codigousuario)
+    {
+         try { 
+                $nomina=Nomina::findOrFail(Crypt::decryptString($codigousuario));
+                $this->authorize('representante',Nomina::class);
+                $data = array('nomina' =>$nomina , );
+                return view('nominas.vistaPreviaJugador',$data);
+         } catch (DecryptException $th) {
+
+            session()->flash('danger','Error al visualizar: Los datos ingresados están manipulados vuelva intentar !');
+            return redirect()->route('mis-equipos');            
+        }
+       
+    }
 }

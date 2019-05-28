@@ -14,7 +14,9 @@ use ioliga\Models\Campeonato;
 use ioliga\Policies\CampeonatoPolicy;
 use ioliga\Models\Nomina\Nomina;
 use ioliga\Models\Equipo\Equipo;
+use ioliga\Models\Equipo\GeneroEquipo;
 use ioliga\Policies\EquipoPolicy;
+use ioliga\Policies\GeneroEquipoPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -28,6 +30,7 @@ class AuthServiceProvider extends ServiceProvider
         User::class=>UsuarioPolicy::class,
         Campeonato::class=>CampeonatoPolicy::class,
         Nomina::class=>NominaPolicy::class,
+        GeneroEquipo::class=>GeneroEquipoPolicy::class,
         Equipo::class=>EquipoPolicy::class
 
     ];

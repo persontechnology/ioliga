@@ -93,7 +93,8 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	Route::post('/guardar-jugador', 'Nominas@guardarJugador')->name('guardar-jugador');
 	Route::get('/editar-foto-jugador/{id}', 'Nominas@editarFoto')->name('editar-foto-jugador');
 	Route::post('/Jugador-actualizar-foto', 'Nominas@actualizarFoto')->name('actualizarFotoJugador');
-	
-
+	Route::post('/Jugador-actualizar-inactivo', 'Nominas@inactivo')->name('inactivo');
+	Route::post('/Jugador-actualizar-activo', 'Nominas@activo')->name('activo');
+	Route::get('/vista-previa-jugador/{id}', 'Nominas@vistaPrevia')->name('vista-previa-jugador');
 
 });

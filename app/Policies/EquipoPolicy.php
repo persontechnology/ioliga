@@ -3,47 +3,65 @@
 namespace ioliga\Policies;
 
 use ioliga\User;
-use ioliga\Equipo\Equipo;
+use ioliga\Models\Equipo\Equipo;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class EquipoPolicy
 {
     use HandlesAuthorization;
-
-     public function genero(User $user)
+   
+    public function ver(User $user)
     {
-        return $user->can('Ver categorias');
+        return $user->can('Listar equipos categorias');
     }
-
-    public function ver(User $user,Equipo $equipo)
-    {
-        return $user->can('Ver equipos');
-    }
-
    
     public function crear(User $user)
     {
-          return $user->can('Crear equipo');
+        return $user->can('Crear equipos');
     }
-
     
-    public function update(User $user,Equipo $equipo)
+    public function actualizar(User $user, Equipo $equipo)
     {
-       
+        return $user->can('Actualizar equipo');
     }
 
-    public function delete(User $user ,Equipo $equipo)
+    public function eliminar(User $user, Equipo $equipo)
     {
-       
+        return $user->can('Eliminar equipo');
     }
 
-    public function restore(User $user)
+    public function verNominaRepresentante(User $user,Equipo $equipo)
     {
-       
+        if($user->can('Ver nómina representante')){
+
+            if($equipo->users_id==$user->id){
+                return true;
+            }
+
+        }
+        
     }
 
-    public function forceDelete(User $user)
+     public function crearJugadorNomina(User $user,Equipo $equipo)
     {
-       
+         if($user->can('Crear jugadores representante')){
+
+            if($equipo->users_id==$user->id){
+                return true;
+            }
+
+        }
+        
+    }
+
+    public function actualizarMiEquipo(User $user,Equipo $equipo)
+    {
+       if($user->can('Actualizar equipo representante')){
+
+            if($equipo->users_id==$user->id){
+                return true;
+            }
+
+        }
     }
 }

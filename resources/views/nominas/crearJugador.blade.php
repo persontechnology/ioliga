@@ -1,4 +1,11 @@
 @extends('layouts.app',['titulo'=>'crear jugadores'])
+@section('breadcrumbs', Breadcrumbs::render('crear-jugadores-equipo',$equipo))
+@section('acciones')  
+  <a href="{{ route('nomina',Crypt::encryptString($equipo->id))}}" class="breadcrumb-elements-item">
+      <i class="fas fa-arrow-left"></i>
+      {{ __('Cancelar') }}
+  </a>
+@endsection
 
 @section('content')
 <div class="card">
@@ -8,9 +15,9 @@
       <div class="row">
           <div class="col-md-6">
               <fieldset>
-                  <legend class="font-weight-semibold"><i class="far fa-id-card"></i> Detalle personal</legend>
+                  <legend class="font-weight-semibold"><i class="far fa-id-card"></i> Detalle personal <i class="fa fa-user"></i> Categoria <span class="bg-dark text-white py-1 px-2 rounded">{{$equipo->genero->nombre}}</span></legend>
 
-                  <input type="text" name="equipo" id="equipo" value="{{Crypt::encryptString($equipo->id)}}" />
+                  <input type="hidden" name="equipo" id="equipo" value="{{Crypt::encryptString($equipo->id)}}" />
                   <div class="form-group row">
                       <label class="col-lg-3 col-form-label" for="nombres">Nombres<span class="text-danger">*</span></label>
                       <div class="col-lg-9">

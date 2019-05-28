@@ -1,15 +1,16 @@
 @extends('layouts.app',['titulo'=>'Crear usuario'])
-
+@section('breadcrumbs', Breadcrumbs::render('editar-foto-jugador',$usuario->nomina->equipo))
 
 
 @section('acciones')	
-	<a href="{{ route('usuarios') }}" class="breadcrumb-elements-item">
+	<a href="{{ route('nomina',Crypt::encryptString($usuario->nomina->equipo_id))}}" class="breadcrumb-elements-item">
 	    <i class="fas fa-arrow-left"></i>
-	    {{ __('Cancel') }}
+	    {{ __('Regresar') }}
 	</a>
 @endsection
 
 @section('content')
+
 
 <div class="card">
   <div class="card-body">

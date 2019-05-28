@@ -21,8 +21,15 @@
 
                 <div class="card-body">
                     <ul class="media-list">
-                        <li class="media bg-light font-weight-semibold py-2"><i class="fas fa-child"></i> {{$ge->nombre}} <a href="{{route('equipos',$ge->id)}}" class="btn btn-dark ml-3   mt-sm-0" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Listar todos los equipos."> <i class="icon-table2 ml-2" ></i> <i class="icon-arrow-right14 ml-2" ></i></a>
-                            <a href="{{route('crear-equipos',$ge->id)}}" class="btn btn-info ml-3   mt-sm-0" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Crear nuevo Equipo.">  <i class="icon-plus3"></i></a>
+                        <li class="media bg-light font-weight-semibold py-2"><i class="fas fa-child"></i> {{$ge->nombre}}
+                        @can('Listar equipos categorias', 'ioliga\Models\Equipo\Equipo::class')
+                         <a href="{{route('equipos',$ge->id)}}" class="btn btn-dark ml-3   mt-sm-0" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Listar todos los equipos."> <i class="icon-table2 ml-2" ></i> <i class="icon-arrow-right14 ml-2" ></i>
+                         </a>
+                         @endcan
+                        @can('Crear equipos', 'ioliga\Models\Equipo\Equipo::class')
+                         <a href="{{route('crear-equipos',$ge->id)}}" class="btn btn-info ml-3   mt-sm-0" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Crear nuevo Equipo.">  <i class="icon-plus3"></i>
+                         </a>
+                        @endcan
                          </li>
                          @if($ge->equipos->count()>0)
                          @foreach($ge->equipos as $equipo)
