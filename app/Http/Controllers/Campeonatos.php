@@ -117,4 +117,12 @@ class Campeonatos extends Controller
         }
         return redirect()->route('campeonatos');
     }
+ 
+    public function representante()
+    {
+        $campeonato=Campeonato::orderBy('estado', 'DESC')->get();
+        $data = array('campeonato' =>$campeonato );
+        return view('campeonatos.representante',$data);
+      
+    }
 }

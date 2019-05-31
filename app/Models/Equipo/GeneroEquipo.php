@@ -14,5 +14,8 @@ class GeneroEquipo extends Model
     {
         return $this->hasMany(Equipo::class,'generoEquipo_id')->orderBy('nombre','ASC');
     }
+
+    /*mi contador de equipos*/
+
    
 }

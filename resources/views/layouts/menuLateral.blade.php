@@ -63,6 +63,17 @@
     </li>
 @endcan
 
+@can('Ver mis campeonatos', ioliga\Models\Campeonato::class)
+    <li class="nav-item">
+        <a href="{{ route('listar-mis-equipo') }}" class="nav-link" id="menuNominare">
+            <i class="fas fa-trophy"></i>
+            <span>
+                {{ __('Mis Campeonatos') }}
+            </span>
+        </a>
+    </li>
+@endcan
+
     <li class="nav-item-header">
         <div class="text-uppercase font-size-xs line-height-xs">{{ __('Sistema') }}</div> 
         <i class="icon-menu" title="Sistema"></i>

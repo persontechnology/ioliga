@@ -69,7 +69,7 @@ class Nominas extends Controller
      public function guardarJugador(RqCrearJugador $request)
     {
         try { 
-            if($this->validarExistencia($request->equipo)==true){   
+      
             
                 $user=new User;
                 $user->name=$request->name;
@@ -106,9 +106,7 @@ class Nominas extends Controller
                 $nomina->save();
                 $request->session()->flash('success','Jugador creado Exitosamente');
                 return redirect()->route('nomina',$request->equipo);
-            }
-                 session()->flash('danger','Error al visualizar: El equipo ingresado no pertenece a su representación !');
-                return redirect()->route('mis-equipos');  
+       
           } catch (DecryptException $th) {
 
             session()->flash('danger','Error al visualizar: Los datos ingresados están manipulados vuelva intentar !');

@@ -127,3 +127,11 @@ Breadcrumbs::for('editar-foto-jugador', function ($trail,$equipo) {
     $trail->push('Nómina  '.' '.$equipo->nombre, route('nomina',Crypt::encryptString($equipo->id))); 
     $trail->push('Editar imagen del jugador ', route('editar-foto-jugador',$equipo->id));     
 });
+
+/*representante ver mis campeonatos*/
+
+
+Breadcrumbs::for('ver-mis-campeonatos', function ($trail) {       
+   $trail->parent('home');
+    $trail->push('Mis Campeonatos', route('listar-mis-equipo'));    
+});

@@ -44,4 +44,8 @@ class CampeonatoPolicy
             return false;
         }
     }
+    public function verRepresentante(User $user)
+    {
+        return $user->can('Ver mis campeonatos');
+    }
 }

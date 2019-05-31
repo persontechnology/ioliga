@@ -97,4 +97,7 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	Route::post('/Jugador-actualizar-activo', 'Nominas@activo')->name('activo');
 	Route::get('/vista-previa-jugador/{id}', 'Nominas@vistaPrevia')->name('vista-previa-jugador');
 
+	/*Nominas Asignaciones*/
+  	Route::get('/listar-mis-equipo', 'Campeonatos@representante')->name('listar-mis-equipo');
+
 });
