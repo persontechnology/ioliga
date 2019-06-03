@@ -5,7 +5,7 @@ namespace ioliga\Models\Nomina;
 use Illuminate\Database\Eloquent\Model;
 use ioliga\User;
 use ioliga\Models\Equipo\Equipo;
-
+use ioliga\Models\Campeonato\AsignacionNomina;
 use DateTime;
 class Nomina extends Model
 {
@@ -28,7 +28,15 @@ class Nomina extends Model
      
         return $this->hasOne(Equipo::class,'id','equipo_id');
     }
-
+    public function usuarioUno()
+    {
+     
+        return $this->hasOne(User::class,'id','users_id');
+    }
+    public function asignacionNomina()
+    {
+        return $this->hasMany(AsignacionNomina::class,'nomina_id');
+    }
     public function calcularaEdad($fecha)
     {
         $nacio = DateTime::createFromFormat('Y-m-d', $fecha);

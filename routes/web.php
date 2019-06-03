@@ -68,9 +68,11 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	    Route::post('/series-agregar-a-campeonato', 'Series@agregar')->name('agregarSerieCampeonato');
 		Route::get('/agregar-equipos-a-serie/{idGeneroSerie}', 'Series@asignarEquiposAserie')->name('asignarEquiposAserie');
 		Route::post('/agregar-equipos-a-serie-guardar', 'Series@agregarEquipoAserie')->name('agregarEquipoAserie');
-		
-	    
-	    
+		/*Asignacion de mi campeonato*/
+		Route::get('/mis-asignacines/{id}', 'Asignaciones@menuAsignacion')->name('mi-menu-equipo');	    
+	    Route::get('/asignacion-nomina/{id}', 'Asignaciones@asignacionNomina')->name('asignacion-nomina');
+	    Route::post('/crear-asignacion-nomina', 'Asignaciones@crearAsignarNomina')->name('crear-asignacion-nomina');
+	    Route::get('/eliminarAsignarNomina/{id}', 'Asignaciones@eliminarAsignarNomina')->name('eliminarAsignarNomina');
 	    
 	});
 
@@ -99,5 +101,7 @@ Route::group(['middleware' => ['verified','auth']], function () {
 
 	/*Nominas Asignaciones*/
   	Route::get('/listar-mis-equipo', 'Campeonatos@representante')->name('listar-mis-equipo');
+	
+
 
 });

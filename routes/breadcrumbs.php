@@ -135,3 +135,12 @@ Breadcrumbs::for('ver-mis-campeonatos', function ($trail) {
    $trail->parent('home');
     $trail->push('Mis Campeonatos', route('listar-mis-equipo'));    
 });
+
+Breadcrumbs::for('ver-asignacion-campeonatos', function ($trail,$asignacion) {       
+   $trail->parent('ver-mis-campeonatos');
+    $trail->push('Asignación campeonato ', route('mi-menu-equipo',Crypt::encryptString($asignacion->id)));    
+});
+Breadcrumbs::for('craer-asignacion-campeonatos', function ($trail,$asignacion) {       
+   $trail->parent('ver-asignacion-campeonatos',$asignacion);
+    $trail->push('Asignación Jugador ', route('asignacion-nomina',$asignacion->id));    
+});

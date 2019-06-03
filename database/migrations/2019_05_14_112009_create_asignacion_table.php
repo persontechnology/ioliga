@@ -23,7 +23,7 @@ class CreateAsignacionTable extends Migration
             $table->unsignedBigInteger('equipo_id');
             $table->foreign('equipo_id')->references('id')->on('equipo');
 
-            $table->boolean('estado')->default(true);
+            $table->boolean('estado')->default(false);
 
             $table->string('usuarioA')->nullable();
 

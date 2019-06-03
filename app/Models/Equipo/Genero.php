@@ -39,7 +39,14 @@ class Genero extends Model
 
       public function asignacionesGenero()
     {
-        return $this->hasManyThrough(Asignacion::class,GeneroSerie::class,'genero_id','generoSerie_id','id','id' );
+        return $this->hasManyThrough(
+        	Asignacion::class,//Taabla asignacion
+        	GeneroSerie::class,//Tabla genero serie 
+        	'genero_id',//Id para igualar la tabla genero - genero serie
+        	'generoSerie_id',//Id para igualar la tabla asignacion genero serie 
+        	'id',
+        	'id' 
+        );
     }
 
 }

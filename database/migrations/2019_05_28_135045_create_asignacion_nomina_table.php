@@ -9,7 +9,7 @@ class CreateAsignacionNominaTable extends Migration
  
     public function up()
     {
-        Schema::create('asignacion_nomina', function (Blueprint $table) {
+        Schema::create('asignacionNomina', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
             $table->unsignedBigInteger('nomina_id');

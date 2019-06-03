@@ -36,9 +36,10 @@
     <script src="{{ asset('/global_assets/js/demo_pages/form_checkboxes_radios.js') }}" type="text/javascript"></script>
     <!-- Theme JS files -->
     @stack('scriptsHeader')
-
+    
     <script src="{{ asset('assets/js/app.js') }}"></script>
     <script src="{{ asset('/global_assets/js/demo_pages/content_cards_content.js') }}"></script>
+        <script src="{{ asset('/global_assets/js/demo_pages/widgets_stats.js') }}"></script>
     <script>
         $.ajaxSetup({
             headers: {
