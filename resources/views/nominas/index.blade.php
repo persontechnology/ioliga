@@ -203,7 +203,7 @@
 											<a href="#" class="text-default font-weight-semibold">{{$nom->user->apellidos .' '. $nom->user->nombres}}</a>
 											<div class="text-muted font-size-sm">
 											 <span class="badge badge-mark border-danger mr-1"></span>
-												Activo
+												Inactivo
 											</div>
 											<div class="text-muted font-size-sm">
 											 <i class="icon-flag3  border-info mr-1"></i>

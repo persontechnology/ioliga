@@ -196,4 +196,97 @@ class Nominas extends Controller
         }
        
     }
+    /*funciones en caso de tener permisos para los demas roles */
+    public function listadoNomina($codigoEquipo)
+    {
+        $equipo = Equipo::findOrFail($codigoEquipo);
+        $this->authorize('verListadoNomina',Nomina::class);        
+        $nomina = $equipo->nominas;            
+        return view('nominas.listaNomina',['nomina'=>$nomina,'equipo'=>$equipo]); 
+
+    }
+     public function crearJugador($codigoEquipo)
+    {
+        $equipo = Equipo::findOrFail($codigoEquipo);
+        $this->authorize('crearJugadorEquipo',Nomina::class);                
+        return view('nominas.crearJugadorEquipo',['equipo'=>$equipo]);      
+    }
+
+    public function guardarJugadorEquipo(RqCrearJugador $request)
+    {
+        try { 
+      
+                $this->authorize('crearJugadorEquipo',Nomina::class);  
+                $user=new User;
+                $user->name=$request->name;
+                $user->email=$request->email;
+                $user->password=Hash::make($request->identificacion);
+                $user->nombres=$request->nombres;
+                $user->apellidos=$request->apellidos;
+                $user->identificacion=$request->identificacion;
+                $user->tipoIdentificacion=$request->tipoIdentificacion;
+                $user->sexo=$request->sexo;
+                $user->telefono=$request->telefono;
+                $user->celular=$request->celular;
+                $user->detalle=$request->detalle;
+                $user->estado=true;
+                $user->fechaNacimiento=$request->fechaNacimiento;
+                $user->estadoCivil=$request->estadoCivil;
+                $roles=Role::where('name','Jugador')->get();
+
+                if ($user->save()) {
+                    if ($request->hasFile('foto')) {
+                        $foto=$user->id.'_'.Carbon::now().'.'.$request->foto->extension();
+                        $path = $request->foto->storeAs('usuarios', $foto,'public');
+                        $user->foto=$foto;    
+                        $user->save();
+                    }
+                }
+                $user->assignRole($roles);
+                $nomina=new Nomina;
+                $nomina->users_id=$user->id;
+                $nomina->equipo_id=Crypt::decryptString($request->equipo);
+                $nomina->nacionalidad=$request->nacionalidad;
+                $nomina->nacionalidad=$request->lugarProcedencia;
+                $nomina->usuarioCreado=Auth::id();
+                $nomina->save();
+                $request->session()->flash('success','Jugador creado Exitosamente');
+                return redirect()->route('listado-jugadores-nomina',Crypt::decryptString($request->equipo));
+       
+          } catch (DecryptException $th) {
+
+            session()->flash('danger','Error al visualizar: Los datos ingresados están manipulados vuelva intentar !');
+            return redirect()->route('listado-jugadores-nomina',Crypt::decryptString($request->equipo));           
+        }
+    }
+
+    public function actualizarFotoJugadorEquipo($codigoUsuario)
+    {       
+        $usuario=User::findOrFail($codigoUsuario);
+        $this->authorize('actualizarFotoJugador',Nomina::class);
+        $data = array('usuario' => $usuario );
+              
+    }
+
+    public function editarFotoJugadorEquipo(RqActualizarFoto $request)
+    {
+        $user=User::findOrFail($request->id);
+      
+         if ($request->hasFile('foto')) {
+            if ($request->file('foto')->isValid()) {
+                Storage::disk('public')->delete('usuarios/'.$user->foto);
+                $foto=$user->id.'_'.Carbon::now().'.'.$request->foto->extension();
+                $path = $request->foto->storeAs('usuarios', $foto,'public');
+                $user->foto=$foto;    
+                $user->save();
+            }else{
+                return response()->json(['error'=>'No se puede subir una imágen pesada']);
+            }
+            
+        }else{
+            return response()->json(['error'=>'No se puede subir una imágen pesada']);
+        }
+        return response()->json(['link'=>Storage::url('public/usuarios/'.$user->foto)]);
+    }
+
 }

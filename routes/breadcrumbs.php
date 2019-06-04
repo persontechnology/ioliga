@@ -77,6 +77,18 @@ Breadcrumbs::for('categorias', function ($trail) {
     $trail->push('Categorias', route('categorias'));
 });
 
+Breadcrumbs::for('Nomina-equipos-jugador', function ($trail,$equipo) {
+    $trail->parent('categorias');
+    $trail->push('Nómina Jugadores', route('listado-jugadores-nomina',$equipo->id));
+});
+
+Breadcrumbs::for('Crear-equipos-jugador', function ($trail,$equipo) {
+    $trail->parent('Nomina-equipos-jugador',$equipo);
+    $trail->push('Crear Jugadores', route('crear-jugador-equipo',$equipo->id));
+});
+
+
+
 Breadcrumbs::for('equipos', function ($trail,$generos) {   
      $trail->parent('categorias');
     $trail->push('Categorias Tipo ' . $generos->nombre, route('equipos',$generos->id));

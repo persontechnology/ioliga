@@ -19,7 +19,7 @@ class NominaPolicy
 
     public function actualizarImagenJugador(User $user, Nomina $nomina)
     {
-        if($user->can('Actualizar imagen jugador nomina')){
+        if($user->can('Actualizar imagen jugador representante')){
 
             if($nomina->equipoUno->users_id==$user->id){
                 return true;
@@ -28,6 +28,21 @@ class NominaPolicy
         }
         
     }
+
+    public function verListadoNomina(User $user)
+    {
+        return $user->can('Listar nómina equipo');
+    }
+
+    public function crearJugadorEquipo(User $user)
+    {
+        return $user->can('Crear jugador equipo');
+    }
+     public function actualizarFotoJugador(User $user)
+    {
+        return $user->can('Actualizar foto jugador');
+    }
+
 
 
     /**

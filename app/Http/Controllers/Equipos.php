@@ -169,8 +169,7 @@ class Equipos extends Controller
     }
 
     public function actualizarMiEquipo(RqActualizarMiEquipo $request)
-    {
-        
+    {        
         try {
             $equipo=Equipo::findOrFail(Crypt::decryptString($request->equipo));  
             $this->authorize('actualizarMiEquipo',$equipo);   
@@ -202,6 +201,7 @@ class Equipos extends Controller
         }
     }
 
+    
 
 
 }
