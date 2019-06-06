@@ -98,6 +98,9 @@
                         @endif
 
                         <div class="card-footer d-flex justify-content-between">
+                          <a href="#" class="list-group-item list-group-item-action">
+                              <span class="badge bg-dark "> {{ $serie_si_x->serie->nombre }} Etapas</span>
+                        </a>
                             <span class="text-muted">Updated 2 hours ago</span>
                             <span>
                                 <i class="icon-star-full2 font-size-base text-warning"></i>

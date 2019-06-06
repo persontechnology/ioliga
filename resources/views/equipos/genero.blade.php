@@ -57,8 +57,8 @@
                                      @can('Listar nómina equipo', 'ioliga\Models\Nomina\Nomina::class')
                                     <a href="{{route('listado-jugadores-nomina',$equipo->id)}}" class="list-icons-item" data-popup="tooltip" title=""  data-trigger="hover" data-target="#call" data-original-title="Ver nómina de {{$equipo->nombre}}"><i class="icon-file-text3"></i></a>
                                     @endcan
-                                    <a href="#" class="list-icons-item" data-popup="tooltip" title="" data-toggle="modal" data-trigger="hover" data-target="#chat" data-original-title="Chat"><i class="icon-comment"></i></a>
-                                    <a href="#" class="list-icons-item" data-popup="tooltip" title="" data-toggle="modal" data-trigger="hover" data-target="#video" data-original-title="Video"><i class="icon-video-camera"></i></a>
+                                    <!-- <a href="#" class="list-icons-item" data-popup="tooltip" title="" data-toggle="modal" data-trigger="hover" data-target="#chat" data-original-title="Chat"><i class="icon-comment"></i></a>
+                                    <a href="#" class="list-icons-item" data-popup="tooltip" title="" data-toggle="modal" data-trigger="hover" data-target="#video" data-original-title="Video"><i class="icon-video-camera"></i></a> -->
                                 </div>
                             </div>
                         </li>

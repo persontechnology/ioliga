@@ -87,7 +87,15 @@ Breadcrumbs::for('Crear-equipos-jugador', function ($trail,$equipo) {
     $trail->push('Crear Jugadores', route('crear-jugador-equipo',$equipo->id));
 });
 
+Breadcrumbs::for('editar-foto-equipos-jugador', function ($trail,$equipo) {
+    $trail->parent('Nomina-equipos-jugador',$equipo);
+    $trail->push('Editar foto jugadores', route('actualizar-foto-jugador',$equipo->id));
+});
 
+Breadcrumbs::for('vista-jugador', function ($trail,$equipo) {
+    $trail->parent('Nomina-equipos-jugador',$equipo);
+    $trail->push('Vista jugador', route('vista-jugador',$equipo->id));
+});
 
 Breadcrumbs::for('equipos', function ($trail,$generos) {   
      $trail->parent('categorias');

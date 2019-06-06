@@ -1,9 +1,7 @@
 @extends('layouts.app',['titulo'=>'Crear usuario'])
-
-
-
+@section('breadcrumbs', Breadcrumbs::render('editar-foto-equipos-jugador',$usuario->nomina->equipo))
 @section('acciones')	
-	<a href="{{ route('nomina',Crypt::encryptString($usuario->nomina->equipo_id))}}" class="breadcrumb-elements-item">
+	<a href="{{ route('listado-jugadores-nomina',$usuario->nomina->equipo_id)}}" class="breadcrumb-elements-item">
 	    <i class="fas fa-arrow-left"></i>
 	    {{ __('Regresar') }}
 	</a>
@@ -62,7 +60,7 @@ var foto="<img class='kv-preview-data file-preview-image' src='{{ asset('global_
 
 
 $("#foto").fileinput({
-    uploadUrl: "{{ route('editar-foto-jugador') }}",
+    uploadUrl: "{{ route('jugador-editar-foto') }}",
     uploadExtraData: {
       'id':'{{ $usuario->id}}',
     },

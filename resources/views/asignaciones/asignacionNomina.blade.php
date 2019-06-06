@@ -28,20 +28,10 @@
 					<div class="form-group">
 						<label>Seleccione al jugador:</label>
 						<select class="form-control select-search " id="jugador" name="jugador" data-fouc required="">
-						@foreach($nomina as $no)
-						@if($no->asignacionNomina->count()>0)
-						@foreach($no->AsignacionNomina as $asig)
-						@if($no->id != $asig->nomina_id)
+						@foreach($nomina as $no)						
 						<option value="{{Crypt::encryptString($no->id)}}">				
 						{{$no->usuarioUno->nombres.' '.$no->usuarioUno->apellidos }}					
-						</option>	
-						@endif
-						@endforeach
-						@else
-						<option value="{{Crypt::encryptString($no->id)}}">				
-						{{$no->usuarioUno->nombres.' '.$no->usuarioUno->apellidos }}					
-						</option>
-					    @endif						
+						</option>					  						
 						@endforeach	
 						  @if ($errors->has('jugador'))
                               <span class="invalid-feedback" role="alert">
@@ -62,7 +52,7 @@
 					<div class="text-right">
 						<button type="submit" class="btn btn-primary">Asignar <i class="icon-paperplane ml-2"></i></button>
 					</div>
-				</form>
+			</form>
 				@else
 			 <div class="alert alert-warning alert-styled-left alert-dismissible">
                 No existen jugadores asignados a este Equipo  crear

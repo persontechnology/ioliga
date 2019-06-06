@@ -33,15 +33,15 @@ class Asignaciones extends Controller
     {
     	try {
 	    	$asignacion=Asignacion::findOrFail(Crypt::decryptString($codigoAsignacion));
-	    	$nominaequipos=Nomina::where('equipo_id',$asignacion->equipo_id)
-	    	->where('estado',true)->get();
-	    	$data = array('asignacion' => $asignacion,'nomina'=>$nominaequipos);
-
+            $existentesNomina=$asignacion->equipos->nominasActivas()
+            ->whereNotIn('id',$asignacion->asignacionSoloNomninas->pluck('id'))->get();
+            $data = array('nomina' =>$existentesNomina,'asignacion'=>$asignacion);
 	    	return view('asignaciones.asignacionNomina',$data);
     	} catch (DecryptException $th) {
         session()->flash('danger','Error al visualizar: Los datos ingresados están manipulados vuelva intentar !');
         return redirect()->route('listar-mis-equipo');            
     	}
+
     }
     public function crearAsignarNomina(RqCrearAsignacionNomina $request)
     {

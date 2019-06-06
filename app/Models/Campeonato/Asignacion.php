@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use ioliga\Models\Equipo\Equipo;
 use ioliga\Models\Campeonato\AsignacionNomina;
 use ioliga\Models\Nomina\Nomina;
+use ioliga\Models\Campeonato\GeneroSerie;
 
 class Asignacion extends Model
 {
@@ -20,6 +21,17 @@ class Asignacion extends Model
 	{
 		return $this->belongsToMany(Nomina::class,'asignacionNomina','asignacion_id','nomina_id')->as('asignacionNomina')->withPivot('numero','id')->orderBy('numero');
 	}
+
+	public function asignacionSoloNomninas()
+	{
+		return $this->belongsToMany(Nomina::class,'asignacionNomina','asignacion_id','nomina_id');
+	}
+	 public function unoGeneroSerie()
+    {
+    	return $this->belongsTo(GeneroSerie::class,'generoSerie_id');
+    }
+
+	
 
 	
 }

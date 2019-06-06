@@ -122,7 +122,7 @@
 								<div class="list-icons-item dropdown">
 									<a href="#" class="list-icons-item dropdown-toggle caret-0" data-toggle="dropdown"><i class="icon-menu7"></i></a>
 									<div class="dropdown-menu dropdown-menu-right">
-										<a href="{{route('vista-previa-jugador',Crypt::encryptString($nom->id))}}" class="dropdown-item"><i class="icon-user-plus"></i> Vista previa</a>
+										<a href="{{route('vista-jugador',$nom->id)}}" class="dropdown-item"><i class="icon-user-plus"></i> Vista previa</a>
 										<a href="#" class="dropdown-item"><i class="icon-pencil6"></i> Editar Usuario</a>
 										<a href="#" class="dropdown-item"><i class="icon-file-locked"></i> Disable campaign</a>
 										<div class="dropdown-divider"></div>
@@ -137,7 +137,7 @@
 							<div class="list-icons-item dropdown">
 								<a href="#" class="list-icons-item dropdown-toggle caret-0" data-toggle="dropdown"><i class="icon-menu7"></i></a>
 								<div class="dropdown-menu dropdown-menu-right">
-									<a href="{{route('vista-previa-jugador',Crypt::encryptString($nom->id))}}" class="dropdown-item"><i class="icon-user-plus"></i> Vista previa</a>
+									<a href="{{route('vista-jugador',$nom->id)}}" class="dropdown-item"><i class="icon-user-plus"></i> Vista previa</a>
 									<a href="#" class="dropdown-item"><i class="icon-pencil6"></i> Editar Usuario</a>
 									<a href="#" class="dropdown-item"><i class="icon-file-locked"></i> Disable campaign</a>
 									<div class="dropdown-divider"></div>

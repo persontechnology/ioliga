@@ -4,6 +4,7 @@ namespace ioliga\Http\Controllers;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Http\Request;
 use ioliga\Models\Nomina\Nomina;
+use ioliga\Models\Campeonato\AsignacionNomina;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Encryption\DecryptException;
 use ioliga\User;
@@ -14,7 +15,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use ioliga\Http\Requests\Usuarios\RqActualizarFoto;
-
+use ioliga\Models\Campeonato;
+use Illuminate\Support\Collection;
 class Nominas extends Controller
 {
    public function __construct()
@@ -265,7 +267,7 @@ class Nominas extends Controller
         $usuario=User::findOrFail($codigoUsuario);
         $this->authorize('actualizarFotoJugador',Nomina::class);
         $data = array('usuario' => $usuario );
-              
+        return view('nominas.editarFotoJugador',$data);        
     }
 
     public function editarFotoJugadorEquipo(RqActualizarFoto $request)
@@ -287,6 +289,65 @@ class Nominas extends Controller
             return response()->json(['error'=>'No se puede subir una imágen pesada']);
         }
         return response()->json(['link'=>Storage::url('public/usuarios/'.$user->foto)]);
+    }
+    
+    public function vistaPreviaJugador($codigousuario)
+    {     
+        $this->authorize('representante',Nomina::class);
+        $nomina=Nomina::findOrFail($codigousuario);
+        $equipos=Equipo::where('estado',1)->orderby('generoEquipo_id')->get();
+        $equipo=$equipos->whereNotIn('id',$nomina->equipoUno->id);
+        /*Verificarl si la nomina no esta en uso en una asignacion con campeonato en estado true*/
+        $existenteActivo=$this->validarNominaActivo($nomina->id);    
+        if($existenteActivo){
+            $asignacionNomia=AsignacionNomina::findOrFail($existenteActivo[0]);
+            $data = array('nomina' =>$nomina ,'equipo'=>$equipo,'nominaExistente'=>$asignacionNomia );
+        return view('nominas.vistaJugador',$data);            
+        }
+          $data = array('nomina' =>$nomina ,'equipo'=>$equipo,'nominaExistente'=>'' );
+        return view('nominas.vistaJugador',$data);       
+    }
+
+    public function validarNominaActivo($nomina)
+    {
+        $totalCampeonatos= '';
+        $campeonatosActivos=Campeonato::where('estado',1)->get();
+        if($campeonatosActivos->count()>0){
+           $primerCampeonato=Campeonato::where('estado',1)->first();
+            $totalCampeonatos1=$primerCampeonato->generoSerie;
+           foreach ($totalCampeonatos1 as $genero) {
+                  foreach ($genero->serieAsignacionNomina as $asi) {                    
+                      if($nomina==$asi->nomina_id){
+                        $totalCampeonatos=collect($asi->id);
+                      }
+                  }
+            } 
+           
+        }else{
+            $totalCampeonatos= '';
+        }
+        return $totalCampeonatos;
+    }
+
+    public function acutualizaJugadorEquipo(Request $request)
+    {
+        try { 
+             $nomina=Nomina::findOrFail(Crypt::decryptString($request->nomina));
+             $nomina->equipo_id=Crypt::decryptString($request->equipo);
+             $nomina->save();
+             session()->flash('success','Pase realizado Exitosamente !');
+            return redirect()->route('listado-jugadores-nomina',Crypt::decryptString($request->equipo));
+         } catch (DecryptException $th) {
+
+            session()->flash('danger','Error al visualizar: Los datos ingresados están manipulados vuelva intentar !');
+            return redirect()->route('listado-jugadores-nomina',Crypt::decryptString($request->equipo));           
+        }
+        
+    }
+
+    public function editarJugador($codigoUsuario)
+    {
+        
     }
 
 }

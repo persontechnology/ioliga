@@ -102,9 +102,12 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	Route::get('/listado-jugadores-nomina/{id}', 'Nominas@listadoNomina')->name('listado-jugadores-nomina');
 	Route::get('/crear-jugador-equipo/{id}', 'Nominas@crearJugador')->name('crear-jugador-equipo');
 	Route::post('/guardar-jugador-equipo', 'Nominas@guardarJugadorEquipo')->name('guardar-jugador-equipo');
-	
+
 	Route::get('/actualizar-foto-jugador/{id}', 'Nominas@actualizarFotoJugadorEquipo')->name('actualizar-foto-jugador');
 	Route::post('/jugador-editar-foto', 'Nominas@editarFotoJugadorEquipo')->name('jugador-editar-foto');
+	Route::get('/vista-jugador/{id}', 'Nominas@vistaPreviaJugador')->name('vista-jugador');
+	Route::post('/jugador-actualizar-nomina', 'Nominas@acutualizaJugadorEquipo')->name('jugador-actualizar-nomina');
+
 	/*Nominas Asignaciones*/
   	Route::get('/listar-mis-equipo', 'Campeonatos@representante')->name('listar-mis-equipo');
 	

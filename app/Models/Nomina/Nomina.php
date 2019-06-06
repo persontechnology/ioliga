@@ -37,6 +37,12 @@ class Nomina extends Model
     {
         return $this->hasMany(AsignacionNomina::class,'nomina_id');
     }
+    public function asignacionNominaUno()
+    {
+     
+        return $this->hasOne(AsignacionNomina::class,'id','nomina_id');
+    }
+
     public function calcularaEdad($fecha)
     {
         $nacio = DateTime::createFromFormat('Y-m-d', $fecha);

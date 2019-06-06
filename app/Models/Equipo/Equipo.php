@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use ioliga\User;
 use ioliga\Models\Equipo\GeneroEquipo;
 use ioliga\Models\Nomina\Nomina;
+use ioliga\Models\Campeonato\Asignacion;
 class Equipo extends Model
 {
     protected $table="equipo";
@@ -26,4 +27,13 @@ class Equipo extends Model
        return $this->hasMany(Nomina::class,'equipo_id');
     }
 
+      public function nominasActivas()
+    {
+       return $this->hasMany(Nomina::class,'equipo_id')->where('estado',1);
+    }
+
+       public function asignaciones()
+    {
+       return $this->hasMany(Asignacion::class,'equipo_id');
+    }
 }
