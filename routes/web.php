@@ -74,6 +74,25 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	    Route::post('/crear-asignacion-nomina', 'Asignaciones@crearAsignarNomina')->name('crear-asignacion-nomina');
 	    Route::get('/eliminarAsignarNomina/{id}', 'Asignaciones@eliminarAsignarNomina')->name('eliminarAsignarNomina');
 	    
+	  	/*etapas*/
+	  	Route::get('/etapas-serie/{id}', 'Etapas@etapasSerie')->name('etapas-serie');
+	  	Route::post('/crear-etapa', 'Etapas@guradarEtapa')->name('crear-etapa');
+	  	Route::post('/guardar-etapa-serie', 'Etapas@guardarEtapaSerie')->name('guardar-etapa-serie');
+	  	Route::get('/eliminar-etapa-serie/{id}', 'Etapas@eliminarEtapaSerie')->name('eliminar-etapa-serie');
+
+	  	/*fechas*/
+
+	  	Route::get('/fechas/{id}', 'Fechas@index')->name('fechas-etapa');
+	  	Route::post('/crear-fecha-etapa', 'Fechas@crearFecha')->name('crear-fecha-etapa');
+	  	Route::get('/fecha/{id}', 'Fechas@fecha')->name('fecha');
+	  	Route::get('/eliminar-fecha/{id}', 'Fechas@eliminarFecha')->name('eliminar-fecha');
+
+	  	/*partidos*/
+	  	Route::post('/crear-partido', 'Fechas@guardarPartidos')->name('crear-partido');
+	  	
+	  	
+
+
 	});
 
 	/*Equipos*/
@@ -110,7 +129,9 @@ Route::group(['middleware' => ['verified','auth']], function () {
 
 	/*Nominas Asignaciones*/
   	Route::get('/listar-mis-equipo', 'Campeonatos@representante')->name('listar-mis-equipo');
+
 	
+
 
 
 });

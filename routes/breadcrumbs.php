@@ -64,6 +64,9 @@ Breadcrumbs::for('series', function ($trail,$genero) {
     $trail->push('Series en categoria '.$genero->generoEquipo->nombre, route('series',$genero->id));
 });
 
+
+
+
 // Equipos en serie
 Breadcrumbs::for('asignarEquiposAserie', function ($trail,$generoSerie) {
     $trail->parent('series',$generoSerie->genero);
@@ -121,6 +124,23 @@ Breadcrumbs::for('editar-mi-equipo', function ($trail,$equipo) {
     $trail->push('Mis Equipos', route('mis-equipos')); 
     $trail->push('Editar Equipo'.' '.$equipo->nombre, route('editar-mi-equipo',$equipo->id));     
 });
+
+/*etapas y genero serie*/
+Breadcrumbs::for('etapas-serie-genero', function ($trail,$serieGenero) {
+    $trail->parent('series',$serieGenero->genero);
+    $trail->push('Etapas serie '.$serieGenero->serie->nombre, route('etapas-serie',$serieGenero->id));
+});
+
+Breadcrumbs::for('fechas-etapa', function ($trail,$etapaSerie) {
+    $trail->parent('etapas-serie-genero',$etapaSerie->generoSerie);
+    $trail->push('Fechas etapa  '.$etapaSerie->generoSerie->serie->nombre, route('fecha',$etapaSerie->id));
+});
+
+Breadcrumbs::for('fecha-etapa', function ($trail,$etapaSerie) {
+    $trail->parent('fechas-etapa',$etapaSerie->generoSerie);
+    $trail->push('Fechas etapa  '.$etapaSerie->generoSerie->serie->nombre, route('fecha',$etapaSerie->id));
+});
+
 /*nominas*/
 Breadcrumbs::for('nomina-mi-equipo', function ($trail,$equipo) {       
    $trail->parent('home');

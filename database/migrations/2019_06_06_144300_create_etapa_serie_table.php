@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEtapaTable extends Migration
+class CreateEtapaSerieTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,16 @@ class CreateEtapaTable extends Migration
      */
     public function up()
     {
-        Schema::create('etapa', function (Blueprint $table) {
+        Schema::create('etapaSerie', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
-            $table->string('nombre')->nullable();
-            $table->string('detalle')->nullable();
+            $table->unsignedBigInteger('generoSerie_id');
+            $table->foreign('generoSerie_id')->references('id')->on('generoSerie');
+
+            $table->unsignedBigInteger('etapa_id');
+            $table->foreign('etapa_id')->references('id')->on('etapa');
+            
+            $table->boolean('estado')->default(false);
             $table->bigInteger('usuarioCreado')->nullable();
             $table->bigInteger('usuarioActualizado')->nullable();
         });
@@ -30,6 +35,6 @@ class CreateEtapaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('etapa');
+        Schema::dropIfExists('etapaSerie');
     }
 }

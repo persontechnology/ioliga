@@ -4,8 +4,7 @@ namespace ioliga\Models\Campeonato;
 
 use Illuminate\Database\Eloquent\Model;
 
-class etapa extends Model
+class Etapa extends Model
 {
      protected $table='etapa';
-     
 }

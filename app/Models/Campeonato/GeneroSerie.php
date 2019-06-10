@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use ioliga\Models\Equipo\Genero;
 use ioliga\Models\Equipo\Equipo;
 use ioliga\Models\Campeonato\Serie;
+use ioliga\Models\Campeonato\EtapaSerie;
+use ioliga\Models\Campeonato\Asignacion;
+
 class GeneroSerie extends Model
 {
     protected $table='generoSerie';
@@ -40,5 +43,13 @@ class GeneroSerie extends Model
             'id', // Local key on countries table...
             'id' // Local key on users table...
         );
+    }
+    public function etapaSerie()
+    {
+        return $this->hasMany(EtapaSerie::class,'generoSerie_id'); 
+    }
+    public function asignacion()
+    {
+        return $this->hasMany(Asignacion::class,'generoSerie_id')->where('estado',1); 
     }
 }
