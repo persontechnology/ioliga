@@ -10,10 +10,6 @@
 @endsection
 
 @section('content')
-
-
-
-
 {{-- presentar formulario si solo el campeonato esta activo --}}
 @can('serieEnCampeonatoActivo',$genero->campeonato)
     <div class="card-group-control card-group-control-right" id="accordion-control-right">
@@ -59,10 +55,12 @@
         
         <div class="col-md-9">
             <!-- Right list container -->
+
             @if(count($genero->GenerosSeries)>0)
             <div class="row">
-                @foreach($genero->GenerosSeries as $serie_si_x)
 
+                @foreach($genero->GenerosSeries as $serie_si_x)
+                
                 <div class="col-md-4">
 
                     <!-- Linked list group -->
@@ -82,8 +80,7 @@
                         <ul class="list-group list-group-flush border-top">
                             
                             @foreach ($serie_si_x->equipos as $equipo)
-                                
-                                
+                                                            
                                 <a href="#" class="list-group-item list-group-item-action">
                                     <span class="font-weight-semibold">
                                         <i class="icon-grid mr-2"></i>
@@ -91,6 +88,13 @@
                                     </span>
                                     <span class="badge bg-success ml-auto">New</span>
                                 </a>
+                                @can('Ver asignacion equipo', 'ioliga\Models\Campeonato\Asignacion::class')
+                                <a href="{{route('asignacion',$equipo->asignacion->id)}}" class="list-group-item list-group-item-action">                         
+                                    <i class="icon-point-right mr-2"></i>                    
+                               
+                                </a>
+                                @endcan
+
 
                             @endforeach
 

@@ -17,14 +17,13 @@ class CreatePartidoTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->time('hora');
+            $table->enum('tipo',['Proceso','Finalizado','Diferido']);
             $table->unsignedBigInteger('fecha_id');
             $table->foreign('fecha_id')->references('id')->on('fecha');
             $table->unsignedBigInteger('asignacion1_id');
             $table->foreign('asignacion1_id')->references('id')->on('asignacion');
             $table->unsignedBigInteger('asignacion2_id');
-            $table->foreign('asignacion2_id')->references('id')->on('asignacion');
-            $table->unsignedBigInteger('users_id');
-            $table->foreign('users_id')->references('id')->on('users');
+            $table->foreign('asignacion2_id')->references('id')->on('asignacion');           
             $table->unsignedBigInteger('estadio_id');
             $table->foreign('estadio_id')->references('id')->on('estadio');
             $table->bigInteger('usuarioCreado')->nullable();

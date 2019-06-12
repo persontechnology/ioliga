@@ -46,7 +46,11 @@ class PermisosSeeder extends Seeder
 
         /*permisos para las etapas del campeonato*/
         $p_Ver_etapas=Permission::updateOrCreate(['name' => 'Ver etapas']);  
-        $p_Crear_etapas=Permission::updateOrCreate(['name' => 'Crear etapa']);   
+        $p_Crear_etapas=Permission::updateOrCreate(['name' => 'Crear etapa']);
+
+        /*permisos para la asignacion*/ 
+        $p_ver_asignacion_equipo=Permission::updateOrCreate(['name' => 'Ver asignacion equipo']);
+          
           
         /*permisos para nominas*/
         $p_ver_equipo_representante=Permission::updateOrCreate(['name' => 'Ver equipo representante']);

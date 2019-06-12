@@ -12,6 +12,7 @@ use ioliga\Models\Estadio;
 use ioliga\Models\Campeonato\Partido;
 
 use ioliga\Http\Requests\Fechas\RqCrear;
+use ioliga\Http\Requests\Partidos\RqCrearPartido;
 
 class Fechas extends Controller
 {
@@ -40,10 +41,23 @@ class Fechas extends Controller
     }
     public function fecha($codigoFecha)
     {
-       $fecha=Fecha::findOrFail($codigoFecha);       
-       $arbitro=User::role('Arbitro')->get();
+       $fecha=Fecha::findOrFail($codigoFecha);
+
+      /* $asignacioncionAsc=$fecha->etapaSerie->buscarPartidoRepetidos()
+       ->whereIn('asignacion1_id',[4])
+       ->whereIn('asignacion2_id',[6])->get();
+       return $asignacioncionAsc;*/
+       
+        $asignacioncionAsc=$fecha->etapaSerie->generoSerie->asignacionAsc()
+       ->whereNotIn('id',$fecha->partidos->pluck('asignacion1_id'))
+       ->whereNotIn('id',$fecha->partidos->pluck('asignacion2_id'))->get(); 
+
+       $asignacioncionDes=$fecha->etapaSerie->generoSerie->asignacionDes()
+       ->whereNotIn('id',$fecha->partidos->pluck('asignacion1_id'))
+       ->whereNotIn('id',$fecha->partidos->pluck('asignacion2_id'))->get();   
+     
        $estadio=Estadio::where('estado',1)->get();
-       $data= array('fecha' =>  $fecha,'arbitro'=>$arbitro,'estadio'=>$estadio );
+       $data= array('fecha' =>  $fecha,'asignacioncionAsc'=>$asignacioncionAsc,'asignacioncionDes'=>$asignacioncionDes,'estadio'=> $estadio );
        return view('campeonatos.fechas.fecha',$data);
     }
 
@@ -59,15 +73,15 @@ class Fechas extends Controller
         }
         return redirect()->route('fechas-etapa',$fecha->etapaSerie_id);
     }
-    public function guardarPartidos(Request $request)
+    public function guardarPartidos(RqCrearPartido $request)
     {
         $partido=new Partido;
         $partido->hora=$request->hora;
         $partido->fecha_id=$request->fecha;
         $partido->asignacion1_id=$request->primerequipo;
         $partido->asignacion2_id=$request->segundoequipo;
-        $partido->users_id=$request->arbitro;
         $partido->estadio_id=$request->estadio;
+        $partido->tipo="Proceso";
         $partido->usuarioCreado=Auth::id();
         $partido->save();
         $request->session()->flash('success','Partido creado existosamente !');

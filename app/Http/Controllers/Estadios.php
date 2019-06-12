@@ -104,11 +104,11 @@ class Estadios extends Controller
          if($request->estado=="Activo"){
             $estadio->estado=true;
             $estadio->save();
-            $request->session()->flash('success','Estadio Activo');      
+            $request->session()->flash('success','Estado Activo');      
          }else{
             $estadio->estado=false;
             $estadio->save();
-            $request->session()->flash('info','Estadio inactivo');            
+            $request->session()->flash('info','Estado Inhabilitado');            
          }       
       
     }

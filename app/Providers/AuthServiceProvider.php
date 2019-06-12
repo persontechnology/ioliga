@@ -18,6 +18,7 @@ use ioliga\Models\Equipo\GeneroEquipo;
 use ioliga\Policies\EquipoPolicy;
 use ioliga\Policies\GeneroEquipoPolicy;
 use ioliga\Models\Campeonato\Etapa;
+use ioliga\Models\Campeonato\Asignacion;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -34,6 +35,7 @@ class AuthServiceProvider extends ServiceProvider
         GeneroEquipo::class=>GeneroEquipoPolicy::class,
         Equipo::class=>EquipoPolicy::class,
         Etapa::class=>EtapaPolicy::class,
+        Asignacion::class=>AsignacionPolicy::class,
 
 
 

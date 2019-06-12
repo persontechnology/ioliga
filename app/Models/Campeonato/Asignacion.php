@@ -7,6 +7,7 @@ use ioliga\Models\Equipo\Equipo;
 use ioliga\Models\Campeonato\AsignacionNomina;
 use ioliga\Models\Nomina\Nomina;
 use ioliga\Models\Campeonato\GeneroSerie;
+use ioliga\Models\Campeonato\Alineacion;
 
 class Asignacion extends Model
 {
@@ -19,7 +20,7 @@ class Asignacion extends Model
 
 	public function asignacionNomninas()
 	{
-		return $this->belongsToMany(Nomina::class,'asignacionNomina','asignacion_id','nomina_id')->as('asignacionNomina')->withPivot('numero','id')->orderBy('numero');
+		return $this->belongsToMany(Nomina::class,'asignacionNomina','asignacion_id','nomina_id')->as('asignacionNomina')->withPivot('numero','id','estado')->orderBy('numero');
 	}
 
 	public function asignacionSoloNomninas()
@@ -31,7 +32,27 @@ class Asignacion extends Model
     	return $this->belongsTo(GeneroSerie::class,'generoSerie_id');
     }
 
-	
+	public function asignacionNominasPartido()
+    {
+        return $this->hasMany(AsignacionNomina::class,'asignacion_id')->where('estado',1);
+    }
+      public function partidoAsignacionAlineacion()
+    {
+        return $this->hasManyThrough(
+            Alineacion::class,
+            AsignacionNomina::class,
+            'asignacion_id', // Foreign key on GeneroSerie table...
+            'asignacionNomina_id', // Foreign key on Genero table...
+            'id', // Local key on countries table...
+            'id' // Local key on users table...
+        );
+    }
+    public function calculoDeGOles($patido)
+    {
+        $nomina=$this->partidoAsignacionAlineacion;
+        $alineacion=$nomina->whereIn('partido_id',[$patido])->sum('goles');
+        return $alineacion;
+    }
 
 	
 }

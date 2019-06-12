@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use ioliga\Models\Campeonato\Asignacion;
 use ioliga\Models\Estadio;
 use ioliga\User;
+use ioliga\Models\Campeonato\Alineacion;
+use ioliga\Models\Campeonato\Fecha;
+
 
 class Partido extends Model
 {
@@ -27,6 +30,16 @@ class Partido extends Model
     {
     	return $this->belongsTo(User::class, 'users_id');
     }
-   
+    public function alineaciones()
+    {
+        return $this->hasMany(Alineacion::class, 'partido_id');
+    }
+
+    public function fecha()
+    {
+        return $this->belongsTo(Fecha::class, 'fecha_id');
+    }
+
+
     
 }

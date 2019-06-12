@@ -28,7 +28,7 @@ class GeneroSerie extends Model
     // GeneroSerie ---> Equipos
     public function equipos()
     {
-        return $this->belongsToMany(Equipo::class, 'asignacion', 'generoSerie_id','equipo_id');
+        return $this->belongsToMany(Equipo::class, 'asignacion', 'generoSerie_id','equipo_id')->as('asignacion')->withPivot('id');
     }
 
       //busqueda de generoSerie a asignaciongenero serie
@@ -48,8 +48,12 @@ class GeneroSerie extends Model
     {
         return $this->hasMany(EtapaSerie::class,'generoSerie_id'); 
     }
-    public function asignacion()
+    public function asignacionDes()
     {
-        return $this->hasMany(Asignacion::class,'generoSerie_id')->where('estado',1); 
+        return $this->hasMany(Asignacion::class,'generoSerie_id')->where('estado',1)->orderBy('equipo_id', 'desc'); 
+    }
+     public function asignacionAsc()
+    {
+        return $this->hasMany(Asignacion::class,'generoSerie_id')->where('estado',1)->orderBy('equipo_id'); 
     }
 }
