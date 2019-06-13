@@ -10,9 +10,12 @@ use ioliga\Models\Campeonato\Fecha;
 use ioliga\User;
 use ioliga\Models\Estadio;
 use ioliga\Models\Campeonato\Partido;
-
+use ioliga\Models\Campeonato\Tabla;
 use ioliga\Http\Requests\Fechas\RqCrear;
 use ioliga\Http\Requests\Partidos\RqCrearPartido;
+use ioliga\Models\Campeonato\Asignacion;
+use Illuminate\Support\Facades\DB;
+use ioliga\Models\Campeonato\Resultado;
 
 class Fechas extends Controller
 {
@@ -42,11 +45,6 @@ class Fechas extends Controller
     public function fecha($codigoFecha)
     {
        $fecha=Fecha::findOrFail($codigoFecha);
-
-      /* $asignacioncionAsc=$fecha->etapaSerie->buscarPartidoRepetidos()
-       ->whereIn('asignacion1_id',[4])
-       ->whereIn('asignacion2_id',[6])->get();
-       return $asignacioncionAsc;*/
        
         $asignacioncionAsc=$fecha->etapaSerie->generoSerie->asignacionAsc()
        ->whereNotIn('id',$fecha->partidos->pluck('asignacion1_id'))
@@ -75,16 +73,164 @@ class Fechas extends Controller
     }
     public function guardarPartidos(RqCrearPartido $request)
     {
-        $partido=new Partido;
-        $partido->hora=$request->hora;
-        $partido->fecha_id=$request->fecha;
-        $partido->asignacion1_id=$request->primerequipo;
-        $partido->asignacion2_id=$request->segundoequipo;
-        $partido->estadio_id=$request->estadio;
-        $partido->tipo="Proceso";
-        $partido->usuarioCreado=Auth::id();
-        $partido->save();
-        $request->session()->flash('success','Partido creado existosamente !');
+      try {
+            DB::beginTransaction();
+            $partido=new Partido;
+            $partido->hora=$request->hora;
+            $partido->fecha_id=$request->fecha;
+            $partido->asignacion1_id=$request->primerequipo;
+            $partido->asignacion2_id=$request->segundoequipo;
+            $partido->estadio_id=$request->estadio;
+            $partido->tipo="Proceso";
+            $partido->usuarioCreado=Auth::id();
+            $partido->save();
+            /* Guardar la asignacin para la tabloa de posiones */
+            $asignacion1=Asignacion::findOrFail($request->primerequipo);
+            $asignacion2=Asignacion::findOrFail($request->segundoequipo);
+            $fecaha=Fecha::findOrFail($request->fecha);
+            if($asignacion1->tablas->count()==0){
+                $tabla=new Tabla;
+                $tabla->etapaSerie_id=$fecaha->etapaSerie->id;
+                $tabla->asignacion_id=$asignacion1->id;
+                $tabla->usuarioCreado=Auth::id();
+                $tabla->save();
+
+            }
+             if($asignacion2->tablas->count()==0){
+                $tabla1=new Tabla;
+                $tabla1->etapaSerie_id=$fecaha->etapaSerie->id;
+                $tabla1->asignacion_id=$asignacion2->id;
+                $tabla1->usuarioCreado=Auth::id();
+                $tabla1->save();
+
+            }
+            DB::commit();
+            $request->session()->flash('success','Partido creado existosamente !');
+        } catch (\Exception $e) {
+            $request->session()->flash('info','Partido no creado');
+            DB::rollBack();
+        }        
         return redirect()->route('fecha',$request->fecha);
+    }
+
+    public function eliminarpartido(Request $request,$idPartido)
+    {
+         try {
+            DB::beginTransaction();
+            $partido=Partido::findOrFail($idPartido);
+            /*return $partido->fecha->etapaSerie->tablas;*/
+            $equipo1=Asignacion::findOrFail($partido->asignacion1_id);
+            $equipo2=Asignacion::findOrFail($partido->asignacion2_id);
+            $consultaEquipo1=$partido->fecha->etapaSerie->tablas()
+            ->whereIn('asignacion_id',[$equipo1->id])->get();
+            $consultaEquipo2=$partido->fecha->etapaSerie->tablas()
+            ->whereIn('asignacion_id',[$equipo2->id])->get();
+            $existe1=$consultaEquipo1->whereIn('id',$partido->resultados
+            ->pluck('tabla_id'));
+            $existe2=$consultaEquipo2->whereIn('id',$partido->resultados
+            ->pluck('tabla_id'));
+             if($existe1->count()==0){
+              $eliminar1=$consultaEquipo1->first(); 
+              $eliminar1->delete(); 
+            }
+            if($existe2->count()==0){
+              $eliminar2=$consultaEquipo2->first();
+              $eliminar2->delete(); 
+            }
+            $partido->delete();
+            DB::commit();
+            $request->session()->flash('success','Partido eliminado existosamente !');
+        } catch (\Exception $e) {
+            $request->session()->flash('info','Partido no se puede eliminar');
+            DB::rollBack();
+        }        
+        return redirect()->route('fecha',$partido->fecha_id);       
+    }
+
+     public function estadoPartido(Request $request)
+    {
+        $partido=Partido::findOrFail($request->partido);
+        $asignacion1=Asignacion::findOrFail($partido->asignacion1_id);
+        $asignacion2=Asignacion::findOrFail($partido->asignacion2_id);
+        if($request->estado=="Finalizado"){
+            /*validar si no existe en la tabla asignacion 1*/
+            $fecaha=Fecha::findOrFail($partido->fecha_id);
+            if($asignacion1->tablas->count()==0){
+                $tabla=new Tabla;
+                $tabla->etapaSerie_id=$fecaha->etapaSerie->id;
+                $tabla->asignacion_id=$asignacion1->id;
+                $tabla->usuarioCreado=Auth::id();
+                $tabla->save();
+                if($this->verificarTabla($tabla->id,$partido->id)==0){
+                $resultado=new Resultado;
+                $resultado->tabla_id=$tabla->id;
+                $resultado->partido_id=$partido->id;
+                $resultado->golesFavor=$asignacion1->calculoDeGOles($partido->id);
+                $resultado->golesContra=$asignacion2->calculoDeGOles($partido->id);
+                $estado;
+                    if ($asignacion1->calculoDeGOles($partido->id)>$asignacion2->calculoDeGOles($partido->id)) {
+                         $estado="Ganado";
+                    }
+                     if ($asignacion1->calculoDeGOles($partido->id)==$asignacion2->calculoDeGOles($partido->id)) {
+                         $estado="Empate";
+                    }
+                     if ($asignacion1->calculoDeGOles($partido->id)<$asignacion2->calculoDeGOles($partido->id)) {
+                         $estado="Perdido";
+                    }
+                    $resultado->estado=$estado;
+                    $resultado->usuarioCreado=Auth::id();
+                    $resultado->save();
+                }
+            }
+                
+           
+             if($asignacion2->tablas->count()==0){
+                $tabla1=new Tabla;
+                $tabla1->etapaSerie_id=$fecaha->etapaSerie->id;
+                $tabla1->asignacion_id=$asignacion2->id;
+                $tabla1->usuarioCreado=Auth::id();
+                $tabla1->save();
+                if($this->verificarTabla($tabla1->id,$partido->id)==0){
+                $resultado=new Resultado;
+                $resultado->tabla_id=$tabla1->id;
+                $resultado->partido_id=$partido->id;
+                $resultado->golesFavor=$asignacion2->calculoDeGOles($partido->id);
+                $resultado->golesContra=$asignacion1->calculoDeGOles($partido->id);
+                $estado;
+                    if ($asignacion2->calculoDeGOles($partido->id)>$asignacion1->calculoDeGOles($partido->id)) {
+                         $estado="Ganado";
+                    }
+                     if ($asignacion2->calculoDeGOles($partido->id)==$asignacion1->calculoDeGOles($partido->id)) {
+                         $estado="Empate";
+                    }
+                     if ($asignacion2->calculoDeGOles($partido->id)<$asignacion1->calculoDeGOles($partido->id)) {
+                         $estado="Perdido";
+                    }
+                    $resultado->estado=$estado;
+                    $resultado->usuarioCreado=Auth::id();
+                    $resultado->save();
+                }
+            }
+            $partido->tipo="Finalizado";
+            $partido->usuarioActualizado=Auth::id();
+            $partido->save();
+
+        }
+        if($request->estado=="Diferido"){
+            $partido->tipo="Diferido";
+            $partido->usuarioActualizado=Auth::id();
+            $partido->save();
+        }
+        if($request->estado=="Proceso"){
+            $partido->tipo="Proceso";
+            $partido->usuarioActualizado=Auth::id();
+            $partido->save();
+        }
+        
+    }
+    public function verificarTabla($idTabla,$idPartido)
+    {
+       $partido=Resultado::where('tabla_id',$idTabla)->where('partido_id',$idPartido)->count();
+       return $partido;
     }
 }

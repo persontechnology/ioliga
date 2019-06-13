@@ -113,7 +113,21 @@
 			@foreach($fecha->partidos as $par)
 			<tbody>
 				<tr class="table-active">
-					<th colspan="8"><i class="fas fa-clock mr-3 fa-2x"></i> {{$par->hora}}</th>
+					<th colspan="7"><i class="fas fa-clock mr-3 fa-2x"></i> {{$par->hora}} </th>
+					<th>
+						<select onchange="cambiarEstado1(this);" class="form-control">
+						  <option class=" text-warning" value="{{$par->id}}" {{$par->tipo=='Proceso' ? 'selected' :''}}>Proceso</option>
+						  <option class="text-success" value="{{$par->id}}" {{$par->tipo=='Finalizado' ? 'selected' :''}}>Finalizado</option>
+						  <option class="text-info" value="{{$par->id}}" {{$par->tipo=='Diferido' ? 'selected' :''}}>Diferido</option>
+						</select>
+					</th>
+					<th>
+						@if($par->alineaciones->count()==0)
+						<button data-url="{{route('eliminar-partido',$par->id)}}" onclick="eliminar(this)" class="btn bg-danger  btn-icon btn-sm legitRipple">
+							<span class="">Eliminar</span>
+						</button>
+						@endif
+					</th>
 				</tr>
 				<tr>
 					<td class="">
@@ -216,6 +230,17 @@
 						
 					</td>
 					<td>
+						@if($par->tipo=="Finalizado")
+						<span class="badge bg-success badge-pill">{{$par->tipo}}</span>
+						@endif
+						@if($par->tipo=="Proceso")
+						<span class="badge bg-warning badge-pill">{{$par->tipo}}</span>
+						@endif
+						@if($par->tipo=="Diferido")
+						<span class="badge bg-info badge-pill">{{$par->tipo}}</span>
+						@endif
+					</td>
+					<td>
 						Árbitro
 					</td>
 					<td>
@@ -288,6 +313,13 @@ $( document ).ready(function() {
 	  }
 	})
 });	
+var estadoEquipo="{{route('estado-partido')}}"
+ function cambiarEstado1(argument){
+    var op=argument.options[argument.selectedIndex].text;
+    var id=argument.value;
+    var estado=op;     
+    $.post(estadoEquipo,{partido:id,estado:estado})
+}
 </script>
 
 

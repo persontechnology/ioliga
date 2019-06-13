@@ -7,6 +7,7 @@ use ioliga\Models\Campeonato\Etapa;
 use ioliga\Models\Campeonato\Fecha;
 use ioliga\Models\Campeonato\GeneroSerie;
 use ioliga\Models\Campeonato\Partido;
+use ioliga\Models\Campeonato\Tabla;
 
 class EtapaSerie extends Model
 {
@@ -42,4 +43,8 @@ class EtapaSerie extends Model
             'id' // Local key on users table...
         );
 	}
+	public function tablas()
+    {
+        return $this->hasMany(Tabla::class,'etapaSerie_id');
+    }
 }

@@ -123,7 +123,8 @@ class Asignaciones extends Controller
         }
         return redirect()->route('nomina-asignacion',$asignacionNomina->asignacion_id);
     }
-      public function estado(Request $request)
+
+    public function estado(Request $request)
     {
          $asignacionNomina=AsignacionNomina::findOrFail($request->id);
          if($request->estado=="Habilitado"){
@@ -136,6 +137,19 @@ class Asignaciones extends Controller
             $request->session()->flash('info','Estadio inactivo');            
          }       
       
+    }
+    public function activarAsignacion($codiAsignacin)
+    {
+        $asignacion=Asignacion::findOrFail($codiAsignacin);
+        if($asignacion->asignacionNominasPartido->count()>=1){
+            $asignacion->estado=true;
+            
+            $asignacion->save();
+            session()->flash('success','El equipo ya puede participar ');
+            return redirect()->route('asignacion',$asignacion->id);
+        }
+        session()->flash('danger','El equipo no cumple con los requerimientos para participar verifique la nómina');
+        return redirect()->route('asignacion',$asignacion->id);
     }
 }
 

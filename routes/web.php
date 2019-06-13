@@ -79,7 +79,7 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	    Route::post('/crear-nomina-asignacion', 'Asignaciones@crearNomina')->name('crear-nomina-asignacion');
 	    Route::get('/eliminarNominaAsignar/{id}', 'Asignaciones@eliminarNomina')->name('eliminarNominaAsignar');
 	    Route::post('/estado-nomina-asignacion', 'Asignaciones@estado')->name('estado-nomina-asignacion');
-	    	
+	    Route::get('/activar-asignacion/{id}', 'Asignaciones@activarAsignacion')->name('activar-asignacion');	
 	    
 	  	/*etapas*/
 	  	Route::get('/etapas-serie/{id}', 'Etapas@etapasSerie')->name('etapas-serie');
@@ -96,6 +96,9 @@ Route::group(['middleware' => ['verified','auth']], function () {
 
 	  	/*partidos*/
 	  	Route::post('/crear-partido', 'Fechas@guardarPartidos')->name('crear-partido');
+	  	Route::get('/eliminar-partido/{id}', 'Fechas@eliminarpartido')->name('eliminar-partido');
+	  	Route::post('/estado-partido', 'Fechas@estadoPartido')->name('estado-partido');
+	  	
 
 
 	  	/*Alineacio*/

@@ -8,6 +8,7 @@ use ioliga\Models\Estadio;
 use ioliga\User;
 use ioliga\Models\Campeonato\Alineacion;
 use ioliga\Models\Campeonato\Fecha;
+use ioliga\Models\Campeonato\Resultado;
 
 
 class Partido extends Model
@@ -38,6 +39,10 @@ class Partido extends Model
     public function fecha()
     {
         return $this->belongsTo(Fecha::class, 'fecha_id');
+    }
+     public function resultados()
+    {
+        return $this->hasMany(Resultado::class, 'partido_id');
     }
 
 

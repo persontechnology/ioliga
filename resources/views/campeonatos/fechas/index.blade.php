@@ -6,12 +6,19 @@
 	<div class="card-header bg-white header-elements-inline">
 		<h6 class="card-title">Fechas de la etapa "<b>{{$etapasSerie->etapa->nombre}}</b>" En la serie <b>"{{$etapasSerie->generoSerie->serie->nombre }}"</b> </h6>
 	
-		@if($etapasSerie->estado==0)
+		@if($etapasSerie->estado==0 && $etapasSerie->generoSerie->asignacionDes->count()>1)
 		<div class="header-elements">
 			<button type="button" class="btn bg-indigo-300" data-toggle="modal" data-target="#modal_theme_primary"><i class="icon-plus-circle2 mr-2"></i> Crear fecha </button>
 			
 		</div>
 		<!-- crear-fecha -->
+		@else
+		<div class="alert alert-info alert-styled-left alert-dismissible">
+			<button type="button" class="close" data-dismiss="alert"><span>×</span></button>
+           No puede crear fechas verifique <br>
+           * Si tiene mas de un equipo asignado a este campeonato Habilitado <br>
+           * Etapa Finalizada             
+     	</div>
 		@endif
 		<div class="header-elements">
 			<div class="list-icons">

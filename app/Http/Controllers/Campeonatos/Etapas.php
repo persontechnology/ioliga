@@ -25,7 +25,7 @@ class Etapas extends Controller
     public function etapasSerie($codigoSerie)
     {
     	$this->authorize('Ver etapas',Etapa::class);
-    	$generoSerie=GeneroSerie::findOrFail($codigoSerie);
+    	$generoSerie=GeneroSerie::findOrFail($codigoSerie);      
     	$etapas=Etapa::get();   	
     	$data = array('etapas' =>$etapas ,'generoSerie'=>$generoSerie);
     	return view('campeonatos.etapas.etapasSerie',$data);

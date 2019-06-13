@@ -9,9 +9,9 @@
 		@if($asignacion->estado)
 		<div class="d-flex align-items-center">
 			<div class="mr-3">
-				<a href="#" class="btn bg-teal-400  btn-icon btn-sm legitRipple">
+				<button   class="btn bg-teal-400  btn-icon btn-sm legitRipple">
 					<span class="letter-icon">AC</span>
-				</a>
+				</button>
 			</div>
 			<div>
 				<a href="#" class="text-default font-weight-semibold letter-icon-title">Cambiar Estado</a>
@@ -21,12 +21,12 @@
 		@else
 		<div class="d-flex align-items-center">
 			<div class="mr-3">
-				<a href="#" class="btn bg-danger  btn-icon btn-sm legitRipple">
+				<button data-url="{{route('activar-asignacion',$asignacion->id) }}" onclick="activar(this)" class="btn bg-danger  btn-icon btn-sm legitRipple">
 					<span class="letter-icon">In</span>
-				</a>
+				</button>
 			</div>
 			<div>
-				<a href="#" class="text-default font-weight-semibold letter-icon-title">Cambiar Estado</a>
+				<a data-url="{{route('activar-asignacion',$asignacion->id) }}" onclick="activar(this)" class="text-default font-weight-semibold letter-icon-title">Cambiar Estado</a>
 				<div class="text-muted font-size-sm"><span class="badge badge-mark border-danger mr-1"></span> Inactivo</div>
 			</div>
 		</div>
@@ -128,5 +128,25 @@
     <script src="{{ asset('/global_assets/js/demo_pages/animations_css3.js') }}"></script>
 @endprepend
 
+<script type="text/javascript">
 
+ function activar(argument){
+    var url=$(argument).data('url');
+    swal({
+    html:true,
+      title: "¿Estás seguro?",
+      text: "De activar al equipo este archivo",
+      type: "info",
+      showCancelButton: true,
+      confirmButtonClass: "btn-primary",
+      confirmButtonText: "¡Sí, Activar!",
+      closeOnConfirm: false,
+      cancelButtonText:"Cancelar",
+      cancelButtonClass:"btn-dark"
+    },
+    function(){
+      window.location.replace(url);
+    });
+}
+</script>
 @endsection

@@ -8,6 +8,7 @@ use ioliga\Models\Campeonato\AsignacionNomina;
 use ioliga\Models\Nomina\Nomina;
 use ioliga\Models\Campeonato\GeneroSerie;
 use ioliga\Models\Campeonato\Alineacion;
+use ioliga\Models\Campeonato\Tabla;
 
 class Asignacion extends Model
 {
@@ -52,6 +53,10 @@ class Asignacion extends Model
         $nomina=$this->partidoAsignacionAlineacion;
         $alineacion=$nomina->whereIn('partido_id',[$patido])->sum('goles');
         return $alineacion;
+    }
+    public function tablas()
+    {
+        return $this->hasMany(Tabla::class,'asignacion_id');
     }
 
 	
