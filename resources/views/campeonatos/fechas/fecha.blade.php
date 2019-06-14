@@ -319,6 +319,10 @@ var estadoEquipo="{{route('estado-partido')}}"
     var id=argument.value;
     var estado=op;     
     $.post(estadoEquipo,{partido:id,estado:estado})
+     .done(function( data ) {
+        window.location.replace("{{route('fecha',$fecha->id)}}");      
+	})
+    
 }
 </script>
 

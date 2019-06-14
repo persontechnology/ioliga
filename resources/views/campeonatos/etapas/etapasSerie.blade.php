@@ -95,6 +95,7 @@
 <div class="row">
 	@if($generoSerie->etapaSerie->count()>0)
 	@foreach($generoSerie->etapaSerie as $etapaSerie)
+
 	<div class="col-xl-6 col-md-6">
 		<div class="card card-body bg-{{$etapaSerie->estado==false ? 'blue-600':'indigo-400'}} border-{{$etapaSerie==true  ? 'success':'danger'}}">
 			<div class="media">
@@ -142,12 +143,12 @@
 	            	</div>
 				</div>				
 				<div class="card-body text-dark">
-					<table class="border-dark table-bordered">
+					<table class="">
 						<thead>
 							<tr>
 								<th class="bg-warning p-2">#</th>
 								<th >Equipo</th>
-								<th class="p-1">Pbs.</th>
+								<th id="pintos" class="p-1">Pbs.</th>
 								<th class="bg-warning p-1">Pts.</th>
 								<th class="p-1">PJ</th>
 								<th class="p-1">PG</th>
@@ -182,24 +183,29 @@
 									{{$tabla->bonificacion}}
 								</td>
 								<td class="bg-dark">
-									3
-								</td>
-								<td>
+									{{$tabla->puntosTotales($tabla->partidosGanados->count(),$tabla->partidosEmpatados->count(),$tabla->bonificacion)}}
 									
 								</td>
 								<td>
+									{{$tabla->resultados->count()}}
+								</td>
+								<td>
+									{{$tabla->partidosGanados->count()}}
+								</td>
+								<td>
+									{{$tabla->partidosEmpatados->count()}}
 									
 								</td>
 								<td>
+									{{$tabla->golesFavor->sum('golesFavor')}}
 									
 								</td>
 								<td>
+									{{$tabla->golesContra->sum('golesContra')}}
 									
 								</td>
 								<td>
-									
-								</td>
-								<td>
+									{{$tabla->golesTotal($tabla->golesFavor->sum('golesFavor'),$tabla->golesContra->sum('golesContra'))}}
 									
 								</td>
 							
@@ -245,5 +251,55 @@ $( document ).ready(function() {
 </script>
 <script>
         $('#menuCampeo').addClass('active');
+$(document).ready(function () {
+	  $('#pintos').addClass('asc selected');
+      $('#pintos').removeClass('desc');
+	
+	$(this).addClass('asc selected');
+        $('th').each(function (col) {
+            $(this).hover(
+                    function () {
+                        $(this).addClass('focus');
+                    },
+                    function () {
+                        $(this).removeClass('focus');
+                    }
+            );
+            $(this).click(function () {
+                if ($(this).is('.desc')) {
+                     $(this).addClass('asc selected');
+                    $(this).removeClass('desc');
+                    sortOrder = 1;
+                } else {
+                  
+                    $(this).removeClass('asc');
+                    $(this).addClass('desc selected');
+                    sortOrder = -1;
+                }
+                $(this).siblings().removeClass('asc selected');
+                $(this).siblings().removeClass('desc selected');
+                var arrData = $('table').find('tbody >tr:has(td)').get();
+                arrData.sort(function (a, b) {
+                    var val1 = $(a).children('td').eq(col).text().toUpperCase();
+                    var val2 = $(b).children('td').eq(col).text().toUpperCase();
+                    if ($.isNumeric(val1) && $.isNumeric(val2))
+                        return sortOrder == 1 ? val1 - val2 : val2 - val1;
+                    else
+                        return (val1 < val2) ? -sortOrder : (val1 > val2) ? sortOrder : 0;
+                });
+                $.each(arrData, function (index, row) {
+                    $('tbody').append(row);
+                });
+            });
+        });
+    });
 </script>
+<style type="text/css">
+	      table, th, td {
+            border: 1px solid black;
+        }
+        th {
+            cursor: pointer;
+        }
+</style>
 @endsection

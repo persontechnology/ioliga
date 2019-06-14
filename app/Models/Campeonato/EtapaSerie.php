@@ -8,7 +8,7 @@ use ioliga\Models\Campeonato\Fecha;
 use ioliga\Models\Campeonato\GeneroSerie;
 use ioliga\Models\Campeonato\Partido;
 use ioliga\Models\Campeonato\Tabla;
-
+use ioliga\Models\Campeonato\Resultado;
 class EtapaSerie extends Model
 {
    protected $table='etapaSerie';
@@ -47,4 +47,17 @@ class EtapaSerie extends Model
     {
         return $this->hasMany(Tabla::class,'etapaSerie_id');
     }
+    public function buscarTablasresultados()
+	{
+		 $listaPartidos= $this->hasManyThrough(
+            Resultado::class,
+            Tabla::class,
+            'etapaSerie_id', // Foreign key on posts table...
+            'tabla_id', // Foreign key on users table...
+            'id', // Local key on countries table...
+            'id' // Local key on users table...
+        )->groupBy('id');
+
+		 return $listaPartidos;
+	}
 }
