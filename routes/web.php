@@ -16,7 +16,9 @@ Route::get('/', function () {
 	 // $A=Artisan::call('cache:clear');
     // $A=Artisan::call('config:clear');
     // $A=Artisan::call('config:cache');
-    //Artisan::call('storage:link');
+	//Artisan::call('storage:link');
+	//Artisan::call('key:generate');
+	
 });
 
 Auth::routes(['verify' => true]);
