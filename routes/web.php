@@ -12,7 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
+	 // $A=Artisan::call('cache:clear');
+    // $A=Artisan::call('config:clear');
+    // $A=Artisan::call('config:cache');
+    //Artisan::call('storage:link');
 });
 
 Auth::routes(['verify' => true]);
