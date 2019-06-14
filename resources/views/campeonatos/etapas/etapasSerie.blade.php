@@ -143,13 +143,13 @@
 	            	</div>
 				</div>				
 				<div class="card-body text-dark">
-					<table class="">
+					<table id="myTable">
 						<thead>
 							<tr>
-								<th class="bg-warning p-2">#</th>
-								<th >Equipo</th>
-								<th id="pintos" class="p-1">Pbs.</th>
+							
 								<th class="bg-warning p-1">Pts.</th>
+								<th >Equipo</th>
+								<th class="p-1">Pbs.</th>
 								<th class="p-1">PJ</th>
 								<th class="p-1">PG</th>
 								<th class="p-1">PE</th>
@@ -163,8 +163,12 @@
 						@php($i=0)
 						@foreach($etapaSerie->tablas as $tabla)
 						@php($i++)
+						@php($h=$tabla->puntosTotales($tabla->partidosGanados->count(),$tabla->partidosEmpatados->count(),$tabla->bonificacion))
 							<tr class="text-center">
-								<td class="bg-dark " > <span class=" media-title">{{$i}}</span></td>
+								<td class="bg-dark">
+									{{$h}}
+									
+								</td>
 								<td>
 									<ul class="media-list">
 										<li class="media">
@@ -182,10 +186,7 @@
 								<td>
 									{{$tabla->bonificacion}}
 								</td>
-								<td class="bg-dark">
-									{{$tabla->puntosTotales($tabla->partidosGanados->count(),$tabla->partidosEmpatados->count(),$tabla->bonificacion)}}
-									
-								</td>
+								
 								<td>
 									{{$tabla->resultados->count()}}
 								</td>
@@ -252,10 +253,6 @@ $( document ).ready(function() {
 <script>
         $('#menuCampeo').addClass('active');
 $(document).ready(function () {
-	  $('#pintos').addClass('asc selected');
-      $('#pintos').removeClass('desc');
-	
-	$(this).addClass('asc selected');
         $('th').each(function (col) {
             $(this).hover(
                     function () {
@@ -293,6 +290,47 @@ $(document).ready(function () {
             });
         });
     });
+</script>
+<script type="text/javascript">
+	$(document).ready(function () {
+	/*ordenar po puntos*/
+		 var table, rows, switching, i, x, y, shouldSwitch;
+		table = document.getElementById("myTable");
+		switching = true;
+		/*Make a loop that will continue until
+		no switching has been done:*/
+		while (switching) {
+		//start by saying: no switching is done:
+		switching = false;
+		rows = table.rows;
+	
+		/*Loop through all table rows (except the
+		first, which contains table headers):*/
+		for (i = 1; i < (rows.length - 1); i++) {
+		  //start by saying there should be no switching:
+		  shouldSwitch = false;
+
+		  /*Get the two elements you want to compare,
+		  one from current row and one from the next:*/
+		  x = rows[i].getElementsByTagName("TD")[0];
+		  y = rows[i + 1].getElementsByTagName("TD")[0];
+
+		  //check if the two rows should switch place:
+		  if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+		    //if so, mark as a switch and break the loop:
+		    shouldSwitch = true;
+		    break;
+		  }
+		}
+		if (shouldSwitch) {
+		  /*If a switch has been marked, make the switch
+		  and mark that a switch has been done:*/
+		  rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+		  switching = true;
+		}
+		}
+});
+
 </script>
 <style type="text/css">
 	      table, th, td {
