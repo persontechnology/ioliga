@@ -99,4 +99,14 @@
             </span>
         </a>
     </li>
+
+    <li class="nav-item">
+        <a href="{{ route('nosotrosAdmin') }}" class="nav-link" id="menuNosotros">
+            <i class="fas fa-cogs"></i>
+            <span>
+                {{ __('Nosotros') }}
+            </span>
+        </a>
+    </li>
+
 @endrole

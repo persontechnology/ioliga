@@ -119,4 +119,9 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	
 
 
+	// acerca de nosotros
+	Route::get('/acerca-de-nosotros-admin', 'Nosotros@index')->name('nosotrosAdmin');
+	Route::post('/acerca-de-nosotros-admin-actualizar', 'Nosotros@actualizarNosotrosAdmin')->name('actualizarNosotrosAdmin');
+	
+
 });

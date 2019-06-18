@@ -116,5 +116,11 @@
     
    <script src="{{ asset('js/funciones.js') }}"></script>
     @stack('scriptsFooter')
+
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
 </body>
 </html>

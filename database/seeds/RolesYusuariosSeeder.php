@@ -41,17 +41,16 @@ class RolesYusuariosSeeder extends Seeder
         /*usuarios*/
         
         $userSuperAdministrador= User::updateOrCreate([
-            'name' => 'soysoftware',
-            'email' => 'info@soysoftware.com',
+            'name' => 'super-admin',
+            'email' => 'info@sa.com',
             'password' => Hash::make('12345678')
         ]);
         $userSuperAdministrador->assignRole($roleSuperAdministrador);
 
          $userAdministrador= User::updateOrCreate([
             'name' => 'administrador',
-            'email' => 'soysoftware@gmail.com',
-            /*'email' => 'fabi.lopez1992@gmail.com',*/
-            'password' => Hash::make('12345678')
+            'email' => 'carlosquishpe001@gmail.com',
+            'password' => Hash::make('sam1724539869')
         ]);
 
         /*asiganar roles a usuarios*/

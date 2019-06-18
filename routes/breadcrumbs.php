@@ -164,3 +164,10 @@ Breadcrumbs::for('craer-asignacion-campeonatos', function ($trail,$asignacion) {
    $trail->parent('ver-asignacion-campeonatos',$asignacion);
     $trail->push('Asignación Jugador ', route('asignacion-nomina',$asignacion->id));    
 });
+
+
+// acerca de nosotros
+Breadcrumbs::for('nosotrosAdmin', function ($trail) {       
+    $trail->parent('home');
+     $trail->push('Acerca de nosotros', route('nosotrosAdmin'));    
+ });
