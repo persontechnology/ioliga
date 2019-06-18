@@ -9,6 +9,7 @@ class CreateAsignacionNominaTable extends Migration
  
     public function up()
     {
+        
         Schema::create('asignacionNomina', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
@@ -27,6 +28,6 @@ class CreateAsignacionNominaTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('asignacion_nomina');
+        Schema::dropIfExists('asignacionNomina');
     }
 }

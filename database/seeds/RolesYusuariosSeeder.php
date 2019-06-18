@@ -33,6 +33,7 @@ class RolesYusuariosSeeder extends Seeder
         $roleComisionadoDeCalendarizacion = Role::updateOrCreate(['name' => 'Comisionado de calendarización']);
         /*rol de secretario*/
         $roleSecreatario=Role::updateOrCreate(['name' => 'Secretario']);
+        $roleArbitro=Role::updateOrCreate(['name' => 'Arbitro']);
 
 
         /*asiganr permisos a roles*/

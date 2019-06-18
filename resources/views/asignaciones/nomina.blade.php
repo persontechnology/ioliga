@@ -1,9 +1,12 @@
 @extends('layouts.app',['titulo'=>'menú del campornato'])
-@section('breadcrumbs', Breadcrumbs::render('craer-asignacion-campeonatos',$asignacion))
+@section('breadcrumbs', Breadcrumbs::render('nomina-menu',$asignacion))
 @section('content')
 
 <div class="row">
-		<div class="col-md-5">		
+		<div class="col-md-6">
+
+		<!-- desde aki -->
+				<!-- Basic layout-->
 		<div class="card">
 			<div class="card-header header-elements-inline">
 				<h5 class="card-title">Asignar jugador al campeonato</h5>
@@ -17,9 +20,9 @@
 
 			<div class="card-body">
 			@if($asignacion->estado==false )
-			@if($nomina->count() >0)
+			@if($nomina->count() >0 )
 
-			<form action="{{route('crear-asignacion-nomina')}}" method="post" enctype="multipart/form-data">
+			<form action="{{route('crear-nomina-asignacion')}}" method="post" enctype="multipart/form-data">
     				@csrf
 
 					<input type="hidden" name="asignacion" id="asignacion" value="{{Crypt::encryptString($asignacion->id)}}">
@@ -60,13 +63,13 @@
 			@endif
 			@else
 			 <div class="alert alert-info alert-styled-left alert-dismissible">
-               Su equipo cumple con nómina requerida para participar             
+               Su equipo cumple con nómina requerida para participar            
             </div>
 			@endif
 			</div>
 		</div>
 	</div>
-	<div class="col-md-7">
+	<div class="col-md-6">
 		<div class="card">
 			<div class="card-header header-elements-inline">
 				<h6 class="card-title">Nómina de {{$asignacion->equipos->nombre}} </h6>
@@ -109,16 +112,25 @@
 								<span class="badge badge-mark border-{{$noas->asignacionNomina->estado==1?'info':'danger'}} mr-1"></span> {{$noas->asignacionNomina->estado==1?'Habilitado':'No habilitado'}}
 							</div>
 						</div>
-						<div class="align-self-center">
-							@if($asignacion->estado==false )
+						@if($asignacion->estado==false )
+						<div class="media-body ">
+							<select onchange="cambiarEstado1(this);" class="form-control">
+							  <option value="{{$noas->asignacionNomina->id}}" {{$noas->asignacionNomina->estado=='1' ? 'selected' :''}}>Habilitado</option>
+							  <option value="{{$noas->asignacionNomina->id}}" {{$noas->asignacionNomina->estado=='0' ? 'selected' :''}}>Inhabilitado</option>
+
+							</select>
+						</div>
+						<div class="align-self-center ml-3">
+						
 							<div class="list-icons list-icons-extended">
-		                    	<a  data-url="{{ route('eliminarAsignarNomina',Crypt::encryptString($noas->asignacionNomina->id)) }}" data-msj="{{ $noas->usuarioUno->apellidos }}" onclick="eliminar(this);"  class="list-icons-item" data-popup="tooltip" title="Borrar asignación de jugador" data-trigger="hover" data-target="#call">
+		                    	<a  data-url="{{ route('eliminarNominaAsignar',$noas->asignacionNomina->id) }}" data-msj="{{ $noas->usuarioUno->apellidos }}" onclick="eliminar(this);"  class="list-icons-item" data-popup="tooltip" title="Borrar asignación de jugador" data-trigger="hover" data-target="#call">
 		                    	<i class="icon-cancel-circle2"></i>
 		                    	</a>
 		                    	
 	                    	</div>
-	                    	@endif
+	                    	
 						</div>
+						@endif
 					</li>
 					@endforeach	
 				</ul>
@@ -158,5 +170,16 @@ $( document ).ready(function() {
 	  }
 	})
 });	
+
+ var estadoEquipo="{{route('estado-nomina-asignacion')}}"
+ function cambiarEstado1(argument){
+    var op=argument.options[argument.selectedIndex].text;
+    var id=argument.value;
+    var estado=op;
+    $.post(estadoEquipo,{id:id,estado:estado})
+    .done(function( data ) {
+        window.location.replace("{{route('nomina-asignacion',$asignacion->id)}}");     
+	})
+}
 </script>
 @endsection

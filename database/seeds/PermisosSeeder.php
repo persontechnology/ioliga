@@ -43,7 +43,25 @@ class PermisosSeeder extends Seeder
         $p_listar_nomina_equipos=Permission::updateOrCreate(['name' => 'Listar nómina equipo']);
         $p_crear_jugador_equipos=Permission::updateOrCreate(['name' => 'Crear jugador equipo']);
         $p_Actualizar_foto_jugador=Permission::updateOrCreate(['name' => 'Actualizar foto jugador']);
-        
+
+        /*permisos para las etapas del campeonato*/
+        $p_Ver_etapas=Permission::updateOrCreate(['name' => 'Ver etapas']);  
+        $p_Crear_etapas=Permission::updateOrCreate(['name' => 'Crear etapa']);
+
+        /*permimsos para las fechas*/
+        $p_Ver_fechas=Permission::updateOrCreate(['name' => 'Ver fechas']); 
+         $p_adminstrar_fechas=Permission::updateOrCreate(['name' => 'Administrar fechas']); 
+
+         /*permisos tabla*/
+         $p_actualizar_bonificacion=Permission::updateOrCreate(['name' => 'Actualizar bonificación']); 
+
+         /*permisos para ve los partidos*/
+        $p_Ver_partidos=Permission::updateOrCreate(['name' => 'Ver partidos']);
+        $p_adminstrar_partidos=Permission::updateOrCreate(['name' => 'Administrar partidos']); 
+        /*permisos para la asignacion*/ 
+        $p_ver_asignacion_equipo=Permission::updateOrCreate(['name' => 'Ver asignacion equipo']);
+          
+          
         /*permisos para nominas*/
         $p_ver_equipo_representante=Permission::updateOrCreate(['name' => 'Ver equipo representante']);
         $p_actualizar_mi_equipo=Permission::updateOrCreate(['name' => 'Actualizar equipo representante']);
@@ -54,5 +72,7 @@ class PermisosSeeder extends Seeder
         /*permisos para ver mis equipos representante*/
 
         $p_ver_mis_campeonatos=Permission::updateOrCreate(['name' => 'Ver mis campeonatos']);
+
+
     }
 }

@@ -64,6 +64,18 @@ Breadcrumbs::for('series', function ($trail,$genero) {
     $trail->push('Series en categoria '.$genero->generoEquipo->nombre, route('series',$genero->id));
 });
 
+/*Asignacion menu*/
+Breadcrumbs::for('asignacion-menu', function ($trail,$asignacion) {
+    $trail->parent('campeonatos');
+     $trail->push('Serie '. $asignacion->unoGeneroSerie->serie->nombre,route('series',$asignacion->unoGeneroSerie->genero->id));
+    $trail->push('Asignacion '.$asignacion->equipos->nombre, route('asignacion',$asignacion->id));
+});
+
+Breadcrumbs::for('nomina-menu', function ($trail,$asignacion) {
+    $trail->parent('asignacion-menu',$asignacion);  
+    $trail->push('Nomina '.$asignacion->equipos->nombre, route('asignacion',$asignacion->id));
+});
+
 // Equipos en serie
 Breadcrumbs::for('asignarEquiposAserie', function ($trail,$generoSerie) {
     $trail->parent('series',$generoSerie->genero);
@@ -121,6 +133,28 @@ Breadcrumbs::for('editar-mi-equipo', function ($trail,$equipo) {
     $trail->push('Mis Equipos', route('mis-equipos')); 
     $trail->push('Editar Equipo'.' '.$equipo->nombre, route('editar-mi-equipo',$equipo->id));     
 });
+
+/*etapas y genero serie*/
+Breadcrumbs::for('etapas-serie-genero', function ($trail,$serieGenero) {
+    $trail->parent('series',$serieGenero->genero);
+    $trail->push('Etapas serie '.$serieGenero->serie->nombre, route('etapas-serie',$serieGenero->id));
+});
+
+Breadcrumbs::for('fechas-etapa', function ($trail,$etapaSerie) {
+    $trail->parent('etapas-serie-genero',$etapaSerie->generoSerie);
+    $trail->push('Fechas etapa  '.$etapaSerie->generoSerie->serie->nombre, route('fechas-etapa',$etapaSerie->id));
+});
+
+Breadcrumbs::for('fecha-etapa', function ($trail,$fecha) {
+    $trail->parent('fechas-etapa',$fecha->etapaSerie);
+    $trail->push('Fechas'. ' '. $fecha->fechaInicio , route('fecha',$fecha->id));
+});
+
+Breadcrumbs::for('alineacion', function ($trail,$partido) {
+    $trail->parent('fecha-etapa',$partido->fecha);
+    $trail->push('Alineacion ', route('alineacion',[$partido->id,$partido->id]));
+});
+
 /*nominas*/
 Breadcrumbs::for('nomina-mi-equipo', function ($trail,$equipo) {       
    $trail->parent('home');
