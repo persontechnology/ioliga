@@ -156,7 +156,7 @@
                         </li>
 
                         <li class="rd-nav-item">
-                            <a class="rd-nav-link" href="#">Equipos</a> 
+                            <a class="rd-nav-link" href="#">Partidos</a> 
                         </li>
                         
                         <li class="rd-nav-item">
