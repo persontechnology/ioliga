@@ -117,6 +117,7 @@
 								<a href="#" data-url="{{ route('eliminar-etapa-serie',$etapaSerie->id) }}" data-msj="{{ $etapaSerie->etapa->nombre}}" onclick="eliminar(this);" class="dropdown-item"><i class="icon-cross2 text-danger-400"></i>  Eliminar</a>
 								@endif
 								<a href="#" class="dropdown-item"><i class="icon-phone2"></i> Make a call</a>
+								@can('Ver fechas', 'ioliga\Models\Campeonato\Fecha::class')
 								<a href="{{route('fechas-etapa',$etapaSerie->id)}}" class="dropdown-item"><i class="icon-calendar"></i> Fechas</a>
 								<div class="dropdown-divider"></div>
 								@if($etapaSerie->fechas->count()>0)
@@ -126,6 +127,7 @@
 								<a href="{{route('fecha',$fe->id)}}" class="dropdown-item"><i class="icon-calendar"></i>{{$fe->nombre}} {{$i}}</a>
 								@endforeach
 								@endif
+								@endcan
 							</div>
                     	</div>
                 	</div>
@@ -146,9 +148,9 @@
 					<table id="myTable">
 						<thead>
 							<tr>
-							
-								<th class="bg-warning p-1">Pts.</th>
+								<th class="bg-warning p-1">#</th>
 								<th >Equipo</th>
+								<th class="bg-warning p-1">Ptn.</th>
 								<th class="p-1">Pbs.</th>
 								<th class="p-1">PJ</th>
 								<th class="p-1">PG</th>
@@ -159,54 +161,61 @@
 							</tr>
 						</thead>
 						<tbody>
+
+					
 						@if($etapaSerie->tablas->count()>0)
 						@php($i=0)
-						@foreach($etapaSerie->tablas as $tabla)
+						@foreach($etapaSerie->resultado($etapaSerie->id) as $res)
 						@php($i++)
-						@php($h=$tabla->puntosTotales($tabla->partidosGanados->count(),$tabla->partidosEmpatados->count(),$tabla->bonificacion))
+						@php($h=$res->tabla($res->tabla_id)->puntosTotales($res->tabla($res->tabla_id)->partidosGanados->count(),$res->tabla($res->tabla_id)->partidosEmpatados->count(),$res->tabla($res->tabla_id)->bonificacion))
 							<tr class="text-center">
-								<td class="bg-dark">
-									{{$h}}
-									
-								</td>
+								<td class="bg-dark">{{$i}}</td>
 								<td>
 									<ul class="media-list">
 										<li class="media">
 											<div class="mr-3">
-				                              <img src="{{ Storage::url('public/equipos/'.$tabla->asignacion->equipos->foto) }}" class="rounded-circle" width="40" height="40" alt="">                        
+				                              <img src="{{ Storage::url('public/equipos/'.$res->tabla($res->tabla_id)->asignacion->equipos->foto) }}" class="rounded-circle" width="40" height="40" alt="">                        
 				                            </div>
 				                             <div class="media-body">
-				                                <div class="media-title font-weight-semibold">{{$tabla->asignacion->equipos->nombre}}</div>				                               
+				                                <div class="media-title font-weight-semibold">{{$res->tabla($res->tabla_id)->asignacion->equipos->nombre}}</div>				                               
 				                            </div>
 											
 										</li>
 									</ul>
 								</td>
+								<td class="bg-dark">
+									{{$h}} 
+									
+								</td>
 
 								<td>
-									{{$tabla->bonificacion}}
+
+									{{$res->tabla($res->tabla_id)->bonificacion}}
+									@can('Actualizar bonificación', 'ioliga\Models\Campeonato\Tabla::class')
+									<button onclick="actualizaBonificacion(this)" data-tabla="{{$res->tabla($res->tabla_id)->id}}" data-equipo="{{$res->tabla($res->tabla_id)->asignacion->equipos->nombre}}" data-goles="{{$res->tabla($res->tabla_id)->bonificacion}}" data-etapaid="{{$generoSerie->id}}" class="btn bg-info border-teal text-teal rounded-round border-2 btn-icon  legitRipple">	<i class="icon-plus3"></i>	</button>
+									@endcan
 								</td>
 								
 								<td>
-									{{$tabla->resultados->count()}}
+									{{$res->tabla($res->tabla_id)->resultados->count()}}
 								</td>
 								<td>
-									{{$tabla->partidosGanados->count()}}
+									{{$res->tabla($res->tabla_id)->partidosGanados->count()}}
 								</td>
 								<td>
-									{{$tabla->partidosEmpatados->count()}}
+									{{$res->tabla($res->tabla_id)->partidosEmpatados->count()}}
 									
 								</td>
 								<td>
-									{{$tabla->golesFavor->sum('golesFavor')}}
+									{{$res->tabla($res->tabla_id)->golesFavor->sum('golesFavor')}}
 									
 								</td>
 								<td>
-									{{$tabla->golesContra->sum('golesContra')}}
+									{{$res->tabla($res->tabla_id)->golesContra->sum('golesContra')}}
 									
 								</td>
 								<td>
-									{{$tabla->golesTotal($tabla->golesFavor->sum('golesFavor'),$tabla->golesContra->sum('golesContra'))}}
+									{{$res->tabla($res->tabla_id)->golesTotal($res->tabla($res->tabla_id)->golesFavor->sum('golesFavor'),$res->tabla($res->tabla_id)->golesContra->sum('golesContra'))}}
 									
 								</td>
 							
@@ -225,6 +234,33 @@
            No existen etapas en esta serie              
      </div>
 	@endif
+</div>
+<!-- Primary modal -->
+<div id="modal_theme_primary" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header bg-primary">
+				<h6 class="modal-title">Ingresar puntos de bonificación para "<b id="equipo"> </b>"  <b></b></h6>				
+			</div>
+			<div class="modal-body">				 	
+				<form action="{{route('actualizar-bonificacion')}}" method="post" enctype="multipart/form-data">
+				@csrf
+				<input type="hidden" name="tabla" id="tabla" value="">
+				<input type="hidden" name="etapaid" id="etapaid" value="">					
+					<div class="form-group row">
+						<label class="col-form-label col-sm-3">Seleccione el número de puntos</label>
+						<div class="col-sm-9">
+							<input type="number" name="bonificacion" id="bonificacion"   required=""  class="form-control">
+						</div>
+					</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-link" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn bg-primary">Bonificar</button>
+				</div>
+			</div>
+		</form>
+		</div>
+	</div>
 </div>
 @prepend('scriptsHeader')
 
@@ -250,87 +286,19 @@ $( document ).ready(function() {
 	})
 });	
 </script>
+
 <script>
-        $('#menuCampeo').addClass('active');
-$(document).ready(function () {
-        $('th').each(function (col) {
-            $(this).hover(
-                    function () {
-                        $(this).addClass('focus');
-                    },
-                    function () {
-                        $(this).removeClass('focus');
-                    }
-            );
-            $(this).click(function () {
-                if ($(this).is('.desc')) {
-                     $(this).addClass('asc selected');
-                    $(this).removeClass('desc');
-                    sortOrder = 1;
-                } else {
-                  
-                    $(this).removeClass('asc');
-                    $(this).addClass('desc selected');
-                    sortOrder = -1;
-                }
-                $(this).siblings().removeClass('asc selected');
-                $(this).siblings().removeClass('desc selected');
-                var arrData = $('table').find('tbody >tr:has(td)').get();
-                arrData.sort(function (a, b) {
-                    var val1 = $(a).children('td').eq(col).text().toUpperCase();
-                    var val2 = $(b).children('td').eq(col).text().toUpperCase();
-                    if ($.isNumeric(val1) && $.isNumeric(val2))
-                        return sortOrder == 1 ? val1 - val2 : val2 - val1;
-                    else
-                        return (val1 < val2) ? -sortOrder : (val1 > val2) ? sortOrder : 0;
-                });
-                $.each(arrData, function (index, row) {
-                    $('tbody').append(row);
-                });
-            });
-        });
-    });
-</script>
-<script type="text/javascript">
-	$(document).ready(function () {
-	/*ordenar po puntos*/
-		 var table, rows, switching, i, x, y, shouldSwitch;
-		table = document.getElementById("myTable");
-		switching = true;
-		/*Make a loop that will continue until
-		no switching has been done:*/
-		while (switching) {
-		//start by saying: no switching is done:
-		switching = false;
-		rows = table.rows;
+$('#menuCampeo').addClass('active');
+
+function actualizaBonificacion(argument) {
+	$('.modal').modal('show');
+	$('#equipo').html($(argument).data('equipo'));
+	$('#bonificacion').val($(argument).data('goles'));
+	$('#tabla').val($(argument).data('tabla'));
+	$('#etapaid').val($(argument).data('etapaid'));
+
 	
-		/*Loop through all table rows (except the
-		first, which contains table headers):*/
-		for (i = 1; i < (rows.length - 1); i++) {
-		  //start by saying there should be no switching:
-		  shouldSwitch = false;
-
-		  /*Get the two elements you want to compare,
-		  one from current row and one from the next:*/
-		  x = rows[i].getElementsByTagName("TD")[0];
-		  y = rows[i + 1].getElementsByTagName("TD")[0];
-
-		  //check if the two rows should switch place:
-		  if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-		    //if so, mark as a switch and break the loop:
-		    shouldSwitch = true;
-		    break;
-		  }
-		}
-		if (shouldSwitch) {
-		  /*If a switch has been marked, make the switch
-		  and mark that a switch has been done:*/
-		  rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-		  switching = true;
-		}
-		}
-});
-
+}
 </script>
 <style type="text/css">
 	      table, th, td {

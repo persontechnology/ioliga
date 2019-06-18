@@ -19,4 +19,13 @@ class Fecha extends Model
 	{
 		return $this->hasMany(Partido::class, 'fecha_id')->orderby('hora');
 	}
+	public function partidosPreceso()
+	{
+		return $this->hasMany(Partido::class, 'fecha_id')->where('tipo','Proceso');
+		
+	}
+	public function partidosDiferidos()
+	{
+		return $this->hasMany(Partido::class, 'fecha_id')->where('tipo','Diferido');		
+	}
 }

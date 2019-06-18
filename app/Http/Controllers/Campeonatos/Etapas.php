@@ -10,6 +10,9 @@ use ioliga\Http\Requests\Etapas\RqCrear;
 use ioliga\Models\Campeonato\GeneroSerie;
 use ioliga\Models\Campeonato\EtapaSerie;
 use ioliga\Http\Requests\Etapas\RqCrearEtapaSerie;
+use ioliga\Models\Campeonato\Tabla;
+use Illuminate\Support\Facades\DB;
+
 class Etapas extends Controller
 {
 	 public function __construct()
@@ -22,10 +25,13 @@ class Etapas extends Controller
 
 
     }
+
+    /*generoSerie ->id */
     public function etapasSerie($codigoSerie)
     {
     	$this->authorize('Ver etapas',Etapa::class);
-    	$generoSerie=GeneroSerie::findOrFail($codigoSerie);      
+    	$generoSerie=GeneroSerie::findOrFail($codigoSerie);       
+
     	$etapas=Etapa::get();   	
     	$data = array('etapas' =>$etapas ,'generoSerie'=>$generoSerie);
     	return view('campeonatos.etapas.etapasSerie',$data);
@@ -68,5 +74,17 @@ class Etapas extends Controller
         }
         return redirect()->route('etapas-serie',$etapaSerie->generoSerie_id);
     }
+
+    public function bonificaciones(Request $request)
+    {
+        $tabla=Tabla::findOrFail($request->tabla);
+        $this->authorize('Actualizar bonificación',Tabla::class);
+        $tabla->bonificacion=$request->bonificacion;
+        $tabla->usuarioActualizado=Auth::id();
+        $tabla->save();
+        $request->session()->flash('success','Bonificacón agregada!');
+        return redirect()->route('etapas-serie',$request->etapaid);
+    }
+
 
 }

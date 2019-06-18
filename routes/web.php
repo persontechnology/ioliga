@@ -86,6 +86,7 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	  	Route::post('/crear-etapa', 'Etapas@guradarEtapa')->name('crear-etapa');
 	  	Route::post('/guardar-etapa-serie', 'Etapas@guardarEtapaSerie')->name('guardar-etapa-serie');
 	  	Route::get('/eliminar-etapa-serie/{id}', 'Etapas@eliminarEtapaSerie')->name('eliminar-etapa-serie');
+	  	Route::post('/actualiza-bonificacion', 'Etapas@bonificaciones')->name('actualizar-bonificacion');
 
 	  	/*fechas*/
 
@@ -93,6 +94,7 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	  	Route::post('/crear-fecha-etapa', 'Fechas@crearFecha')->name('crear-fecha-etapa');
 	  	Route::get('/fecha/{id}', 'Fechas@fecha')->name('fecha');
 	  	Route::get('/eliminar-fecha/{id}', 'Fechas@eliminarFecha')->name('eliminar-fecha');
+	  	Route::get('/finalizar-fecha/{id}', 'Fechas@finalizarProcesoFecha')->name('finalizar-fecha');
 
 	  	/*partidos*/
 	  	Route::post('/crear-partido', 'Fechas@guardarPartidos')->name('crear-partido');
@@ -105,7 +107,7 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	  	Route::get('/alineacion-index/{id}/{idAs}', 'Alineaciones@index')->name('alineacion');
 	  	Route::post('/crear-alineacion', 'Alineaciones@guardarAlineacion')->name('crear-alineacion');
 		Route::post('/actualizar-alineacion', 'Alineaciones@actualizarResultados')->name('actualizar-alineacion');
-	  	
+	  	Route::get('/alineacion-eliminar/{id}/{idAs}', 'Alineaciones@eliominarAlineacion')->name('alineacion-eliminar');
 	  	
 
 	});

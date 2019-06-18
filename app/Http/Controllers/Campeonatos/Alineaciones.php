@@ -19,6 +19,7 @@ class Alineaciones extends Controller
 	public function Index($codigoPar,$codigoAsignacion)
 	{
 		$partido=Partido::findOrFail($codigoPar);
+		 $this->authorize('Administrar partidos',Partido::class);
 		$asignacion=Asignacion::findOrFail($codigoAsignacion);
 		$existeAsignacioNomina=$asignacion->asignacionNominasPartido()
 		->whereNotIn('id',$partido->alineaciones->pluck('asignacionNomina_id'))->get();
@@ -32,6 +33,7 @@ class Alineaciones extends Controller
 
 	public function guardarAlineacion(Request $request)
 	{
+		 $this->authorize('Administrar partidos',Partido::class);
 		$alineacion=new Alineacion;
 		$alineacion->detalle="Inicio";
 		$alineacion->asignacionNomina_id=$request->nomina;
@@ -40,13 +42,13 @@ class Alineaciones extends Controller
 		$alineacion->rojas=0;
 		$alineacion->goles=0;
 		$alineacion->usuarioCreado=Auth::id();
-
 		$alineacion->save();
 		session()->flash('success','Jugador asignado al partido existosamente !');
         return redirect()->route('alineacion',[$request->partido,$request->asignacion]);  
 	}
 	public function actualizarResultados(Request $request)
 	{
+		 $this->authorize('Administrar partidos',Partido::class);
 		$alineacion=Alineacion::findOrFail($request->alineacion);
 		$alineacion->amarillas=$request->amarillas;
 		$alineacion->rojas=$request->rojas;
@@ -56,5 +58,16 @@ class Alineaciones extends Controller
 		session()->flash('success','Datos Ingresados existosamente !');
         return redirect()->route('alineacion',[$request->partido,$request->asignacion]);
 	}
-    
+    public function eliominarAlineacion($codigoAlineacion,$codigoAsignacion)
+    {
+	    $alineacion=Alineacion::findOrFail($codigoAlineacion);
+	     $this->authorize('Administrar partidos',Partido::class);
+    	 try {
+	    	$alineacion->delete();
+	    	session()->flash('success','El jugador fue elimanado de la nómina');
+        } catch (\Exception $e) {
+            session()->flash('info','El jugador no eliminado, ya que contiene información relacionada');
+        }
+        return redirect()->route('alineacion',[$alineacion->partido_id,$codigoAsignacion]);
+    }
 }

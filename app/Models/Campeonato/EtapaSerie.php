@@ -9,6 +9,7 @@ use ioliga\Models\Campeonato\GeneroSerie;
 use ioliga\Models\Campeonato\Partido;
 use ioliga\Models\Campeonato\Tabla;
 use ioliga\Models\Campeonato\Resultado;
+use Illuminate\Support\Facades\DB;
 class EtapaSerie extends Model
 {
    protected $table='etapaSerie';
@@ -54,10 +55,29 @@ class EtapaSerie extends Model
             Tabla::class,
             'etapaSerie_id', // Foreign key on posts table...
             'tabla_id', // Foreign key on users table...
-            'id', // Local key on countries table...
-            'id' // Local key on users table...
-        )->groupBy('id');
+     		'id',
+     		'id'
+        );
 
 		 return $listaPartidos;
 	}
+
+
+	/**/
+	public function resultado($id)
+	{	
+		$result=Tabla::
+		join('resultado','resultado.tabla_id','=', 'tabla.id')
+		->select('resultado.tabla_id','tabla.bonificacion',DB::raw('((sum(resultado.estado="Ganado")*3)+tabla.bonificacion) as ganado,sum(resultado.estado="Empate") as empate , sum(golesFavor-golesContra) as goles'))
+		->where('etapaSerie_id',$id)		
+		->groupBy('resultado.tabla_id','tabla.bonificacion')
+		->orderBy('ganado','DESC')		
+		->orderBy('empate','DESC')
+		->orderBy('goles','DESC')
+		->get();
+		return $result;
+	}
+
+	
+
 }

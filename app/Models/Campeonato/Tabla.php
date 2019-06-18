@@ -45,4 +45,10 @@ class Tabla extends Model
     	$ampate=$empatados*1;
     	return $ganado+$ampate+$bonificacion;
     }
+
+    public function tabla($idTabla)
+    {
+        $tabla=Tabla::findOrFail($idTabla);
+        return $tabla;
+    }
 }

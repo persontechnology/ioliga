@@ -19,7 +19,12 @@ use ioliga\Policies\EquipoPolicy;
 use ioliga\Policies\GeneroEquipoPolicy;
 use ioliga\Models\Campeonato\Etapa;
 use ioliga\Models\Campeonato\Asignacion;
-
+use ioliga\Models\Campeonato\Fecha;
+use ioliga\Policies\FechaPolicy;
+use ioliga\Models\Campeonato\Partido;
+use ioliga\Policies\PartidoPolicy;
+use ioliga\Models\Campeonato\Tabla;
+use ioliga\Policies\TablaPolicy;
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -36,8 +41,9 @@ class AuthServiceProvider extends ServiceProvider
         Equipo::class=>EquipoPolicy::class,
         Etapa::class=>EtapaPolicy::class,
         Asignacion::class=>AsignacionPolicy::class,
-
-
+        Fecha::class=>FechaPolicy::class,
+        Partido::class=>PartidoPolicy::class,
+        Tabla::class=>TablaPolicy::class,
 
     ];
 

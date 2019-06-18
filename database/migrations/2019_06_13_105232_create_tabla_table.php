@@ -17,6 +17,7 @@ class CreateTablaTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->integer('bonificacion')->default(0);
+            $table->enum('lugar',['Participante','Primer','Segundo','Tercero']);
             $table->unsignedBigInteger('etapaSerie_id');
             $table->foreign('etapaSerie_id')->references('id')->on('etapaSerie');            
             $table->unsignedBigInteger('asignacion_id');

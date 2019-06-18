@@ -4,6 +4,7 @@ namespace ioliga\Http\Controllers\Campeonatos;
 
 use Illuminate\Http\Request;
 use ioliga\Http\Controllers\Controller;
+
 use Illuminate\Support\Facades\Auth;
 use ioliga\Models\Campeonato\EtapaSerie;
 use ioliga\Models\Campeonato\Fecha;
@@ -25,14 +26,15 @@ class Fechas extends Controller
     }
     public function index($codigoEserie)
     {
-    	/*$this->authorize('Ver fechas',Fecha::class);*/
     	$etapaSerie=EtapaSerie::findOrFail($codigoEserie);    	  	
+    	$this->authorize('Ver fechas',Fecha::class);
     	$data = array('etapasSerie' =>$etapaSerie );
     	return view('campeonatos.fechas.index',$data);
     }
     public function crearFecha(RqCrear $request)
     {
-        $etapaSerie=EtapaSerie::findOrFail($request->etapa);      
+        $etapaSerie=EtapaSerie::findOrFail($request->etapa);
+        $this->authorize('Administrar fechas',Fecha::class);      
     	$fecha=new Fecha;
     	$fecha->etapaSerie_id=$etapaSerie->id;
     	$fecha->nombre="Fecha";
@@ -45,7 +47,7 @@ class Fechas extends Controller
     public function fecha($codigoFecha)
     {
        $fecha=Fecha::findOrFail($codigoFecha);
-       
+       $this->authorize('Ver partidos',Partido::class);
         $asignacioncionAsc=$fecha->etapaSerie->generoSerie->asignacionAsc()
        ->whereNotIn('id',$fecha->partidos->pluck('asignacion1_id'))
        ->whereNotIn('id',$fecha->partidos->pluck('asignacion2_id'))->get(); 
@@ -62,10 +64,10 @@ class Fechas extends Controller
     public function eliminarFecha(Request $request,$idFecha)
     {
         $fecha=Fecha::findOrFail($idFecha);
-        /*$this->authorize('eliminar',$campeonato);*/
+        $this->authorize('Administrar fechas',Fecha::class);  
         try {
             $fecha->delete();
-            $request->session()->flash('success','La fecha de la etapa fue eliminada');
+            session()->flash('success','La fecha de la etapa fue eliminada');
         } catch (\Exception $e) {
             $request->session()->flash('info','La fecha de la etapa no eliminado, ya que contiene información relacionada');
         }
@@ -74,6 +76,7 @@ class Fechas extends Controller
     public function guardarPartidos(RqCrearPartido $request)
     {
       try {
+            $this->authorize('Administrar partidos',Partido::class);
             DB::beginTransaction();
             $partido=new Partido;
             $partido->hora=$request->hora;
@@ -116,6 +119,7 @@ class Fechas extends Controller
     public function eliminarpartido(Request $request,$idPartido)
     {
          try {
+             $this->authorize('Administrar partidos',Partido::class);
             DB::beginTransaction();
             $partido=Partido::findOrFail($idPartido);
             /*return $partido->fecha->etapaSerie->tablas;*/
@@ -150,6 +154,7 @@ class Fechas extends Controller
      public function estadoPartido(Request $request)
     {
         try {
+             $this->authorize('Administrar partidos',Partido::class);
             DB::beginTransaction();
             $partido=Partido::findOrFail($request->partido);
             $asignacion1=Asignacion::findOrFail($partido->asignacion1_id);
@@ -214,6 +219,7 @@ class Fechas extends Controller
     }
     public function guardarResultadosEstado($idPartido,$asignacion1_id,$asignacion2_id)
     {
+         $this->authorize('Administrar partidos',Partido::class);
         $partido=Partido::findOrFail($idPartido);
          $fecaha=Fecha::findOrFail($partido->fecha_id);
         $asignacion1=Asignacion::findOrFail($asignacion1_id);
@@ -290,5 +296,16 @@ class Fechas extends Controller
             $edires->usuarioCreado=Auth::id();
             $edires->save();
         }
+    }
+    /*finalizar proceso de la fecha*/
+    public function finalizarProcesoFecha($codigoFecha)
+    {
+        $this->authorize('Administrar fechas',Fecha::class);   
+        $fecha=Fecha::findOrFail($codigoFecha);
+        $fecha->estado=true;
+        $fecha->usuarioActualizado=Auth::id();
+        $fecha->save();
+       session()->flash('success','Fecha Finalizada');
+        return redirect()->route('fecha',$fecha->id);
     }
 }

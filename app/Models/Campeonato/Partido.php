@@ -44,6 +44,7 @@ class Partido extends Model
     {
         return $this->hasMany(Resultado::class, 'partido_id');
     }
+    
 
 
     

@@ -18,6 +18,8 @@
 	<div class="card-body">
 		<div class="row">
 			<div class="col-sm-12">
+			@can('Administrar partidos', 'ioliga\Models\Campeonato\Partido::class')
+			@if($partido->tipo=="Proceso")
 			@if($asistenciaNomina->count()>0)	
 			<form action="{{route('crear-alineacion')}}" method="post" enctype="multipart/form-data" id="formIngresoUsuario">
 		      @csrf
@@ -47,14 +49,18 @@
 		  </form>
 		  @else
 		   <div class="alert alert-warning alert-styled-left alert-dismissible">
+		   	<button type="button" class="close" data-dismiss="alert"><span>×</span></button>
                 No existen jugadores             
             </div>
 		  @endif
+		  @endif
+		  @endcan
 			</div>
+
 			<div class="col-sm-12">
 				
 		@if($alineacion->count()>0)
-
+		
 		<!-- Support tickets -->
 		<div class="card">
 			<div class="card-header header-elements-sm-inline">
@@ -72,11 +78,29 @@
 
 				<div class="d-flex align-items-center mb-3 mb-md-0">
 					<a href="#" class="btn bg-transparent border-success text-indigo-400 rounded-round border-2 btn-icon">
-						<i class="icon-user-check"></i>
+						<i class="far fa-futbol"></i>
 					</a>
 					<div class="ml-3">
-						<h5 class="font-weight-semibold mb-0">{{$alineacion->count()}}</h5>
-						<span class="text-muted">total registrados</span>
+						<h5 class="font-weight-semibold mb-0">{{$alineacion->sum('goles')}}</h5>
+						<span class="text-muted">total goles</span>
+					</div>
+				</div>
+				<div class="d-flex align-items-center mb-3 mb-md-0">
+					<a href="#" class="btn bg-transparent border-warning text-warning rounded-round border-2 btn-icon">
+						<i class="far fa-file "></i>
+					</a>
+					<div class="ml-3">
+						<h5 class="font-weight-semibold mb-0">{{$alineacion->sum('amarillas')}}</h5>
+						<span class="text-muted">total Amarillas</span>
+					</div>
+				</div>
+				<div class="d-flex align-items-center mb-3 mb-md-0">
+					<a href="#" class="btn bg-transparent border-danger text-danger rounded-round border-2 btn-icon">
+						<i class="far fa-file "></i>
+					</a>
+					<div class="ml-3">
+						<h5 class="font-weight-semibold mb-0">{{$alineacion->sum('rojas')}}</h5>
+						<span class="text-muted">total Rojas</span>
 					</div>
 				</div>
 
@@ -131,8 +155,10 @@
 									</div>
 								</div>
 							</td>
+							@if($partido->tipo=="Proceso")
 							<form action="{{route('actualizar-alineacion')}}" method="post">
 								@csrf
+							@endif
 							<td>
 								<input type="hidden" name="partido" id="partido" value="{{$partido->id}}">
 								<input class=" form-control" type="number" min="0" max="2" name="amarillas" value="{{$ali->amarillas}}" >	
@@ -146,9 +172,18 @@
 								<input class=" form-control" type="number" name="goles" value="{{$ali->goles}}" >
 							</td>
 							<td>
-								<button type="submit" class="btn btn-dark"><i class="icon-database-refresh"></i></button>
+								@can('Administrar partidos', 'ioliga\Models\Campeonato\Partido::class')
+								@if($partido->tipo=="Proceso")
+								<div class="btn-group" role="group" aria-label="Basic example">
+									<button type="submit" class="btn btn-dark"><i class="icon-database-refresh"></i></button>
+									<a data-url="{{ route('alineacion-eliminar',[$ali->id,$asignacion->id]) }}" data-msj="Eliminar Jugador" onclick="eliminar(this);" class="dropdown-item"><i class="fas fa-trash-alt text-danger"></i> </a>
+								</div>
+								@endif
+								@endcan
 							</td>
+							@if($partido->tipo=="Proceso")
 							</form>
+							@endif
 						</tr>
 						@endforeach	
 

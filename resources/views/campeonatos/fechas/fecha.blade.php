@@ -13,6 +13,8 @@
     	</div>
 	</div>
 	<div class="card-body">
+		@can('Administrar partidos', 'ioliga\Models\Campeonato\Partido::class')
+		@if($fecha->estado==0)
 		<form action="{{ route('crear-partido') }}" method="post" enctype="multipart/form-data" id="formIngresoUsuario">
 		      @csrf
 		      <div class="row">		      
@@ -92,6 +94,8 @@
 					</div>
 				</div>
 	  	</form>
+	  	@endif
+	  	@endcan
 	</div>
 </div>
 
@@ -113,7 +117,9 @@
 			@foreach($fecha->partidos as $par)
 			<tbody>
 				<tr class="table-active">
-					<th colspan="7"><i class="fas fa-clock mr-3 fa-2x"></i> {{$par->hora}} </th>
+					<th colspan="{{$fecha->estado==0?'7':'9'}}"><i class="fas fa-clock mr-3 fa-2x"></i> {{$par->hora}} </th>
+					@can('Administrar partidos', 'ioliga\Models\Campeonato\Partido::class')
+					@if($fecha->estado==0)
 					<th>
 						<select onchange="cambiarEstado1(this);" class="form-control">
 						  <option class=" text-warning" value="{{$par->id}}" {{$par->tipo=='Proceso' ? 'selected' :''}}>Proceso</option>
@@ -128,6 +134,8 @@
 						</button>
 						@endif
 					</th>
+					@endif
+					@endcan
 				</tr>
 				<tr>
 					<td class="">
