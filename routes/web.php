@@ -18,6 +18,7 @@ Route::get('/', function () {
     // $A=Artisan::call('config:cache');
 	//Artisan::call('storage:link');
 	//Artisan::call('key:generate');
+	//Artisan::call('migrate --seed');
 	
 });
 
