@@ -145,6 +145,7 @@
 	            	</div>
 				</div>				
 				<div class="card-body text-dark">
+					<div class="table-responsive">
 					<table id="myTable">
 						<thead>
 							<tr>
@@ -224,6 +225,7 @@
 							@endif
 						</tbody>
 					</table>
+				</div>
 				</div>
 			</div>
 		</div>
