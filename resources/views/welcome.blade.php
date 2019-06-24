@@ -1,6 +1,10 @@
 @extends('layouts.info',['titulo'=>'Nosotros'])
 @section('content')
 
+
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v3.3"></script>
+
 <!-- Swiper-->
 <section class="section swiper-container swiper-slider swiper-classic bg-gray-2" data-loop="true" data-autoplay="4000" data-simulate-touch="false" data-slide-effect="fade">
   <div class="swiper-wrapper">
@@ -93,8 +97,8 @@
                         <div class="inline-toggle icon material-icons-share"></div>
                         <div class="inline-toggle-element">
                           <ul class="list-inline">
-                            <li>Compartir</li>
-
+                            
+                            <div class="fb-share-button" data-href="{{ route('noticiaDetalle',$now->id) }}" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ route('noticiaDetalle',$now->id) }}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Compartir</a></div>
                           </ul>
                         </div>
                       </div>
