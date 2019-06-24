@@ -32,6 +32,32 @@ class Asignaciones extends Controller
     	}
     }
 
+    /*resultados*/
+
+    public function partidosRe($codigoAsignacion)
+    {
+        try {
+        $asignacion=Asignacion::findOrFail(Crypt::decryptString($codigoAsignacion));                
+        $generoSerie=$asignacion->unoGeneroSerie;
+        $data = array('asignacion' =>$asignacion ,'generoSerie'=>$generoSerie);
+        return view('asignaciones.etapasEquipo',$data);
+        } catch (DecryptException $th) {
+        session()->flash('danger','Error al visualizar: Los datos ingresados están manipulados vuelva intentar !');
+        return redirect()->route('listar-mis-equipo');            
+        }
+    }
+     public function fechasEquipo($codigoAsignacion)
+    {
+        try {
+        $asignacion=Asignacion::findOrFail(Crypt::decryptString($codigoAsignacion));                
+        $generoSerie=$asignacion->unoGeneroSerie;
+        $data = array('asignacion' =>$asignacion ,'generoSerie'=>$generoSerie);
+        return view('asignaciones.fechasEquipo',$data);
+        } catch (DecryptException $th) {
+        session()->flash('danger','Error al visualizar: Los datos ingresados están manipulados vuelva intentar !');
+        return redirect()->route('listar-mis-equipo');            
+        }
+    }
     public function asignacionNomina($codigoAsignacion)
     {
     	try {

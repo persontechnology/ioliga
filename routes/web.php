@@ -103,6 +103,9 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	  	Route::get('/eliminar-etapa-serie/{id}', 'Etapas@eliminarEtapaSerie')->name('eliminar-etapa-serie');
 	  	Route::post('/actualiza-bonificacion', 'Etapas@bonificaciones')->name('actualizar-bonificacion');
 
+	  	/*ver historia de serie*/
+	  	Route::get('/etapas-representante/{id}', 'Asignaciones@partidosRe')->name('etapas-equipo');
+	  	Route::get('/fechas-representante/{id}', 'Asignaciones@fechasEquipo')->name('fechas-representante');
 	  	/*fechas*/
 
 	  	Route::get('/fechas/{id}', 'Fechas@index')->name('fechas-etapa');
