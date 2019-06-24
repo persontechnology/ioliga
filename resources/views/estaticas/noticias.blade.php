@@ -1,4 +1,4 @@
-@extends('layouts.info',['titulo'=>'Nosotros'])
+@extends('layouts.info',['titulo'=>'Noticias'])
 @section('content')
 
 
@@ -32,17 +32,11 @@
                 <!-- Post Carmen-->
                 <article class="post-carmen">
                     <img src="{{ Storage::url('public/noticias/'.$n->foto) }}" alt="" width="369" height="343"/>
-                <div class="post-carmen-header">
-                    <!-- Badge-->
-                    @if(!$n->urlVideo)
-                    <a class="post-video-button" id="verVideo" href="#modal1" data-url="{{ Storage::url('public/noticias/'.$n->foto) }}" data-toggle="modal">
-                        <span class="icon material-icons-play_arrow"></span>
-                    </a>
-                    @endif
+                <div class="post-carmen-header"> 
                 </div>
                 <div class="post-carmen-main">
                     <h4 class="post-carmen-title">
-                        <a href="blog-post.html">
+                        <a href="{{ route('noticiaDetalle',$n->id) }}">
                             {{ $n->titulo }}
                         </a>
                         </h4>
@@ -79,7 +73,9 @@
     <script>
         $('#menuNoticias').addClass('active');
     </script>
+    
 @endpush
+
 
 
 @endsection

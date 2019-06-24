@@ -141,11 +141,11 @@
                     Contactanos
                 </div>
                 <div class="card-body">
-                    @if($nos->email)
+                    @if(isset($nos->email))
                         <p class="card-text"> <i class="icon fa fa-envelope" aria-hidden="true"></i> {{ $nos->email }}</p>
                     @endif
 
-                    @if($nos->telefono)
+                    @if(isset($nos->telefono))
                         <p class="card-text"> <i class="icon fa fa-phone-square" aria-hidden="true"></i> {{ $nos->telefono }}</p>
                     @endif
 

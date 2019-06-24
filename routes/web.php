@@ -27,6 +27,7 @@ Route::get('/', function () {
 
 Route::get('/nosotros', 'Estaticas@nosotros')->name('nosotros');
 Route::get('/noticias', 'Estaticas@noticias')->name('noticias');
+Route::get('/noticia-detalle/{id}', 'Estaticas@noticiaDetalle')->name('noticiaDetalle');
 
 
 

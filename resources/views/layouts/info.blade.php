@@ -225,7 +225,7 @@
                       </div>
                       <div class="unit-body">
                         <h6>Escribenos</h6>
-                          <span class="text-white">{{ $nos->email }}
+                          <span class="text-white">{{ $nos->email??'' }}
                           </span>
                       </div>
                     </div>

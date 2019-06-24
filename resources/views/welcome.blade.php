@@ -11,7 +11,7 @@
             <div class="swiper-slide-caption">
               <h1 data-caption-animate="fadeInUp" data-caption-delay="100">Nosotros jugamos futbol</h1>
               <h4 data-caption-animate="fadeInUp" data-caption-delay="200">Unete a nosotros</h4>
-              <a class="button button-primary" data-caption-animate="fadeInUp" data-caption-delay="300" href="about-us.html">Conocer más</a>
+              <a class="button button-primary" data-caption-animate="fadeInUp" data-caption-delay="300" href="{{ route('nosotros') }}">Conocer más</a>
             </div>
           </div>
         </div>
@@ -24,7 +24,7 @@
             <div class="swiper-slide-caption">
               <h1 data-caption-animate="fadeInUp" data-caption-delay="100">Somos los mejores</h1>
               <h4 data-caption-animate="fadeInUp" data-caption-delay="200">en todo lo relacionado con el fútbol</h4>
-              <a class="button button-primary" data-caption-animate="fadeInUp" data-caption-delay="300" href="about-us.html">Lee mas</a>
+              <a class="button button-primary" data-caption-animate="fadeInUp" data-caption-delay="300" href="{{ route('noticias') }}">Lee mas</a>
             </div>
           </div>
         </div>
@@ -37,7 +37,7 @@
             <div class="swiper-slide-caption">
               <h1 data-caption-animate="fadeInUp" data-caption-delay="100">Mejor sitio web</h1>
               <h4 data-caption-animate="fadeInUp" data-caption-delay="200">Para noticias de fútbol, ​​actualizaciones , <br class="d-none d-xl-block"> y resultados de juegos.</h4>
-              <a class="button button-primary" data-caption-animate="fadeInUp" data-caption-delay="300" href="about-us.html">Lee mas</a>
+              <a class="button button-primary" data-caption-animate="fadeInUp" data-caption-delay="300" href="{{ url('/') }}">Lee mas</a>
             </div>
           </div>
         </div>
@@ -59,42 +59,42 @@
           <article class="heading-component">
             <div class="heading-component-inner">
               <h5 class="heading-component-title">Noticias populares
-              </h5><a class="button button-xs button-gray-outline" href="news-1.html">Todas las noticias</a>
+              </h5><a class="button button-xs button-gray-outline" href="{{ route('noticias') }}">Todas las noticias</a>
             </div>
           </article>
           <div class="row row-30">
+            @foreach(ioliga\Models\Noticia::where('estado',true)->latest()->get() as $now)
             <div class="col-md-6">
               <!-- Post Future-->
               <article class="post-future">
-                  <a class="post-future-figure" href="blog-post.html">
-                      <img src="{{ asset('vendor/soccer/images/news-2-1-368x287.jpg') }}" alt="" width="368" height="287"/>
+                  <a class="post-future-figure" href="{{ route('noticiaDetalle',$now->id) }}">
+                      <img src="{{ Storage::url('public/noticias/'.$now->foto) }}" alt="" width="368" height="287"/>
                   </a>
                 <div class="post-future-main">
-                  <h4 class="post-future-title"><a href="blog-post.html">Sadio mane still makes a difference, sam wilson admits</a></h4>
+                  <h4 class="post-future-title"><a href="{{ route('noticiaDetalle',$now->id) }}">{{ $now->titulo }}</a></h4>
                   <div class="post-future-meta">
                     <!-- Badge-->
-                    <div class="badge badge-secondary">The Team
+                    <div class="badge badge-secondary">La liga
                     </div>
                     <div class="post-future-time"><span class="icon mdi mdi-clock"></span>
-                      <time datetime="2019">April 15, 2019</time>
+                      <time datetime="">{{ $now->created_at }}</time>
                     </div>
                   </div>
                   <hr/>
                   <div class="post-future-text">
-                    <p>Liverpool would love to welcome Philippe Coutinho back, but Sadio Mane is carrying...</p>
+                    
+                        {!! str_limit($now->detalle, $limit = 15, $end = '...') !!}
+                    
                   </div>
                   <div class="post-future-footer group-flex group-flex-xs">
-                    <a class="button button-gray-outline" href="blog-post.html">Read more</a>
+                    <a class="button button-gray-outline" href="{{ route('noticiaDetalle',$now->id) }}">Leer mas</a>
                     <div class="post-future-share">
                       <div class="inline-toggle-parent">
                         <div class="inline-toggle icon material-icons-share"></div>
                         <div class="inline-toggle-element">
                           <ul class="list-inline">
-                            <li>Share</li>
-                            <li><a class="icon fa-facebook" href="#"></a></li>
-                            <li><a class="icon fa-twitter" href="#"></a></li>
-                            <li><a class="icon fa-google-plus" href="#"></a></li>
-                            <li><a class="icon fa-instagram" href="#"></a></li>
+                            <li>Compartir</li>
+
                           </ul>
                         </div>
                       </div>
@@ -103,272 +103,7 @@
                 </div>
               </article>
             </div>
-            <div class="col-md-6">
-              <!-- Post Future-->
-              <article class="post-future">
-                  <a class="post-future-figure" href="blog-post.html">
-                      <img src="{{ asset('vendor/soccer/images/news-2-2-368x287.jpg') }}" alt="" width="368" height="287"/></a>
-                <div class="post-future-main">
-                  <h4 class="post-future-title"><a href="blog-post.html">Robertsons decent debut at european cup 2019</a></h4>
-                  <div class="post-future-meta">
-                    <!-- Badge-->
-                    <div class="badge badge-secondary">The Team
-                    </div>
-                    <div class="post-future-time"><span class="icon mdi mdi-clock"></span>
-                      <time datetime="2019">April 15, 2019</time>
-                    </div>
-                  </div>
-                  <hr/>
-                  <div class="post-future-text">
-                    <p>Robertson, in his first Anfield outing as a Liverpool player, looked assured at left-back...</p>
-                  </div>
-                  <div class="post-future-footer group-flex group-flex-xs"><a class="button button-gray-outline" href="blog-post.html">Read more</a>
-                    <div class="post-future-share">
-                      <div class="inline-toggle-parent">
-                        <div class="inline-toggle icon material-icons-share"></div>
-                        <div class="inline-toggle-element">
-                          <ul class="list-inline">
-                            <li>Share</li>
-                            <li><a class="icon fa-facebook" href="#"></a></li>
-                            <li><a class="icon fa-twitter" href="#"></a></li>
-                            <li><a class="icon fa-google-plus" href="#"></a></li>
-                            <li><a class="icon fa-instagram" href="#"></a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </article>
-            </div>
-            <div class="col-md-6">
-              <!-- Post Future-->
-              <article class="post-future">
-                  <a class="post-future-figure" href="blog-post.html">
-                      <img src="{{ asset('vendor/soccer/images/news-2-3-368x287.jpg') }}" alt="" width="368" height="287"/>
-                  </a>
-                <div class="post-future-main">
-                  <h4 class="post-future-title"><a href="blog-post.html">Pochettino and ‘gaffer’s son’ Rose estranged – reports</a></h4>
-                  <div class="post-future-meta">
-                    <!-- Badge-->
-                    <div class="badge badge-secondary">The Team
-                    </div>
-                    <div class="post-future-time"><span class="icon mdi mdi-clock"></span>
-                      <time datetime="2019">April 15, 2019</time>
-                    </div>
-                  </div>
-                  <hr/>
-                  <div class="post-future-text">
-                    <p>Danny Rose and Mauricio Pochettino were once so close that he was nicknamed “the gaffer’s...</p>
-                  </div>
-                  <div class="post-future-footer group-flex group-flex-xs"><a class="button button-gray-outline" href="blog-post.html">Read more</a>
-                    <div class="post-future-share">
-                      <div class="inline-toggle-parent">
-                        <div class="inline-toggle icon material-icons-share"></div>
-                        <div class="inline-toggle-element">
-                          <ul class="list-inline">
-                            <li>Share</li>
-                            <li><a class="icon fa-facebook" href="#"></a></li>
-                            <li><a class="icon fa-twitter" href="#"></a></li>
-                            <li><a class="icon fa-google-plus" href="#"></a></li>
-                            <li><a class="icon fa-instagram" href="#"></a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </article>
-            </div>
-            <div class="col-md-6">
-              <!-- Post Future-->
-              <article class="post-future">
-                  <a class="post-future-figure" href="blog-post.html">
-                      <img src="{{ asset('vendor/soccer/images/news-2-4-368x287.jpg') }}" alt="" width="368" height="287"/>
-                  </a>
-                <div class="post-future-main">
-                  <h4 class="post-future-title"><a href="blog-post.html">Coutinho’s camp: It was all Barca’s fault and we can prove it</a></h4>
-                  <div class="post-future-meta">
-                    <!-- Badge-->
-                    <div class="badge badge-secondary">The Team
-                    </div>
-                    <div class="post-future-time"><span class="icon mdi mdi-clock"></span>
-                      <time datetime="2019">April 15, 2019</time>
-                    </div>
-                  </div>
-                  <hr/>
-                  <div class="post-future-text">
-                    <p>Philippe Coutinho is reportedly seeking clear-the-air talks with Liverpool after...</p>
-                  </div>
-                  <div class="post-future-footer group-flex group-flex-xs"><a class="button button-gray-outline" href="blog-post.html">Read more</a>
-                    <div class="post-future-share">
-                      <div class="inline-toggle-parent">
-                        <div class="inline-toggle icon material-icons-share"></div>
-                        <div class="inline-toggle-element">
-                          <ul class="list-inline">
-                            <li>Share</li>
-                            <li><a class="icon fa-facebook" href="#"></a></li>
-                            <li><a class="icon fa-twitter" href="#"></a></li>
-                            <li><a class="icon fa-google-plus" href="#"></a></li>
-                            <li><a class="icon fa-instagram" href="#"></a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </article>
-            </div>
-            <div class="col-md-12">
-              <!-- Post Gloria-->
-              <article class="post-gloria"><img src="{{ asset('vendor/soccer/images/post-gloria-1-769x429.jpg') }}" alt="" width="769" height="429"/>
-                <div class="post-gloria-main">
-                  <h3 class="post-gloria-title"><a href="blog-post.html">Premier League Winners and Losers: a quick look</a></h3>
-                  <div class="post-gloria-meta">
-                    <!-- Badge-->
-                    <div class="badge badge-primary">The League
-                    </div>
-                    <div class="post-gloria-time"><span class="icon mdi mdi-clock"></span>
-                      <time datetime="2019">April 15, 2019</time>
-                    </div>
-                  </div>
-                  <div class="post-gloria-text">
-                    <svg version="1.1" x="0px" y="0px" width="6.888px" height="4.68px" viewbox="0 0 6.888 4.68" enable-background="new 0 0 6.888 4.68" xml:space="preserve">
-                      <path d="M1.584,0h1.8L2.112,4.68H0L1.584,0z M5.112,0h1.776L5.64,4.68H3.528L5.112,0z"></path>
-                    </svg>
-                    <p>During this year’s premier league, we are glad to announce that there are new players who are...</p>
-                  </div><a class="button" href="blog-post.html">Read more</a>
-                </div>
-              </article>
-            </div>
-            <div class="col-md-12">
-              <!-- Post Future-->
-              <article class="post-future post-future-horizontal">
-                  <a class="post-future-figure" href="blog-post.html">
-                      <img src="{{ asset('vendor/soccer/images/news-3-1-370x325.jpg') }}" alt="" width="370" height="325"/></a>
-                <div class="post-future-main">
-                  <h4 class="post-future-title"><a href="blog-post.html">Zidane: “We’re not going to change the way we play at the Calderón”</a></h4>
-                  <div class="post-future-meta">
-                    <!-- Badge-->
-                    <div class="badge badge-red">hot<span class="icon mdi mdi-fire"></span>
-                    </div>
-                    <div class="post-future-time"><span class="icon mdi mdi-clock"></span>
-                      <time datetime="2019">April 15, 2019</time>
-                    </div>
-                  </div>
-                  <hr/>
-                  <div class="post-future-text">
-                    <p>Zidane spoke to the media at the Real Madrid City. The Whites coach explained how the team is going in to the second leg of the Champions...</p>
-                  </div>
-                </div>
-              </article>
-            </div>
-            <div class="col-md-12">
-              <!-- Post Future-->
-              <article class="post-future post-future-horizontal">
-                  <a class="post-future-figure" href="blog-post.html">
-                      <img src="{{ asset('vendor/soccer/images/news-3-2-370x325.jpg') }}" alt="" width="370" height="325"/></a>
-                <div class="post-future-main">
-                  <h4 class="post-future-title"><a href="blog-post.html">NFL Will Handle Referee Pete Morelli’s Uose of Profanity Internally</a></h4>
-                  <div class="post-future-meta">
-                    <!-- Badge-->
-                    <div class="badge badge-primary">The League
-                    </div>
-                    <div class="post-future-time"><span class="icon mdi mdi-clock"></span>
-                      <time datetime="2019">April 15, 2019</time>
-                    </div>
-                  </div>
-                  <hr/>
-                  <div class="post-future-text">
-                    <p>The NFL will internally address referee Pete Morellis recent microphone gaffe, a league spokesman said, but it does not appear Morelli...</p>
-                  </div>
-                </div>
-              </article>
-            </div>
-            <div class="col-md-12">
-              <!-- Swiper-->
-              <div class="swiper-container swiper-slider post-slider" data-loop="false" data-autoplay="false" data-simulate-touch="false">
-                <div class="swiper-wrapper">
-                  <div class="swiper-slide">
-                    <div class="swiper-slide-caption">
-                      <!-- Post Alice-->
-                      <article class="post-alice">
-                          <img src="{{ asset('vendor/soccer/images/post-slide-1-769x397.jpg') }}" alt="" width="769" height="397"/>
-                          <div class="post-alice-main">
-                          <!-- Badge-->
-                          <div class="badge badge-secondary">the team
-                          </div>
-                          <h3 class="post-alice-title"><a href="blog-post.html">Lewis named AIG MCAA Sevens head coach</a></h3>
-                          <div class="divider"></div>
-                          <div class="post-alice-time"><span class="icon mdi mdi-clock"></span>
-                              <time datetime="2019">April 15, 2019</time>
-                          </div>
-                          </div>
-                      </article>
-                    </div>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="swiper-slide-caption">
-                      <!-- Post Alice-->
-                      <article class="post-alice"><img src="{{ asset('vendor/soccer/images/post-slide-2-769x397.jpg') }}" alt="" width="769" height="397"/>
-                          <div class="post-alice-main">
-                          <!-- Badge-->
-                          <div class="badge badge-primary">The League
-                          </div>
-                          <h3 class="post-alice-title"><a href="blog-post.html">rumors about world soccer championship 2019</a></h3>
-                          <div class="divider"></div>
-                          <div class="post-alice-time"><span class="icon mdi mdi-clock"></span>
-                              <time datetime="2019">April 15, 2019</time>
-                          </div>
-                          </div>
-                      </article>
-                    </div>
-                  </div>
-                  <div class="swiper-slide">
-                    <div class="swiper-slide-caption">
-                      <!-- Post Alice-->
-                      <article class="post-alice"><img src="{{ asset('vendor/soccer/images/post-slide-3-769x397.jpg') }}" alt="" width="769" height="397"/>
-                          <div class="post-alice-main">
-                          <!-- Post Video Button--><a class="post-video-button" href="#modal1" data-toggle="modal"><span class="icon material-icons-play_arrow"></span></a>
-                          <h3 class="post-alice-title"><a href="blog-post.html">2019 Europa League Final</a></h3>
-                          <div class="divider"></div>
-                          <div class="post-alice-time"><span class="icon mdi mdi-clock"></span>
-                              <time datetime="2019">April 15, 2019</time>
-                          </div>
-                          </div>
-                      </article>
-                    </div>
-                  </div>
-                </div>
-                <!-- Swiper Pagination-->
-                <div class="swiper-pagination"></div>
-                <!-- Swiper Navigation-->
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-              </div>
-            </div>
-            <div class="col-md-12">
-              <!-- Post Future-->
-              <article class="post-future post-future-horizontal">
-                  <a class="post-future-figure" href="blog-post.html">
-                      <img src="{{ asset('vendor/soccer/images/news-3-3-370x325.jpg') }}" alt="" width="370" height="325"/></a>
-                <div class="post-future-main">
-                  <h4 class="post-future-title"><a href="blog-post.html">Zidane: “We’re not going to change the way we play at the Calderón”</a></h4>
-                  <div class="post-future-meta">
-                    <!-- Badge-->
-                    <div class="badge badge-red">hot<span class="icon mdi mdi-fire"></span>
-                    </div>
-                    <div class="post-future-time"><span class="icon mdi mdi-clock"></span>
-                      <time datetime="2019">April 15, 2019</time>
-                    </div>
-                  </div>
-                  <hr/>
-                  <div class="post-future-text">
-                    <p>Zidane spoke to the media at the Real Madrid City. The Whites coach explained how the team is going in to the second leg of the Champions...</p>
-                  </div>
-                </div>
-              </article>
-            </div>
+            @endforeach
           </div>
         </div>
         <div class="main-component">
