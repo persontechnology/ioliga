@@ -7,7 +7,7 @@
      <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@isset($titulo){{ $titulo }} |@endisset {{ config('app.name', 'IOLIGA') }}</title>
+    <title>@isset($titulo){{ $titulo }} |@endisset {{ config('app.name', 'LIGA') }}</title>
 
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">

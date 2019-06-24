@@ -25,7 +25,7 @@ class RqActualizarNosotros extends FormRequest
     {
         return [
             'nombre'=>'required|string|max:255',
-            'resena'=>'nullable|string|max:255',
+            'resena'=>'nullable|string',
             'presidente'=>'nullable|string|max:255',
             'vocala'=>'nullable|string|max:255',
             'vocalb'=>'nullable|string|max:255',
@@ -36,9 +36,9 @@ class RqActualizarNosotros extends FormRequest
             'youtube'=>'nullable|string|max:255',
             'istagram'=>'nullable|string|max:255',
             'logo'=>'nullable|mimes:jpeg,jpg,png|max:1000',
-            'acerca'=>'nullable|string|max:255',
-            'mision'=>'nullable|string|max:255',
-            'vision'=>'nullable|string|max:255',
+            'acerca'=>'nullable|string',
+            'mision'=>'nullable|string',
+            'vision'=>'nullable|string',
             'email'=>'nullable|string|email|max:255',
             'telefono'=>'nullable|string|max:25',
         ];
