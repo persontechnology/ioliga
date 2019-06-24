@@ -18,6 +18,12 @@
   </head>
   <body>
 
+
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v3.3"></script>
+
+
+
     @php($nos=ioliga\Models\Nosotro::first())
     <div class="ie-panel">
       <a href="{{ url('/') }}">
@@ -274,66 +280,27 @@
                 <h5>Noticias populares</h5>
                 <div class="divider-small divider-secondary"></div>
                 <div class="row row-20">
+                  @foreach(ioliga\Models\Noticia::where('estado',true)->latest()->take(2)->get() as $nof)
                   <div class="col-sm-6">
                     <!-- Post Classic-->
                     <article class="post-classic">
-                      <div class="post-classic-aside"><a class="post-classic-figure" href="blog-post.html"><img src="{{ asset('vendor/soccer/images/footer-soccer-post-1-93x87.jpg') }}" alt="" width="93" height="87"/></a></div>
+                      <div class="post-classic-aside">
+                        <a class="post-classic-figure" href="blog-post.html">
+                          <img src="{{ Storage::url('public/noticias/'.$nof->foto) }}" alt="" width="93" height="87"/>
+                        </a>
+                      </div>
                       <div class="post-classic-main">
                         <!-- Badge-->
-                        <div class="badge badge-secondary">The Team
-                        </div>
-                        <p class="post-classic-title"><a href="blog-post.html">Bundy stymies Blue Jays and Orioles hit 2 HRs</a></p>
+                        
+                        <p class="post-classic-title"><a href="{{ route('noticiaDetalle',$nof->id) }}">{{ $nof->titulo }}</a></p>
                         <div class="post-classic-time"><span class="icon mdi mdi-clock"></span>
-                          <time datetime="2019">April 15, 2019</time>
+                          <time datetime="">{{ $nof->created_at }}</time>
                         </div>
                       </div>
                     </article>
                   </div>
-                  <div class="col-sm-6">
-                          <!-- Post Classic-->
-                          <article class="post-classic">
-                            <div class="post-classic-aside"><a class="post-classic-figure" href="blog-post.html"><img src="{{ asset('vendor/soccer/images/footer-soccer-post-2-93x87.jpg') }}" alt="" width="93" height="87"/></a></div>
-                            <div class="post-classic-main">
-                              <!-- Badge-->
-                              <div class="badge badge-red">Hot<span class="icon material-icons-whatshot"></span>
-                              </div>
-                              <p class="post-classic-title"><a href="blog-post.html">Good vibes back at struggling Schalke</a></p>
-                              <div class="post-classic-time"><span class="icon mdi mdi-clock"></span>
-                                <time datetime="2019">April 15, 2019</time>
-                              </div>
-                            </div>
-                          </article>
-                  </div>
-                  <div class="col-sm-6">
-                          <!-- Post Classic-->
-                          <article class="post-classic">
-                            <div class="post-classic-aside"><a class="post-classic-figure" href="blog-post.html"><img src="{{ asset('vendor/soccer/images/footer-soccer-post-3-93x87.jpg') }}" alt="" width="93" height="87"/></a></div>
-                            <div class="post-classic-main">
-                              <!-- Badge-->
-                              <div class="badge badge-primary">The League
-                              </div>
-                              <p class="post-classic-title"><a href="blog-post.html">Prem in 90 seconds: Chelseas crisis is over!</a></p>
-                              <div class="post-classic-time"><span class="icon mdi mdi-clock"></span>
-                                <time datetime="2019">April 15, 2019</time>
-                              </div>
-                            </div>
-                          </article>
-                  </div>
-                  <div class="col-sm-6">
-                          <!-- Post Classic-->
-                          <article class="post-classic">
-                            <div class="post-classic-aside"><a class="post-classic-figure" href="blog-post.html"><img src="{{ asset('vendor/soccer/images/footer-soccer-post-4-93x87.jpg') }}" alt="" width="93" height="87"/></a></div>
-                            <div class="post-classic-main">
-                              <!-- Badge-->
-                              <div class="badge badge-primary">The League
-                              </div>
-                              <p class="post-classic-title"><a href="blog-post.html">Liverpool in desperate need of backup players</a></p>
-                              <div class="post-classic-time"><span class="icon mdi mdi-clock"></span>
-                                <time datetime="2019">April 15, 2019</time>
-                              </div>
-                            </div>
-                          </article>
-                  </div>
+                  @endforeach
+
                 </div>
               </div>
             </div>

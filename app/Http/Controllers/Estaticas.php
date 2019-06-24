@@ -25,7 +25,7 @@ class Estaticas extends Controller
         if($n->estado){
             $n->vistas=$n->vistas+1;
             $n->save();
-            $no=Noticia::where('estado',true)->get();
+            $no=Noticia::where('estado',true)->where('id','!=',$id)->get();
             $data = array('n' =>$n ,'no'=> $no);
             return view('estaticas.noticiaDetalle',$data);
         }

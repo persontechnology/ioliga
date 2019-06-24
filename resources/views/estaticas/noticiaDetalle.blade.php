@@ -24,7 +24,7 @@
             <div class="blog-post">
             <!-- Badge-->
             <div class="">
-                <img src="{{ Storage::url('public/noticias/'.$n->foto) }}" alt="" class="" width="50px;" />
+                <img src="{{ Storage::url('public/noticias/'.$n->foto) }}" alt="" class="" width="683" height="407" />
             </div>
             <h3 class="blog-post-title">
                 {{ $n->titulo }}
@@ -43,10 +43,7 @@
             <div class="blog-post-share">
                 <p>Compartir esta publicacion</p>
                 <ul class="group">
-                <li><a class="icon fa-facebook" href="#"></a></li>
-                <li><a class="icon fa-twitter" href="#"></a></li>
-                <li><a class="icon fa-google-plus" href="#"></a></li>
-                <li><a class="icon fa-instagram" href="#"></a></li>
+                        <div class="fb-share-button" data-href="{{ route('noticiaDetalle',$n->id) }}" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ route('noticiaDetalle',$n->id) }}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Compartir</a></div>
                 </ul>
             </div>
             <div class="blog-post-content">
@@ -69,7 +66,7 @@
                 </div>
                 </article>
                 <div class="blog-post-comments">
-                    <p>ok</p>
+                    <div class="fb-comments" data-href="{{ route('noticiaDetalle',$n->id) }}" data-width="" data-numposts="5"></div>
                 </div>
             </div>
             </div>

@@ -2,8 +2,9 @@
 @section('content')
 
 
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v3.3"></script>
+@php($nosw=ioliga\Models\Nosotro::first())
+
+
 
 <!-- Swiper-->
 <section class="section swiper-container swiper-slider swiper-classic bg-gray-2" data-loop="true" data-autoplay="4000" data-simulate-touch="false" data-slide-effect="fade">
@@ -67,15 +68,19 @@
             </div>
           </article>
           <div class="row row-30">
-            @foreach(ioliga\Models\Noticia::where('estado',true)->latest()->get() as $now)
+
+          @foreach(ioliga\Models\Noticia::where('estado',true)->latest()->take(4)->get() as $now)
             <div class="col-md-6">
               <!-- Post Future-->
               <article class="post-future">
-                  <a class="post-future-figure" href="{{ route('noticiaDetalle',$now->id) }}">
+                  <a class="post-future-figure" href="blog-post.html">
                       <img src="{{ Storage::url('public/noticias/'.$now->foto) }}" alt="" width="368" height="287"/>
                   </a>
                 <div class="post-future-main">
-                  <h4 class="post-future-title"><a href="{{ route('noticiaDetalle',$now->id) }}">{{ $now->titulo }}</a></h4>
+                  <h4 class="post-future-title">
+                    <a href="blog-post.html">
+                      {{ $now->titulo }}
+                    </a></h4>
                   <div class="post-future-meta">
                     <!-- Badge-->
                     <div class="badge badge-secondary">La liga
@@ -87,18 +92,17 @@
                   <hr/>
                   <div class="post-future-text">
                     
-                        {!! str_limit($now->detalle, $limit = 15, $end = '...') !!}
+                        
                     
                   </div>
                   <div class="post-future-footer group-flex group-flex-xs">
-                    <a class="button button-gray-outline" href="{{ route('noticiaDetalle',$now->id) }}">Leer mas</a>
+                    <a class="button button-gray-outline" href="blog-post.html">Read more</a>
                     <div class="post-future-share">
                       <div class="inline-toggle-parent">
                         <div class="inline-toggle icon material-icons-share"></div>
                         <div class="inline-toggle-element">
                           <ul class="list-inline">
-                            
-                            <div class="fb-share-button" data-href="{{ route('noticiaDetalle',$now->id) }}" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ route('noticiaDetalle',$now->id) }}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Compartir</a></div>
+                              <div class="fb-share-button" data-href="{{ route('noticiaDetalle',$now->id) }}" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ route('noticiaDetalle',$now->id) }}&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Compartir</a></div>
                           </ul>
                         </div>
                       </div>
@@ -107,9 +111,13 @@
                 </div>
               </article>
             </div>
-            @endforeach
+          @endforeach  
+
+          
+
           </div>
         </div>
+
         <div class="main-component">
           <!-- Heading Component-->
           <article class="heading-component">
@@ -252,58 +260,7 @@
               </div>
             </div>
           </div>
-          <div class="aside-component">
-            <!-- Heading Component-->
-            <article class="heading-component">
-              <div class="heading-component-inner">
-                <h5 class="heading-component-title">En el punto de mira
-                </h5><a class="button button-xs button-gray-outline" href="news-1.html">Todas las noticias</a>
-              </div>
-            </article>
-            <!-- List Post Classic-->
-            <div class="list-post-classic">
-              <!-- Post Classic-->
-              <article class="post-classic">
-                <div class="post-classic-aside"><a class="post-classic-figure" href="blog-post.html"><img src="{{ asset('vendor/soccer/images/blog-element-1-94x94.jpg') }}" alt="" width="94" height="94"/></a></div>
-                <div class="post-classic-main">
-                  <p class="post-classic-title"><a href="blog-post.html">Raheem Sterling turns the tide for Manchester</a></p>
-                  <div class="post-classic-time"><span class="icon mdi mdi-clock"></span>
-                    <time datetime="2019">April 15, 2019</time>
-                  </div>
-                </div>
-              </article>
-              <!-- Post Classic-->
-              <article class="post-classic">
-                <div class="post-classic-aside"><a class="post-classic-figure" href="blog-post.html"><img src="{{ asset('vendor/soccer/images/blog-element-2-94x94.jpg') }}" alt="" width="94" height="94"/></a></div>
-                <div class="post-classic-main">
-                  <p class="post-classic-title"><a href="blog-post.html">Prem in 90 seconds: Chelseas crisis is over!</a></p>
-                  <div class="post-classic-time"><span class="icon mdi mdi-clock"></span>
-                    <time datetime="2019">April 15, 2019</time>
-                  </div>
-                </div>
-              </article>
-              <!-- Post Classic-->
-              <article class="post-classic">
-                <div class="post-classic-aside"><a class="post-classic-figure" href="blog-post.html"><img src="{{ asset('vendor/soccer/images/blog-element-3-94x94.jpg') }}" alt="" width="94" height="94"/></a></div>
-                <div class="post-classic-main">
-                  <p class="post-classic-title"><a href="blog-post.html">Good vibes back at struggling Schalke</a></p>
-                  <div class="post-classic-time"><span class="icon mdi mdi-clock"></span>
-                    <time datetime="2019">April 15, 2019</time>
-                  </div>
-                </div>
-              </article>
-              <!-- Post Classic-->
-              <article class="post-classic">
-                <div class="post-classic-aside"><a class="post-classic-figure" href="blog-post.html"><img src="{{ asset('vendor/soccer/images/blog-element-4-94x94.jpg') }}" alt="" width="94" height="94"/></a></div>
-                <div class="post-classic-main">
-                  <p class="post-classic-title"><a href="blog-post.html">Liverpool in desperate need of backup players</a></p>
-                  <div class="post-classic-time"><span class="icon mdi mdi-clock"></span>
-                    <time datetime="2019">April 15, 2019</time>
-                  </div>
-                </div>
-              </article>
-            </div>
-          </div>
+          
           <div class="aside-component">
             <!-- Heading Component-->
             <article class="heading-component">
@@ -421,15 +378,37 @@
               </div>
             </article>
             <!-- Buttons Media-->
-            <div class="group-sm group-flex"><a class="button-media button-media-facebook" href="#">
-                <h4 class="button-media-title">50k</h4>
-                <p class="button-media-action">Like<span class="icon material-icons-add_circle_outline icon-sm"></span></p><span class="button-media-icon fa-facebook"></span></a><a class="button-media button-media-twitter" href="#">
-                <h4 class="button-media-title">120k</h4>
-                <p class="button-media-action">Follow<span class="icon material-icons-add_circle_outline icon-sm"></span></p><span class="button-media-icon fa-twitter"></span></a><a class="button-media button-media-google" href="#">
-                <h4 class="button-media-title">15k</h4>
-                <p class="button-media-action">Follow<span class="icon material-icons-add_circle_outline icon-sm"></span></p><span class="button-media-icon fa-google"></span></a><a class="button-media button-media-instagram" href="#">
-                <h4 class="button-media-title">85k</h4>
-                <p class="button-media-action">Follow<span class="icon material-icons-add_circle_outline icon-sm"></span></p><span class="button-media-icon fa-instagram"></span></a></div>
+            <div class="group-sm group-flex">
+                @if(isset($nosw->facebook))
+                <a class="button-media button-media-facebook" href="{{ $nosw->facebook }}">
+                  <p class="button-media-action">Facebook</p>
+                    <span class="button-media-icon fa-facebook"></span>
+                </a>
+                @endif
+                @if(isset($nosw->twitter))
+                  <a class="button-media button-media-twitter" href="{{ $nosw->twitter }}">
+                      <p class="button-media-action">Twitter
+                        
+                      </p>
+                      <span class="button-media-icon fa-twitter"></span>
+                  </a>
+                @endif
+  
+                @if(isset($nosw->youtube))
+                  <a class="button-media button-media-google" href="{{ $nosw->youtube }}">
+                    <p class="button-media-action">Youtube</p>
+                      <span class="button-media-icon fa-youtube"></span>
+                  </a>
+                  @endif
+                  @if(isset($nosw->istagram))
+                  <a class="button-media button-media-instagram" href="{{ $nosw->istagram }}">
+                      
+                      <p class="button-media-action">Instagram
+                      </p>
+                    <span class="button-media-icon fa-instagram"></span>
+                  </a>
+                  @endif
+            </div>
           </div>
           <div class="aside-component">
             <!-- Heading Component-->
@@ -444,10 +423,10 @@
                 <!-- Awards Item-->
                 <div class="awards-item"> 
                   <div class="awards-item-main">
-                    <h4 class="awards-item-title"><span class="text-accent">World</span>Champions
+                    <h4 class="awards-item-title"><span class="text-accent">Copa</span>1
                     </h4>
                     <div class="divider"></div>
-                    <h5 class="awards-item-time">December 2014</h5>
+                    <h5 class="awards-item-time">Deciembre 2014</h5>
                   </div>
                   <div class="awards-item-aside"> <img src="{{ asset('vendor/soccer/images/thumbnail-minimal-1-67x147.png') }}" alt="" width="67" height="147"/>
                   </div>
@@ -455,10 +434,10 @@
                 <!-- Awards Item-->
                 <div class="awards-item"> 
                   <div class="awards-item-main">
-                    <h4 class="awards-item-title"><span class="text-accent">Best</span>Forward
+                    <h4 class="awards-item-title"><span class="text-accent">Copa</span>2
                     </h4>
                     <div class="divider"></div>
-                    <h5 class="awards-item-time">June 2015</h5>
+                    <h5 class="awards-item-time">Junio 2015</h5>
                   </div>
                   <div class="awards-item-aside"> <img src="{{ asset('vendor/soccer/images/thumbnail-minimal-2-68x126.png') }}" alt="" width="68" height="126"/>
                   </div>
@@ -466,47 +445,17 @@
                 <!-- Awards Item-->
                 <div class="awards-item"> 
                   <div class="awards-item-main">
-                    <h4 class="awards-item-title"><span class="text-accent">Best</span>Coach
+                    <h4 class="awards-item-title"><span class="text-accent">Copa</span>3
                     </h4>
                     <div class="divider"></div>
-                    <h5 class="awards-item-time">November 2016</h5>
+                    <h5 class="awards-item-time">Noviembre 2016</h5>
                   </div>
                   <div class="awards-item-aside"> <img src="{{ asset('vendor/soccer/images/thumbnail-minimal-3-73x135.png') }}" alt="" width="73" height="135"/>
                   </div>
                 </div>
             </div>
           </div>
-          <div class="aside-component">
-            <!-- Heading Component-->
-            <article class="heading-component">
-              <div class="heading-component-inner">
-                <h5 class="heading-component-title">Galería
-                </h5>
-              </div>
-            </article>
-            <article class="gallery" data-lightgallery="group">
-              <div class="row row-10 row-narrow">
-                <div class="col-6 col-sm-4 col-md-6 col-lg-4"><a class="thumbnail-creative" data-lightgallery="item" href="{{ asset('vendor/soccer/images/gallery-soccer-1-original.jpg') }}"><img src="{{ asset('vendor/soccer/images/gallery-soccer-1-212x212.jpg') }}" alt=""/>
-                    <div class="thumbnail-creative-overlay"></div></a>
-                </div>
-                <div class="col-6 col-sm-4 col-md-6 col-lg-4"><a class="thumbnail-creative" data-lightgallery="item" href="{{ asset('vendor/soccer/images/gallery-soccer-2-original.jpg') }}"><img src="{{ asset('vendor/soccer/images/gallery-soccer-2-212x212.jpg') }}" alt=""/>
-                    <div class="thumbnail-creative-overlay"></div></a>
-                </div>
-                <div class="col-6 col-sm-4 col-md-6 col-lg-4"><a class="thumbnail-creative" data-lightgallery="item" href="{{ asset('vendor/soccer/images/gallery-soccer-3-original.jpg') }}"><img src="{{ asset('vendor/soccer/images/gallery-soccer-3-212x212.jpg') }}" alt=""/>
-                    <div class="thumbnail-creative-overlay"></div></a>
-                </div>
-                <div class="col-6 col-sm-4 col-md-6 col-lg-4"><a class="thumbnail-creative" data-lightgallery="item" href="{{ asset('vendor/soccer/images/gallery-soccer-4-original.jpg') }}"><img src="{{ asset('vendor/soccer/images/gallery-soccer-4-212x212.jpg') }}" alt=""/>
-                    <div class="thumbnail-creative-overlay"></div></a>
-                </div>
-                <div class="col-6 col-sm-4 col-md-6 col-lg-4"><a class="thumbnail-creative" data-lightgallery="item" href="{{ asset('vendor/soccer/images/gallery-soccer-5-original.jpg') }}"><img src="{{ asset('vendor/soccer/images/gallery-soccer-5-212x212.jpg') }}" alt=""/>
-                    <div class="thumbnail-creative-overlay"></div></a>
-                </div>
-                <div class="col-6 col-sm-4 col-md-6 col-lg-4"><a class="thumbnail-creative" data-lightgallery="item" href="{{ asset('vendor/soccer/images/gallery-soccer-6-original.jpg') }}"><img src="{{ asset('vendor/soccer/images/gallery-soccer-6-212x212.jpg') }}" alt=""/>
-                    <div class="thumbnail-creative-overlay"></div></a>
-                </div>
-              </div>
-            </article>
-          </div>
+         
           <div class="aside-component">
             <!-- Heading Component-->
             <article class="heading-component">
