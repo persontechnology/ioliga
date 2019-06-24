@@ -28,6 +28,9 @@ Route::get('/', function () {
 Route::get('/nosotros', 'Estaticas@nosotros')->name('nosotros');
 Route::get('/noticias', 'Estaticas@noticias')->name('noticias');
 Route::get('/noticia-detalle/{id}', 'Estaticas@noticiaDetalle')->name('noticiaDetalle');
+Route::get('/contactos', 'Estaticas@contactos')->name('contactos');
+Route::post('/contactos-guardar', 'Estaticas@contactosGuardar')->name('enviarContacto');
+
 
 
 

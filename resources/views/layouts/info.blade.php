@@ -169,8 +169,8 @@
                             <a class="rd-nav-link" href="{{ route('noticias') }}">Noticias</a> 
                         </li>
                         
-                        <li class="rd-nav-item">
-                          <a class="rd-nav-link" href="#">Contactos</a> 
+                        <li class="rd-nav-item" id="menuContacto">
+                          <a class="rd-nav-link" href="{{ route('contactos') }}">Contactos</a> 
                         </li>
                     </ul>
                   <div class="rd-navbar-main-element">

@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use ioliga\Models\Nosotro;
 use ioliga\Models\Noticia;
 
+use Illuminate\Support\Facades\Mail;
+use ioliga\Mail\EmailContacto;
+
 class Estaticas extends Controller
 {
     public function nosotros()
@@ -32,4 +35,21 @@ class Estaticas extends Controller
         return abort(404);
         
     }
+
+
+
+    public function contactos()
+    {
+        return view('estaticas.contactos');
+    }
+
+    public function contactosGuardar(Request $r)
+    {
+        $data = array('email' => $r->email,'nombre'=>$r->nombre,'asunto'=>$r->asunto,'mensaje'=>$r->mensaje );
+    	Mail::to(config('MAIL_FROM_ADDRESS','carlosquishpe001@gmail.com'))->send(new EmailContacto($data));
+    	$r->session()->flash('success','Liga te da la bienvenida y gracias por escribirnos. Intentaremos responderte lo antes posible.');
+    	return redirect()->route('contactos');
+    }
+    
+
 }
