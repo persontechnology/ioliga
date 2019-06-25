@@ -9,6 +9,7 @@ use ioliga\User;
 use ioliga\Models\Campeonato\Alineacion;
 use ioliga\Models\Campeonato\Fecha;
 use ioliga\Models\Campeonato\Resultado;
+use ioliga\Models\Campeonato\Arbitro;  
 
 
 class Partido extends Model
@@ -44,7 +45,10 @@ class Partido extends Model
     {
         return $this->hasMany(Resultado::class, 'partido_id');
     }
-    
+     public function arbitros()
+    {
+        return $this->hasMany(Arbitro::class, 'partido_id');
+    }
 
 
     

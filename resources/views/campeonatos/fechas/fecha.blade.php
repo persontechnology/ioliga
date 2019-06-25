@@ -128,11 +128,18 @@
 						</select>
 					</th>
 					<th>
-						@if($par->alineaciones->count()==0)
+					<div class="btn-group" role="group" aria-label="Basic example">
+						@if($par->arbitros->count()==0)
+						<button data-url="" onclick="" class="btn bg-info border-teal text-teal rounded-round border-2 btn-icon  legitRipple"><i class="icon-plus2"></i>	<span class="">Arbitro</span>
+						</button>
+						@endif
+						@if($par->alineaciones->count()==0 && $par->arbitros->count()==0)
+						
 						<button data-url="{{route('eliminar-partido',$par->id)}}" onclick="eliminar(this)" class="btn bg-danger  btn-icon btn-sm legitRipple">
 							<span class="">Eliminar</span>
 						</button>
 						@endif
+					</div>
 					</th>
 					@endif
 					@endcan
@@ -248,9 +255,7 @@
 						<span class="badge bg-info badge-pill">{{$par->tipo}}</span>
 						@endif
 					</td>
-					<td>
-						Árbitro
-					</td>
+
 					<td>
 						<ul class="media-list">
 					@if($par->estadio->foto)
@@ -277,6 +282,38 @@
                         </div>
                     </li>                    
                         @endif
+                     </ul>
+
+					</td>
+
+					<td>
+					<ul class="media-list">
+					@foreach($par->arbitros as $art)
+						@if($art->user->foto)
+						
+							<li class="media " >
+	                        <div class="mr-3">
+	                            <img src="{{ Storage::url('public/usuarios/'.$art->user->foto) }}" class="rounded-circle" width="40" height="40" alt="">
+	                          
+	                        </div>
+	                         <div class="media-body">
+	                            <div class="media-title font-weight-semibold">{{$art->user->nombres}}</div>
+	                            <span class=" media-title">{{$art->user->apellidos }}</span>
+	                            
+	                        </div>
+	                        @else
+	                         <div class="mr-3">
+	                            <img src="{{ asset('global_assets/images/demo/users/balon.jpg') }}" class="rounded-circle" width="40" height="40" alt="">
+	                            
+	                        </div>
+	                      	<div class="media-body">
+	                            <div class="media-title font-weight-semibold">{{$art->user->nombres}}</div>
+	                            <span class=" media-title">{{$art->user->apellidos }}</span>
+	                           
+	                        </div>
+	                    </li>                    
+	                        @endif
+	                     @endforeach
                      </ul>
 
 					</td>
