@@ -78,6 +78,18 @@ class EtapaSerie extends Model
 		return $result;
 	}
 
+	/*funciones para la vista*/
+	public function buscarPartidoVista()
+	{
+		 return $this->hasManyThrough(
+            Partido::class,
+            Fecha::class,
+            'etapaSerie_id', // Foreign key on users table...
+            'fecha_id', // Foreign key on posts table...
+            'id', // Local key on countries table...
+            'id' // Local key on users table...
+        )->where('tipo','Finalizado')->orderBy('fechaInicio','asc');
+	}
 	
 
 }

@@ -10,9 +10,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use ioliga\Models\Campeonato;
 
 Route::get('/', function () {
-	return view('welcome');
+
+	$campeonato=Campeonato::where('estado',true)->orderBy('fechaInicio','asc')->get();
+    $data = array('campeonatoActivo' =>$campeonato, );
+	return view('welcome',$data);
 	 // $A=Artisan::call('cache:clear');
     // $A=Artisan::call('config:clear');
     // $A=Artisan::call('config:cache');
@@ -30,7 +34,7 @@ Route::get('/noticias', 'Estaticas@noticias')->name('noticias');
 Route::get('/noticia-detalle/{id}', 'Estaticas@noticiaDetalle')->name('noticiaDetalle');
 Route::get('/contacto', 'Estaticas@contactos')->name('contactos');
 Route::post('/contacto-guardar', 'Estaticas@contactosGuardar')->name('enviarContacto');
-
+Route::get('/equipos-vista', 'Estaticas@eqiposVista')->name('equipos-vista');
 
 
 

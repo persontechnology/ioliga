@@ -2,25 +2,7 @@
 @section('breadcrumbs', Breadcrumbs::render('estadios'))
 
 @section('acciones')
-    <a href="#" class="breadcrumb-elements-item">
-        <i class="icon-comment-discussion mr-2"></i>
-        Support
-    </a>
-
-    <div class="breadcrumb-elements-item dropdown p-0">
-        <a href="#" class="breadcrumb-elements-item dropdown-toggle" data-toggle="dropdown">
-            <i class="icon-gear mr-2"></i>
-            Settings
-        </a>
-
-        <div class="dropdown-menu dropdown-menu-right">
-            <a href="#" class="dropdown-item"><i class="icon-user-lock"></i> Account security</a>
-            <a href="#" class="dropdown-item"><i class="icon-statistics"></i> Analytics</a>
-            <a href="#" class="dropdown-item"><i class="icon-accessibility"></i> Accessibility</a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item"><i class="icon-gear"></i> All settings</a>
-        </div>
-    </div>
+   
 @endsection
 
 @section('content')
@@ -32,10 +14,12 @@
 @endif
 
 <div class="card">
-    <div class="card-header">Administración</div>
+    <div class="card-header">
+        Sistema de gestión de Ligas
+    </div>
 
     <div class="card-body">
-        
+        <img src="{{asset('img/home.png')}}" class="img-responsive img-fluid">
     </div>
 </div>
 

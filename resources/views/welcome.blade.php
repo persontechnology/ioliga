@@ -3,9 +3,8 @@
 
 
 @php($nosw=ioliga\Models\Nosotro::first())
-
-
-
+@php($campAc=ioliga\Models\Campeonato::count())
+@php($equipos=ioliga\Models\Equipo\Equipo::get())
 <!-- Swiper-->
 <section class="section swiper-container swiper-slider swiper-classic bg-gray-2" data-loop="true" data-autoplay="4000" data-simulate-touch="false" data-slide-effect="fade">
   <div class="swiper-wrapper">
@@ -122,44 +121,38 @@
           <!-- Heading Component-->
           <article class="heading-component">
             <div class="heading-component-inner">
-              <h5 class="heading-component-title">PRÓXIMO PARTIDO
+              <h5 class="heading-component-title">Ver Calendarios 
               </h5><a class="button button-xs button-gray-outline" href="sport-elements.html">Calendario</a>
             </div>
           </article>
           <!-- Game Result Bug-->
+
+          @if($campAc>0 )
+          @if($campeonatoActivo->count() >0 )
+          @php($campeo=$campeonatoActivo->first())
           <article class="game-result">
             <div class="game-info game-info-creative">
-              <p class="game-info-subtitle">Real Stadium - 
-                <time datetime="08:30"> 08:30 PM</time>
+              <p class="game-info-subtitle">Campeonato Actual: {{$campeo->estado?'Activo':"Inactivo"}} 
+                
               </p>
-              <h3 class="game-info-title">Champions league semi-final 2019</h3>
+              <h3 class="game-info-title">Campeonato: {{$campeo->nombre .' ' .$campeo->fechaInicio }}  </h3>
               <div class="game-info-main">
                 <div class="game-info-team game-info-team-first">
                   <figure><img src="{{ asset('vendor/soccer/images/team-sportland-75x99.png') }}" alt="" width="75" height="99"/>
                   </figure>
-                  <div class="game-result-team-name">Sportland</div>
-                  <div class="game-result-team-country">Italy</div>
+                  
                 </div>
                 <div class="game-info-middle game-info-middle-vertical">
-                  <time class="time-big" datetime="2019-06-17"><span class="heading-3">Fri 19</span> May 2019
-                  </time>
-                  <div class="game-result-divider-wrap"><span class="game-info-team-divider">VS</span></div>
-                  <div class="group-sm">
-                    <div class="button button-sm button-share-outline">Compartir
-                      <ul class="game-info-share">
-                        <li class="game-info-share-item"><a class="icon fa fa-facebook" href="#"></a></li>
-                        <li class="game-info-share-item"><a class="icon fa fa-twitter" href="#"></a></li>
-                        <li class="game-info-share-item"><a class="icon fa fa-google-plus" href="#"></a></li>
-                        <li class="game-info-share-item"><a class="icon fa fa-instagram" href="#"></a></li>
-                      </ul>
-                    </div>
-                  </div>
+                  <time class="time-big" datetime="2019-06-17"><span class="heading-3">{{$campeo->fechaInicio }} </span> al {{$campeo->fechaFin }} 
+                  </time>          
                 </div>
                 <div class="game-info-team game-info-team-second">
-                  <figure><img src="{{ asset('vendor/soccer/images/team-dream-team-91x91') }}.png" alt="" width="91" height="91"/>
-                  </figure>
-                  <div class="game-result-team-name">Dream Team</div>
-                  <div class="game-result-team-country">Spain</div>
+                  @foreach($campeo->generos as $generos)
+                 <div class="game-result-team-name">{{$generos->generoEquipo->nombre}}</div>
+                 @foreach($generos->GenerosSeries as $generosse)
+                  <div class="game-result-team-country">serie-"{{$generosse->serie->nombre}}"</div>
+                  @endforeach
+                   @endforeach
                 </div>
               </div>
             </div>
@@ -167,11 +160,75 @@
               <div class="countdown countdown-bordered" data-type="until" data-time="18 Jun 2019 16:00" data-format="dhms" data-style="short"></div>
             </div>
           </article>
+          @else
+          <div class="heading-component-inner">
+            <h5 class="heading-component-title">ver historial datos
+            </h5>
+          </div>
+          @endif
+          @else
+          <div class="heading-component-inner">
+            <h5 class="heading-component-title">No exiten datos
+            </h5>
+          </div>
+          @endif
+
+
         </div>
       </div>
       <!-- Aside Block-->
+
+
+   
       <div class="col-lg-4">
         <aside class="aside-components">
+
+             <div class="aside-component">
+                  <div class="owl-carousel-outer-navigation">
+                    <!-- Heading Component-->
+                    <article class="heading-component">
+                      <div class="heading-component-inner">
+                        <h5 class="heading-component-title">Equipos
+                        </h5><a class="button button-xs button-gray-outline" href="{{route('equipos-vista')}}">Ver todos</a>
+                        <div class="owl-carousel-arrows-outline">
+                          <div class="owl-nav">
+                            <button class="owl-arrow owl-arrow-prev"></button>
+                            <button class="owl-arrow owl-arrow-next"></button>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                    <!-- Owl Carousel-->
+                    <div class="owl-carousel owl-spacing-1" data-items="1" data-dots="false" data-nav="true" data-autoplay="true" data-autoplay-speed="4000" data-stage-padding="0" data-loop="false" data-margin="30" data-mouse-drag="false" data-nav-custom=".owl-carousel-outer-navigation">
+                      @if($equipos->count()>0)
+                      @foreach($equipos as $equi)
+                      <article class="product">
+                        <header class="product-header">
+                          <!-- Badge-->
+                          <div class="badge badge-{{$equi->estado==true?'secondary':'danger'}}">{{$equi->genero->nombre}}<span class="icon material-icons-whatshot"></span>
+                          </div>
+                          <div class="product-figure"><img width="200" height="200" src="{{ Storage::url('public/equipos/'.$equi->foto) }}" alt=""/></div>
+                          <div class="product-buttons">
+                           <a class="product-button fl-bigmug-line-shopping202" href="shopping-cart.html" style="font-size: 26px"></a><a class="product-button fl-bigmug-line-zoom60" href="{{ Storage::url('public/equipos/'.$equi->foto) }}" data-lightgallery="item" style="font-size: 25px"></a>
+                          </div>
+                        </header>
+                        <footer class="product-content">
+                          <h6 class="product-title"><a href="product-page.html">{{$equi->nombre}}</a></h6>
+                          <div class="product-price"><span class="heading-6 product-price-new">Representante: {{$equi->user->nombres .' '. $equi->user->apellidos}}</span>
+                          </div>
+                       
+                        </footer>
+                      </article>
+                      @endforeach
+                      @endif
+
+                    </div>
+                  </div>
+                </div>
+
+          @if($campAc>0 )
+          @if($campeonatoActivo->count() >0 )
+          @foreach($campeonatoActivo as $campeonato)
           <div class="aside-component">
             <div class="owl-carousel-outer-navigation-1">
               <!-- Heading Component-->
@@ -187,8 +244,15 @@
                   </div>
                 </div>
               </article>
+                <div class="owl-carousel owl-spacing-1" data-items="1" data-dots="false" data-nav="true" data-autoplay="true" data-autoplay-speed="4000" data-stage-padding="0" data-loop="true" data-margin="30" data-mouse-drag="false" data-animation-in="fadeIn" data-animation-out="fadeOut" data-nav-custom=".owl-carousel-outer-navigation-1">
+          @foreach($campeonato->generoSerieVista as $genero)
+          @foreach($genero->etapaSerie as $etaSerie)
+    
+          @foreach($etaSerie->buscarPartidoVista as $partidos) 
+
+      
               <!-- Owl Carousel-->
-              <div class="owl-carousel owl-spacing-1" data-items="1" data-dots="false" data-nav="true" data-autoplay="true" data-autoplay-speed="4000" data-stage-padding="0" data-loop="true" data-margin="30" data-mouse-drag="false" data-animation-in="fadeIn" data-animation-out="fadeOut" data-nav-custom=".owl-carousel-outer-navigation-1">
+            
                 <!-- Game Result Creative-->
                 <article class="game-result game-result-creative">
                   <div class="game-result-main-vertical">
@@ -257,10 +321,27 @@
                     </ul>
                   </div>
                 </article>
-              </div>
-            </div>
+                     
+          @endforeach
+            
+          @endforeach
+          @endforeach
+            </div> 
           </div>
-          
+          </div>
+          @endforeach
+           @else
+          <div class="heading-component-inner">
+            <h5 class="heading-component-title">ver historial datos
+            </h5>
+          </div>
+          @endif
+          @else
+          <div class="heading-component-inner">
+            <h5 class="heading-component-title">No exiten datos
+            </h5>
+          </div>
+          @endif
           <div class="aside-component">
             <!-- Heading Component-->
             <article class="heading-component">
@@ -536,6 +617,8 @@
         
         </aside>
       </div>
+   
+
     </div>
   </div>
 </section>

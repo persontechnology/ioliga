@@ -44,4 +44,22 @@ class Campeonato extends Model
             'id' // Local key on users table...
         );
     }
+
+    //busquedas para la vista
+
+    public function generosVista()
+    {
+        return $this->hasMany(Genero::class,'campeonato_id')->orderBy('generoEquipo_id','asc');
+    }
+      public function generoSerieVista()
+    {
+        return $this->hasManyThrough(
+            GeneroSerie::class,
+            Genero::class,
+            'campeonato_id', // Foreign key on Genero table...
+            'genero_id', // Foreign key on GeneroSerie table...
+            'id', // Local key on countries table...
+            'id' // Local key on users table...
+        );
+    }
 }   

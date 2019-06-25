@@ -8,6 +8,8 @@ use ioliga\Models\Noticia;
 
 use Illuminate\Support\Facades\Mail;
 use ioliga\Mail\EmailContacto;
+use ioliga\Models\Equipo\Equipo;
+use ioliga\Models\Equipo\GeneroEquipo;
 
 class Estaticas extends Controller
 {
@@ -52,4 +54,10 @@ class Estaticas extends Controller
     }
     
 
+    public function eqiposVista()
+    {
+        $genero=GeneroEquipo::get();
+        $data = array('genero' =>$genero );
+         return view('estaticas.equiposVista',$data);
+    }
 }
