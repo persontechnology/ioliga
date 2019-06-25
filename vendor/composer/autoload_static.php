@@ -4675,6 +4675,7 @@ class ComposerStaticInitc9aa06dc6137b35b6dce290cb2a7f894
         'ioliga\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'ioliga\\Http\\Controllers\\Equipos' => __DIR__ . '/../..' . '/app/Http/Controllers/Equipos.php',
         'ioliga\\Http\\Controllers\\Estadios' => __DIR__ . '/../..' . '/app/Http/Controllers/Estadios.php',
+        'ioliga\\Http\\Controllers\\Estaticas' => __DIR__ . '/../..' . '/app/Http/Controllers/Estaticas.php',
         'ioliga\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'ioliga\\Http\\Controllers\\Nominas' => __DIR__ . '/../..' . '/app/Http/Controllers/Nominas.php',
         'ioliga\\Http\\Controllers\\Nosotros' => __DIR__ . '/../..' . '/app/Http/Controllers/Nosotros.php',

@@ -205,3 +205,20 @@ Breadcrumbs::for('nosotrosAdmin', function ($trail) {
     $trail->parent('home');
      $trail->push('Acerca de nosotros', route('nosotrosAdmin'));    
  });
+
+//  noticias
+Breadcrumbs::for('noticiasAdmin', function ($trail) {       
+    $trail->parent('home');
+     $trail->push('Noticias', route('noticiasAdmin'));    
+ });
+ Breadcrumbs::for('crearNoticiaAdmin', function ($trail) {       
+    $trail->parent('noticiasAdmin');
+     $trail->push('Nueva noticia', route('crearNoticiaAdmin'));    
+ });
+
+ Breadcrumbs::for('editarNoticia', function ($trail,$n) {       
+    $trail->parent('noticiasAdmin');
+     $trail->push('Editar noticia', route('editarNoticia',$n->id));    
+ });
+
+ 

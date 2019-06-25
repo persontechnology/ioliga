@@ -28,9 +28,9 @@ class CreateNosotroTable extends Migration
             $table->string('youtube')->nullable();
             $table->string('istagram')->nullable();
             $table->string('logo')->nullable();
-            $table->string('acerca')->nullable();
-            $table->string('mision')->nullable();
-            $table->string('vision')->nullable();
+            $table->text('acerca')->nullable();
+            $table->text('mision')->nullable();
+            $table->text('vision')->nullable();
             $table->string('email')->nullable();
             $table->string('telefono')->nullable();
         });

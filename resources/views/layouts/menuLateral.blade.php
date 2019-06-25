@@ -74,6 +74,17 @@
     </li>
 @endcan
 
+@can('administrarNoticias', ioliga\Models\Noticia::class)
+    <li class="nav-item">
+        <a href="{{ route('noticiasAdmin') }}" class="nav-link" id="menuNoticias">
+            <i class="far fa-newspaper"></i>
+            <span>
+                {{ __('Noticias') }}
+            </span>
+        </a>
+    </li>
+@endcan
+
     <li class="nav-item-header">
         <div class="text-uppercase font-size-xs line-height-xs">{{ __('Sistema') }}</div> 
         <i class="icon-menu" title="Sistema"></i>

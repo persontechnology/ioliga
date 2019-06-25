@@ -22,6 +22,18 @@ Route::get('/', function () {
 	
 });
 
+
+// nosotros
+
+Route::get('/nosotros', 'Estaticas@nosotros')->name('nosotros');
+Route::get('/noticias', 'Estaticas@noticias')->name('noticias');
+Route::get('/noticia-detalle/{id}', 'Estaticas@noticiaDetalle')->name('noticiaDetalle');
+Route::get('/contacto', 'Estaticas@contactos')->name('contactos');
+Route::post('/contacto-guardar', 'Estaticas@contactosGuardar')->name('enviarContacto');
+
+
+
+
 Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['verified','auth']], function () {
 	Route::get('/home', 'HomeController@index')->name('home');
@@ -166,5 +178,16 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	Route::post('/acerca-de-nosotros-admin-actualizar', 'Nosotros@actualizarNosotrosAdmin')->name('actualizarNosotrosAdmin');
 	
 
+
+	// noticias admin
+	Route::get('/noticias-admin', 'Noticias@index')->name('noticiasAdmin');
+	Route::get('/noticias-nuevo-admin', 'Noticias@nuevo')->name('crearNoticiaAdmin');
+	Route::post('/noticias-guardar-admin', 'Noticias@guardar')->name('guardarNoticiaAdmin');
+	
+	Route::get('/noticias-estado-admin/{id}', 'Noticias@estado')->name('estadoNoticia');
+	Route::get('/noticias-editar-admin/{id}', 'Noticias@editar')->name('editarNoticia');
+	Route::post('/noticias-actualizar-admin', 'Noticias@actualizar')->name('actualizarNoticia');
+	Route::get('/noticias-eliminar-admin/{id}', 'Noticias@eliminar')->name('eliminarNoticia');
+	
 
 });

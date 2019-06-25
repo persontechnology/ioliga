@@ -4147,6 +4147,7 @@ return array(
     'ioliga\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'ioliga\\Http\\Controllers\\Equipos' => $baseDir . '/app/Http/Controllers/Equipos.php',
     'ioliga\\Http\\Controllers\\Estadios' => $baseDir . '/app/Http/Controllers/Estadios.php',
+    'ioliga\\Http\\Controllers\\Estaticas' => $baseDir . '/app/Http/Controllers/Estaticas.php',
     'ioliga\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'ioliga\\Http\\Controllers\\Nominas' => $baseDir . '/app/Http/Controllers/Nominas.php',
     'ioliga\\Http\\Controllers\\Nosotros' => $baseDir . '/app/Http/Controllers/Nosotros.php',

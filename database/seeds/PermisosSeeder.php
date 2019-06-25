@@ -73,6 +73,9 @@ class PermisosSeeder extends Seeder
 
         $p_ver_mis_campeonatos=Permission::updateOrCreate(['name' => 'Ver mis campeonatos']);
 
+        // acceso a toda la gestion de noticias
+        $p_administrar_noticias=Permission::updateOrCreate(['name' => 'Administrar noticias']);
+
 
     }
 }
