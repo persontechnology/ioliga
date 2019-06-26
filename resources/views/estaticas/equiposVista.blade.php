@@ -1,14 +1,13 @@
 @extends('layouts.info',['titulo'=>'Equipos'])
 @section('content')
 
-
 <section class="section parallax-container breadcrumbs-wrap" data-parallax-img="images/bg-breadcrumbs-1-1920x726.jpg">
     <div class="parallax-content breadcrumbs-custom context-dark">
       <div class="container">
-        <h3 class="breadcrumbs-custom-title">Acerca de nosotros</h3>
+        <h3 class="breadcrumbs-custom-title">Equipos Inscriptos</h3>
         <ul class="breadcrumbs-custom-path">
           <li><a href="{{ url('/') }}">Inicio</a></li>
-          <li class="active">Nosotros</li>
+          <li class="active">Equipos</li>
         </ul>
       </div>
     </div>
@@ -35,20 +34,27 @@
                   </div>
                 @foreach($ge->equipos as $equi)  
                
-                  <div class="col-md-6 col-lg-3">
+                  <div class="col-md-6 col-lg-4">
                     <article class="product">
                       <header class="product-header">
                         <!-- Badge-->
                         <div class="badge badge-{{$equi->estado==true?'shop':'red'}}">{{$equi->estado==true?'Activo':'Inactivo'}}
                         </div>
-                        <div class="product-figure"><img width="200" height="200" src=" {{ Storage::url('public/equipos/'.$equi->foto) }}" alt=""/></div>
+                        <div class="product-figure">
+                          <img width="200" height="200" src=" {{ Storage::url('public/equipos/'.$equi->foto) }}" alt=""/>
+                        </div>
                         <div class="product-buttons">
-                        <a class="product-button fl-bigmug-line-shopping202" href="shopping-cart.html" style="font-size: 26px"></a><a class="product-button fl-bigmug-line-zoom60" href="{{ Storage::url('public/equipos/'.$equi->foto) }}" data-lightgallery="item" style="font-size: 25px"></a>
+                          <a class="product-button" href="shopping-cart.html" style="font-size: 20px"><i class="fa fa-user"></i></a>
+
+                          <a class="product-button" href="{{route('equipo-vista',$equi->id)}}" style="font-size: 20px"> <i class="fa fa-list"></i></a>
+
+                        <a class="product-button fl-bigmug-line-zoom60" href="{{ Storage::url('public/equipos/'.$equi->foto) }}" data-lightgallery="item" style="font-size: 20px"></a>
                         </div>
                       </header>
                       <footer class="product-content">
                         <h6 class="product-title"><a href="product-page.html">{{$equi->nombre}}</a></h6>
-                        <div class="product-price"><span class="heading-6 product-price-new">Representante: {{$equi->user->nombres .' '. $equi->user->apellidos}}</span>
+                        <div class="product-price">
+                          <span class="heading-6 product-price-new">Representante: {{$equi->user->nombres .' '. $equi->user->apellidos}}</span>
                         </div>
                      
                       </footer>
@@ -74,7 +80,7 @@
 
 @push('scriptsFooter')
     <script>
-        $('#menuNosotros').addClass('active');
+        $('#menuEquipo').addClass('active');
     </script>
 @endpush
 

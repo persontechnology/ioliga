@@ -60,4 +60,11 @@ class Estaticas extends Controller
         $data = array('genero' =>$genero );
          return view('estaticas.equiposVista',$data);
     }
+    public function equipoVista($codigoEquipo)
+    {
+         $equipo=Equipo::findOrFail($codigoEquipo);
+         $asignaciones=$equipo->asignaciones;
+         $data = array('equipo' =>$equipo );
+         return view('estaticas.equipoVista',$data);
+    }
 }

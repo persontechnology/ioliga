@@ -32,8 +32,13 @@ class Equipo extends Model
        return $this->hasMany(Nomina::class,'equipo_id')->where('estado',1);
     }
 
-       public function asignaciones()
+    public function asignaciones()
     {
        return $this->hasMany(Asignacion::class,'equipo_id');
     }
+    public function asignacionesVista()
+    {
+       return $this->hasMany(Asignacion::class,'equipo_id')->orderBy('id','desc');
+    }
+
 }

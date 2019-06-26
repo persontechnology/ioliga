@@ -8,7 +8,7 @@
 
     <div class="navbar-collapse collapse" id="navbar-footer">
         <span class="navbar-text">
-            &copy; {{ date('Y') }}. <a href="#">LIGA DEPORTIVA</a> por <a href="">CARLOS Y JORGE</a>
+            &copy; {{ date('Y') }}. <a href="#">LIGA DEPORTIVA</a> por <a href="">CARLOS Y JOSÉ</a>
         </span>
 
         <ul class="navbar-nav ml-lg-auto">

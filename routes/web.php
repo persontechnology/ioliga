@@ -35,7 +35,7 @@ Route::get('/noticia-detalle/{id}', 'Estaticas@noticiaDetalle')->name('noticiaDe
 Route::get('/contacto', 'Estaticas@contactos')->name('contactos');
 Route::post('/contacto-guardar', 'Estaticas@contactosGuardar')->name('enviarContacto');
 Route::get('/equipos-vista', 'Estaticas@eqiposVista')->name('equipos-vista');
-
+Route::get('/equipo-vista/{id}', 'Estaticas@equipoVista')->name('equipo-vista');
 
 
 Auth::routes(['verify' => true]);
