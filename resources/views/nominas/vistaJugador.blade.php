@@ -63,7 +63,8 @@
 									</div>
 
 									<div class="text-sm-right mb-0 mt-3 mt-sm-0 ml-auto">
-										<h6 class="font-weight-semibold">Edad {{$nomina->calcularaEdad($nomina->user->fechaNacimiento)}} Años</h6>
+										<h6 class="font-weight-semibold">Edad 
+										{{Carbon\Carbon::parse($nomina->user->fechaNacimiento)->age}}Años</h6>
 										<ul class="list list-unstyled mb-0">
 											<li>Estado: <span class="badge bg-{{$nomina->estado? 'success':'danger'}}-400 align-top dropdown-toggle">{{$nomina->estado?'Activo':'Inactivo'}}</span></li>
 											
