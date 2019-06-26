@@ -1,4 +1,4 @@
-@extends('layouts.info',['titulo'=>'Nosotros'])
+@extends('layouts.info',['titulo'=>'Bienvenido'])
 @section('content')
 
 
