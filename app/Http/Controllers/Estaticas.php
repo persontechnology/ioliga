@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use ioliga\Mail\EmailContacto;
 use ioliga\Models\Equipo\Equipo;
 use ioliga\Models\Equipo\GeneroEquipo;
-
+use ioliga\Models\Campeonato;
 class Estaticas extends Controller
 {
     public function nosotros()
@@ -66,5 +66,21 @@ class Estaticas extends Controller
          $asignaciones=$equipo->asignaciones;
          $data = array('equipo' =>$equipo );
          return view('estaticas.equipoVista',$data);
+    }
+
+  
+    public function nominaVista($codigoEquipo)
+    {
+         $equipo=Equipo::findOrFail($codigoEquipo);
+       
+         $data = array('equipo' =>$equipo );
+         return view('estaticas.nominaVista',$data);
+    }
+
+     public function calendarios($codigoCampeo)
+    {
+        $campeo=Campeonato::findOrFail($codigoCampeo);       
+        $data = array('campeo' =>$campeo );
+        return view('estaticas.calendarios',$data);
     }
 }

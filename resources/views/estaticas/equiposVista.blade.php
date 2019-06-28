@@ -44,7 +44,7 @@
                           <img width="200" height="200" src=" {{ Storage::url('public/equipos/'.$equi->foto) }}" alt=""/>
                         </div>
                         <div class="product-buttons">
-                          <a class="product-button" href="shopping-cart.html" style="font-size: 20px"><i class="fa fa-user"></i></a>
+                          <a class="product-button" href="{{route('nomina-vista',$equi->id)}}" style="font-size: 20px"><i class="fa fa-user"></i></a>
 
                           <a class="product-button" href="{{route('equipo-vista',$equi->id)}}" style="font-size: 20px"> <i class="fa fa-list"></i></a>
 

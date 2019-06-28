@@ -36,7 +36,8 @@ Route::get('/contacto', 'Estaticas@contactos')->name('contactos');
 Route::post('/contacto-guardar', 'Estaticas@contactosGuardar')->name('enviarContacto');
 Route::get('/equipos-vista', 'Estaticas@eqiposVista')->name('equipos-vista');
 Route::get('/equipo-vista/{id}', 'Estaticas@equipoVista')->name('equipo-vista');
-
+Route::get('/nomina-vista/{id}', 'Estaticas@nominaVista')->name('nomina-vista');
+Route::get('/calendario-vista/{id}', 'Estaticas@calendarios')->name('calendario-vista');
 
 Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['verified','auth']], function () {

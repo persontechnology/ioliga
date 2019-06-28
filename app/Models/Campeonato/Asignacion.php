@@ -59,6 +59,43 @@ class Asignacion extends Model
         return $this->hasMany(Tabla::class,'asignacion_id');
     }
 
+    //valores para la vista
+
+    public function resultadosVista()
+    {
+        return $this->hasManyThrough(
+            Resultado::class,
+            tabla::class,
+            'asignacion_id', // Foreign key on GeneroSerie table...
+            'tabla_id', // Foreign key on Genero table...
+            'id', // Local key on countries table...
+            'id' // Local key on users table...
+        );
+    }
+
+    public function resultadosVistaGanado()
+    {
+        return $this->hasManyThrough(
+            Resultado::class,
+            tabla::class,
+            'asignacion_id', // Foreign key on GeneroSerie table...
+            'tabla_id', // Foreign key on Genero table...
+            'id', // Local key on countries table...
+            'id' // Local key on users table...
+        )->where('resultado.estado','Ganado');
+    }
+
+      public function resultadosVistaGolesA()
+    {
+        return $this->hasManyThrough(
+            Resultado::class,
+            tabla::class,
+            'asignacion_id', // Foreign key on GeneroSerie table...
+            'tabla_id', // Foreign key on Genero table...
+            'id', // Local key on countries table...
+            'id' // Local key on users table...
+        );
+    }
 	
 }
 

@@ -7,6 +7,9 @@ use ioliga\User;
 use ioliga\Models\Equipo\GeneroEquipo;
 use ioliga\Models\Nomina\Nomina;
 use ioliga\Models\Campeonato\Asignacion;
+use ioliga\Models\Campeonato\Tabla;
+use ioliga\Models\Campeonato\Resultado;
+use Illuminate\Support\Facades\DB;
 class Equipo extends Model
 {
     protected $table="equipo";
@@ -31,7 +34,10 @@ class Equipo extends Model
     {
        return $this->hasMany(Nomina::class,'equipo_id')->where('estado',1);
     }
-
+   public function nominasInactivas()
+    {
+       return $this->hasMany(Nomina::class,'equipo_id')->where('estado',0);
+    }
     public function asignaciones()
     {
        return $this->hasMany(Asignacion::class,'equipo_id');
@@ -41,4 +47,19 @@ class Equipo extends Model
        return $this->hasMany(Asignacion::class,'equipo_id')->orderBy('id','desc');
     }
 
+    public function resultadoMejoreJugadores($id)
+    { 
+      $result=Nomina::
+      join('asignacionNomina','asignacionNomina.nomina_id','=', 'nomina.id')
+      ->join('alineacion','alineacion.asignacionNomina_id','=', 'asignacionNomina.id')
+      ->select('nomina.id',DB::raw('sum(alineacion.goles) as golesTotal'))
+      ->where('equipo_id',$id)    
+      ->groupBy('nomina.id')
+      ->orderBy('golesTotal','DESC')
+      ->limit(2)  
+      ->get();
+      return $result;
+    }
+   
+   
 }

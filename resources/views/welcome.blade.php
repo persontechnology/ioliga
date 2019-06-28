@@ -121,8 +121,7 @@
           <!-- Heading Component-->
           <article class="heading-component">
             <div class="heading-component-inner">
-              <h5 class="heading-component-title">Ver Calendarios 
-              </h5><a class="button button-xs button-gray-outline" href="sport-elements.html">Calendario</a>
+           
             </div>
           </article>
           <!-- Game Result Bug-->
@@ -133,12 +132,19 @@
           <article class="game-result">
             <div class="game-info game-info-creative">
               <p class="game-info-subtitle">Campeonato Actual: {{$campeo->estado?'Activo':"Inactivo"}} 
-                
+         
+              <a class="button button-xs button-gray-outline" href="{{route('calendario-vista',$campeo->id)}})">Calendario
+              </a>
               </p>
               <h3 class="game-info-title">Campeonato: {{$campeo->nombre .' ' .$campeo->fechaInicio }}  </h3>
               <div class="game-info-main">
                 <div class="game-info-team game-info-team-first">
-                  <figure><img src="{{ asset('vendor/soccer/images/team-sportland-75x99.png') }}" alt="" width="75" height="99"/>
+                  <figure>  
+                  @if(isset($nosw->logo))
+                    <img class="brand-logo " src="{{ Storage::url('public/nosotros/'.$nosw->logo) }}" alt="" width="95" height="126"/>
+                  @else
+                   <img class="brand-logo " src="{{ asset('vendor/soccer/images/logo-soccer-default-95x126.png') }}" alt="" width="95" height="126"/>
+                  @endif
                   </figure>
                   
                 </div>
@@ -209,7 +215,10 @@
                           </div>
                           <div class="product-figure"><img width="200" height="200" src="{{ Storage::url('public/equipos/'.$equi->foto) }}" alt=""/></div>
                           <div class="product-buttons">
-                           <a class="product-button fl-bigmug-line-shopping202" href="shopping-cart.html" style="font-size: 26px"></a><a class="product-button fl-bigmug-line-zoom60" href="{{ Storage::url('public/equipos/'.$equi->foto) }}" data-lightgallery="item" style="font-size: 25px"></a>
+                           <a class="product-button" href="{{route('nomina-vista',$equi->id)}}" style="font-size: 20px"><i class="fa fa-user"></i></a>
+
+                          <a class="product-button" href="{{route('equipo-vista',$equi->id)}}" style="font-size: 20px"> <i class="fa fa-list"></i></a>
+                           <a class="product-button fl-bigmug-line-zoom60" href="{{ Storage::url('public/equipos/'.$equi->foto) }}" data-lightgallery="item" style="font-size: 25px"></a>
                           </div>
                         </header>
                         <footer class="product-content">
