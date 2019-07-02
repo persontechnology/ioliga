@@ -96,7 +96,7 @@
 	@if($generoSerie->etapaSerie->count()>0)
 	@foreach($generoSerie->etapaSerie as $etapaSerie)
 
-	<div class="col-xl-6 col-md-6">
+	<div class="col-xl-12 col-md-6">
 		<div class="card card-body bg-{{$etapaSerie->estado==false ? 'blue-600':'indigo-400'}} border-{{$etapaSerie==true  ? 'success':'danger'}}">
 			<div class="media">
 				<div class="media-body">
@@ -116,7 +116,7 @@
 	                    		@if($etapaSerie->fechas->count()==0)
 								<a href="#" data-url="{{ route('eliminar-etapa-serie',$etapaSerie->id) }}" data-msj="{{ $etapaSerie->etapa->nombre}}" onclick="eliminar(this);" class="dropdown-item"><i class="icon-cross2 text-danger-400"></i>  Eliminar</a>
 								@endif
-								<a href="#" class="dropdown-item"><i class="icon-phone2"></i> Make a call</a>
+								
 								@can('Ver fechas', 'ioliga\Models\Campeonato\Fecha::class')
 								<a href="{{route('fechas-etapa',$etapaSerie->id)}}" class="dropdown-item"><i class="icon-calendar"></i> Fechas</a>
 								<div class="dropdown-divider"></div>
@@ -146,24 +146,22 @@
 				</div>				
 				<div class="card-body text-dark">
 					<div class="table-responsive">
-					<table id="myTable">
+					<table class="table">
 						<thead>
 							<tr>
-								<th class="bg-warning p-1">#</th>
+								<th class="bg-warning ">#</th>
 								<th >Equipo</th>
-								<th class="bg-warning p-1">Ptn.</th>
-								<th class="p-1">Pbs.</th>
-								<th class="p-1">PJ</th>
-								<th class="p-1">PG</th>
-								<th class="p-1">PE</th>
-								<th class="p-1">GF</th>
-								<th class="p-1">GC</th>
-								<th class="p-1">GT</th>
+								<th class="bg-warning ">Pts.</th>
+								<th >Pb.</th>
+								<th >PJ</th>
+								<th >PG</th>
+								<th >PE</th>
+								<th >GF</th>
+								<th >GC</th>
+								<th >GT</th>
 							</tr>
 						</thead>
-						<tbody>
-
-					
+						<tbody>					
 						@if($etapaSerie->tablas->count()>0)
 						@php($i=0)
 						@foreach($etapaSerie->resultado($etapaSerie->id) as $res)
@@ -188,15 +186,13 @@
 									{{$h}} 
 									
 								</td>
-
 								<td>
 
 									{{$res->tabla($res->tabla_id)->bonificacion}}
 									@can('Actualizar bonificación', 'ioliga\Models\Campeonato\Tabla::class')
 									<button onclick="actualizaBonificacion(this)" data-tabla="{{$res->tabla($res->tabla_id)->id}}" data-equipo="{{$res->tabla($res->tabla_id)->asignacion->equipos->nombre}}" data-goles="{{$res->tabla($res->tabla_id)->bonificacion}}" data-etapaid="{{$generoSerie->id}}" class="btn bg-info border-teal text-teal rounded-round border-2 btn-icon  legitRipple">	<i class="icon-plus3"></i>	</button>
 									@endcan
-								</td>
-								
+								</td>								
 								<td>
 									{{$res->tabla($res->tabla_id)->resultados->count()}}
 								</td>
@@ -218,13 +214,167 @@
 								<td>
 									{{$res->tabla($res->tabla_id)->golesTotal($res->tabla($res->tabla_id)->golesFavor->sum('golesFavor'),$res->tabla($res->tabla_id)->golesContra->sum('golesContra'))}}
 									
-								</td>
-							
+								</td>							
 							</tr>
 							@endforeach
 							@endif
 						</tbody>
 					</table>
+					
+						<div class="row">
+						<div class="col-md-4">	
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="mr-3">
+											<a href="#" class="btn bg-primary-400 rounded-round btn-icon btn-sm legitRipple">
+												<span class="letter-icon">#</span>
+											</a>
+										</div>
+										<div>
+											<a href="#" class="text-default font-weight-semibold letter-icon-title">Número de Posición</a>
+											
+										</div>
+									</div>
+								</td>								
+								
+							</tr>
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="mr-3">
+											<a href="#" class="btn bg-primary-400 rounded-round btn-icon btn-sm legitRipple">
+												<span class="letter-icon">Pts</span>
+											</a>
+										</div>
+										<div>
+											<a href="#" class="text-default font-weight-semibold letter-icon-title">Puntos Totales</a>
+											
+										</div>
+									</div>
+								</td>								
+								
+							</tr>
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="mr-3">
+											<a href="#" class="btn bg-primary-400 rounded-round btn-icon btn-sm legitRipple">
+												<span class="letter-icon">Pb</span>
+											</a>
+										</div>
+										<div>
+											<a href="#" class="text-default font-weight-semibold letter-icon-title">Puntos Bonificación</a>
+											
+										</div>
+									</div>
+								</td>								
+								
+							</tr>
+						</div>
+						<div class="col-md-4">	
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="mr-3">
+											<a href="#" class="btn bg-primary-400 rounded-round btn-icon btn-sm legitRipple">
+												<span class="letter-icon">PJ</span>
+											</a>
+										</div>
+										<div>
+											<a href="#" class="text-default font-weight-semibold letter-icon-title">Partidos Jugados</a>
+											
+										</div>
+									</div>
+								</td>								
+								
+							</tr>
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="mr-3">
+											<a href="#" class="btn bg-primary-400 rounded-round btn-icon btn-sm legitRipple">
+												<span class="letter-icon">PG</span>
+											</a>
+										</div>
+										<div>
+											<a href="#" class="text-default font-weight-semibold letter-icon-title">Partidos Ganados</a>
+											
+										</div>
+									</div>
+								</td>								
+								
+							</tr>
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="mr-3">
+											<a href="#" class="btn bg-primary-400 rounded-round btn-icon btn-sm legitRipple">
+												<span class="letter-icon">PE</span>
+											</a>
+										</div>
+										<div>
+											<a href="#" class="text-default font-weight-semibold letter-icon-title">Partidos Empatados</a>
+											
+										</div>
+									</div>
+								</td>								
+								
+							</tr>
+						</div>
+						<div class="col-md-4">	
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="mr-3">
+											<a href="#" class="btn bg-primary-400 rounded-round btn-icon btn-sm legitRipple">
+												<span class="letter-icon">GF</span>
+											</a>
+										</div>
+										<div>
+											<a href="#" class="text-default font-weight-semibold letter-icon-title">Goles Favor</a>
+											
+										</div>
+									</div>
+								</td>								
+								
+							</tr>
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="mr-3">
+											<a href="#" class="btn bg-primary-400 rounded-round btn-icon btn-sm legitRipple">
+												<span class="letter-icon">GC</span>
+											</a>
+										</div>
+										<div>
+											<a href="#" class="text-default font-weight-semibold letter-icon-title">Goles Contra</a>
+											
+										</div>
+									</div>
+								</td>								
+								
+							</tr>
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="mr-3">
+											<a href="#" class="btn bg-primary-400 rounded-round btn-icon btn-sm legitRipple">
+												<span class="letter-icon">GT</span>
+											</a>
+										</div>
+										<div>
+											<a href="#" class="text-default font-weight-semibold letter-icon-title">Goles Totales</a>
+											
+										</div>
+									</div>
+								</td>								
+								
+							</tr>
+						</div>
+						</div>
+
+					
 				</div>
 				</div>
 			</div>
@@ -302,12 +452,5 @@ function actualizaBonificacion(argument) {
 	
 }
 </script>
-<style type="text/css">
-	      table, th, td {
-            border: 1px solid black;
-        }
-        th {
-            cursor: pointer;
-        }
-</style>
+
 @endsection

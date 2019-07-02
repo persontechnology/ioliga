@@ -38,7 +38,7 @@
 	        </article>
 	          <div class="row row-50">
 				@foreach($geSe->etapaSerie as $etapa)
-				<div class="col-lg-7 col-xl-6">
+				<div class="col-lg-7 col-xl-12">
 				 <article class="heading-component">
 		            <div class="heading-component-inner">
 		              <h5 class="heading-component-title">Etapa "{{$etapa->etapa->nombre}}"

@@ -82,10 +82,10 @@
         
           	<div class="btn-group" role="group" aria-label="Basic example">
           	<a class="button button-xs button-gray-outline" href="{{route('calendario-vista',$cam->id)}}">Calendarios </a>
-   			<a class="button button-xs button-gray-outline" href="#">Tabla Posiciones </a>
+   			  <a class="button button-xs button-gray-outline" href="{{route('tabla-vista',$cam->id)}}">Tabla Posiciones </a>
          	<a class="button button-xs button-gray-outline" href="#">Mejores Jugadores </a>
          
-          	</div>
+          </div>
        
         </div>
       </div>

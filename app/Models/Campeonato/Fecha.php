@@ -20,6 +20,10 @@ class Fecha extends Model
 	{
 		return $this->hasMany(Partido::class, 'fecha_id')->orderby('hora');
 	}
+	public function partidosVista()
+	{
+		return $this->hasMany(Partido::class, 'fecha_id')->where('tipo','Finalizado')->orderby('hora');
+	}
 	public function partidosPreceso()
 	{
 		return $this->hasMany(Partido::class, 'fecha_id')->where('tipo','Proceso');

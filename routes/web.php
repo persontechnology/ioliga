@@ -39,6 +39,7 @@ Route::get('/equipo-vista/{id}', 'Estaticas@equipoVista')->name('equipo-vista');
 Route::get('/nomina-vista/{id}', 'Estaticas@nominaVista')->name('nomina-vista');
 Route::get('/calendario-vista/{id}', 'Estaticas@calendarios')->name('calendario-vista');
 Route::get('/campeonatos-vista', 'Estaticas@campeonatosVista')->name('campeonatos-vista');
+Route::get('/tabla-vista/{id}', 'Estaticas@tablaVista')->name('tabla-vista');
 
 Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['verified','auth']], function () {

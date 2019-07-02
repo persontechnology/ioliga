@@ -111,4 +111,10 @@ class Estaticas extends Controller
         return view('estaticas.campeonatosVista',$data);
         
     }
+    public function tablaVista($codigoCampeo)
+    {
+        $campeo=Campeonato::findOrFail($codigoCampeo);       
+        $data = array('campeo' =>$campeo );
+        return view('estaticas.tablaVista',$data);
+    }
 }
