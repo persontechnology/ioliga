@@ -121,7 +121,7 @@
 					@can('Administrar partidos', 'ioliga\Models\Campeonato\Partido::class')
 					@if($fecha->estado==0)
 					<th>
-						<select onchange="cambiarEstado1(this);" class="form-control">
+						<select onchange="cambiarEstado1(this);" class="">
 						  <option class=" text-warning" value="{{$par->id}}" {{$par->tipo=='Proceso' ? 'selected' :''}}>Proceso</option>
 						  <option class="text-success" value="{{$par->id}}" {{$par->tipo=='Finalizado' ? 'selected' :''}}>Finalizado</option>
 						  <option class="text-info" value="{{$par->id}}" {{$par->tipo=='Diferido' ? 'selected' :''}}>Diferido</option>

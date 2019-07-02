@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use ioliga\User;
 use ioliga\Models\Equipo\Equipo;
 use ioliga\Models\Campeonato\AsignacionNomina;
+use ioliga\Models\Nomina\Nomina;
+use ioliga\Models\Campeonato\Alineacion;
 use DateTime;
 class Nomina extends Model
 {
@@ -50,4 +52,23 @@ class Nomina extends Model
         $edad=  $calculo->y;    
         return $edad;
     }
+
+    
+    public function alineacionResultado()
+    {
+        return $this->hasManyThrough(
+            Alineacion::class,//Taabla asignacion
+            asignacionNomina::class,//Tabla genero serie 
+            'nomina_id',//Id para igualar la tabla genero - genero serie
+            'asignacionNomina_id',//Id para igualar la tabla asignacion genero serie 
+            'id',
+            'id' 
+        );
+    }
+    public function vistaNomina($idnomina)
+    {
+        $nomina=Nomina::findOrFail($idnomina);
+        return $nomina;
+    }
 }
+

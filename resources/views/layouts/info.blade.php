@@ -160,6 +160,9 @@
                         <li class="rd-nav-item" id="menuNosotros">
                           <a class="rd-nav-link" href="{{ route('nosotros') }}">Nosotros</a> 
                         </li>
+                         <li class="rd-nav-item" id="menuEquipo">
+                          <a class="rd-nav-link" href="{{ route('equipos-vista') }}">Equipos</a> 
+                        </li>
 
                         <li class="rd-nav-item">
                             <a class="rd-nav-link" href="#">Partidos</a> 
