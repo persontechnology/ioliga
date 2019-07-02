@@ -133,7 +133,7 @@
             <div class="game-info game-info-creative">
               <p class="game-info-subtitle">Campeonato Actual: {{$campeo->estado?'Activo':"Inactivo"}} 
          
-              <a class="button button-xs button-gray-outline" href="{{route('calendario-vista',$campeo->id)}})">Calendario
+              <a class="button button-xs button-gray-outline" href="{{route('calendario-vista',$campeo->id)}}">Calendario
               </a>
               </p>
               <h3 class="game-info-title">Campeonato: {{$campeo->nombre .' ' .$campeo->fechaInicio }}  </h3>

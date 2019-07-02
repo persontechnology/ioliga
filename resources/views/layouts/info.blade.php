@@ -164,8 +164,8 @@
                           <a class="rd-nav-link" href="{{ route('equipos-vista') }}">Equipos</a> 
                         </li>
 
-                        <li class="rd-nav-item">
-                            <a class="rd-nav-link" href="#">Partidos</a> 
+                        <li class="rd-nav-item" id="menuCampeonato">
+                            <a class="rd-nav-link" href="{{ route('campeonatos-vista') }}">Campeonatos</a> 
                         </li>
                         
                         <li class="rd-nav-item" id="menuNoticias">

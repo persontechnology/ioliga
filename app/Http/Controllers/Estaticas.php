@@ -11,6 +11,8 @@ use ioliga\Mail\EmailContacto;
 use ioliga\Models\Equipo\Equipo;
 use ioliga\Models\Equipo\GeneroEquipo;
 use ioliga\Models\Campeonato;
+use ioliga\Models\Nomina\Nomina;
+use Illuminate\Support\Facades\DB;
 class Estaticas extends Controller
 {
     public function nosotros()
@@ -82,5 +84,31 @@ class Estaticas extends Controller
         $campeo=Campeonato::findOrFail($codigoCampeo);       
         $data = array('campeo' =>$campeo );
         return view('estaticas.calendarios',$data);
+    }
+    public function campeonatosVista()
+    {
+        $campeo=Campeonato::orderBy('estado','desc')
+        ->orderBy('fechaInicio','desc')
+        ->get();
+        $mejorEquipo=Equipo::
+          join('asignacion','asignacion.equipo_id','=', 'equipo.id')
+          ->join('tabla','tabla.asignacion_id','=', 'asignacion.id')
+          ->join('resultado','resultado.tabla_id','=', 'tabla.id')
+          ->select('equipo.id',DB::raw('sum(resultado.estado="Ganado") as partidosGanados')) 
+          ->groupBy('equipo.id')
+          ->orderBy('partidosGanados','desc')
+          ->limit(4)  
+          ->get();
+          $nomina=Nomina::
+          join('asignacionNomina','asignacionNomina.nomina_id','=', 'nomina.id')
+          ->join('alineacion','alineacion.asignacionNomina_id','=', 'asignacionNomina.id')          
+          ->select('nomina.id',DB::raw('sum(alineacion.goles) as golesTotal')) 
+          ->groupBy('nomina.id')
+          ->orderBy('golesTotal','desc')
+          ->limit(4)  
+          ->get();
+        $data = array('campeo' =>$campeo, 'mejorEquipo'=>$mejorEquipo,'mejorJugador'=>$nomina );
+        return view('estaticas.campeonatosVista',$data);
+        
     }
 }

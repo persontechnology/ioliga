@@ -62,4 +62,5 @@ class Campeonato extends Model
             'id' // Local key on users table...
         );
     }
+   
 }   
