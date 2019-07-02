@@ -34,7 +34,7 @@ class CampeonatoDataTable extends DataTable
      */
     public function query(Campeonato $model)
     {
-        return $model->newQuery()->select($this->getColumns());
+        return $model->newQuery()->select($this->getColumns())->orderBy('created_at','desc');
     }
 
     /**
@@ -76,7 +76,6 @@ class CampeonatoDataTable extends DataTable
             'nombre'=>['title'=>'Nombre de campeonato'],
             'fechaInicio',
             'fechaFin',
-            'estado',
             'descripcion'=>['title'=>'Descripción'],
             'categoria'=>['title'=>'Categorías']
 

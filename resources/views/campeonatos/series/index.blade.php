@@ -64,13 +64,13 @@
                 <div class="col-md-4">
 
                     <!-- Linked list group -->
-                    <div class="card">
+                    <div class="card ">
                         <a href="{{ route('asignarEquiposAserie',$serie_si_x->id) }}">
                         <div class="card-body text-center">
                             <p class="card-text">
                                 SERIE
                             </p>
-                            <h1 class="card-title">{{ $serie_si_x->serie->nombre }}</h1>
+                            <h1 class="card-title"><strong>{{ $serie_si_x->serie->nombre }}</strong></h1>
                             <small class="float-right">+ Asignar equipos</small>
                         </div>
                         </a>
@@ -81,42 +81,28 @@
                             
                             @foreach ($serie_si_x->equipos as $equipo)
                                                             
-                                <a href="#" class="list-group-item list-group-item-action">
-                                    <span class="font-weight-semibold">
-                                        <i class="icon-grid mr-2"></i>
+                            @can('Ver asignacion equipo', 'ioliga\Models\Campeonato\Asignacion::class')    
+                                <a href="{{route('asignacion',$equipo->asignacion->id)}}" class="list-group-item list-group-item-action">
+                                    <span class="font-weight-semibolds">
+                                        <i class="fas fa-users"></i>
                                         {{ $equipo->nombre }}
                                     </span>
-                                    <span class="badge bg-success ml-auto">New</span>
+                                    <span class="badge bg-secondary ml-auto">Asignaciones</span>
                                 </a>
-                                @can('Ver asignacion equipo', 'ioliga\Models\Campeonato\Asignacion::class')
-                                <a href="{{route('asignacion',$equipo->asignacion->id)}}" class="list-group-item list-group-item-action">                         
-                                    <i class="icon-point-right mr-2"></i>                    
-                               
-                                </a>
-                                @endcan
-
-
+                            @endcan
+                                
                             @endforeach
 
                         </ul>
                         @endif
 
-                        <div class="card-footer d-flex justify-content-between">
+                        <div class="card-footer bg-dark">
                          @can('Ver etapas', 'ioliga\Models\Campeonato\Etapa::class')
-                          <a href="{{route('etapas-serie',$serie_si_x->id)}}" class="list-group-item list-group-item-action">
-                              <span class="badge bg-dark "> {{ $serie_si_x->serie->nombre }} Etapas</span>
+                          <a href="{{route('etapas-serie',$serie_si_x->id)}}" class="text-white">
+                              <span class=""> Etapas de la SERIE {{ $serie_si_x->serie->nombre }}</span>
                           </a>
                         @endcan
 
-                            <span class="text-muted">Updated 2 hours ago</span>
-                            <span>
-                                <i class="icon-star-full2 font-size-base text-warning"></i>
-                                <i class="icon-star-full2 font-size-base text-warning"></i>
-                                <i class="icon-star-full2 font-size-base text-warning"></i>
-                                <i class="icon-star-full2 font-size-base text-warning"></i>
-                                <i class="icon-star-empty3 font-size-base text-warning"></i>
-                                <span class="text-muted ml-2">(86)</span>
-                            </span>
                         </div>
                     </div>
                     <!-- /linked list group -->

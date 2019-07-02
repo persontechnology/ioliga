@@ -30,15 +30,19 @@
                 <div class="card-body">
                     <input type="hidden" name="serie" class="" value="{{ $generoSerie->id }}">
                     <select multiple="multiple" name="equipos[]" class="form-control listbox-no-selection" data-fouc>
+                        
+                        @foreach($equiposNo as $equipo_no)
+                        <option value="{{ $equipo_no->id }}">{{ $equipo_no->nombre }}</option>
+                        @endforeach
+
+                        
                         @foreach($equiposSi as $equipo_si)
                         
                         <option value="{{ $equipo_si->id }}" selected>{{ $equipo_si->nombre }}</option>
                         
                         @endforeach
 
-                        @foreach($equiposNo as $equipo_no)
-                        <option value="{{ $equipo_no->id }}">{{ $equipo_no->nombre }}</option>
-                        @endforeach
+                        
 
                     </select>
                 </div>
