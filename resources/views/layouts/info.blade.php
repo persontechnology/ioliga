@@ -48,32 +48,7 @@
               <!-- RD Navbar Panel-->
               <div class="rd-navbar-panel-inner container">
                 <div class="rd-navbar-collapse rd-navbar-panel-item rd-navbar-panel-item-left">
-                  <!-- Owl Carousel-->
-                  <div class="owl-carousel-navbar owl-carousel-inline-outer">
-                    <div class="owl-inline-nav">
-                      <button class="owl-arrow owl-arrow-prev"></button>
-                      <button class="owl-arrow owl-arrow-next"></button>
-                    </div>
-                    <div class="owl-carousel-inline-wrap">
-                      <div class="owl-carousel owl-carousel-inline" data-items="1" data-dots="false" data-nav="true" data-autoplay="true" data-autoplay-speed="3200" data-stage-padding="0" data-loop="true" data-margin="10" data-mouse-drag="false" data-touch-drag="false" data-nav-custom=".owl-carousel-navbar">
-                        <!-- Post Inline-->
-                        <article class="post-inline">
-                          <time class="post-inline-time" datetime="2019">Enero 15, 2019</time>
-                          <p class="post-inline-title">Sportland vs Dream Team</p>
-                        </article>
-                        <!-- Post Inline-->
-                        <article class="post-inline">
-                          <time class="post-inline-time" datetime="2019">Febrero 15, 2019</time>
-                          <p class="post-inline-title">Sportland vs Real Madrid</p>
-                        </article>
-                        <!-- Post Inline-->
-                        <article class="post-inline">
-                          <time class="post-inline-time" datetime="2019">Marzo 15, 2019</time>
-                          <p class="post-inline-title">Sportland vs Barcelona</p>
-                        </article>
-                      </div>
-                    </div>
-                  </div>
+                  <p>{{ $nos->nombre??config('app.name','LIGA') }}</p>
                 </div>
                 <div class="rd-navbar-panel-item rd-navbar-panel-item-right">
                   <ul class="list-inline list-inline-bordered">
@@ -137,15 +112,33 @@
                   </ul>
                   <!-- RD Navbar Search-->
                   <div class="rd-navbar-search">
-                    <button class="rd-navbar-search-toggle" data-rd-navbar-toggle=".rd-navbar-search"><span></span></button>
-                    <form class="rd-search" action="#" data-search-live="rd-search-results-live" method="GET">
-                      <div class="form-wrap">
-                        <label class="form-label" for="rd-navbar-search-form-input">Ingrese su solicitud de búsqueda aquí...</label>
-                        <input class="rd-navbar-search-form-input form-input" id="rd-navbar-search-form-input" type="text" name="s" autocomplete="off">
-                        <div class="rd-search-results-live" id="rd-search-results-live"></div>
+                    <div class="ml-5">
+                      <div class="owl-carousel-navbar owl-carousel-inline-outer">
+                        <div class="owl-inline-nav">
+                          <button class="owl-arrow owl-arrow-prev"></button>
+                          <button class="owl-arrow owl-arrow-next"></button>
+                        </div>
+                        <div class="owl-carousel-inline-wrap">
+                          <div class="owl-carousel owl-carousel-inline" data-items="1" data-dots="false" data-nav="true" data-autoplay="true" data-autoplay-speed="3200" data-stage-padding="0" data-loop="true" data-margin="10" data-mouse-drag="false" data-touch-drag="false" data-nav-custom=".owl-carousel-navbar">
+                            <!-- Post Inline-->
+                            <article class="post-inline">
+                              <time class="post-inline-time" datetime="2019">Enero 15, 2019</time>
+                              <p class="post-inline-title">Sportland vs Dream Team</p>
+                            </article>
+                            <!-- Post Inline-->
+                            <article class="post-inline">
+                              <time class="post-inline-time" datetime="2019">Febrero 15, 2019</time>
+                              <p class="post-inline-title">Sportland vs Real Madrid</p>
+                            </article>
+                            <!-- Post Inline-->
+                            <article class="post-inline">
+                              <time class="post-inline-time" datetime="2019">Marzo 15, 2019</time>
+                              <p class="post-inline-title">Sportland vs Barcelona</p>
+                            </article>
+                          </div>
+                        </div>
                       </div>
-                      <button class="rd-search-form-submit fl-budicons-launch-search81" type="submit"></button>
-                    </form>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -311,26 +304,16 @@
         </div>
         <div class="footer-classic-aside footer-classic-darken">
           <div class="container">
-            <div class="layout-justify">
+            <div class="layout-center">
               <!-- Rights-->
-              <p class="rights">
+              <a href="{{ url('/') }}">
+              <p class="text-center text-success">
                 <span>{{ $nos->nombre??config('app.name','LIGA') }}</span>
                 <span>&nbsp;&copy;&nbsp;</span>
                 <span class="">{{ date('Y') }}</span>
-                <span>.&nbsp;</span>
-                <a class="link-underline" href="privacy-policy.html">Política de privacidad</a>
               </p>
-              <nav class="nav-minimal">
-                <ul class="nav-minimal-list">
-                    <li id="menuHome">
-                        <a href="{{ url('/') }}">Inicio</a>
-                    </li>
-                  <li><a href="#">Nosotros</a></li>
-                  <li><a href="#">Equipos</a></li>
-                  <li><a href="{{ route('noticias') }}">Noticias</a></li>
-                  <li><a href="#">Contactos</a></li>
-                </ul>
-              </nav>
+            </a>
+              
             </div>
           </div>
         </div>

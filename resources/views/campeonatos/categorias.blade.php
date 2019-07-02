@@ -8,28 +8,18 @@
 			<span class="font-weight-semibold">
 				{{ $cat->nombre }}
 			</span>
-			<span class="badge bg-success ml-auto">{{ count($cat->equipos) }} equipos</span>
+			<span class="badge ml-auto">{{ count($cat->equipos) }} equipos</span>
 		</a>
 		
 		@endforeach
 	</ul>
 
-	<div class="card-footer bg-white d-flex justify-content-between align-items-center">
-		<div class="text-{{ $campeonato->estado ==false ?'danger':'success' }}">
-			<i class="fas {{ $campeonato->estado ==false ?'fa-power-off':'fa-clipboard-check' }}"></i>
+	<div class="card-footer {{ $campeonato->estado ==false ?'bg-danger':'bg-success' }} d-flex justify-content-between align-items-center">
+		<div class="text-white">
+			<i class="fas {{ $campeonato->estado ==false ?'fa-power-off':'fas fa-spinner' }}"></i>
 			{{ $campeonato->estado ==false ?'FINALIZADO':'ACTIVO' }}
 		</div>
-
-    	<div class="btn-group btn-group-sm">
-            <button class="btn btn-dark btn-sm dropdown-toggle" data-toggle="dropdown"><i class="icon-cog3"></i></button>
-			<div class="dropdown-menu dropdown-menu-right">
-				<a href="#" class="dropdown-item">Action</a>
-				<a href="#" class="dropdown-item">Another action</a>
-				<a href="#" class="dropdown-item">Something else here</a>
-				<div class="dropdowndivider"></div>
-				<a href="#" class="dropdown-item">One more separated line</a>
-			</div>
-        </div>
 	</div>
 </div>
+
 <!-- /linked list group -->

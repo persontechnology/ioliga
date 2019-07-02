@@ -41,7 +41,7 @@
             <div class="swiper-slide-caption">
               <h1 data-caption-animate="fadeInUp" data-caption-delay="100">Mejor sitio web</h1>
               <h4 data-caption-animate="fadeInUp" data-caption-delay="200">Para noticias de fútbol, ​​actualizaciones , <br class="d-none d-xl-block"> y resultados de juegos.</h4>
-              <a class="button button-primary" data-caption-animate="fadeInUp" data-caption-delay="300" href="{{ url('/') }}">Lee mas</a>
+              <a class="button button-primary" data-caption-animate="fadeInUp" data-caption-delay="300" href="{{ url('equipos-vista') }}">Lee mas</a>
             </div>
           </div>
         </div>
@@ -72,12 +72,12 @@
             <div class="col-md-6">
               <!-- Post Future-->
               <article class="post-future">
-                  <a class="post-future-figure" href="blog-post.html">
+                  <a class="post-future-figure" href="{{ route('noticiaDetalle',$now->id) }}">
                       <img src="{{ Storage::url('public/noticias/'.$now->foto) }}" alt="" width="368" height="287"/>
                   </a>
                 <div class="post-future-main">
                   <h4 class="post-future-title">
-                    <a href="blog-post.html">
+                    <a href="{{ route('noticiaDetalle',$now->id) }}">
                       {{ $now->titulo }}
                     </a></h4>
                   <div class="post-future-meta">
@@ -95,7 +95,7 @@
                     
                   </div>
                   <div class="post-future-footer group-flex group-flex-xs">
-                    <a class="button button-gray-outline" href="blog-post.html">Read more</a>
+                    <a class="button button-gray-outline" href="{{ route('noticiaDetalle',$now->id) }}">ver detalle</a>
                     <div class="post-future-share">
                       <div class="inline-toggle-parent">
                         <div class="inline-toggle icon material-icons-share"></div>
