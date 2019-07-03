@@ -114,29 +114,8 @@
                   <div class="rd-navbar-search">
                     <div class="ml-5">
                       <div class="owl-carousel-navbar owl-carousel-inline-outer">
-                        <div class="owl-inline-nav">
-                          <button class="owl-arrow owl-arrow-prev"></button>
-                          <button class="owl-arrow owl-arrow-next"></button>
-                        </div>
-                        <div class="owl-carousel-inline-wrap">
-                          <div class="owl-carousel owl-carousel-inline" data-items="1" data-dots="false" data-nav="true" data-autoplay="true" data-autoplay-speed="3200" data-stage-padding="0" data-loop="true" data-margin="10" data-mouse-drag="false" data-touch-drag="false" data-nav-custom=".owl-carousel-navbar">
-                            <!-- Post Inline-->
-                            <article class="post-inline">
-                              <time class="post-inline-time" datetime="2019">Enero 15, 2019</time>
-                              <p class="post-inline-title">Sportland vs Dream Team</p>
-                            </article>
-                            <!-- Post Inline-->
-                            <article class="post-inline">
-                              <time class="post-inline-time" datetime="2019">Febrero 15, 2019</time>
-                              <p class="post-inline-title">Sportland vs Real Madrid</p>
-                            </article>
-                            <!-- Post Inline-->
-                            <article class="post-inline">
-                              <time class="post-inline-time" datetime="2019">Marzo 15, 2019</time>
-                              <p class="post-inline-title">Sportland vs Barcelona</p>
-                            </article>
-                          </div>
-                        </div>
+                    
+               
                       </div>
                     </div>
                   </div>
@@ -269,7 +248,7 @@
                         @endif
 
                     </ul>
-                  </div><a class="button button-sm button-gray-outline" href="contact-us.html">Estar en contacto</a>
+                  </div><a class="button button-sm button-gray-outline" href="{{route('contactos')}}">Estar en contacto</a>
                 </div>
               </div>
               <div class="col-lg-7">

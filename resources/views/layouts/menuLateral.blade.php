@@ -26,6 +26,19 @@
     </a>
 </li>
 @endcan
+{{-- equipos --}}
+
+@can('Ver categorias', 'ioliga\Models\Equipo\GeneroEquipo::class')
+<li class="nav-item">
+    <a href="{{ route('categorias') }}" class="nav-link" id="menuEquipo" title="Equipos">
+        <i class="fas fa-futbol"></i>
+        <span>
+            {{ __('Equipos') }}
+        </span>
+    </a>
+</li>
+@endcan
+
 {{-- campeonatos --}}
 
 @can('ver', ioliga\Models\Campeonato::class)
@@ -39,18 +52,6 @@
 </li>
 @endcan
 
-{{-- equipos --}}
-
-@can('Ver categorias', 'ioliga\Models\Equipo\GeneroEquipo::class')
-<li class="nav-item">
-    <a href="{{ route('categorias') }}" class="nav-link" id="menuEquipo" title="Equipos">
-        <i class="fas fa-futbol"></i>
-        <span>
-            {{ __('Equipos') }}
-        </span>
-    </a>
-</li>
-@endcan
 
 @can('representante', ioliga\Models\Nomina\Nomina::class)
     <li class="nav-item">

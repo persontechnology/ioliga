@@ -11,11 +11,20 @@
 |
 */
 use ioliga\Models\Campeonato;
+use ioliga\Models\Nomina\Nomina;
 
 Route::get('/', function () {
 
 	$campeonato=Campeonato::where('estado',true)->orderBy('fechaInicio','asc')->get();
-    $data = array('campeonatoActivo' =>$campeonato, );
+    $nomina=Nomina::
+      join('asignacionNomina','asignacionNomina.nomina_id','=', 'nomina.id')
+      ->join('alineacion','alineacion.asignacionNomina_id','=', 'asignacionNomina.id')          
+      ->select('nomina.id',DB::raw('sum(alineacion.goles) as golesTotal')) 
+      ->groupBy('nomina.id')
+      ->orderBy('golesTotal','desc')
+      ->limit(4)  
+      ->get();
+    $data = array('campeonatoActivo' =>$campeonato,'mejorJugador'=>$nomina );
 	return view('welcome',$data);
 	 // $A=Artisan::call('cache:clear');
     // $A=Artisan::call('config:clear');

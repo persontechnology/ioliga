@@ -220,7 +220,7 @@
 							@endif
 						</tbody>
 					</table>
-					
+					</div>
 						<div class="row">
 						<div class="col-md-4">	
 							<tr>
@@ -372,7 +372,7 @@
 								
 							</tr>
 						</div>
-						</div>
+						
 
 					
 				</div>

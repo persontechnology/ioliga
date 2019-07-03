@@ -42,25 +42,10 @@
                             <span>Mi perfil</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="icon-coins"></i>
-                            <span>Mi balance</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="icon-comment-discussion"></i>
-                            <span>Mensajes</span>
-                            <span class="badge bg-teal-400 badge-pill align-self-center ml-auto">58</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="icon-cog5"></i>
-                            <span>Configuraciones de la cuenta</span>
-                        </a>
-                    </li>
+                 
+                   
+            
+                  
                     <li class="nav-item">
                         <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
