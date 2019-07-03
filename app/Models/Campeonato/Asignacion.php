@@ -32,6 +32,10 @@ class Asignacion extends Model
     {
     	return $this->belongsTo(GeneroSerie::class,'generoSerie_id');
     }
+        public function asignacionNominas()
+    {
+        return $this->hasMany(AsignacionNomina::class,'asignacion_id');
+    }
 
 	public function asignacionNominasPartido()
     {

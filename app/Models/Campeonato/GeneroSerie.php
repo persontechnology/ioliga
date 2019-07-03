@@ -56,4 +56,8 @@ class GeneroSerie extends Model
     {
         return $this->hasMany(Asignacion::class,'generoSerie_id')->where('estado',1)->orderBy('equipo_id'); 
     }
+     public function asignaciones()
+    {
+        return $this->hasMany(Asignacion::class,'generoSerie_id'); 
+    }
 }

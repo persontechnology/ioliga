@@ -43,41 +43,13 @@ class NominaPolicy
         return $user->can('Actualizar foto jugador');
     }
 
-
-
-    /**
-     * Determine whether the user can delete the nomina.
-     *
-     * @param  \ioliga\User  $user
-     * @param  \ioliga\Nomina  $nomina
-     * @return mixed
-     */
-    public function delete(User $user, Nomina $nomina)
+     public function multasJugador(User $user)
     {
-        //
+        return $user->can('Multas jugador');
     }
 
-    /**
-     * Determine whether the user can restore the nomina.
-     *
-     * @param  \ioliga\User  $user
-     * @param  \ioliga\Nomina  $nomina
-     * @return mixed
-     */
-    public function restore(User $user, Nomina $nomina)
+    public function Cobrarmultas(User $user)
     {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the nomina.
-     *
-     * @param  \ioliga\User  $user
-     * @param  \ioliga\Nomina  $nomina
-     * @return mixed
-     */
-    public function forceDelete(User $user, Nomina $nomina)
-    {
-        //
+        return $user->can('Cobrar multa');
     }
 }

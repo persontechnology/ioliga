@@ -7,7 +7,7 @@ use ioliga\Models\Equipo\GeneroEquipo;
 use ioliga\Models\Equipo\Genero;
 use ioliga\Models\Campeonato\GeneroSerie;
 use ioliga\Models\Campeonato\Asignacion;
-
+use Illuminate\Support\Facades\DB;
 class Campeonato extends Model
 {
      protected $table="campeonato";
@@ -61,6 +61,19 @@ class Campeonato extends Model
             'id', // Local key on countries table...
             'id' // Local key on users table...
         );
+    }
+
+    public function contadorDeAsignaciones($camp)
+    {
+        $result=Campeonato::
+        join('genero','genero.campeonato_id','=', 'campeonato.id')    
+        ->join('generoSerie','generoSerie.genero_id','=', 'genero.id')
+        ->join('asignacion','asignacion.generoSerie_id','=', 'generoSerie.id')
+        ->select('campeonato.id',DB::raw('count(campeonato.id) as total'))
+        ->where('campeonato.id',$camp)      
+        ->groupBy('campeonato.id')    
+        ->get();
+        return $result;
     }
    
 }   

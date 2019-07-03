@@ -68,6 +68,9 @@ class PermisosSeeder extends Seeder
         $p_ver_nomina_representante=Permission::updateOrCreate(['name' => 'Ver nómina representante']);
         $p_crear_jugadores_representante=Permission::updateOrCreate(['name' => 'Crear jugadores representante']);
         $p_actualizar_imagen_jugadores_nomina=Permission::updateOrCreate(['name' => 'Actualizar imagen jugador representante']);
+        $p_multa_jugador=Permission::updateOrCreate(['name' => 'Multas jugador']);
+        $p_cobrar_multa=Permission::updateOrCreate(['name' => 'Cobrar multa']);
+
         
         /*permisos para ver mis equipos representante*/
 

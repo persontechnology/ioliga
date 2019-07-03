@@ -4,6 +4,10 @@ namespace ioliga\Http\Controllers;
 
 use Illuminate\Http\Request;
 use ioliga\Models\Campeonato;
+use ioliga\User;
+use Spatie\Permission\Models\Role;
+use ioliga\Models\Equipo\GeneroEquipo;
+use ioliga\Models\Equipo\Equipo;
 class HomeController extends Controller
 {
     /**
@@ -23,7 +27,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        
-        return view('home');
+       
+       $campeonato=Campeonato::orderBy('fechaInicio','desc')->get();
+       $equipo=Equipo::orderBy('nombre','asc')->get();
+       $genero=GeneroEquipo::get();
+       $data = array('campeonatos' =>$campeonato ,'genero'=>$genero,'equipo'=>$equipo );
+    
+        return view('home',$data);
     }
 }

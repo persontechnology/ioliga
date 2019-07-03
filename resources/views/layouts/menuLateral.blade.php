@@ -53,6 +53,7 @@
 @endcan
 
 
+
 @can('representante', ioliga\Models\Nomina\Nomina::class)
     <li class="nav-item">
         <a href="{{ route('mis-equipos') }}" class="nav-link" id="menuNominare">

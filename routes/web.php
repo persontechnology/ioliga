@@ -182,6 +182,9 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	Route::get('/vista-jugador/{id}', 'Nominas@vistaPreviaJugador')->name('vista-jugador');
 	Route::post('/jugador-actualizar-nomina', 'Nominas@acutualizaJugadorEquipo')->name('jugador-actualizar-nomina');
 
+	Route::get('/multas-jugadores/{id}', 'Nominas@multaJugadores')->name('multas-jugadores');
+	Route::get('/multas-cobrar/{id}/{idCa}', 'Nominas@cobrarMulta')->name('cobrar-multa');
+
 	/*Nominas Asignaciones*/
   	Route::get('/listar-mis-equipo', 'Campeonatos@representante')->name('listar-mis-equipo');
 
