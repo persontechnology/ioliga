@@ -93,9 +93,13 @@ Highcharts.chart('numeroequiposGenero', {
         @foreach($genero as $ge)
         {
             name: '{{$ge->nombre}}',
-            y: @foreach($ge->contadorDeAsignaciones($ge->id) as $con)
-                {{$con->total}},
+            y: @if($ge->contadorDeAsignaciones($ge->id)->count()>0)
+                 @foreach($ge->contadorDeAsignaciones($ge->id) as $con)
+                    {{$con->total}},
                 @endforeach
+                @else
+                    0,
+                @endif
              
             sliced: true,
             selected: true
