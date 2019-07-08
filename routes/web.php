@@ -11,11 +11,20 @@
 |
 */
 use ioliga\Models\Campeonato;
+use ioliga\Models\Nomina\Nomina;
 
 Route::get('/', function () {
 
 	$campeonato=Campeonato::where('estado',true)->orderBy('fechaInicio','asc')->get();
-    $data = array('campeonatoActivo' =>$campeonato, );
+    $nomina=Nomina::
+      join('asignacionNomina','asignacionNomina.nomina_id','=', 'nomina.id')
+      ->join('alineacion','alineacion.asignacionNomina_id','=', 'asignacionNomina.id')          
+      ->select('nomina.id',DB::raw('sum(alineacion.goles) as golesTotal')) 
+      ->groupBy('nomina.id')
+      ->orderBy('golesTotal','desc')
+      ->limit(4)  
+      ->get();
+    $data = array('campeonatoActivo' =>$campeonato,'mejorJugador'=>$nomina );
 	return view('welcome',$data);
 	 // $A=Artisan::call('cache:clear');
     // $A=Artisan::call('config:clear');
@@ -38,6 +47,8 @@ Route::get('/equipos-vista', 'Estaticas@eqiposVista')->name('equipos-vista');
 Route::get('/equipo-vista/{id}', 'Estaticas@equipoVista')->name('equipo-vista');
 Route::get('/nomina-vista/{id}', 'Estaticas@nominaVista')->name('nomina-vista');
 Route::get('/calendario-vista/{id}', 'Estaticas@calendarios')->name('calendario-vista');
+Route::get('/campeonatos-vista', 'Estaticas@campeonatosVista')->name('campeonatos-vista');
+Route::get('/tabla-vista/{id}', 'Estaticas@tablaVista')->name('tabla-vista');
 
 Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['verified','auth']], function () {
@@ -127,7 +138,7 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	  	Route::post('/crear-partido', 'Fechas@guardarPartidos')->name('crear-partido');
 	  	Route::get('/eliminar-partido/{id}', 'Fechas@eliminarpartido')->name('eliminar-partido');
 	  	Route::post('/estado-partido', 'Fechas@estadoPartido')->name('estado-partido');
-	  	
+	  	Route::post('/asignar-arbitro', 'Fechas@asignarArbitro')->name('asignar-arbitro');
 
 
 	  	/*Alineacio*/
@@ -170,6 +181,9 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	Route::post('/jugador-editar-foto', 'Nominas@editarFotoJugadorEquipo')->name('jugador-editar-foto');
 	Route::get('/vista-jugador/{id}', 'Nominas@vistaPreviaJugador')->name('vista-jugador');
 	Route::post('/jugador-actualizar-nomina', 'Nominas@acutualizaJugadorEquipo')->name('jugador-actualizar-nomina');
+
+	Route::get('/multas-jugadores/{id}', 'Nominas@multaJugadores')->name('multas-jugadores');
+	Route::get('/multas-cobrar/{id}/{idCa}', 'Nominas@cobrarMulta')->name('cobrar-multa');
 
 	/*Nominas Asignaciones*/
   	Route::get('/listar-mis-equipo', 'Campeonatos@representante')->name('listar-mis-equipo');

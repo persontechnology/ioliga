@@ -32,10 +32,10 @@
         <div class="player-info-figure">
           <div class="block-number"><span>{{$equipo->anioCreacion}}</span></div>
           <div class="player-img">
-            <img src="{{ Storage::url('public/equipos/'.$equipo->foto) }} " alt="" width="368" height="286"/>
+            <img src="{{ Storage::url('public/equipos/'.$equipo->foto) }} " alt="" width="178" height="176"/>
           </div>
           <div class="team-logo-img">
-            <img src="{{ Storage::url('public/nosotros/'.$nos->logo) }}" alt="" width="237" height="312"/>
+            <img src="{{ Storage::url('public/nosotros/'.$nos->logo) }}" alt="" width="437" height="412"/>
           </div>
         </div>
         <div class="player-info-main">

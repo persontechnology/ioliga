@@ -92,7 +92,7 @@
 			<div class="form-group row">
 				<label for="fraseIdentificacion" class="col-form-label col-lg-3">Frase de Identificación (opcional)<span class="text-danger">*</span></label>
 				<div class="col-lg-9">
-					<input type="number" name="fraseIdentificacion" id="fraseIdentificacion" value="{{ old('fraseIdentificacion') }}" class="form-control @error('fraseIdentificacion') is-invalid @enderror" placeholder="Ingrese..">
+					<input type="text" name="fraseIdentificacion" id="fraseIdentificacion" value="{{ old('fraseIdentificacion') }}" class="form-control @error('fraseIdentificacion') is-invalid @enderror" placeholder="Ingrese..">
 					@error('fraseIdentificacion')
 	                    <span class="invalid-feedback" role="alert">
 	                        <strong>{{ $message }}</strong>
@@ -103,7 +103,7 @@
 			<div class="form-group row">
 				<label for="color" class="col-form-label col-lg-3">Color (opcional)<span class="text-danger">*</span></label>
 				<div class="col-lg-9">
-					<input type="number" name="color" id="color" value="{{ old('color') }}" class="form-control @error('color') is-invalid @enderror" placeholder="Ingrese..">
+					<input type="text" name="color" id="color" value="{{ old('color') }}" class="form-control @error('color') is-invalid @enderror" placeholder="Ingrese..">
 					@error('color')
 	                    <span class="invalid-feedback" role="alert">
 	                        <strong>{{ $message }}</strong>
@@ -114,7 +114,7 @@
 			<div class="form-group row">
 				<label for="color1" class="col-form-label col-lg-3">Color #2 (opcional)<span class="text-danger">*</span></label>
 				<div class="col-lg-9">
-					<input type="number" name="color1" id="color1" value="{{ old('color1') }}" class="form-control @error('color1') is-invalid @enderror" placeholder="Ingrese..">
+					<input type="text" name="color1" id="color1" value="{{ old('color1') }}" class="form-control @error('color1') is-invalid @enderror" placeholder="Ingrese..">
 					@error('color1')
 	                    <span class="invalid-feedback" role="alert">
 	                        <strong>{{ $message }}</strong>
@@ -125,7 +125,7 @@
 			<div class="form-group row">
 				<label for="color2" class="col-form-label col-lg-3">Color #3 (opcional)<span class="text-danger">*</span></label>
 				<div class="col-lg-9">
-					<input type="number" name="color2" id="color2" value="{{ old('color2') }}" class="form-control @error('color2') is-invalid @enderror" placeholder="Ingrese..">
+					<input type="text" name="color2" id="color2" value="{{ old('color2') }}" class="form-control @error('color2') is-invalid @enderror" placeholder="Ingrese..">
 					@error('color2')
 	                    <span class="invalid-feedback" role="alert">
 	                        <strong>{{ $message }}</strong>

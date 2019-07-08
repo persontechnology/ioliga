@@ -133,7 +133,7 @@
             <div class="game-info game-info-creative">
               <p class="game-info-subtitle">Campeonato Actual: {{$campeo->estado?'Activo':"Inactivo"}} 
          
-              <a class="button button-xs button-gray-outline" href="{{route('calendario-vista',$campeo->id)}})">Calendario
+              <a class="button button-xs button-gray-outline" href="{{route('calendario-vista',$campeo->id)}}">Calendario
               </a>
               </p>
               <h3 class="game-info-title">Campeonato: {{$campeo->nombre .' ' .$campeo->fechaInicio }}  </h3>
@@ -161,9 +161,102 @@
                    @endforeach
                 </div>
               </div>
+              <div class="container">
+                @foreach($campeo->generosVista as $genero)
+                <div class="row row-30">
+                    <div class="col-xl-12">
+                    <article class="heading-component">
+                      <div class="heading-component-inner">
+                        <h5 class="heading-component-title">Tablas de Genero "{{$genero->generoEquipo->nombre}}"
+                        </h5>
+                      </div>
+                    </article> 
+                      @foreach($genero->GenerosSeries as $geSe)
+                       <article class="heading-component">
+                        <div class="heading-component-inner">
+                          <h5 class="heading-component-title">Serie: "{{$geSe->serie->nombre}}"
+                          </h5>
+                        </div>
+                      </article>
+                      @foreach($geSe->etapaSerie as $etapaSerie)
+                         <article class="heading-component">
+                          <div class="heading-component-inner">
+                            <h5 class="heading-component-title">Etapa: "{{$etapaSerie->etapa->nombre}}" Estado: "
+                              {{$etapaSerie->etapa->estado==0?'Proceso':'Finalizada'}}"
+                            </h5>
+                          </div>
+                        </article>
+                            
+                      <div class="container">
+                        <div class="row row-50">                            
+                          <div class="col-xl-12">                              
+                            <div class="table-custom-responsive">
+                              <table class="table-custom table-standings table-classic">
+                                <thead>
+                                  <tr>
+                                    <th>#</th>
+                                    <th>N.</th>
+                                    <th>P.J</th>
+                                    <th>G.F</th>
+                                    <th>PTS</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                          @if($etapaSerie->tablas->count()>0)
+                          @php($i=0)
+                          @foreach($etapaSerie->resultado($etapaSerie->id) as $res)
+                          @php($i++)
+                          @php($h=$res->tabla($res->tabla_id)->puntosTotales($res->tabla($res->tabla_id)->partidosGanados->count(),$res->tabla($res->tabla_id)->partidosEmpatados->count(),$res->tabla($res->tabla_id)->bonificacion))
+                            <tr >
+                              <td class="bg-dark">{{$i}}</td>
+                              <td>
+                                <ul class="media-list">
+                                  <li class="media">
+                                    <div class="mr-3">
+                                    <img src="{{ Storage::url('public/equipos/'.$res->tabla($res->tabla_id)->asignacion->equipos->foto) }}" class="rounded-circle" width="40" height="40" alt="">                        
+                                  </div>
+                                   <div class="media-body">
+                                      <div class="media-title font-weight-semibold">{{$res->tabla($res->tabla_id)->asignacion->equipos->nombre}}</div>                                       
+                                  </div>
+                                    
+                                  </li>
+                                </ul>
+                              </td>
+                              
+                              <td>
+                                {{$res->tabla($res->tabla_id)->partidosGanados->count()}}
+                              </td>
+                              
+                              <td>
+                                {{$res->tabla($res->tabla_id)->golesTotal($res->tabla($res->tabla_id)->golesFavor->sum('golesFavor'),$res->tabla($res->tabla_id)->golesContra->sum('golesContra'))}}
+                                
+                              </td>
+                              <td class="bg-dark">
+                                {{$h}} 
+                                
+                              </td>             
+                            </tr>
+                            @endforeach
+                            @endif                      
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                         @endforeach
+                      @endforeach
+                         
+                    </div>
+                </div>
+                  @endforeach
+                  
+                </div>
+
+
             </div>
             <div class="game-info-countdown">
-              <div class="countdown countdown-bordered" data-type="until" data-time="18 Jun 2019 16:00" data-format="dhms" data-style="short"></div>
+            
             </div>
           </article>
           @else
@@ -180,6 +273,70 @@
           @endif
 
 
+        </div>
+
+        <div class="aside-component">
+          <!-- Heading Component-->
+          <article class="heading-component">
+            <div class="heading-component-inner">
+              <h5 class="heading-component-title">Mejores Jugadores
+              </h5>
+            </div>
+          </article>
+              <!-- Player Voting Item-->
+
+              @if($mejorJugador->count()>0)
+              @php($m=0)
+              @foreach($mejorJugador as $mejor)
+              @php($m++)
+       
+          <div class="player-info-corporate {{$m==1?'player-info-other-team':''}}">
+            <div class="player-info-figure">
+              <div class="block-number"><span>{{$m}}</span></div>
+              <div class="player-img"><img src="{{ Storage::url('public/usuarios/'.$mejor->vistaNomina($mejor->id)->user->foto) }}" alt="" width="268" height="200"/>
+              </div>
+              <div class="team-logo-img"><img src="{{ Storage::url('public/nosotros/'.$nosw->logo) }}" alt="" width="233" height="233"/>
+              </div>
+            </div>
+            <div class="player-info-main">
+              <h4 class="player-info-title">{{$mejor->vistaNomina($mejor->id)->user->apellidos}}</h4>
+              <p class="player-info-subtitle">{{$mejor->vistaNomina($mejor->id)->user->nombres}} </p>
+              <hr/>
+              <div class="player-info-table">
+                <div class="table-custom-wrap">
+                  <table class="table-custom">
+                    <tr>
+                      <th>Goles</th>
+                      <th>{{$mejor->golesTotal}}</th>
+                      <th>P. jugados</th>
+                      <th>{{$mejor->vistaNomina($mejor->id)->alineacionResultado->count()}}</th>
+                    </tr>
+                  @php($toAJ=0 )
+                  @php($toRJ=0 )
+                  @php($toGJ=0 )
+                  @foreach($mejor->vistaNomina($mejor->id)->alineacionResultado as $to)
+                    @php($toGJ=$toGJ+$to->goles)
+                    @php($toAJ=$toAJ+$to->amarillas)
+                    @php($toGJ=$toGJ+$to->rojas)
+                  @endforeach
+                    <tr>
+                      <td>Tarjetas Amarillas</td>
+                      <td>{{$toAJ}}</td>
+                      <td>Tarjetas Rojas</td>
+                      <td>{{$toRJ}}</td>
+                    </tr>
+                    <tr>
+                   
+                  </table>
+                </div>
+              </div>
+              <hr/>
+ 
+            </div>
+          </div>
+
+              @endforeach
+              @endif   
         </div>
       </div>
       <!-- Aside Block-->
@@ -222,7 +379,7 @@
                           </div>
                         </header>
                         <footer class="product-content">
-                          <h6 class="product-title"><a href="product-page.html">{{$equi->nombre}}</a></h6>
+                          <h6 class="product-title"><a href="{{route('equipo-vista',$equi->id)}}">{{$equi->nombre}}</a></h6>
                           <div class="product-price"><span class="heading-6 product-price-new">Representante: {{$equi->user->nombres .' '. $equi->user->apellidos}}</span>
                           </div>
                        
@@ -254,211 +411,72 @@
                 </div>
               </article>
                 <div class="owl-carousel owl-spacing-1" data-items="1" data-dots="false" data-nav="true" data-autoplay="true" data-autoplay-speed="4000" data-stage-padding="0" data-loop="true" data-margin="30" data-mouse-drag="false" data-animation-in="fadeIn" data-animation-out="fadeOut" data-nav-custom=".owl-carousel-outer-navigation-1">
-          @foreach($campeonato->generoSerieVista as $genero)
-          @foreach($genero->etapaSerie as $etaSerie)
-    
-          @foreach($etaSerie->buscarPartidoVista as $partidos) 
+                  @foreach($campeonato->generoSerieVista as $genero)
+                  @foreach($genero->etapaSerie as $etaSerie)
+            
+                  @foreach($etaSerie->fechasOrdenas as $fechas) 
 
-      
+                  @foreach($fechas->partidos as $par)
               <!-- Owl Carousel-->
             
                 <!-- Game Result Creative-->
                 <article class="game-result game-result-creative">
                   <div class="game-result-main-vertical">
                     <div class="game-result-team game-result-team-horizontal game-result-team-first">
-                      <figure class="game-result-team-figure"><img src="{{ asset('vendor/soccer/images/team-sportland-31x41.png') }}" alt="" width="31" height="41"/>
+                      <figure class="game-result-team-figure"><img src="{{ Storage::url('public/equipos/'.$par->asignacioUno->equipos->foto) }}" alt="" width="31" height="41"/>
                       </figure>
                       <div class="game-result-team-title">
-                        <div class="game-result-team-name">Sportland</div>
-                        <div class="game-result-team-country">Los angeles</div>
+                        <div class="game-result-team-name">{{$par->asignacioUno->equipos->nombre}}</div>
+                        <div class="game-result-team-country">{{$par->asignacioUno->equipos->localidad}}</div>
                       </div>
-                      <div class="game-result-score game-result-score-big game-result-team-win">2<span class="game-result-team-label game-result-team-label-right">Win</span>
+                      <div class="game-result-score game-result-score-big game-result-team-win">
+                     
+                        {{$par->asignacioUno->calculoDeGOles($par->id)}}
+                        @if($par->asignacioUno->calculoDeGOles($par->id)>$par->asignacioDos->calculoDeGOles($par->id))
+                        <span class="game-result-team-label game-result-team-label-right">Ganador</span>
+                        @endif
                       </div>
                     </div><span class="game-result-team-divider">VS</span>
                     <div class="game-result-team game-result-team-horizontal game-result-team-second">
-                      <figure class="game-result-team-figure"><img src="{{ asset('vendor/soccer/images/team-fenix-40x32.png') }}" alt="" width="40" height="32"/>
+                      <figure class="game-result-team-figure"><img src="{{ Storage::url('public/equipos/'.$par->asignacioDos->equipos->foto) }}" alt="" width="40" height="32"/>
                       </figure>
                       <div class="game-result-team-title">
-                        <div class="game-result-team-name">Real madrid</div>
-                        <div class="game-result-team-country">Spain</div>
+                        <div class="game-result-team-name">{{$par->asignacioDos->equipos->nombre}}</div>
+                        <div class="game-result-team-country">{{$par->asignacioDos->equipos->localidad}}</div>
                       </div>
-                      <div class="game-result-score game-result-score-big">1
+                      <div class="game-result-score game-result-score-big game-result-team-win">
+                        {{$par->asignacioDos->calculoDeGOles($par->id)}}
+                        @if($par->asignacioDos->calculoDeGOles($par->id)>$par->asignacioUno->calculoDeGOles($par->id))
+                        <span class="game-result-team-label game-result-team-label-right">Ganador</span>
+                        @endif
                       </div>
                     </div>
                   </div>
-                  <div class="game-result-footer">
-                    <ul class="game-result-details">
-                      <li>Home</li>
-                      <li>New Yorkers Stadium</li>
-                      <li>
-                        <time datetime="2019-04-14">April 14, 2019</time>
-                      </li>
-                    </ul>
-                  </div>
+              
                 </article>
                 <!-- Game Result Creative-->
-                <article class="game-result game-result-creative">
-                  <div class="game-result-main-vertical">
-                    <div class="game-result-team game-result-team-horizontal game-result-team-first">
-                      <figure class="game-result-team-figure"><img src="{{ asset('vendor/soccer/images/team-bavaria-fc-26x34.png') }}" alt="" width="26" height="34"/>
-                      </figure>
-                      <div class="game-result-team-title">
-                        <div class="game-result-team-name">Bavaria FC</div>
-                        <div class="game-result-team-country">Germany</div>
-                      </div>
-                      <div class="game-result-score game-result-score-big">2
-                      </div>
-                    </div><span class="game-result-team-divider">VS</span>
-                    <div class="game-result-team game-result-team-horizontal game-result-team-second">
-                      <figure class="game-result-team-figure"><img src="{{ asset('vendor/soccer/images/team-athletic-33x30.png') }}" alt="" width="33" height="30"/>
-                      </figure>
-                      <div class="game-result-team-title">
-                        <div class="game-result-team-name">Atletico</div>
-                        <div class="game-result-team-country">USA</div>
-                      </div>
-                      <div class="game-result-score game-result-score-big game-result-team-win">3<span class="game-result-team-label game-result-team-label-right">Win</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="game-result-footer">
-                    <ul class="game-result-details">
-                      <li>Away</li>
-                      <li>Bavaria Stadium</li>
-                      <li>
-                        <time datetime="2019-04-14">April 14, 2019</time>
-                      </li>
-                    </ul>
-                  </div>
-                </article>
-                     
-          @endforeach
-            
-          @endforeach
-          @endforeach
-            </div> 
-          </div>
-          </div>
-          @endforeach
-           @else
-          <div class="heading-component-inner">
-            <h5 class="heading-component-title">ver historial datos
-            </h5>
-          </div>
-          @endif
-          @else
-          <div class="heading-component-inner">
-            <h5 class="heading-component-title">No exiten datos
-            </h5>
-          </div>
-          @endif
-          <div class="aside-component">
-            <!-- Heading Component-->
-            <article class="heading-component">
-              <div class="heading-component-inner">
-                <h5 class="heading-component-title">Posiciones
-                </h5><a class="button button-xs button-gray-outline" href="standings.html">Posiciones completas</a>
+
+                @endforeach
+                @endforeach  
+                @endforeach
+                @endforeach
+                </div> 
               </div>
-            </article>
-            <!-- Table team-->
-            <div class="table-custom-responsive">
-              <table class="table-custom table-standings table-classic">
-                <thead>
-                  <tr>
-                    <th colspan="2">Posición del equipo</th>
-                    <th>W</th>
-                    <th>L</th>
-                    <th>PTS</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span>1</span></td>
-                    <td class="team-inline">
-                      <div class="team-figure"><img src="{{ asset('vendor/soccer/images/team-sportland-31x41.png') }}" alt="" width="31" height="41"/>
-                      </div>
-                      <div class="team-title">
-                        <div class="team-name">Sportland</div>
-                        <div class="team-country">USA</div>
-                      </div>
-                    </td>
-                    <td>153</td>
-                    <td>30</td>
-                    <td>186</td>
-                  </tr>
-                  <tr>
-                    <td><span>2</span></td>
-                    <td class="team-inline">
-                      <div class="team-figure"><img src="{{ asset('vendor/soccer/images/team-dream-team-34x34.png') }}" alt="" width="34" height="34"/>
-                      </div>
-                      <div class="team-title">
-                        <div class="team-name">Dream team</div>
-                        <div class="team-country">Spain</div>
-                      </div>
-                    </td>
-                    <td>120</td>
-                    <td>30</td>
-                    <td>186</td>
-                  </tr>
-                  <tr>
-                    <td><span>3</span></td>
-                    <td class="team-inline">
-                      <div class="team-figure"><img src="{{ asset('vendor/soccer/images/team-real-madrid-28x37.png') }}" alt="" width="28" height="37"/>
-                      </div>
-                      <div class="team-title">
-                        <div class="team-name">Real Madrid</div>
-                        <div class="team-country">Spain</div>
-                      </div>
-                    </td>
-                    <td>100</td>
-                    <td>30</td>
-                    <td>186</td>
-                  </tr>
-                  <tr>
-                    <td><span>4</span></td>
-                    <td class="team-inline">
-                      <div class="team-figure"><img src="{{ asset('vendor/soccer/images/team-celta-vigo-35x39.png') }}" alt="" width="35" height="39"/>
-                      </div>
-                      <div class="team-title">
-                        <div class="team-name">Celta Vigo</div>
-                        <div class="team-country">Italy</div>
-                      </div>
-                    </td>
-                    <td>98</td>
-                    <td>30</td>
-                    <td>186</td>
-                  </tr>
-                  <tr>
-                    <td><span>5</span></td>
-                    <td class="team-inline">
-                      <div class="team-figure"><img src="{{ asset('vendor/soccer/images/team-barcelona-30x35.png') }}" alt="" width="30" height="35"/>
-                      </div>
-                      <div class="team-title">
-                        <div class="team-name">Barcelona</div>
-                        <div class="team-country">Spain</div>
-                      </div>
-                    </td>
-                    <td>98</td>
-                    <td>30</td>
-                    <td>186</td>
-                  </tr>
-                  <tr>
-                    <td><span>6</span></td>
-                    <td class="team-inline">
-                      <div class="team-figure"><img src="{{ asset('vendor/soccer/images/team-bavaria-fc-26x34.png') }}" alt="" width="26" height="34"/>
-                      </div>
-                      <div class="team-title">
-                        <div class="team-name">Bavaria FC</div>
-                        <div class="team-country">Germany</div>
-                      </div>
-                    </td>
-                    <td>98</td>
-                    <td>30</td>
-                    <td>186</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+              </div>
+              @endforeach
+               @else
+              <div class="heading-component-inner">
+                <h5 class="heading-component-title">ver historial datos
+                </h5>
+              </div>
+              @endif
+              @else
+              <div class="heading-component-inner">
+                <h5 class="heading-component-title">No exiten datos
+                </h5>
+              </div>
+              @endif
+
           <div class="aside-component">
             <!-- Heading Component-->
             <article class="heading-component">
@@ -545,84 +563,30 @@
                 </div>
             </div>
           </div>
-         
-          <div class="aside-component">
-            <!-- Heading Component-->
-            <article class="heading-component">
-              <div class="heading-component-inner">
-                <h5 class="heading-component-title">Mejores goleadores
-                </h5>
-              </div>
-            </article>
-            <div class="block-voting">
-              <div class="group-md">
-                <!-- Player Voting Item-->
-                <div class="player-voting-item">
-                  <div class="player-voting-item-figure"><img src="{{ asset('vendor/soccer/images/player-5-152x144.jpg') }}" alt="" width="152" height="144"/>
-                    <div class="player-number">
-                      <p>21</p>
+           <div class="aside-component">
+                <!-- Heading Component-->
+                <article class="heading-component">
+                  <div class="heading-component-inner">
+                    <h5 class="heading-component-title">Galeria
+                    </h5>
+                  </div>
+                </article>
+                @if($equipos->count()>0)
+              
+                <article class="gallery" data-lightgallery="group">
+                  <div class="row row-10 row-narrow">
+                    @foreach($equipos as $equi)
+                    <div class="col-6 col-sm-4 col-md-6 col-lg-4"><a class="thumbnail-creative" data-lightgallery="item" href="{{ Storage::url('public/equipos/'.$equi->foto) }}"><img src="{{ Storage::url('public/equipos/'.$equi->foto) }}" alt=""/>
+                        <div class="thumbnail-creative-overlay"></div></a>
                     </div>
+                 
+                    @endforeach
                   </div>
-                  <div class="player-voting-item-title">
-                    <p>Joe Montana</p>
-                  </div>
-                  <div class="player-voting-item-progress">
-                    <!-- Linear progress bar-->
-                    <article class="progress-linear progress-bar-modern progress-bar-modern-red">
-                      <div class="progress-header">
-                        <p>Pass Acc</p>
-                      </div>
-                      <div class="progress-bar-linear-wrap">
-                        <div class="progress-bar-linear"></div>
-                      </div><span class="progress-value">95</span>
-                    </article>
-                    <!-- Linear progress bar-->
-                    <article class="progress-linear progress-bar-modern">
-                      <div class="progress-header">
-                        <p>Shots Acc</p>
-                      </div>
-                      <div class="progress-bar-linear-wrap">
-                        <div class="progress-bar-linear"></div>
-                      </div><span class="progress-value">70</span>
-                    </article>
-                  </div>
-                  <button class="button button-block button-icon button-icon-left button-primary" type="button"><span class="icon material-icons-thumb_up"></span><span>854 votes</span></button>
-                </div>
-                <!-- Player Voting Item-->
-                <div class="player-voting-item">
-                  <div class="player-voting-item-figure"><img src="{{ asset('vendor/soccer/images/player-6-152x144.jpg') }}" alt="" width="152" height="144"/>
-                    <div class="player-number">
-                      <p>7</p>
-                    </div>
-                  </div>
-                  <div class="player-voting-item-title">
-                    <p>George Blanda</p>
-                  </div>
-                  <div class="player-voting-item-progress">
-                    <!-- Linear progress bar-->
-                    <article class="progress-linear progress-bar-modern progress-bar-modern-red">
-                      <div class="progress-header">
-                        <p>Pass Acc</p>
-                      </div>
-                      <div class="progress-bar-linear-wrap">
-                        <div class="progress-bar-linear"></div>
-                      </div><span class="progress-value">95</span>
-                    </article>
-                    <!-- Linear progress bar-->
-                    <article class="progress-linear progress-bar-modern">
-                      <div class="progress-header">
-                        <p>Shots Acc</p>
-                      </div>
-                      <div class="progress-bar-linear-wrap">
-                        <div class="progress-bar-linear"></div>
-                      </div><span class="progress-value">70</span>
-                    </article>
-                  </div>
-                  <button class="button button-block button-icon button-icon-left button-primary" type="button"><span class="icon material-icons-thumb_up"></span><span>436 votes</span></button>
-                </div>
-              </div>
-            </div>
+                </article>
+           
+                @endif
           </div>
+ 
         
         </aside>
       </div>

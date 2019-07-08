@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Http\Request;
 use ioliga\Models\Nomina\Nomina;
 use ioliga\Models\Campeonato\AsignacionNomina;
+use ioliga\Models\Campeonato\Alineacion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Encryption\DecryptException;
 use ioliga\User;
@@ -348,6 +349,24 @@ class Nominas extends Controller
     public function editarJugador($codigoUsuario)
     {
         
+    }
+
+    public function multaJugadores($Codigocampeo)
+    {
+         $this->authorize('Multas jugador',Nomina::class);
+          $campeonato=Campeonato::findOrFail($Codigocampeo);
+          $data = array('campeonato' =>$campeonato , );
+          return view('nominas.multasJugadores',$data); 
+    }
+    public function cobrarMulta($codigoAli,$codigoCam)
+    {
+         $this->authorize('Cobrar multa',Nomina::class);
+          $alineacion=Alineacion::findOrFail($codigoAli);
+          $alineacion->estadoSale=true;
+            $alineacion->usuarioActualizado=Auth::id();
+            $alineacion->save();
+       session()->flash('success','Cobro realizado exitosamente');
+        return redirect()->route('multas-jugadores',$codigoCam);
     }
 
 }

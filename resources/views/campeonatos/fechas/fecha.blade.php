@@ -117,35 +117,37 @@
 			@foreach($fecha->partidos as $par)
 			<tbody>
 				<tr class="table-active">
-					<th colspan="{{$fecha->estado==0?'7':'9'}}"><i class="fas fa-clock mr-3 fa-2x"></i> {{$par->hora}} </th>
+					<th colspan="2"><i class="fas fa-clock mr-3 fa-2x"></i> {{$par->hora}} </th>
 					@can('Administrar partidos', 'ioliga\Models\Campeonato\Partido::class')
 					@if($fecha->estado==0)
-					<th>
-						<select onchange="cambiarEstado1(this);" class="">
+					<th colspan="2">					
+					
+						<button data-id="{{$par->id}}"  onclick="abrimodadl(this)" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Asignar Arbitro." class="btn bg-info border-teal text-teal rounded-round border-2 btn-icon  legitRipple"><i class="icon-plus2"></i>	
+						</button>
+							
+					</th>
+					<th colspan="3">
+						<select class="form-control" onchange="cambiarEstado1(this);">
 						  <option class=" text-warning" value="{{$par->id}}" {{$par->tipo=='Proceso' ? 'selected' :''}}>Proceso</option>
 						  <option class="text-success" value="{{$par->id}}" {{$par->tipo=='Finalizado' ? 'selected' :''}}>Finalizado</option>
 						  <option class="text-info" value="{{$par->id}}" {{$par->tipo=='Diferido' ? 'selected' :''}}>Diferido</option>
 						</select>
 					</th>
-					<th>
-					<div class="btn-group" role="group" aria-label="Basic example">
-						@if($par->arbitros->count()==0)
-						<button data-url="" onclick="" class="btn bg-info border-teal text-teal rounded-round border-2 btn-icon  legitRipple"><i class="icon-plus2"></i>	<span class="">Arbitro</span>
-						</button>
-						@endif
+					<th colspan="2">
 						@if($par->alineaciones->count()==0 && $par->arbitros->count()==0)
 						
 						<button data-url="{{route('eliminar-partido',$par->id)}}" onclick="eliminar(this)" class="btn bg-danger  btn-icon btn-sm legitRipple">
-							<span class="">Eliminar</span>
+							Eliminar
 						</button>
 						@endif
-					</div>
 					</th>
+			
 					@endif
 					@endcan
 				</tr>
 				<tr>
 					<td class="">
+					
 				<ul class="media-list">
 					@if($par->asignacioUno->equipos->foto)
 					
@@ -332,6 +334,49 @@
 
 	</div>
 </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="arbritrosModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Asignar Árbitro</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+  		<form action="{{route('asignar-arbitro')}}" method="post" enctype="multipart/form-data">
+    				@csrf
+
+			<input type="hidden" name="partido" id="partido" value="">
+			<div class="form-group">
+				<label>Seleccione al Artitro:</label>
+				<select class="form-control select-search " id="arbitro" name="arbitro" data-fouc required="">
+				@foreach($arbitros as $no)
+				@foreach($no->users as $user)						
+				<option value="{{$user->id}}">				
+				{{$user->nombres .' '.$user->apellidos}}					
+				</option>					  						
+				@endforeach	
+				@endforeach	
+				  @if ($errors->has('arbitro'))
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $errors->first('arbitro') }}</strong>
+                      </span>
+                  @endif		
+				</select>
+			</div>			
+			<div class="text-right">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+				<button type="submit" class="btn btn-primary">Asignar <i class="icon-paperplane ml-2"></i></button>
+			</div>
+	</form>
+    </div>
+  </div>
+</div>
 
 <!-- /content area -->
 @prepend('scriptsHeader')
@@ -368,6 +413,11 @@ var estadoEquipo="{{route('estado-partido')}}"
         window.location.replace("{{route('fecha',$fecha->id)}}");      
 	})
     
+}
+
+function abrimodadl(argument) {
+	$('#arbritrosModal').modal('show')
+	$('#partido').val($(argument).data('id'))
 }
 </script>
 

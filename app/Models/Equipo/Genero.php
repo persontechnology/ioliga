@@ -49,4 +49,9 @@ class Genero extends Model
         );
     }
 
+    public function contadorAsicnacines($idGe)
+    {
+        
+    }
+
 }

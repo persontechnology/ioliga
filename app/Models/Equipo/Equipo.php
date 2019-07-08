@@ -61,5 +61,9 @@ class Equipo extends Model
       return $result;
     }
    
-   
+   public function equipo($idEquipo)
+    {
+        $equipo=Equipo::findOrFail($idEquipo);
+        return $equipo;
+    }
 }

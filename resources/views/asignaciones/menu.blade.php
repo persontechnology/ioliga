@@ -48,7 +48,7 @@
 							<div class="media-body">
 								<h3 class="mb-0">{{$asignacion->asignacionNomninas->count() }}</h3>
 								<a href="{{route('nomina-asignacion',$asignacion->id)}}">
-									<span class="text-uppercase text-white font-size-xs">Listado de jugadores</span> <i class="icon-point-right text-white"></i>
+									<span class="text-uppercase text-white font-size-xs">Listado de jugadores</span> 
 								</a>
 							</div>
 
@@ -66,51 +66,6 @@
 									@endif
 								</div>
 	                		</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-sm-6 col-xl-4">
-					<div class="card card-body bg-blue-800 has-bg-image">
-						<div class="media">
-							<div class="media-body">
-								<h3 class="mb-0">389,438</h3>
-								<span class="text-uppercase font-size-xs">total orders</span>
-							</div>
-
-							<div class="ml-3 align-self-center">
-								<i class="icon-bag icon-3x opacity-75"></i>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-sm-6 col-xl-4">
-					<div class="card card-body bg-success-400 has-bg-image">
-						<div class="media">
-							<div class="mr-3 align-self-center">
-								<i class="icon-pointer icon-3x opacity-75"></i>
-							</div>
-
-							<div class="media-body text-right">
-								<h3 class="mb-0">652,549</h3>
-								<span class="text-uppercase font-size-xs">total clicks</span>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-sm-6 col-xl-4">
-					<div class="card card-body bg-indigo-400 has-bg-image">
-						<div class="media">
-							<div class="mr-3 align-self-center">
-								<i class="icon-enter6 icon-3x opacity-75"></i>
-							</div>
-
-							<div class="media-body text-right">
-								<h3 class="mb-0">245,382</h3>
-								<span class="text-uppercase font-size-xs">total visits</span>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -149,4 +104,10 @@
     });
 }
 </script>
+@push('scriptsFooter')
+   
+    <script>
+        $('#menuCampeo').addClass('active');
+    </script>
+@endpush
 @endsection

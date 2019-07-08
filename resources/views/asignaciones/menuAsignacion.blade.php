@@ -122,5 +122,10 @@
     <script src="{{ asset('/global_assets/js/demo_pages/animations_css3.js') }}"></script>
 @endprepend
 
-
+@push('scriptsFooter')
+   
+    <script>
+        $('#menuCampeo').addClass('active');
+    </script>
+@endpush
 @endsection

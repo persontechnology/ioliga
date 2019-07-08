@@ -7,8 +7,8 @@
     <h3 class="breadcrumbs-custom-title">Calendarios del campeonato {{$campeo->nombre}}</h3>
     <ul class="breadcrumbs-custom-path">
        <li><a href="{{ url('/') }}">Inicio</a></li>      
-      <li><a href="{{route('equipos-vista')}}">Campeonato</a></li>
-      <li class="active"></li>
+      <li><a href="{{route('campeonatos-vista')}}">Campeonato</a></li>
+      <li class="active">Calendarios</li>
     </ul>
   </div>
 </div>
@@ -27,10 +27,9 @@
               </h5>
             </div>
           </article>
-          	<div class="row row-50">
+         
           @foreach($genero->GenerosSeries as $geSe)
-	         
-			<div class="col-12"> 
+
 			 <article class="heading-component">
 	            <div class="heading-component-inner">
 	              <h5 class="heading-component-title">Serie "{{$geSe->serie->nombre}}"
@@ -39,7 +38,7 @@
 	        </article>
 	          <div class="row row-50">
 				@foreach($geSe->etapaSerie as $etapa)
-				<div class="col-6">
+				<div class="col-lg-7 col-xl-12">
 				 <article class="heading-component">
 		            <div class="heading-component-inner">
 		              <h5 class="heading-component-title">Etapa "{{$etapa->etapa->nombre}}"
@@ -52,7 +51,7 @@
 			                <div class="card-standing-caption-aside">
 	                        <div class="card-standing-team">Fecha</div>
 	                        <div class="card-standing-number">N.E</div>
-	                        <div class="card-standing-number">G.T</div>
+	                       
 	                        <div class="card-standing-number">E</div>
 	                       
 	                      </div>
@@ -71,9 +70,10 @@
 		                    </div>
 		                  </div>
 		                  <div class="card-standing-number">{{$fe->partidos->count()}}</div>
-		                  <div class="card-standing-number">30</div>
-		                  <div class="card-standing-number">1</div>	               
-		                  <div class="card-standing-diff">+12</div>
+		                  <div class="card-standing-diff1">{{$fe->estado==1?'Finalizada':'Proceso'}}</div>
+		                  <div class="card-standing-number">
+		                  	
+		                  </div>		                              
 		                  <div class="card-standing-button"><a class="card-standing-toogle material-icons-remove collapsed" role="button" data-toggle="collapse" data-parent="#accordion{{$fe->id}}" href="#accordion1Collapse{{$fe->id}}" aria-controls="accordion1Collapse{{$fe->id}}"></a></div>
 		                </div>
 		              </div>
@@ -122,12 +122,9 @@
 				</div>
 			      @endforeach
 
-			  </div>
-
-		     </div>
-		
+			  </div>		
           @endforeach
-           </div>
+           
         </div>
         @endforeach
         <div class="col-12">
@@ -181,5 +178,11 @@
   </div>
 </div>
 </section>
+
+@push('scriptsFooter')
+    <script>
+        $('#menuCampeonato').addClass('active');
+    </script>
+@endpush
 
 @endsection
