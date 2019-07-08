@@ -138,7 +138,7 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	  	Route::post('/crear-partido', 'Fechas@guardarPartidos')->name('crear-partido');
 	  	Route::get('/eliminar-partido/{id}', 'Fechas@eliminarpartido')->name('eliminar-partido');
 	  	Route::post('/estado-partido', 'Fechas@estadoPartido')->name('estado-partido');
-	  	
+	  	Route::post('/asignar-arbitro', 'Fechas@asignarArbitro')->name('asignar-arbitro');
 
 
 	  	/*Alineacio*/

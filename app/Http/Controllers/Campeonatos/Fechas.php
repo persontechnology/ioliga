@@ -17,6 +17,8 @@ use ioliga\Http\Requests\Partidos\RqCrearPartido;
 use ioliga\Models\Campeonato\Asignacion;
 use Illuminate\Support\Facades\DB;
 use ioliga\Models\Campeonato\Resultado;
+use Spatie\Permission\Models\Role;
+use ioliga\Models\Campeonato\Arbitro;
 
 class Fechas extends Controller
 {
@@ -55,9 +57,14 @@ class Fechas extends Controller
        $asignacioncionDes=$fecha->etapaSerie->generoSerie->asignacionDes()
        ->whereNotIn('id',$fecha->partidos->pluck('asignacion1_id'))
        ->whereNotIn('id',$fecha->partidos->pluck('asignacion2_id'))->get();   
-     
+        $arbitro=Role::with('users')->where('name', 'Arbitro')->get();;
        $estadio=Estadio::where('estado',1)->get();
-       $data= array('fecha' =>  $fecha,'asignacioncionAsc'=>$asignacioncionAsc,'asignacioncionDes'=>$asignacioncionDes,'estadio'=> $estadio );
+       $data= array('fecha' =>  $fecha,
+                    'asignacioncionAsc'=>$asignacioncionAsc,
+                    'asignacioncionDes'=>$asignacioncionDes,
+                    'estadio'=> $estadio,
+                    'arbitros'=>$arbitro 
+                );
        return view('campeonatos.fechas.fecha',$data);
     }
 
@@ -307,5 +314,28 @@ class Fechas extends Controller
         $fecha->save();
        session()->flash('success','Fecha Finalizada');
         return redirect()->route('fecha',$fecha->id);
+    }
+    public function asignarArbitro(Request $request)
+    {
+        $partido=Partido::findOrFail($request->partido);
+        $arbitro=Arbitro::where('partido_id',$partido->id)->where('users_id',$request->arbitro)->get();
+        if($arbitro->count()>0){
+            $arbitroUno=Arbitro::first();
+            $arbitroUno->partido_id=$request->partido;
+            $arbitroUno->users_id=$request->arbitro;
+            $arbitroUno->usuarioCreado=Auth::id();
+            $arbitroUno->save();
+            session()->flash('success','Arbitro asignado');
+             return redirect()->route('fecha',$partido->fecha_id);
+        }else{
+            $arbi= new Arbitro;
+            $arbi->partido_id=$request->partido;
+            $arbi->users_id=$request->arbitro;
+            $arbi->usuarioCreado=Auth::id();
+            $arbi->save();
+            session()->flash('success','Arbitro asignado');
+            return redirect()->route('fecha',$partido->fecha_id);
+        }
+        
     }
 }
