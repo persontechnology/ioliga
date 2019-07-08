@@ -138,9 +138,8 @@ class EloquentDataTable extends QueryDataTable
     protected function joinEagerLoadedColumn($relation, $relationColumn)
     {
         $table     = '';
-        $deletedAt = false;
         $lastQuery = $this->query;
-        foreach (explode('.', $relation) as $index => $eachRelation) {
+        foreach (explode('.', $relation) as $eachRelation) {
             $model = $lastQuery->getRelation($eachRelation);
             switch (true) {
                 case $model instanceof BelongsToMany:
@@ -164,38 +163,22 @@ class EloquentDataTable extends QueryDataTable
                     $table     = $model->getRelated()->getTable();
                     $foreign   = $model->getQualifiedForeignKeyName();
                     $other     = $model->getQualifiedParentKeyName();
-                    $deletedAt = $this->checkSoftDeletesOnModel($model->getRelated());
                     break;
 
                 case $model instanceof BelongsTo:
                     $table     = $model->getRelated()->getTable();
-                    $alias     = "{$table}_{$index}";
-                    $tableAs   = "{$table} AS {$alias}";
                     $foreign   = $model->getQualifiedForeignKeyName();
-                    $other     = "{$alias}.{$model->getOwnerKeyName()}";
-                    $deletedAt = $this->checkSoftDeletesOnModel($model->getRelated());
-
+                    $other     = $model->getQualifiedOwnerKeyName();
                     break;
 
                 default:
                     throw new Exception('Relation ' . get_class($model) . ' is not yet supported.');
             }
-            $this->performJoin($tableAs ?? $table, $foreign, $other, $deletedAt);
+            $this->performJoin($table, $foreign, $other);
             $lastQuery = $model->getQuery();
         }
 
-        $table = $alias ?? $table;
-
-        return "{$table}.{$relationColumn}";
-    }
-
-    protected function checkSoftDeletesOnModel($model)
-    {
-        if (in_array('Illuminate\Database\Eloquent\SoftDeletes', class_uses($model))) {
-            return $model->getQualifiedDeletedAtColumn();
-        }
-
-        return false;
+        return $table . '.' . $relationColumn;
     }
 
     /**
@@ -204,10 +187,9 @@ class EloquentDataTable extends QueryDataTable
      * @param string $table
      * @param string $foreign
      * @param string $other
-     * @param string $deletedAt
      * @param string $type
      */
-    protected function performJoin($table, $foreign, $other, $deletedAt = false, $type = 'left')
+    protected function performJoin($table, $foreign, $other, $type = 'left')
     {
         $joins = [];
         foreach ((array) $this->getBaseQueryBuilder()->joins as $key => $join) {
@@ -216,10 +198,6 @@ class EloquentDataTable extends QueryDataTable
 
         if (! in_array($table, $joins)) {
             $this->getBaseQueryBuilder()->join($table, $foreign, '=', $other, $type);
-        }
-
-        if ($deletedAt !== false) {
-            $this->getBaseQueryBuilder()->whereNull($deletedAt);
         }
     }
 }
