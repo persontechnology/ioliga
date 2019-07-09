@@ -149,7 +149,7 @@
                         <p class="card-text"> <i class="icon fa fa-phone-square" aria-hidden="true"></i> {{ $nos->telefono }}</p>
                     @endif
 
-                    <a class="button button-sm button-default-outline" href="#">
+                    <a class="button button-sm button-default-outline" href="{{route('contactos')}}">
                             <i class="icon fa fa-envelope" aria-hidden="true"></i> Escribenos
                     </a>
                 </div>

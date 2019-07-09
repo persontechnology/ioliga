@@ -18,6 +18,7 @@
 				<div class="text-muted font-size-sm"><span class="badge badge-mark border-blue mr-1"></span> Activo</div>
 			</div>
 		</div>
+
 		@else
 		<div class="d-flex align-items-center">
 			<div class="mr-3">
@@ -66,6 +67,24 @@
 									@endif
 								</div>
 	                		</div>
+						</div>
+					</div>
+				</div>
+
+					<div class="col-sm-6 col-xl-4">
+					<div class="card card-body bg-pink-800 has-bg-image">
+						<div class="media">
+							<div class="media-body">
+								<h3 class="mb-0">Descargar</h3>
+								<a href="#">
+									<span class="text-uppercase text-white font-size-xs">Carnet de jugadores</span> 
+								</a>
+							</div>
+
+							<div class="ml-3 align-self-center">
+							<a href="{{route('carnet',$asignacion->id)}}" class="text-white">	<i class="icon-file-download icon-3x opacity-75"></i></a>
+							</div>
+						
 						</div>
 					</div>
 				</div>

@@ -18,6 +18,7 @@ use Spatie\Permission\Models\Role;
 use ioliga\Http\Requests\Usuarios\RqActualizarFoto;
 use ioliga\Models\Campeonato;
 use Illuminate\Support\Collection;
+use \PDF;
 class Nominas extends Controller
 {
    public function __construct()
@@ -367,6 +368,17 @@ class Nominas extends Controller
             $alineacion->save();
        session()->flash('success','Cobro realizado exitosamente');
         return redirect()->route('multas-jugadores',$codigoCam);
+    }
+
+      public function reportesMulta($Codigocampeo)
+    {
+         $this->authorize('Multas jugador',Nomina::class);
+          $campeonato=Campeonato::findOrFail($Codigocampeo);
+          $data = array('campeonato' =>$campeonato , );
+          /*return view('nominas.reporteMultas',$data);*/
+        $pdf = PDF::loadView('nominas.reporteMultas',$data);
+        return $pdf->download('multas_de_'.$campeonato->fechaInicio.'.pdf');
+      
     }
 
 }

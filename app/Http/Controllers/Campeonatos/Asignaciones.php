@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Encryption\DecryptException;
 use ioliga\Http\Requests\Campeonatos\RqCrearAsignacionNomina;
+use \PDF;
 class Asignaciones extends Controller
 {
 
@@ -176,6 +177,14 @@ class Asignaciones extends Controller
         }
         session()->flash('danger','El equipo no cumple con los requerimientos para participar verifique la nómina');
         return redirect()->route('asignacion',$asignacion->id);
+    }
+    public function carnet($codigoAsignacion)
+    {
+        $asignacion=Asignacion::findOrFail($codigoAsignacion);
+        $data = array('asignacion' => $asignacion, );
+        /*return view('asignaciones.carnet',$data);*/
+        $pdf = PDF::loadView('asignaciones.carnet',$data);
+        return $pdf->download('carnet.pdf');
     }
 }
 

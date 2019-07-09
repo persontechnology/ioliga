@@ -126,6 +126,7 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	  	/*ver historia de serie*/
 	  	Route::get('/etapas-representante/{id}', 'Asignaciones@partidosRe')->name('etapas-equipo');
 	  	Route::get('/fechas-representante/{id}', 'Asignaciones@fechasEquipo')->name('fechas-representante');
+	  	Route::get('/carnet/{id}', 'Asignaciones@carnet')->name('carnet');
 	  	/*fechas*/
 
 	  	Route::get('/fechas/{id}', 'Fechas@index')->name('fechas-etapa');
@@ -184,6 +185,8 @@ Route::group(['middleware' => ['verified','auth']], function () {
 
 	Route::get('/multas-jugadores/{id}', 'Nominas@multaJugadores')->name('multas-jugadores');
 	Route::get('/multas-cobrar/{id}/{idCa}', 'Nominas@cobrarMulta')->name('cobrar-multa');
+	Route::get('/reporte-multa/{id}', 'Nominas@reportesMulta')->name('reporte-multa');
+
 
 	/*Nominas Asignaciones*/
   	Route::get('/listar-mis-equipo', 'Campeonatos@representante')->name('listar-mis-equipo');

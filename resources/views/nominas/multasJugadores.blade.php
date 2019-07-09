@@ -5,8 +5,11 @@
 	<!-- Support tickets -->
 	<div class="card">
 		<div class="card-header header-elements-sm-inline">
-			<h6 class="card-title">Juagadores con multas</h6>
-			
+			<h6 class="card-title">Juagadores con multas
+
+			<a href="{{route('reporte-multa',$campeonato->id)}}"><i class="icon-file-download icon-2x"></i></a>
+			</h6>
+			<h6 class="card-title">Costos: Amarillas $0.50 Rojas $1.00</h6>
 		</div>
 
 		<div class="table-responsive">
