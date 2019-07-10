@@ -12,7 +12,7 @@ width: 100%;
 
 table, th, td {
 border: 1px solid black;
-text-align: center;
+text-align: left;
 }
 
 .gene {
@@ -32,18 +32,20 @@ text-align: center;
 	<thead>
 		<tr>
 			<th>#</th>
-			<th>Fecha</th>
-			<th>Hora</th>
+			<th>Foto</th>
 			<th>Nombres</th>
 			<th>Equipo</th>
+			<th>Fecha</th>
+			<th>Hora</th>
 			<th>T. Amarillas</th>
 			<th>T. Rojas</th>
+			<th>Cobrar</th>
 		</tr>
 	</thead>
 	@php($t=0)
 	@foreach($campeonato->generos as $ger)
 		<tr class="gene">
-			<td colspan="7">Género: {{$ger->GeneroEquipo->nombre}}</td>
+			<td colspan="9">Género: {{$ger->GeneroEquipo->nombre}}</td>
 			
 		</tr>
 		@foreach($ger->GenerosSeries as $gese)
@@ -55,24 +57,31 @@ text-align: center;
 		@php($t++)
 		<tr>
 			<td>{{$t}}</td>
+			<td>
+				<img class="card-img" src="{{public_path('/storage/usuarios/'.$gers->asignacionNomina->unoNomina->user->foto) }}
+								         " alt="" width="45px" />
+			</td>
+			<td>				
+				{{$gers->asignacionNomina->unoNomina->user->apellidos. ' ' . $gers->asignacionNomina->unoNomina->user->nombres}}
+			</td>
+			<td>{{$gers->asignacionNomina->unoNomina->equipo->nombre}}</td>
 			<td>{{$gers->partido->fecha->fechaInicio}}</td>
 			<td>{{$gers->partido->hora}}</td>
-			<td>{{$gers->asignacionNomina->unoNomina->user->apellidos. ' ' . $gers->asignacionNomina->unoNomina->user->nombres}}</td>
-			<td>{{$gers->asignacionNomina->unoNomina->equipo->nombre}}</td>
-			<td>
+			<td  style="text-align: center;">
 				@if($gers->amarillas > 0  )
 					<div class="font-weight-semibold">{{$gers->amarillas}}</div>
 				@else
 					<div class="font-weight-semibold">0</div>
 				@endif
 			</td>
-			<td>
+			<td style="text-align: center;">
 			@if($gers->rojas > 0  )
 				<div class="font-weight-semibold">{{$gers->rojas}}</div>
 			@else
 				<div class="font-weight-semibold">0</div>
 			@endif	
 			</td>
+			<td></td>
 
 		</tr>
 	@endif

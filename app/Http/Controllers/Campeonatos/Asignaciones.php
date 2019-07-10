@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Encryption\DecryptException;
 use ioliga\Http\Requests\Campeonatos\RqCrearAsignacionNomina;
-use \PDF;
+use PDF;
 class Asignaciones extends Controller
 {
 
