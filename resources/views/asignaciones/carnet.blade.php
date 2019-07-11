@@ -53,7 +53,7 @@ img {
 						<p style="text-align: center;">
 					@if(isset($nos->logo))
 				        <img class="card-img" src="{{public_path('/storage/nosotros/'.$nos->logo) }}" alt="" width="65px" />
-				        <b>	"{{$nos->nombre}}"	</b>		         
+				        <b>	"{{$nos->nombre}}"	{{public_path('/storage/nosotros/'.$nos->logo) }}</b>		         
 				      @else
 				        <img class="card-img" src="{{asset('vendor/soccer/images/logo-soccer-default-95x126.png') }}" alt="" width="65px;" />
 				      @endif
