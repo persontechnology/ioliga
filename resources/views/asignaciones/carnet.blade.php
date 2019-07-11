@@ -51,15 +51,11 @@ img {
 				<tr>
 					<td class="header" >
 						<p style="text-align: center;">
-						 @if(isset($nos->logo))
-				        <img class="card-img" src="{{public_path('/storage/nosotros/'.$nos->logo) }}
-				         " alt="" width="65px" />
-				        <!--  <img class="card-img" src="{{asset('vendor/soccer/images/logo-soccer-default-95x126.png') }}
-				         " alt="" width="55px;" /> -->
+					@if(isset($nos->logo))
+				        <img class="card-img" src="{{public_path('/storage/nosotros/'.$nos->logo) }}" alt="" width="65px" />
 				        <b>	"{{$nos->nombre}}"	</b>		         
 				      @else
-				        <img class="card-img" src="{{asset('vendor/soccer/images/logo-soccer-default-95x126.png') }}
-				         " alt="" width="65px;" />
+				        <img class="card-img" src="{{asset('vendor/soccer/images/logo-soccer-default-95x126.png') }}" alt="" width="65px;" />
 				      @endif
 				      <br>
 				      <b>{{$asignacion->unoGeneroSerie->genero->campeonato->nombre}} {{$asignacion->unoGeneroSerie->genero->campeonato->fechaInicio}}  </b>
@@ -120,7 +116,7 @@ img {
 						 	<img class="card-img" src="" alt=""width="125px;"  height="125px" />
 						@endif
 						
-				         <b>Apellidos: </b>{{  }}$asiNO->unoNomina->user->apellidos}}<br>
+				         <b>Apellidos: </b>{{$asiNO->unoNomina->user->apellidos}}<br>
 				         <b>Nombres: </b>{{$asiNO->unoNomina->user->nombres}}<br>
 				         <b>DNI: </b>{{$asiNO->unoNomina->user->identificacion}}<br>
 				         <b>Club: </b>{{$asiNO->unoNomina->equipo->nombre}}<br>
