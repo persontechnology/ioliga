@@ -64,8 +64,35 @@ Highcharts.chart('numeroequiposGenero', {
         plotBackgroundColor: null,
         plotBorderWidth: null,
         plotShadow: false,
+        openInCloud:false,
         type: 'pie'
     },
+    lang: {
+            loading: 'Cargando...',
+            months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            weekdays: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            shortMonths: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            exportButtonTitle: "Exportar",
+            printButtonTitle: "Importar",
+            rangeSelectorFrom: "Desde",
+            rangeSelectorTo: "Hasta",
+            rangeSelectorZoom: "Período",
+            downloadPNG: 'Descargar imagen PNG',
+            downloadJPEG: 'Descargar imagen JPEG',
+            downloadPDF: 'Descargar imagen PDF',
+            downloadSVG: 'Descargar imagen SVG',
+            downloadXLS:'Descargar imagen XLS',
+            downloadCSV:'Descargar imagen CSV',
+            viewData:'Vista de Datos',
+            contextButtonTitle:'Ver opciones',
+            openInCloud:'Ver en la nube',
+            viewFullscreen:'Ver pantalla completa',
+            printChart: 'Imprimir',
+            resetZoom: 'Reiniciar zoom',
+            resetZoomTitle: 'Reiniciar zoom',
+            thousandsSep: ",",
+            decimalPoint: '.'
+        },
     title: {
         text: 'Total equipos por género'
     },
@@ -118,6 +145,32 @@ Highcharts.chart('numeroCampeonatos', {
     chart: {
         type: 'column'
     },
+    lang: {
+            loading: 'Cargando...',
+            months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            weekdays: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            shortMonths: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            exportButtonTitle: "Exportar",
+            printButtonTitle: "Importar",
+            rangeSelectorFrom: "Desde",
+            rangeSelectorTo: "Hasta",
+            rangeSelectorZoom: "Período",
+            downloadPNG: 'Descargar imagen PNG',
+            downloadJPEG: 'Descargar imagen JPEG',
+            downloadPDF: 'Descargar imagen PDF',
+            downloadSVG: 'Descargar imagen SVG',
+            downloadXLS:'Descargar imagen XLS',
+            downloadCSV:'Descargar imagen CSV',
+            viewData:'Vista de Datos',
+            contextButtonTitle:'Ver opciones',
+            openInCloud:'Ver en la nube',
+            viewFullscreen:'Ver pantalla completa',
+            printChart: 'Imprimir',
+            resetZoom: 'Reiniciar zoom',
+            resetZoomTitle: 'Reiniciar zoom',
+            thousandsSep: ",",
+            decimalPoint: '.'
+        },
     title: {
         text: 'Equipos por campeonato'
     },
@@ -184,6 +237,32 @@ Highcharts.chart('numeroNomina', {
     chart: {
         type: 'column'
     },
+    lang: {
+            loading: 'Cargando...',
+            months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            weekdays: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            shortMonths: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            exportButtonTitle: "Exportar",
+            printButtonTitle: "Importar",
+            rangeSelectorFrom: "Desde",
+            rangeSelectorTo: "Hasta",
+            rangeSelectorZoom: "Período",
+            downloadPNG: 'Descargar imagen PNG',
+            downloadJPEG: 'Descargar imagen JPEG',
+            downloadPDF: 'Descargar imagen PDF',
+            downloadSVG: 'Descargar imagen SVG',
+            downloadXLS:'Descargar imagen XLS',
+            downloadCSV:'Descargar imagen CSV',
+            viewData:'Vista de Datos',
+            contextButtonTitle:'Ver opciones',
+            openInCloud:'Ver en la nube',
+            viewFullscreen:'Ver pantalla completa',
+            printChart: 'Imprimir',
+            resetZoom: 'Reiniciar zoom',
+            resetZoomTitle: 'Reiniciar zoom',
+            thousandsSep: ",",
+            decimalPoint: '.'
+        },
     title: {
         text: 'Nómina del los equipos'
     },
@@ -242,29 +321,6 @@ Highcharts.chart('numeroNomina', {
     }]
 });
 
-
-Highcharts.setOptions({
-    lang: {
-            loading: 'Cargando...',
-            months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-            weekdays: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-            shortMonths: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-            exportButtonTitle: "Exportar",
-            printButtonTitle: "Importar",
-            rangeSelectorFrom: "Desde",
-            rangeSelectorTo: "Hasta",
-            rangeSelectorZoom: "Período",
-            downloadPNG: 'Descargar imagen PNG',
-            downloadJPEG: 'Descargar imagen JPEG',
-            downloadPDF: 'Descargar imagen PDF',
-            downloadSVG: 'Descargar imagen SVG',
-            printChart: 'Imprimir',
-            resetZoom: 'Reiniciar zoom',
-            resetZoomTitle: 'Reiniciar zoom',
-            thousandsSep: ",",
-            decimalPoint: '.'
-        }        
-});
 
 </script>
 @endpush
