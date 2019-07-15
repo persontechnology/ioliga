@@ -17,6 +17,7 @@
     <div class="card-header">
         Sistema de gestión de Ligas
     </div>
+ 
     <div class="card">
      
         <div class="card-body">
@@ -145,6 +146,32 @@ Highcharts.chart('numeroCampeonatos', {
     chart: {
         type: 'column'
     },
+    lang: {
+            loading: 'Cargando...',
+            months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            weekdays: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            shortMonths: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            exportButtonTitle: "Exportar",
+            printButtonTitle: "Importar",
+            rangeSelectorFrom: "Desde",
+            rangeSelectorTo: "Hasta",
+            rangeSelectorZoom: "Período",
+            downloadPNG: 'Descargar imagen PNG',
+            downloadJPEG: 'Descargar imagen JPEG',
+            downloadPDF: 'Descargar imagen PDF',
+            downloadSVG: 'Descargar imagen SVG',
+            downloadXLS:'Descargar imagen XLS',
+            downloadCSV:'Descargar imagen CSV',
+            viewData:'Vista de Datos',
+            contextButtonTitle:'Ver opciones',
+            openInCloud:'Ver en la nube',
+            viewFullscreen:'Ver pantalla completa',
+            printChart: 'Imprimir',
+            resetZoom: 'Reiniciar zoom',
+            resetZoomTitle: 'Reiniciar zoom',
+            thousandsSep: ",",
+            decimalPoint: '.'
+        },
     title: {
         text: 'Equipos por campeonato'
     },
@@ -176,14 +203,15 @@ Highcharts.chart('numeroCampeonatos', {
         data: [
          @if($campeonatos->count()>0)
            @foreach($campeonatos as $cam)
-            [
-          
-            '{{$cam->fechaInicio.' '.$cam->nombre}}', 
-            @foreach($cam->contadorDeAsignaciones($cam->id) as $con)
-                {{$con->total}}
+            [          
+            '{{$cam->fechaInicio.' '.$cam->nombre}}',
+              @if($cam->contadorDeAsignaciones($cam->id)->isEmpty())
+                0                
+                @else 
+                @foreach($cam->contadorDeAsignaciones($cam->id) as $con)                
+                {{$con->total}}                
                 @endforeach
-            
-
+              @endif
             ],
             @endforeach
         @endif         
@@ -211,6 +239,32 @@ Highcharts.chart('numeroNomina', {
     chart: {
         type: 'column'
     },
+    lang: {
+            loading: 'Cargando...',
+            months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            weekdays: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            shortMonths: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            exportButtonTitle: "Exportar",
+            printButtonTitle: "Importar",
+            rangeSelectorFrom: "Desde",
+            rangeSelectorTo: "Hasta",
+            rangeSelectorZoom: "Período",
+            downloadPNG: 'Descargar imagen PNG',
+            downloadJPEG: 'Descargar imagen JPEG',
+            downloadPDF: 'Descargar imagen PDF',
+            downloadSVG: 'Descargar imagen SVG',
+            downloadXLS:'Descargar imagen XLS',
+            downloadCSV:'Descargar imagen CSV',
+            viewData:'Vista de Datos',
+            contextButtonTitle:'Ver opciones',
+            openInCloud:'Ver en la nube',
+            viewFullscreen:'Ver pantalla completa',
+            printChart: 'Imprimir',
+            resetZoom: 'Reiniciar zoom',
+            resetZoomTitle: 'Reiniciar zoom',
+            thousandsSep: ",",
+            decimalPoint: '.'
+        },
     title: {
         text: 'Nómina del los equipos'
     },
@@ -242,12 +296,9 @@ Highcharts.chart('numeroNomina', {
         data: [
          @if($equipo->count()>0)
            @foreach($equipo as $equi)
-
-            [
-          
+            [          
             '{{$equi->nombre}}', 
-                {{$equi->nominas->count()}}
-            
+            {{$equi->nominas->count()}} 
 
             ],
             @endforeach
