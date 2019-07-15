@@ -127,6 +127,10 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	  	Route::get('/etapas-representante/{id}', 'Asignaciones@partidosRe')->name('etapas-equipo');
 	  	Route::get('/fechas-representante/{id}', 'Asignaciones@fechasEquipo')->name('fechas-representante');
 	  	Route::get('/carnet/{id}', 'Asignaciones@carnet')->name('carnet');
+
+	  	/*ver asignaciones de usuario jugador*/
+	  	Route::get('mis-participaciones', 'Asignaciones@verMisParticipaciones')->name('mis-participaciones');
+
 	  	/*fechas*/
 
 	  	Route::get('/fechas/{id}', 'Fechas@index')->name('fechas-etapa');

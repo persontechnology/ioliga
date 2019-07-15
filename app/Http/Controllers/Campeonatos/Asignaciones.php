@@ -3,6 +3,7 @@
 namespace ioliga\Http\Controllers\Campeonatos;
 
 use Illuminate\Http\Request;
+use ioliga\User;
 use ioliga\Http\Controllers\Controller;
 use ioliga\Models\Campeonato\Asignacion;
 use ioliga\Models\Campeonato\AsignacionNomina;
@@ -185,6 +186,16 @@ class Asignaciones extends Controller
         /*return view('asignaciones.carnet',$data);*/
         $pdf = PDF::loadView('asignaciones.carnet',$data);
         return $pdf->download('carnet.pdf');
+    }
+
+
+    public function verMisParticipaciones()
+    {
+        $id=Auth::id();
+        $usuario=User::findOrFail($id);
+        $nomina=Nomina::where('users_id',$id)->get();
+        $data = array('nomina' =>$nomina ,'usuario'=>$usuario );
+        return view('asignaciones.participacionJugador',$data);
     }
 }
 

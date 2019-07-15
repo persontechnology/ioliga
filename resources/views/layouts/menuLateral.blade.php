@@ -87,6 +87,16 @@
     </li>
 @endcan
 
+    <li class="nav-item">
+        <a href="{{ route('mis-participaciones') }}" class="nav-link" id="menuparticipaciones">
+            <i class="far fa-newspaper"></i>
+            <span>
+                {{ __('Mis participaciones') }}
+            </span>
+        </a>
+    </li>
+
+
     <li class="nav-item-header">
         <div class="text-uppercase font-size-xs line-height-xs">{{ __('Sistema') }}</div> 
         <i class="icon-menu" title="Sistema"></i>
