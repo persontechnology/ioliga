@@ -22,6 +22,7 @@
 						<th style="width: 300px;">Equipo</th>
 						<th style="width: 300px;">Amarillas</th>
 						<th style="width: 300px;">Rojas</th>
+						<th style="width: 300px;">V. pagar</th>
 						
 						<th class="text-center" style="width: 20px;"><i class="icon-arrow-down12"></i></th>
 					</tr>
@@ -29,7 +30,7 @@
 				<tbody>
 					@foreach($campeonato->generos as $ger)
 					<tr class="table-active table-border-double">
-						<td colspan="7">Género: {{$ger->GeneroEquipo->nombre}}</td>
+						<td colspan="8">Género: {{$ger->GeneroEquipo->nombre}}</td>
 						
 					</tr>
 					@foreach($ger->GenerosSeries as $gese)
@@ -89,6 +90,14 @@
 							<div class="font-weight-semibold">0</div>
 						@endif	
 							
+						</td>
+						<td>
+							@if($gers->amarillas > 0  )
+							<div class="font-weight-semibold">$ 0,50</div>
+							@endif
+							@if($gers->rojas > 0  )
+							<div class="font-weight-semibold">$ 1,00</div>
+							@endif
 						</td>
 						<td class="text-center">
 							@can('Cobrar multa', ioliga\Models\Nomina\Nomina::class)

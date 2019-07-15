@@ -24,7 +24,7 @@ text-align: left;
 <body>
 <center>
 	<p><h1>Jugadores con multas</h1></p>
-	<p>Costo Amarillas $0.50 y Rojas $1.00</p>
+	
 </center>
 <br>
 <br>
@@ -39,13 +39,14 @@ text-align: left;
 			<th>Hora</th>
 			<th>T. Amarillas</th>
 			<th>T. Rojas</th>
+			<th>V. pagar</th>
 			<th>Cobrar</th>
 		</tr>
 	</thead>
 	@php($t=0)
 	@foreach($campeonato->generos as $ger)
 		<tr class="gene">
-			<td colspan="9">Género: {{$ger->GeneroEquipo->nombre}}</td>
+			<td colspan="10">Género: {{$ger->GeneroEquipo->nombre}}</td>
 			
 		</tr>
 		@foreach($ger->GenerosSeries as $gese)
@@ -80,6 +81,15 @@ text-align: left;
 			@else
 				<div class="font-weight-semibold">0</div>
 			@endif	
+			</td>
+			<td style="text-align: center;">
+			@if($gers->amarillas > 0  )
+			<div class="font-weight-semibold">$ 0,50</div>
+			@endif
+			@if($gers->rojas > 0  )
+			<div class="font-weight-semibold">$ 1,00</div>
+			@endif
+				
 			</td>
 			<td></td>
 
