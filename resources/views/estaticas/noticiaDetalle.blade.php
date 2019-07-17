@@ -93,13 +93,13 @@
                     @foreach($no as $not)
                         <article class="post-classic">
                             <div class="post-classic-aside">
-                                <a class="post-classic-figure" href="blog-post.html">
+                                <a class="post-classic-figure" href="{{ route('noticiaDetalle',$not->id) }}">
                                     <img src="{{ Storage::url('public/noticias/'.$n->foto) }}" alt="" width="94" height="94"/>
                                 </a>
                             </div>
                             <div class="post-classic-main">
                                 <p class="post-classic-title">
-                                    <a href="blog-post.html">
+                                    <a href="{{ route('noticiaDetalle',$not->id) }}">
                                         {{ $n->titulo }}
                                     </a></p>
                                 <div class="post-classic-time"><span class="icon mdi mdi-clock"></span>

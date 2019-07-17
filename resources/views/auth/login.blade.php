@@ -1,37 +1,31 @@
 @extends('layouts.app',['titulo'=>__('Login')])
 
-@section('breadcrumbs', Breadcrumbs::render('inicio'))
-
-@section('acciones-x')
-    <a href="#" class="breadcrumb-elements-item">
-        <i class="icon-comment-discussion mr-2"></i>
-        Support
-    </a>
-
-    <div class="breadcrumb-elements-item dropdown p-0">
-        <a href="#" class="breadcrumb-elements-item dropdown-toggle" data-toggle="dropdown">
-            <i class="icon-gear mr-2"></i>
-            Settings
-        </a>
-
-        <div class="dropdown-menu dropdown-menu-right">
-            <a href="#" class="dropdown-item"><i class="icon-user-lock"></i> Account security</a>
-            <a href="#" class="dropdown-item"><i class="icon-statistics"></i> Analytics</a>
-            <a href="#" class="dropdown-item"><i class="icon-accessibility"></i> Accessibility</a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item"><i class="icon-gear"></i> All settings</a>
-        </div>
-    </div>
-@endsection
-
-
 
 @section('content')
+<style>
+        #micontenedor{
+            background-image: url("{{ asset('img/home.png') }}"); /* The image used */
+            background-color: #cccccc; /* Used if the image is unavailable */
+            height: auto;
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            background-size: cover; /* Resize the background image to cover the entire container */
+        }
+    </style>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                <div class="card-header text-center">
+                    
+                    @if(isset($nos->logo))
+                        <img class="brand-logo" src="{{ Storage::url('public/nosotros/'.$nos->logo) }}" alt="" width="95" height="126"/>
+                      @else
+                      <img class="brand-logo" src="{{ asset('vendor/soccer/images/logo-soccer-default-95x126.png') }}" alt="" width="95" height="126"/>
+                      @endif
+                      <br>
+                      <h1>{{ __('Ingresar al sistema') }}</h1>
+                </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
@@ -96,4 +90,7 @@
         </div>
     </div>
 </div>
+
+
+</style>
 @endsection

@@ -5,7 +5,15 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header text-center">
+                    @if(isset($nos->logo))
+                        <img class="brand-logo" src="{{ Storage::url('public/nosotros/'.$nos->logo) }}" alt="" width="95" height="126"/>
+                    @else
+                        <img class="brand-logo" src="{{ asset('vendor/soccer/images/logo-soccer-default-95x126.png') }}" alt="" width="95" height="126"/>
+                        @endif
+                    <br>
+                    {{ __('Register') }}
+                </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">

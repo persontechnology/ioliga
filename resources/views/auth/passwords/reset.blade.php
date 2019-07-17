@@ -1,11 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    #micontenedor{
+        background-image: url("{{ asset('img/home.png') }}"); /* The image used */
+        background-color: #cccccc; /* Used if the image is unavailable */
+        height: auto;
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Do not repeat the image */
+        background-size: cover; /* Resize the background image to cover the entire container */
+    }
+</style>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+                <div class="card-header">
+                    <h1>{{ __('Reset Password') }}</h1>
+                </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('password.update') }}">

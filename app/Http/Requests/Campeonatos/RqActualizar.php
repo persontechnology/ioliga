@@ -28,8 +28,8 @@ class RqActualizar extends FormRequest
             'fechaInicio'=>'required|date',
             'fechaFin'=>'required|date',
             'descripcion'=>'nullable|max:255',
-            "generos"    => "required|array|min:1",
-            "generos.*"  => "required|exists:generoEquipo,id",
+            "generos"    => "nullable|array|min:1",
+            "generos.*"  => "nullable|exists:generoEquipo,id",
             "estado"=>'required|in:1,0'
         ];
     }

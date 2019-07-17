@@ -67,7 +67,7 @@
         <!-- /Barra lateral principal -->
 
         <!-- Contenido principal -->
-        <div class="content-wrapper">
+        <div class="content-wrapper" id="micontenedor">
 
             <!-- Encabezado de página -->
             <div class="page-header page-header-light">
