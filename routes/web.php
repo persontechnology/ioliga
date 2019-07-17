@@ -191,9 +191,12 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	Route::post('/jugador-editar-foto', 'Nominas@editarFotoJugadorEquipo')->name('jugador-editar-foto');
 	Route::get('/vista-jugador/{id}', 'Nominas@vistaPreviaJugador')->name('vista-jugador');
 	Route::post('/jugador-actualizar-nomina', 'Nominas@acutualizaJugadorEquipo')->name('jugador-actualizar-nomina');
+	Route::get('/edita-jugador/{id}', 'Nominas@editarJugador')->name('editar-jugador');
+	
 
 	Route::get('/multas-jugadores/{id}', 'Nominas@multaJugadores')->name('multas-jugadores');
 	Route::get('/multas-cobrar/{id}/{idCa}', 'Nominas@cobrarMulta')->name('cobrar-multa');
+	Route::get('/reporte-nomina/{id}', 'Nominas@reportesNomina')->name('reporte-nomina');
 	Route::get('/reporte-multa/{id}', 'Nominas@reportesMulta')->name('reporte-multa');
 
 

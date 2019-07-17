@@ -8,7 +8,9 @@
 		<!-- Marketing campaigns -->
 		<div class="card">
 			<div class="card-header header-elements-sm-inline">
-				<h6 class="card-title">Lista de jugadores convocados equipo <span class="badge bg-primary badge-pill"> {{$equipo->nombre}} </span></h6>
+				<h6 class="card-title">Lista de jugadores convocados equipo <span class="badge bg-primary badge-pill"> {{$equipo->nombre}} </span>
+					<a href="{{route('reporte-nomina',$equipo->id)}}"><i class="icon-file-download icon-2x"></i>
+				</h6>
 				<div class="header-elements">
 					@can('Crear jugador equipo', 'ioliga\Models\Nomina\Nomina::class')
 					<a href="{{route('crear-jugador-equipo',$equipo->id)}}" class="btn bg-indigo-300"><i class="icon-plus-circle2 mr-2"></i>Crear Jugador</a>
@@ -123,7 +125,7 @@
 									<a href="#" class="list-icons-item dropdown-toggle caret-0" data-toggle="dropdown"><i class="icon-menu7"></i></a>
 									<div class="dropdown-menu dropdown-menu-right">
 										<a href="{{route('vista-jugador',$nom->id)}}" class="dropdown-item"><i class="icon-user-plus"></i> Vista previa</a>
-										<a href="#" class="dropdown-item"><i class="icon-pencil6"></i> Editar Usuario</a>
+										
 										
 										<div class="dropdown-divider"></div>
 										<button data-id="{{Crypt::encryptString($nom->id)}}"
