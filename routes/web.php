@@ -53,6 +53,11 @@ Route::get('/tabla-vista/{id}', 'Estaticas@tablaVista')->name('tabla-vista');
 Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['verified','auth']], function () {
 	Route::get('/home', 'HomeController@index')->name('home');
+
+	// perfil de usuario
+	Route::get('/mi-perfil', 'HomeController@perfil')->name('miPerfil');
+	Route::post('/mi-perfil-actualizar', 'HomeController@perfilActualizar')->name('actualizarMiPerfil');
+	Route::post('/mi-perfil-actualizar-password', 'HomeController@perfilActualizarPasswor')->name('actualizarPassword');
 	/*estadios*/
 	Route::get('/estadios', 'Estadios@index')->name('estadios');
 	Route::get('/estadios-crear', 'Estadios@crear')->name('crearEstadio');
