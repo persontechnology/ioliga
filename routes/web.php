@@ -53,6 +53,11 @@ Route::get('/tabla-vista/{id}', 'Estaticas@tablaVista')->name('tabla-vista');
 Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['verified','auth']], function () {
 	Route::get('/home', 'HomeController@index')->name('home');
+
+	// perfil de usuario
+	Route::get('/mi-perfil', 'HomeController@perfil')->name('miPerfil');
+	Route::post('/mi-perfil-actualizar', 'HomeController@perfilActualizar')->name('actualizarMiPerfil');
+	Route::post('/mi-perfil-actualizar-password', 'HomeController@perfilActualizarPasswor')->name('actualizarPassword');
 	/*estadios*/
 	Route::get('/estadios', 'Estadios@index')->name('estadios');
 	Route::get('/estadios-crear', 'Estadios@crear')->name('crearEstadio');
@@ -127,6 +132,10 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	  	Route::get('/etapas-representante/{id}', 'Asignaciones@partidosRe')->name('etapas-equipo');
 	  	Route::get('/fechas-representante/{id}', 'Asignaciones@fechasEquipo')->name('fechas-representante');
 	  	Route::get('/carnet/{id}', 'Asignaciones@carnet')->name('carnet');
+
+	  	/*ver asignaciones de usuario jugador*/
+	  	Route::get('mis-participaciones', 'Asignaciones@verMisParticipaciones')->name('mis-participaciones');
+
 	  	/*fechas*/
 
 	  	Route::get('/fechas/{id}', 'Fechas@index')->name('fechas-etapa');
@@ -182,9 +191,12 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	Route::post('/jugador-editar-foto', 'Nominas@editarFotoJugadorEquipo')->name('jugador-editar-foto');
 	Route::get('/vista-jugador/{id}', 'Nominas@vistaPreviaJugador')->name('vista-jugador');
 	Route::post('/jugador-actualizar-nomina', 'Nominas@acutualizaJugadorEquipo')->name('jugador-actualizar-nomina');
+	Route::get('/edita-jugador/{id}', 'Nominas@editarJugador')->name('editar-jugador');
+	
 
 	Route::get('/multas-jugadores/{id}', 'Nominas@multaJugadores')->name('multas-jugadores');
 	Route::get('/multas-cobrar/{id}/{idCa}', 'Nominas@cobrarMulta')->name('cobrar-multa');
+	Route::get('/reporte-nomina/{id}', 'Nominas@reportesNomina')->name('reporte-nomina');
 	Route::get('/reporte-multa/{id}', 'Nominas@reportesMulta')->name('reporte-multa');
 
 

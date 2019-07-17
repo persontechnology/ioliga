@@ -39,6 +39,10 @@ class Nomina extends Model
     {
         return $this->hasMany(AsignacionNomina::class,'nomina_id');
     }
+      public function asignacionNominaAs()
+    {
+        return $this->hasMany(AsignacionNomina::class,'nomina_id')->orderBy('created_at','desc');
+    }
     public function asignacionNominaUno()
     {
      

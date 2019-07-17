@@ -25,7 +25,7 @@
 		@if($generoSerie->etapaSerie->count()>0)
 		@foreach($generoSerie->etapaSerie as $etapaSerie)
 
-		<div class="col-xl-6 col-md-6">
+		<div class="col-xl-12 col-md-6">
 			<div class="card card-body bg-{{$etapaSerie->estado==false ? 'blue-600':'indigo-400'}} border-{{$etapaSerie==true  ? 'success':'danger'}}">
 				<div class="media">
 					<div class="media-body">
@@ -63,19 +63,19 @@
 					</div>				
 					<div class="card-body text-dark">
 						<div class="table-responsive">
-						<table id="myTable">
+						<table class="table">
 							<thead>
 								<tr>
 									<th class="bg-warning p-1">#</th>
 									<th >Equipo</th>
-									<th class="bg-warning p-1">Ptn.</th>
-									<th class="p-1">Pbs.</th>
-									<th class="p-1">PJ</th>
-									<th class="p-1">PG</th>
-									<th class="p-1">PE</th>
-									<th class="p-1">GF</th>
-									<th class="p-1">GC</th>
-									<th class="p-1">GT</th>
+									<th class="bg-warning p-1">Pb.</th>
+									<th >Pbs.</th>
+									<th >PJ</th>
+									<th >PG</th>
+									<th >PE</th>
+									<th >GF</th>
+									<th >GC</th>
+									<th >GT</th>
 								</tr>
 							</thead>
 							<tbody>						
@@ -137,9 +137,159 @@
 								@endforeach
 								@endif
 							</tbody>
-						</table>
-						<div class="table-responsive">
-					</div>
+						</table>					
+				</div>
+				<div class="row">
+						<div class="col-md-4">	
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="mr-3">
+											<a href="#" class="btn bg-primary-400 rounded-round btn-icon btn-sm legitRipple">
+												<span class="letter-icon">#</span>
+											</a>
+										</div>
+										<div>
+											<a href="#" class="text-default font-weight-semibold letter-icon-title">Número de Posición</a>
+											
+										</div>
+									</div>
+								</td>								
+								
+							</tr>
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="mr-3">
+											<a href="#" class="btn bg-primary-400 rounded-round btn-icon btn-sm legitRipple">
+												<span class="letter-icon">Pts</span>
+											</a>
+										</div>
+										<div>
+											<a href="#" class="text-default font-weight-semibold letter-icon-title">Puntos Totales</a>
+											
+										</div>
+									</div>
+								</td>								
+								
+							</tr>
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="mr-3">
+											<a href="#" class="btn bg-primary-400 rounded-round btn-icon btn-sm legitRipple">
+												<span class="letter-icon">Pb</span>
+											</a>
+										</div>
+										<div>
+											<a href="#" class="text-default font-weight-semibold letter-icon-title">Puntos Bonificación</a>
+											
+										</div>
+									</div>
+								</td>								
+								
+							</tr>
+						</div>
+						<div class="col-md-4">	
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="mr-3">
+											<a href="#" class="btn bg-primary-400 rounded-round btn-icon btn-sm legitRipple">
+												<span class="letter-icon">PJ</span>
+											</a>
+										</div>
+										<div>
+											<a href="#" class="text-default font-weight-semibold letter-icon-title">Partidos Jugados</a>
+											
+										</div>
+									</div>
+								</td>								
+								
+							</tr>
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="mr-3">
+											<a href="#" class="btn bg-primary-400 rounded-round btn-icon btn-sm legitRipple">
+												<span class="letter-icon">PG</span>
+											</a>
+										</div>
+										<div>
+											<a href="#" class="text-default font-weight-semibold letter-icon-title">Partidos Ganados</a>
+											
+										</div>
+									</div>
+								</td>								
+								
+							</tr>
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="mr-3">
+											<a href="#" class="btn bg-primary-400 rounded-round btn-icon btn-sm legitRipple">
+												<span class="letter-icon">PE</span>
+											</a>
+										</div>
+										<div>
+											<a href="#" class="text-default font-weight-semibold letter-icon-title">Partidos Empatados</a>
+											
+										</div>
+									</div>
+								</td>								
+								
+							</tr>
+						</div>
+						<div class="col-md-4">	
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="mr-3">
+											<a href="#" class="btn bg-primary-400 rounded-round btn-icon btn-sm legitRipple">
+												<span class="letter-icon">GF</span>
+											</a>
+										</div>
+										<div>
+											<a href="#" class="text-default font-weight-semibold letter-icon-title">Goles Favor</a>
+											
+										</div>
+									</div>
+								</td>								
+								
+							</tr>
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="mr-3">
+											<a href="#" class="btn bg-primary-400 rounded-round btn-icon btn-sm legitRipple">
+												<span class="letter-icon">GC</span>
+											</a>
+										</div>
+										<div>
+											<a href="#" class="text-default font-weight-semibold letter-icon-title">Goles Contra</a>
+											
+										</div>
+									</div>
+								</td>								
+								
+							</tr>
+							<tr>
+								<td>
+									<div class="d-flex align-items-center">
+										<div class="mr-3">
+											<a href="#" class="btn bg-primary-400 rounded-round btn-icon btn-sm legitRipple">
+												<span class="letter-icon">GT</span>
+											</a>
+										</div>
+										<div>
+											<a href="#" class="text-default font-weight-semibold letter-icon-title">Goles Totales</a>
+											
+										</div>
+									</div>
+								</td>								
+								
+							</tr>
+						</div>											
 				</div>
 			</div>
 		</div>
@@ -159,12 +309,5 @@
 $('#menuCampeo').addClass('active');
 
 </script>
-<style type="text/css">
-	      table, th, td {
-            border: 1px solid black;
-        }
-        th {
-            cursor: pointer;
-        }
-</style>
+
 @endsection

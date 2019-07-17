@@ -19,7 +19,14 @@
             <div class="sidebar-user-material-body">
                 <div class="card-body text-center">
                     <a href="#">
-                        <img src="{{ asset('global_assets/images/demo/users/face6.jpg') }}" class="img-fluid rounded-circle shadow-1 mb-3" width="80" height="80" alt="">
+                        @if( Storage::exists('public/usuarios/'.(Auth::user()->foto??'sn')))
+                  
+                             <img src="{{Storage::url('public/usuarios/'.Auth::user()->foto)}}" class="img-fluid rounded-circle shadow-1 mb-3" width="80" height="80" alt="">
+                        @else
+                            >
+                             <img src="{{ asset('global_assets/images/juavatar.png') }}" class="img-fluid rounded-circle shadow-1 mb-3" width="80" height="80" alt="">
+                        @endif
+                        
                     </a>
                     <h6 class="mb-0 text-white text-shadow-dark">
                         {{ Auth::user()->name }}
@@ -37,7 +44,7 @@
             <div class="collapse" id="user-nav">
                 <ul class="nav nav-sidebar">
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{route('miPerfil')}}" class="nav-link">
                             <i class="icon-user-plus"></i>
                             <span>Mi perfil</span>
                         </a>

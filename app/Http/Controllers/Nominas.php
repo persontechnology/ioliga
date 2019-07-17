@@ -349,7 +349,10 @@ class Nominas extends Controller
 
     public function editarJugador($codigoUsuario)
     {
-        
+        $user=User::findOrFail($codigoUsuario);
+        $this->authorize('actualizar',$user);
+        $data = array('usuario' => $user,'roles' => Role::where('name','!=','SuperAdministrador')->get() );
+        return view('nominas.editarJugador',$data);
     }
 
     public function multaJugadores($Codigocampeo)
@@ -378,6 +381,16 @@ class Nominas extends Controller
           /*return view('nominas.reporteMultas',$data);*/
         $pdf = PDF::loadView('nominas.reporteMultas',$data);
         return $pdf->download('multas_de_'.$campeonato->fechaInicio.'.pdf');
+      
+    }
+       public function reportesNomina($idEquipo)
+    {
+          $equipo=Equipo::findOrFail($idEquipo);
+          $nomina=$equipo->nominas;
+          $data = array('equipo' =>$equipo ,'nomina' =>$nomina , );
+         /* return view('nominas.reporteNominas',$data);*/
+        $pdf = PDF::loadView('nominas.reporteNominas',$data);
+        return $pdf->download('Nomina'.$equipo->nombre.'.pdf');
       
     }
 
