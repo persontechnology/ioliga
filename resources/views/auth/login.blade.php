@@ -16,7 +16,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header text-center">
+                <div class="card-header text-center bg-secondary">
                     
                     @if(isset($nos->logo))
                         <img class="brand-logo" src="{{ Storage::url('public/nosotros/'.$nos->logo) }}" alt="" width="95" height="126"/>
