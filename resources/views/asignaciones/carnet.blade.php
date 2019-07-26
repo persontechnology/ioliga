@@ -52,7 +52,7 @@ img {
 					<td class="header" >
 						<p style="text-align: center;font-size: 70%;">
 					@if(isset($nos->logo))
-				        <img class="card-img" src="{{public_path('/storage/nosotros/'.$nos->logo) }}" alt="" width="70px;" />
+				        <img class="card-img" src="{{public_path('/storage/nosotros/'.$nos->logo) }}" alt="" width="50px;" />
 				        <b>	"{{$nos->nombre}}"	</b>		         
 				      @else
 				        <img class="card-img" src="{{asset('vendor/soccer/images/logo-soccer-default-95x126.png') }}" alt="" width="70px;;" />
@@ -69,9 +69,9 @@ img {
 						<p>
 						
 							@if(isset($asiNO->unoNomina->user->foto))
-								<img class="card-img" src="{{public_path('/storage/usuarios/'.$asiNO->unoNomina->user->foto) }}" alt=""width="130px;;"  height="130px;" />
+								<img class="card-img" src="{{public_path('/storage/usuarios/'.$asiNO->unoNomina->user->foto) }}" alt=""width="120px;;"  height="120px;" />
 							@else
-								 <img class="card-img" src="" alt=""width="130px;;"  height="130px;" />
+								 <img class="card-img" src="" alt=""width="120px;;"  height="120px;" />
 							@endif
 				     
 				     	 <b>Apellidos: </b>{{$asiNO->unoNomina->user->apellidos}}<br>
@@ -94,7 +94,7 @@ img {
 					<td class="header" >
 						<p style="text-align: center;font-size: 70%;">
 						@if(isset($nos->logo))
-				        	<img class="card-img" src="{{public_path('/storage/nosotros/'.$nos->logo) }}" alt="" width="70px;" />
+				        	<img class="card-img" src="{{public_path('/storage/nosotros/'.$nos->logo) }}" alt="" width="50px;" />
 				             <b>	"{{$nos->nombre}}"	</b>					         
 				      	@else
 				        	<img class="card-img" src="{{asset('vendor/soccer/images/logo-soccer-default-95x126.png') }}" alt="" width="45px;" />
@@ -111,9 +111,9 @@ img {
 					<td class="header">
 					<p style="">
 						@if(isset($asiNO->unoNomina->user->foto))
-							<img class="card-img" src="{{public_path('/storage/usuarios/'.$asiNO->unoNomina->user->foto) }}" alt=""width="130px;;"  height="130px;" />
+							<img class="card-img" src="{{public_path('/storage/usuarios/'.$asiNO->unoNomina->user->foto) }}" alt=""width="120px;;"  height="120px;" />
 						@else
-						 	<img class="card-img" src="" alt=""width="130px;;"  height="130px;" />
+						 	<img class="card-img" src="" alt=""width="120px;;"  height="120px;" />
 						@endif
 						
 				         <b>Apellidos: </b>{{$asiNO->unoNomina->user->apellidos}}<br>
