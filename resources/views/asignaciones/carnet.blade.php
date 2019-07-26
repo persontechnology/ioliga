@@ -50,7 +50,7 @@ img {
 			<tbody>
 				<tr>
 					<td class="header" >
-						<p style="text-align: center;">
+						<p style="text-align: center;font-size: 70%;">
 					@if(isset($nos->logo))
 				        <img class="card-img" src="{{public_path('/storage/nosotros/'.$nos->logo) }}" alt="" width="70px;" />
 				        <b>	"{{$nos->nombre}}"	</b>		         
@@ -92,9 +92,9 @@ img {
 			<tbody>
 				<tr>
 					<td class="header" >
-						<p style="text-align: center;">
+						<p style="text-align: center;font-size: 70%;">
 						@if(isset($nos->logo))
-				        	<img class="card-img" src="{{public_path('/storage/nosotros/'.$nos->logo) }}" alt="" width="45px" />
+				        	<img class="card-img" src="{{public_path('/storage/nosotros/'.$nos->logo) }}" alt="" width="70px;" />
 				             <b>	"{{$nos->nombre}}"	</b>					         
 				      	@else
 				        	<img class="card-img" src="{{asset('vendor/soccer/images/logo-soccer-default-95x126.png') }}" alt="" width="45px;" />
