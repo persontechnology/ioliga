@@ -73,12 +73,20 @@
                         </a>
                       </li>
                       @else
-                      <li>
-                      <a class="link link-icon link-icon-left link-classic" href="{{ route('home') }}">
-                        <span class="icon fa fa-user"></span>
-                        <span class="link-icon-text">Ingresar</span>
-                      </a>
-                    </li>
+                        <li>
+                          <a class="link link-icon link-icon-left link-classic" href="{{ route('login') }}">
+                            <span class="icon fa fa-sign-in"></span>
+                            <span class="link-icon-text">Ingresar</span>
+                          </a>
+                        </li>
+
+                        <li>
+                          <a class="link link-icon link-icon-left link-classic" href="{{ route('register') }}">
+                            <span class="icon fa fa-sign-in"></span>
+                            <span class="link-icon-text">Registrar</span>
+                          </a>
+                        </li>
+
                       @endauth
 
                     
@@ -147,6 +155,11 @@
                         <li class="rd-nav-item" id="menuContacto">
                           <a class="rd-nav-link" href="{{ route('contactos') }}">Contactos</a> 
                         </li>
+
+                        <li class="rd-nav-item" id="menuAyuda">
+                          <a class="rd-nav-link" href="{{ route('ayuda') }}">Ayuda</a> 
+                        </li>
+
                     </ul>
                   <div class="rd-navbar-main-element">
                     <ul class="list-inline list-inline-sm">
@@ -229,7 +242,7 @@
                 </ul>
                 <div class="group-md group-middle">
                   <div class="group-item">
-                    <ul class="list-inline list-inline-xs">
+                    {{--  <ul class="list-inline list-inline-xs">
 
                         @if(isset($nos->facebook))
                         <li><a class="icon icon-corporate fa fa-facebook" href="{{ $nos->facebook }}" target="_blank"></a></li>
@@ -247,7 +260,7 @@
                         <li><a class="icon icon-corporate fa fa-instagram" href="{{ $nos->istagram }}" target="_blank"></a></li>
                         @endif
 
-                    </ul>
+                    </ul>  --}}
                   </div><a class="button button-sm button-gray-outline" href="{{route('contactos')}}">Estar en contacto</a>
                 </div>
               </div>
@@ -287,7 +300,7 @@
               <!-- Rights-->
               <a href="{{ url('/') }}">
               <p class="text-center text-success">
-                <span>{{ $nos->nombre??config('app.name','LIGA') }}</span>
+                <span>Carlos Quishpe - José Viera – UTC</span>
                 <span>&nbsp;&copy;&nbsp;</span>
                 <span class="">{{ date('Y') }}</span>
               </p>

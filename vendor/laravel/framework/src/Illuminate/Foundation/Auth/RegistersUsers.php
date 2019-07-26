@@ -5,7 +5,7 @@ namespace Illuminate\Foundation\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
-
+use ioliga\Models\Nosotro;
 trait RegistersUsers
 {
     use RedirectsUsers;
@@ -17,8 +17,8 @@ trait RegistersUsers
      */
     public function showRegistrationForm()
     {
-        return redirect('login');
-        // return view('auth.register');
+        $no=Nosotro::first();
+       return view('auth.register',['nos'=>$no]);
     }
 
     /**

@@ -49,7 +49,15 @@
         @else
             <ul class="navbar-nav ml-md-auto">
                 <li class="nav-item">
-                    <a class="navbar-nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    <a class="navbar-nav-link" href="{{ route('login') }}">
+                            <i class="fas fa-sign-in-alt"></i>
+                            {{ __('Login') }}</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="navbar-nav-link" href="{{ route('register') }}">
+                        <i class="fas fa-sign-out-alt"></i>
+                            {{ __('Register') }}</a>
                 </li>
 
             </ul>

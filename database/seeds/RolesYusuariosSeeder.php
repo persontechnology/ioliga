@@ -50,7 +50,7 @@ class RolesYusuariosSeeder extends Seeder
 
          $userAdministrador= User::updateOrCreate([
             'name' => 'administrador',
-            'email' => 'carlosquishpe001@gmail.com',
+            'email' => '    ',
             'password' => Hash::make('sam1724539869')
         ]);
 

@@ -117,4 +117,9 @@ class Estaticas extends Controller
         $data = array('campeo' =>$campeo );
         return view('estaticas.tablaVista',$data);
     }
+
+    public function ayuda()
+    {
+        return view('estaticas.ayuda');
+    }
 }
