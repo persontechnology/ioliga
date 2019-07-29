@@ -18,7 +18,10 @@
   <!-- Section Contact-->
       <section class="section section-variant-1 bg-gray-100">
         <div class="container">
-          En pronto estaremos con ustedes..
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="{{ asset('files/ioliga-manual.pdf') }}" allowfullscreen></iframe>
+              </div>
+          
         </div>
       </section>
 
