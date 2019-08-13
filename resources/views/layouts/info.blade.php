@@ -300,7 +300,7 @@
               <!-- Rights-->
               <a href="{{ url('/') }}">
               <p class="text-center text-success">
-                <span>Carlos Quishpe - José Viera – UTC</span>
+                <span>Soysoftware</span>
                 <span>&nbsp;&copy;&nbsp;</span>
                 <span class="">{{ date('Y') }}</span>
               </p>

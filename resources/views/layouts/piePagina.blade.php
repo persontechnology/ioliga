@@ -8,7 +8,7 @@
 
     <div class="navbar-collapse collapse" id="navbar-footer">
         <span class="navbar-text">
-            Carlos Quishpe - José Viera – UTC &copy; {{ date('Y') }}
+            Soysoftware &copy; {{ date('Y') }}
         </span>
 
         <ul class="navbar-nav ml-lg-auto">

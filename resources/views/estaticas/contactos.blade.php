@@ -73,18 +73,18 @@
                   <dt>E-mail</dt>
                   <dd><span class="icon icon-primary mdi mdi-email-outline"></span>
                     <a class="link" href="">
-                        <span class="__cf_email__" data-cfemail="">carlosquishpe001@gmail.com</span>
+                        <span class="__cf_email__" data-cfemail="">fabi.lopez1992@gmail.com</span>
                     </a></dd>
                 </dl>
                 <dl>
                   <dt>Dirección</dt>
                   <dd><span class="icon icon-primary mdi mdi-map-marker"></span>
-                    <a class="link" href="#">Latacunga - San Felipe</a></dd>
+                    <a class="link" href="#">Latacunga - Tiobamba Sur</a></dd>
                 </dl>
                 <dl>
                   <dt>Télefono</dt>
                   <dd><span class="icon icon-primary mdi mdi-phone"></span>
-                    <a class="link link-md" href="">0997753249</a></dd>
+                    <a class="link link-md" href="">0984372898</a></dd>
                 </dl>
               </div>
             </div>
