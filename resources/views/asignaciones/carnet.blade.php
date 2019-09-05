@@ -58,7 +58,10 @@ img {
 				        <img class="card-img" src="{{asset('vendor/soccer/images/logo-soccer-default-95x126.png') }}" alt="" width="70px;;" />
 				      @endif
 				      <br>
-				      <b>{{$asignacion->unoGeneroSerie->genero->campeonato->nombre}} {{$asignacion->unoGeneroSerie->genero->campeonato->fechaInicio}}  </b>
+				      <b>{{$asignacion->unoGeneroSerie->genero->campeonato->nombre}} {{$asignacion->unoGeneroSerie->genero->campeonato->fechaInicio}}
+					<br>
+						{{$asignacion->unoGeneroSerie->genero->generoEquipo->nombre}}
+				        </b>
 				      
 				      </p>
 				      <hr>
@@ -100,7 +103,10 @@ img {
 				        	<img class="card-img" src="{{asset('vendor/soccer/images/logo-soccer-default-95x126.png') }}" alt="" width="45px;" />
 				      	@endif
 				      <br>
-				      <b>{{$asignacion->unoGeneroSerie->genero->campeonato->nombre}} {{$asignacion->unoGeneroSerie->genero->campeonato->fechaInicio}}  </b>
+				      <b>{{$asignacion->unoGeneroSerie->genero->campeonato->nombre}} {{$asignacion->unoGeneroSerie->genero->campeonato->fechaInicio}} 
+						<br>
+						"{{$asignacion->unoGeneroSerie->genero->generoEquipo->nombre}}"
+				       </b>
 				     </p>
 				 				      <hr>
 					</td>
