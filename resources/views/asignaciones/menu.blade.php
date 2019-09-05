@@ -9,12 +9,12 @@
 		@if($asignacion->estado)
 		<div class="d-flex align-items-center">
 			<div class="mr-3">
-				<button   class="btn bg-teal-400  btn-icon btn-sm legitRipple">
+				<button  data-url="{{route('desactivar-asignacion',$asignacion->id) }}" onclick="desactivar(this)" class="btn bg-teal-400  btn-icon btn-sm legitRipple">
 					<span class="letter-icon">AC</span>
 				</button>
 			</div>
 			<div>
-				<a href="#" class="text-default font-weight-semibold letter-icon-title">Cambiar Estado</a>
+				<a data-url="{{route('desactivar-asignacion',$asignacion->id) }}" onclick="desactivar(this)" class="text-default font-weight-semibold letter-icon-title">Cambiar Estado</a>
 				<div class="text-muted font-size-sm"><span class="badge badge-mark border-blue mr-1"></span> Activo</div>
 			</div>
 		</div>
@@ -122,6 +122,27 @@
       window.location.replace(url);
     });
 }
+
+ function desactivar(argument){
+    var url=$(argument).data('url');
+    swal({
+    html:true,
+      title: "¿Estás seguro?",
+      text: "De activar al equipo este archivo",
+      type: "info",
+      showCancelButton: true,
+      confirmButtonClass: "btn-primary",
+      confirmButtonText: "¡Sí, Activar!",
+      closeOnConfirm: false,
+      cancelButtonText:"Cancelar",
+      cancelButtonClass:"btn-dark"
+    },
+    function(){
+      window.location.replace(url);
+    });
+}
+
+
 </script>
 @push('scriptsFooter')
    

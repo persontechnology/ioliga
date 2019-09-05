@@ -179,6 +179,19 @@ class Asignaciones extends Controller
         session()->flash('danger','El equipo no cumple con los requerimientos para participar verifique la nómina');
         return redirect()->route('asignacion',$asignacion->id);
     }
+    public function desactivarAsignacion($codiAsignacin)
+    {
+        $asignacion=Asignacion::findOrFail($codiAsignacin);
+        if($asignacion->asignacionNominasPartido->count()>=1){
+            $asignacion->estado=false;
+            
+            $asignacion->save();
+            session()->flash('success','El equipo ya puede participar ');
+            return redirect()->route('asignacion',$asignacion->id);
+        }
+        session()->flash('danger','El equipo no cumple con los requerimientos para participar verifique la nómina');
+        return redirect()->route('asignacion',$asignacion->id);
+    }
     public function carnet($codigoAsignacion)
     {
         $asignacion=Asignacion::findOrFail($codigoAsignacion);

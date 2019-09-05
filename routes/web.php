@@ -121,7 +121,8 @@ Route::group(['middleware' => ['verified','auth']], function () {
 	    Route::get('/eliminarNominaAsignar/{id}', 'Asignaciones@eliminarNomina')->name('eliminarNominaAsignar');
 	    Route::post('/estado-nomina-asignacion', 'Asignaciones@estado')->name('estado-nomina-asignacion');
 	    Route::get('/activar-asignacion/{id}', 'Asignaciones@activarAsignacion')->name('activar-asignacion');	
-	    
+	    Route::get('/desactivar-asignacion/{id}', 'Asignaciones@desactivarAsignacion')->name('desactivar-asignacion');
+
 	  	/*etapas*/
 	  	Route::get('/etapas-serie/{id}', 'Etapas@etapasSerie')->name('etapas-serie');
 	  	Route::post('/crear-etapa', 'Etapas@guradarEtapa')->name('crear-etapa');
