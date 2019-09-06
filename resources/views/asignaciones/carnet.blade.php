@@ -52,7 +52,7 @@ img {
 		@if($cont%2==1)
 		<table style="width: 50%;" align="left" class="egt" >
 			<tbody class="esta">
-				<tr style="background-color: #28ABDF;color: #fff">
+				<tr style="background-color: #84B3C9;color: #fff">
 					<th class="header" colspan="2" >
 						<p style="text-align: center;font-size: 80%;color: #ffffff;">
 					@if(isset($nos->logo))
@@ -96,7 +96,7 @@ img {
 		@else
 		<table style="width: 50%;" align="right" class="egt" >
 			<tbody>
-				<tr style="background-color: #28ABDF;">
+				<tr style="background-color: #84B3C9;">
 					<td class="header" colspan="2" >
 						<p style="text-align: center;font-size: 80%;color: #ffffff;">
 						@if(isset($nos->logo))
