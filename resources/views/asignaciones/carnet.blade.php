@@ -75,9 +75,9 @@ img {
 					<td class="">					
 						
 						@if(isset($asiNO->unoNomina->user->foto))
-							<img class="card-img" src="{{public_path('/storage/usuarios/'.$asiNO->unoNomina->user->foto) }}" alt=""width="120px;;"  height="150px;" />
+							<img class="card-img" style="border-radius: 10px;" src="{{public_path('/storage/usuarios/'.$asiNO->unoNomina->user->foto) }}" alt=""width="120px;;"  height="160px;" />
 						@else
-							 <img class="card-img" src="" alt=""width="120px;;"  height="150px;" />
+							 <img class="card-img" src="" alt=""width="120px;;"  height="160px;" />
 						@endif					
 					</td>
 					<td>
@@ -119,9 +119,9 @@ img {
 					<td class="">
 				
 						@if(isset($asiNO->unoNomina->user->foto))
-							<img class="card-img" src="{{public_path('/storage/usuarios/'.$asiNO->unoNomina->user->foto) }}" alt=""width="120px;;"  height="150px;" />
+							<img class="card-img" style="border-radius: 10px;" src="{{public_path('/storage/usuarios/'.$asiNO->unoNomina->user->foto) }}" alt=""width="120px;;"  height="160px;" />
 						@else
-						 	<img class="card-img" src="" alt=""width="120px;;"  height="150px;" />
+						 	<img class="card-img" src="" alt=""width="120px;;"  height="160px;" />
 						@endif			     
 
 					</td>
