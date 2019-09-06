@@ -21,6 +21,7 @@ table .header{
 
 	padding-left:02rem;
 
+
 }
 p {
 	color:black;  
@@ -32,6 +33,9 @@ img {
 	float: left;
 	border-radius: 1px;
 
+}
+.esta{
+	 border-spacing: 10px 5px;
 }
 
 </style>
@@ -46,11 +50,11 @@ img {
 		@foreach($asignacion->asignacionNominas as $asiNO)
 		@php($cont++)
 		@if($cont%2==1)
-		<table style="width: 50%;" align="left" >
-			<tbody>
-				<tr>
+		<table style="width: 50%;" align="left" class="egt" >
+			<tbody class="esta">
+				<tr style="background-color: #28ABDF;color: #fff">
 					<th class="header" colspan="2" >
-						<p style="text-align: center;font-size: 80%;">
+						<p style="text-align: center;font-size: 80%;color: #ffffff;">
 					@if(isset($nos->logo))
 				        <img class="card-img" src="{{public_path('/storage/nosotros/'.$nos->logo) }}" alt="" width="50px;" />
 				        <b>	"{{$nos->nombre}}"	</b>		         
@@ -59,7 +63,7 @@ img {
 				      @endif
 				      <br>
 				      <b>{{$asignacion->unoGeneroSerie->genero->campeonato->nombre}} {{$asignacion->unoGeneroSerie->genero->campeonato->fechaInicio}}
-					<br>
+						<br>
 						{{$asignacion->unoGeneroSerie->genero->generoEquipo->nombre}}
 				        </b>
 				      
@@ -67,16 +71,14 @@ img {
 				      <hr>
 					</th>
 				</tr>
-				<tr>					
+				<tr >					
 					<td class="">					
 						
-							@if(isset($asiNO->unoNomina->user->foto))
-								<img class="card-img" src="{{public_path('/storage/usuarios/'.$asiNO->unoNomina->user->foto) }}" alt=""width="120px;;"  height="150px;" />
-							@else
-								 <img class="card-img" src="" alt=""width="120px;;"  height="150px;" />
-							@endif	     	 
-				      
-						
+						@if(isset($asiNO->unoNomina->user->foto))
+							<img class="card-img" src="{{public_path('/storage/usuarios/'.$asiNO->unoNomina->user->foto) }}" alt=""width="120px;;"  height="150px;" />
+						@else
+							 <img class="card-img" src="" alt=""width="120px;;"  height="150px;" />
+						@endif					
 					</td>
 					<td>
 					<b>Apellidos: </b>{{$asiNO->unoNomina->user->apellidos}}<br>
@@ -92,11 +94,11 @@ img {
 			</tbody>					
 		</table>
 		@else
-		<table style="width: 50%;" align="right" >
+		<table style="width: 50%;" align="right" class="egt" >
 			<tbody>
-				<tr>
+				<tr style="background-color: #28ABDF;">
 					<td class="header" colspan="2" >
-						<p style="text-align: center;font-size: 80%;">
+						<p style="text-align: center;font-size: 80%;color: #ffffff;">
 						@if(isset($nos->logo))
 				        	<img class="card-img" src="{{public_path('/storage/nosotros/'.$nos->logo) }}" alt="" width="50px;" />
 				             <b>	"{{$nos->nombre}}"	</b>					         
