@@ -85,6 +85,7 @@ img {
 				         <b>Club: </b>{{$asiNO->unoNomina->equipo->nombre}}<br>
 				      	 <b>N° Camiseta: </b>{{$asiNO->numero}}<br>
 				      	 <br>
+				      	 <br>
 				      	 <b>Firma: </b>---------------------<br>
 				     </td>										
 				</tr>
@@ -128,6 +129,7 @@ img {
 				         <b>DNI: </b>{{$asiNO->unoNomina->user->identificacion}}<br>
 				         <b>Club: </b>{{$asiNO->unoNomina->equipo->nombre}}<br>
 				 		 <b>N° Camiseta: </b>{{$asiNO->numero}}<br>
+				 		 <br>
 				 		 <br>
 				      	 <b>Firma: </b>---------------------<br>
 					</td>									
