@@ -69,15 +69,16 @@ img {
 				      
 				      </p>
 				      <hr>
+				    
 					</th>
 				</tr>
 				<tr >					
 					<td class="">					
 						
 						@if(isset($asiNO->unoNomina->user->foto))
-							<img class="card-img" style="border-radius: 10px;" src="{{public_path('/storage/usuarios/'.$asiNO->unoNomina->user->foto) }}" alt=""width="120px;;"  height="160px;" />
+							<img class="card-img" style="border-radius: 10px; border: 1; border-color: #84B3C9" src="{{public_path('/storage/usuarios/'.$asiNO->unoNomina->user->foto) }}" alt=""width="120px;;"  height="151px;" />
 						@else
-							 <img class="card-img" src="" alt=""width="120px;;"  height="160px;" />
+							 <img class="card-img" src="" alt=""width="120px;;"  height="151px;" />
 						@endif					
 					</td>
 					<td>
@@ -111,7 +112,8 @@ img {
 						"{{$asignacion->unoGeneroSerie->genero->generoEquipo->nombre}}"
 				       </b>
 				     </p>
-				 				      <hr>
+				 	<hr>
+				 	
 					</td>
 				</tr>
 				<tr>
@@ -119,9 +121,9 @@ img {
 					<td class="">
 				
 						@if(isset($asiNO->unoNomina->user->foto))
-							<img class="card-img" style="border-radius: 10px;" src="{{public_path('/storage/usuarios/'.$asiNO->unoNomina->user->foto) }}" alt=""width="120px;;"  height="160px;" />
+							<img class="card-img" style="border-radius: 10px; border: 1; border-color: #84B3C9" src="{{public_path('/storage/usuarios/'.$asiNO->unoNomina->user->foto) }}" alt=""width="120px;;"  height="151px;" />
 						@else
-						 	<img class="card-img" src="" alt=""width="120px;;"  height="160px;" />
+						 	<img class="card-img" src="" alt=""width="120px;;"  height="151px;" />
 						@endif			     
 
 					</td>
