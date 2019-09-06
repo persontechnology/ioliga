@@ -50,7 +50,7 @@ img {
 			<tbody>
 				<tr>
 					<th class="header" colspan="2" >
-						<p style="text-align: center;font-size: 70%;">
+						<p style="text-align: center;font-size: 80%;">
 					@if(isset($nos->logo))
 				        <img class="card-img" src="{{public_path('/storage/nosotros/'.$nos->logo) }}" alt="" width="50px;" />
 				        <b>	"{{$nos->nombre}}"	</b>		         
@@ -71,9 +71,9 @@ img {
 					<td class="">					
 						
 							@if(isset($asiNO->unoNomina->user->foto))
-								<img class="card-img" src="{{public_path('/storage/usuarios/'.$asiNO->unoNomina->user->foto) }}" alt=""width="120px;;"  height="120px;" />
+								<img class="card-img" src="{{public_path('/storage/usuarios/'.$asiNO->unoNomina->user->foto) }}" alt=""width="120px;;"  height="150px;" />
 							@else
-								 <img class="card-img" src="" alt=""width="120px;;"  height="120px;" />
+								 <img class="card-img" src="" alt=""width="120px;;"  height="150px;" />
 							@endif	     	 
 				      
 						
@@ -95,7 +95,7 @@ img {
 			<tbody>
 				<tr>
 					<td class="header" colspan="2" >
-						<p style="text-align: center;font-size: 70%;">
+						<p style="text-align: center;font-size: 80%;">
 						@if(isset($nos->logo))
 				        	<img class="card-img" src="{{public_path('/storage/nosotros/'.$nos->logo) }}" alt="" width="50px;" />
 				             <b>	"{{$nos->nombre}}"	</b>					         
@@ -116,14 +116,10 @@ img {
 					<td class="">
 				
 						@if(isset($asiNO->unoNomina->user->foto))
-							<img class="card-img" src="{{public_path('/storage/usuarios/'.$asiNO->unoNomina->user->foto) }}" alt=""width="120px;;"  height="120px;" />
+							<img class="card-img" src="{{public_path('/storage/usuarios/'.$asiNO->unoNomina->user->foto) }}" alt=""width="120px;;"  height="150px;" />
 						@else
-						 	<img class="card-img" src="" alt=""width="120px;;"  height="120px;" />
-						@endif
-						
-				        
-				      
-				     
+						 	<img class="card-img" src="" alt=""width="120px;;"  height="150px;" />
+						@endif			     
 
 					</td>
 					<td>
